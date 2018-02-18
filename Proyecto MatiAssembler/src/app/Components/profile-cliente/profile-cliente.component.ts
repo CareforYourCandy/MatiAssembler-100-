@@ -36,11 +36,11 @@ export class ProfileClienteComponent implements OnInit {
       console.log(vehiculo); //Para registrar un usuario
       let headers = new Headers();
       headers.append('Content-Type','application/json');
-      return this.http.post('http://localhost:3000/vehiculo/registerVehiculo', vehiculo, {headers: headers})
+      return this.http.post('http://localhost:3000/users/registerVehiculo', vehiculo, {headers: headers})
         .map(res => res.json());
     }
   }
  
-}
+
 
 

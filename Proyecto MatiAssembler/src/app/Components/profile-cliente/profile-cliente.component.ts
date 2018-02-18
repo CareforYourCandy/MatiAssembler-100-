@@ -16,7 +16,11 @@ export class ProfileClienteComponent implements OnInit {
   user; 
   serialMotor: String; 
   modelo: String;
+<<<<<<< HEAD
   ano: Int16Array;
+=======
+  fecha: String; 
+>>>>>>> a6f8004504d7dd32e7026e1c110c6b3e0e2b682c
   placa: String; 
   activado: Boolean;
   marca: Int16Array;
@@ -46,10 +50,15 @@ export class ProfileClienteComponent implements OnInit {
       placa: this.placa,       
       marca: this.marca,
       modelo: this.modelo,
+<<<<<<< HEAD
       activado: true,
       serialMotor: this.serialMotor,     
       año: this.ano,
       dueño: this.user.idUsuario    
+=======
+      año: this.fecha,
+      placa: this.placa, 
+>>>>>>> a6f8004504d7dd32e7026e1c110c6b3e0e2b682c
     }
     console.log(vehiculo); //Para registrar un vehiculo
 

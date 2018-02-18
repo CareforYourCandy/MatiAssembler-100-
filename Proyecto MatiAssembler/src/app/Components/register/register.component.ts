@@ -39,32 +39,42 @@ export class RegisterComponent implements OnInit {
        
   	}
     console.log(user); 
+    console.log("Hola"); 
     //Required fields
     if(!this.validateService.validateRegister(user)){
      console.log("Fallo val usuario");
       return false;
     }
-
+    console.log("Hola2");
     //Validar email
     if(!this.validateService.validateEmail(user.correo)){
      console.log("Fallo val email"); 
       return false;
     }
-
+    console.log("Hola3"); 
     //Registrar usuario
     this.authService.registerUser(user).subscribe(data => {
+<<<<<<< HEAD
       console.log(data.success); 
+=======
+     
+>>>>>>> a6f8004504d7dd32e7026e1c110c6b3e0e2b682c
       if(data.success){
-       console.log("sirvio"); 
+
         this.router.navigate(['/login']);
       } else {
         console.log("fallo"); 
-        this.router.navigate(['/register']);
+        this.router.navigate(['/login']);
       }
+<<<<<<< HEAD
     });
 
     this.router.navigate(['/login']);
 
+=======
+    })
+    this.router.navigate(['/login']); 
+>>>>>>> a6f8004504d7dd32e7026e1c110c6b3e0e2b682c
   }
 
 }

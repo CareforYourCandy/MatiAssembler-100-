@@ -1,0 +1,84 @@
+<p>
+  register works! comp
+
+
+
+
+
+
+  
+ 
+      <div class="signup-box">
+          <div class="logo">
+              <a href="javascript:void(0);">Mati<b>ASSEMBLER</b></a>
+              <small>Su taller de siempre, ahora mejor que nunca</small>
+          </div>
+          <div class="card">
+              <div class="body">
+                  <form (submit) = "onRegisterSubmit()">
+                      <div class="msg">Registre una nueva cuenta</div>
+                      <div class="input-group">
+                          <span class="input-group-addon">
+                              <i class="material-icons">person</i>
+                          </span>
+                          <div class="form-line">
+                              <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Nombre" required autofocus>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <span class="input-group-addon">
+                              <i class="material-icons">person</i>
+                          </span>
+                          <div class="form-line">
+                              <input type="text" class="form-control"  [(ngModel)]="lastname" name="lastname" placeholder="Apellido" required autofocus>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <span class="input-group-addon">
+                              <i class="material-icons">person</i>
+                          </span>
+                          <div class="form-line">
+                              <input type="text" class="form-control"  [(ngModel)] = "cedula" name="cedula" placeholder="Cédula" required autofocus>
+                          </div>
+                      </div>
+                  
+                      
+                      <div class="input-group">
+                          <span class="input-group-addon">
+                              <i class="material-icons">email</i>
+                          </span>
+                          <div class="form-line">
+                              <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" required>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                          <span class="input-group-addon">
+                              <i class="material-icons">lock</i>
+                          </span>
+                          <div class="form-line">
+                              <input type="password" class="form-control" [(ngModel)] = "password" name="password" minlength="6" placeholder="Contraseña" required>
+                          </div>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" [(ngModel)]="rol" name="rol" placeholder="rol" required autofocus>
+                        </div>
+                    </div>
+  
+                      <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR</button>
+  
+                      <div class="m-t-25 m-b--5 align-center">
+                          <a href="sign-in.html">¿Ya tienes una cuenta?</a>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  
+     
+  
+  
+  

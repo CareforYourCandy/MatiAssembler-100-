@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+
+
+<body class="login-page">
+    <div class="login-box">
+        <div class="logo">
+            <a href="javascript:void(0);">Mati
+                <b>ASSEMBLER</b>
+            </a>
+            <small>Su taller de siempre, ahora mejor que nunca</small>
+        </div>
+        <div class="card">
+            <div class="body">
+                <form (submit)= "onLoginSubmit()">
+                    <div class="msg">Inicie sesión</div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" [(ngModel)]='email' class="form-control" name="email" placeholder="Correo" required autofocus>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password"  [(ngModel)] = 'password' class="form-control" name="password" placeholder="Contraseña" required>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">INGRESAR</button>
+
+                    <div class="row m-t-15 m-b--20">
+                        <div class="col-xs-6">
+                            <a href="sign-up.html">Registrate Ahora!</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

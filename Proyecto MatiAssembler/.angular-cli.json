@@ -1,0 +1,154 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "mati-assembler"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "../public",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap/css/bootstrap.css",
+        "../node_modules/adminbsb-materialdesign/plugins/node-waves/waves.css",
+        "../node_modules/adminbsb-materialdesign/plugins/animate-css/animate.css",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap-select/css/bootstrap-select.css",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-spinner/css/bootstrap-spinner.css",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css",
+        "../node_modules/adminbsb-materialdesign/plugins/dropzone/dropzone.css",
+        "../node_modules/adminbsb-materialdesign/plugins/nestable/jquery-nestable.css",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css",
+        "../node_modules/adminbsb-materialdesign/plugins/light-gallery/css/lightgallery.css",
+        "../node_modules/adminbsb-materialdesign/plugins/morrisjs/morris.css",
+        "../node_modules/adminbsb-materialdesign/plugins/multi-select/css/multi-select.css",
+        "../node_modules/adminbsb-materialdesign/plugins/nouislider/nouislider.min.css",
+        "../node_modules/adminbsb-materialdesign/plugins/ion-rangeslider/css/ion.rangeSlider.css",
+        "../node_modules/adminbsb-materialdesign/plugins/ion-rangeslider/css/ion.rangeSlider.skinFlat.css",
+        "../node_modules/adminbsb-materialdesign/plugins/sweetalert/sweetalert.css",
+        "../node_modules/adminbsb-materialdesign/plugins/waitme/waitMe.css",
+        "../node_modules/adminbsb-materialdesign/css/style.css",
+        "../node_modules/adminbsb-materialdesign/css/themes/all-themes.css"
+      ],
+      "scripts": [
+        "../node_modules/adminbsb-materialdesign/plugins/jquery/jquery.min.js",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap/js/bootstrap.js",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-slimscroll/jquery.slimscroll.js",
+        "../node_modules/adminbsb-materialdesign/plugins/node-waves/waves.js",
+        "../node_modules/adminbsb-materialdesign/plugins/autosize/autosize.js",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap-notify/bootstrap-notify.js",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+        "../node_modules/adminbsb-materialdesign/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js",
+        "../node_modules/adminbsb-materialdesign/plugins/chartjs/Chart.bundle.js",
+        "../node_modules/adminbsb-materialdesign/plugins/ckeditor/ckeditor.js",
+        "../node_modules/adminbsb-materialdesign/plugins/dropzone/dropzone.js",
+        "../node_modules/adminbsb-materialdesign/plugins/editable-table/mindmup-editabletable.js",
+        "../node_modules/adminbsb-materialdesign/plugins/flot-charts/jquery.flot.js",
+        "../node_modules/adminbsb-materialdesign/plugins/flot-charts/jquery.flot.resize.js",
+        "../node_modules/adminbsb-materialdesign/plugins/flot-charts/jquery.flot.pie.js",
+        "../node_modules/adminbsb-materialdesign/plugins/flot-charts/jquery.flot.categories.js",
+        "../node_modules/adminbsb-materialdesign/plugins/flot-charts/jquery.flot.time.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-inputmask/jquery.inputmask.bundle.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-countto/jquery.countTo.js",
+        "../node_modules/adminbsb-materialdesign/plugins/nestable/jquery.nestable.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-spinner/js/jquery.spinner.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-validation/jquery.validate.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-steps/jquery.steps.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/jquery.dataTables.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/extensions/export/buttons.flash.min.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/extensions/export/jszip.min.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/extensions/export/pdfmake.min.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/extensions/export/vfs_fonts.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/extensions/export/buttons.html5.min.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-datatable/extensions/export/buttons.print.min.js",
+        "../node_modules/adminbsb-materialdesign/plugins/light-gallery/js/lightgallery-all.js",
+        "../node_modules/adminbsb-materialdesign/plugins/momentjs/moment.js",
+        "../node_modules/adminbsb-materialdesign/plugins/raphael/raphael.min.js",
+        "../node_modules/adminbsb-materialdesign/plugins/morrisjs/morris.js",
+        "../node_modules/adminbsb-materialdesign/plugins/multi-select/js/jquery.multi-select.js",
+        "../node_modules/adminbsb-materialdesign/plugins/nouislider/nouislider.js",
+        "../node_modules/adminbsb-materialdesign/plugins/ion-rangeslider/js/ion.rangeSlider.js",
+        "../node_modules/adminbsb-materialdesign/plugins/jquery-sparkline/jquery.sparkline.js",
+        "../node_modules/adminbsb-materialdesign/plugins/sweetalert/sweetalert.min.js",
+        "../node_modules/adminbsb-materialdesign/plugins/tinymce/tinymce.js",
+        "../node_modules/adminbsb-materialdesign/plugins/waitme/waitMe.js",
+        "../node_modules/adminbsb-materialdesign/js/admin.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/index.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/cards/basic.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/cards/colored.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/widgets/infobox/infobox-1.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/widgets/infobox/infobox-2.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/widgets/infobox/infobox-3.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/widgets/infobox/infobox-4.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/widgets/infobox/infobox-5.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/ui/animations.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/ui/dialogs.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/ui/modals.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/ui/notifications.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/ui/range-sliders.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/ui/sortable-nestable.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/ui/tooltips-popovers.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/forms/basic-form-elements.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/forms/advanced-form-elements.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/forms/form-validation.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/forms/form-wizard.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/forms/editors.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/tables/jquery-datatable.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/tables/editable-table.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/medias/image-gallery.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/examples/sign-in.js",
+        "../node_modules/adminbsb-materialdesign/js/pages/examples/sign-up.js",
+        "../node_modules/adminbsb-materialdesign/js/demo.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

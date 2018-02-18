@@ -6,7 +6,7 @@ const passport = require('passport');
 
 //Conectar a la base de datos
 const Sequelize = require('sequelize');
-const connection = new Sequelize('mydb', 'root', 'dictadormarico69', {
+const connection = new Sequelize('mydb', 'root', 'pink88pink', {
   	host: 'localhost',
   	dialect : 'mysql',
 	define : {

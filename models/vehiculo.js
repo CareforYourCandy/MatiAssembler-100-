@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 const path = require('path');
-const connection = new Sequelize('mydb', 'root', 'dictadormarico69', {
+const connection = new Sequelize('mydb', 'root', 'pink88pink', {
   	host: 'localhost',
   	dialect : 'mysql',
 	define : {
@@ -13,6 +13,7 @@ const connection = new Sequelize('mydb', 'root', 'dictadormarico69', {
 //User Schema
 module.exports = function(sequelize, DataTypes) {
 	
+	var marca = connection.import(path.join(process.cwd(), 'models', 'marca'));
 
 	return sequelize.define('vehiculo', {
 		idVehiculo: {
@@ -23,6 +24,14 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		placa: {
 			type: DataTypes.STRING
+		},
+		marca: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			references: {
+				model: marca,
+				key: 'idMarca'
+			}
 		},
 		modelo: {
 			type: DataTypes.INTEGER
@@ -46,6 +55,31 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER
         }
 	});	
+}
+
+const Vehiculo = module.exports = connection.import(path.join(process.cwd(), 'models', 'vehiculo'));
+
+module.exports.getVehiculosByDueño = function(elquetal, callback){
+
+	const query = {where: {dueño: elquetal}}
+	Vehiculo.findAll(query).then(vehiculos => {
+		return vehiculos.forEach(function(vehiculo2) {
+			//console.log(vehiculo2.dataValues);
+		}) 
+	})
+	.then(datos => {
+		console.log(datos);
+		return callback(null, datos);
+	});		
+}
+
+module.exports.addVehiculo = function(newUser, callback) {
+			console.log("estoy en addVehiculo");
+			newUser.save(callback);
+			return callback();
+			console.log("añadi");
+
+
 }
 
 

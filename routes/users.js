@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const vehiculo = require('../models/vehiculo'); 
+const Vehiculo = require('../models/vehiculo'); 
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
@@ -22,10 +22,28 @@ router.post('/register', (req, res, next) => {
 		if(err){
 			res.json({success:false, msg:'No funciono el registro de usuario'});
 		} else {
-			res.json({success:false, msg:'Usuario registrado :)'});
+			res.json({success:true, msg:'Usuario registrado'});
 		}
 	});
 });
+
+//Obtener Vehiculos
+router.post('/getVehiculos', (req, res, next) => {
+	const id=req.body.idUsuario;
+	console.log(id);
+	Vehiculo.getVehiculosByDueño(id, (err, vehiculos) => {
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!vehiculos){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'User not found'});
+		}
+		res.json({
+			success: true,
+			vehiculos});
+	});
+})
 
 //Authenticate
 router.post('/authenticate', (req, res, next) => {
@@ -77,20 +95,25 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 
 router.post('/registerVehiculo', (req, res, next) => {
     
-        let newVehiculo = new vehiculo({
-            placa: req.body.placa,
-            modelo: req.body.modelo,
-            serialMotor: req.body.serialMotor,
-            año: req.body.año,
-            dueño: req.body.dueño, 
-           
-        });
-        vehiculo.addVehiculo(newVehiculo, (err, vehiculo) => {
-            if(err){
-                res.json({success:false, msg:'No funciono el registro de usuario'});
-            } else {
-                res.json({success:false, msg:'Usuario registrado :)'});
-            }
-        });
+    let newVehiculo = new Vehiculo({
+        placa: req.body.placa,
+        marca: req.body.marca,
+        modelo: req.body.modelo,
+        activado: req.body.activado,
+        serialMotor: req.body.serialMotor,
+        año: req.body.año,
+        dueño: req.body.dueño, 
+       
     });
+    Vehiculo.addVehiculo(newVehiculo, (err, user) => {
+		if(err){
+			console.log("errooooooor");
+			res.json({success:false, msg:'No funciono el registro vehiculo'});
+		} else {
+			res.json({success:true, msg:'Vehiculo registrado'});
+		}
+	});
+
+});
+
 module.exports = router;

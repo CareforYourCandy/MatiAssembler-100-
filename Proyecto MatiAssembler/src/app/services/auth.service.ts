@@ -7,14 +7,23 @@ export class AuthService {
 
 	authToken: any;
 	user: any;
+	vehiculo: any;
 
 	constructor(private http:Http) { }
 
 	registerUser(user){ 
-		console.log(user); //Para registrar un usuario
+		//console.log(user); //Para registrar un usuario
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/register', user, {headers: headers})
+			.map(res => res.json());
+	}
+
+	registerVehiculo(carro){ 
+		//Para registrar un vehiculo
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/registerVehiculo', carro, {headers: headers})
 			.map(res => res.json());
 	}
 
@@ -22,6 +31,13 @@ export class AuthService {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/authenticate', user, {headers: headers})
+			.map(res => res.json());
+	}
+
+	obtenerVehiculos(user){ //ObtenerVehiculos
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getVehiculos', user, {headers: headers})
 			.map(res => res.json());
 	}
 
@@ -41,6 +57,11 @@ export class AuthService {
 		this.user = user;
 	}
 
+	storeVehiculosData(vehiculos) {
+		localStorage.setItem('vehicles', JSON.stringify(vehiculos));
+		this.vehiculo = vehiculos;
+	}
+
 	loadToken(){
 		const token = localStorage.getItem('id_token');
 		this.authToken = token;
@@ -49,6 +70,7 @@ export class AuthService {
 	logout(){ //Para cerrar sesión
 		this.authToken = null;
 		this.user = null;
+		this.vehiculo = null;
 		localStorage.clear();
 	}
 }

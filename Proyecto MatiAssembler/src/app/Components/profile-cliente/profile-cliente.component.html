@@ -274,34 +274,45 @@
                       <i class="material-icons">confirmation_number</i>
                   </span>
                   <div class="form-line">
-                      <input type="text" class="form-control" [(ngModel)]="serialMotor" name="namesurname" placeholder="Serial del motor" required autofocus>
+                      <input type="text" class="form-control" [(ngModel)]="marca" name="marca" placeholder="Marca" required autofocus>
                   </div>
               </div>
+
               <div class="input-group">
                   <span class="input-group-addon">
                       <i class="material-icons">directions_car</i>
                   </span>
                   <div class="form-line">
-                      <input type="email" class="form-control"[(ngModel)]="modelo" name="email" placeholder="Modelo" required>
-                  </div>
-              </div>
-              <div class="input-group">
-                  <span class="input-group-addon">
-                      <i class="material-icons">date_range</i>
-                  </span>
-                  <div class="form-line">
-                      <input type="text" class="form-control" name="password" [ngModel]="ano"  placeholder="Año" required>
-                  </div>
-              </div>
-              <div class="input-group">
-                  <span class="input-group-addon">
-                      <i class="material-icons">indeterminate_check_box</i>
-                  </span>
-                  <div class="form-line">
-                      <input type="text" class="form-control" name="confirm" [ngModel]='placa' placeholder="Placa" required>
+                      <input type="email" class="form-control"[(ngModel)]="modelo" name="modelo" placeholder="Modelo" required>
                   </div>
               </div>
 
+              <div class="input-group">
+                  <span class="input-group-addon">
+                      <i class="material-icons">confirmation_number</i>
+                  </span>
+                  <div class="form-line">
+                      <input type="text" class="form-control" [(ngModel)]="serialMotor" name="serialMotor" placeholder="Serial del motor" required autofocus>
+                  </div>
+              </div>
+
+              <div class="input-group">
+                  <span class="input-group-addon">
+                      <i class="material-icons">confirmation_number</i>
+                  </span>
+                  <div class="form-line">
+                      <input type="text" class="form-control" [(ngModel)]="ano" name="ano" placeholder="Año" required autofocus>
+                  </div>
+              </div>
+
+              <div class="input-group">
+                  <span class="input-group-addon">
+                      <i class="material-icons">confirmation_number</i>
+                  </span>
+                  <div class="form-line">
+                      <input type="text" class="form-control" [(ngModel)]="placa" name="placa" placeholder="Placa" required autofocus>
+                  </div>
+              </div>
       
 
               <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR VEHÍCULO</button>

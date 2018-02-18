@@ -1,16 +1,16 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 
-//Rol Schema
+//Marca Schema
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('rol', {
-		idRol: {
+	return sequelize.define('marca', {
+		idMarca: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
 			primaryKey: true,
 			allowNull: false
 		},
-		rol: {
+		marca: {
 			type: DataTypes.STRING
 		}
 	});

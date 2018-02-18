@@ -26,7 +26,7 @@ connection.authenticate().then(() => {
 const app = express();
 
 const users = require('./routes/users');
-
+const vehiculo = require('./routes/vehiculo');
 //Port number
 const port = 3000;
 
@@ -46,7 +46,7 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use('/users', users);
-
+app.use('/vehiculo', vehiculo); 
 //Index Route
 app.get('/', (req, res) => {
 	res.send('Invalid Endpoint');

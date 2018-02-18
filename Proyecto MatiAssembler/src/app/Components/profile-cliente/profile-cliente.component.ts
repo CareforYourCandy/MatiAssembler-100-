@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { timeout } from 'q';
+import { Http, Headers } from '@angular/http';
 
 @Component({
   selector: 'app-profile-cliente',
@@ -14,7 +15,7 @@ export class ProfileClienteComponent implements OnInit {
   año: String; 
   placa: String; 
 
-  constructor() { 
+  constructor(private http:Http ) { 
     
   }
 
@@ -30,6 +31,13 @@ export class ProfileClienteComponent implements OnInit {
       modelo: this.modelo,
       año: this.año,
       placa: this.placa, 
+    }
+    
+      console.log(vehiculo); //Para registrar un usuario
+      let headers = new Headers();
+      headers.append('Content-Type','application/json');
+      return this.http.post('http://localhost:3000/vehiculo/registerVehiculo', vehiculo, {headers: headers})
+        .map(res => res.json());
     }
   }
  

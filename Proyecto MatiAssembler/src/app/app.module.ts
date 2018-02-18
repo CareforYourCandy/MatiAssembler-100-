@@ -13,10 +13,14 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { LoginComponent } from './Components/login/login.component';
+import { ProfileAdministradorComponent } from './Components/profile-administrador/profile-administrador.component';
+import { AgregarRepuestoComponent } from './Components/agregar-repuesto/agregar-repuesto.component';
   const appRoutes: Routes = [ 
       { path: 'profile-cliente', component:ProfileClienteComponent},
       { path: 'register', component:RegisterComponent},
-      { path: 'login', component:LoginComponent}
+      { path: 'login', component:LoginComponent},
+      { path: 'profile-administrador', component:ProfileAdministradorComponent},
+      { path: 'agregar-repuesto', component:AgregarRepuestoComponent}
     ]
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { LoginComponent } from './Components/login/login.component';
     ProfileClienteComponent,
     NavbarComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileAdministradorComponent,
+    AgregarRepuestoComponent
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@ export class ProfileClienteComponent implements OnInit {
   user; 
   serialMotor: String; 
   modelo: String;
-  año: String; 
+  fecha: String; 
   placa: String; 
 
   constructor(private http:Http ) { 
@@ -29,7 +29,7 @@ export class ProfileClienteComponent implements OnInit {
     const vehiculo = {
       serialMotor : this.serialMotor,
       modelo: this.modelo,
-      año: this.año,
+      año: this.fecha,
       placa: this.placa, 
     }
     

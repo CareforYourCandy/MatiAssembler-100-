@@ -29,8 +29,13 @@ export class LoginComponent implements OnInit {
         if(data.success){
           this.authService.storeUserData(data.token, data.user);
         
-            console.log("Entraste"); 
+          
+         if ( data.user.rol == 1) {
           this.router.navigate(['profile-cliente']);
+         }
+         if (data.user.rol == 4) {
+           this.router.navigate(['profile-administrador']); 
+         }
         } else {
           console.log("Fallo"); 
           this.flashMessage.show(data.msg, {

@@ -1,47 +1,34 @@
 const Sequelize = require('sequelize');
+const config = require('./../config/database');
+const connection = config.connection;
+
 const bcrypt = require('bcryptjs');
 const path = require('path');
-const connection = new Sequelize('mydb', 'root', 'pink88pink', {
-  	host: 'localhost',
-  	dialect : 'mysql',
-	define : {
-		freezeTableName : true,
-		timestamps : false
-    }
-});
+
 
 //Cita Schema
-module.exports = function(sequelize, DataTypes) {
-	 
-	 var vehiculo = connection.import(path.join(process.cwd(), 'models', 'vehiculo'));
-
-	 
-	return sequelize.define('cita', {
+//const vehiculo = connection.import(path.join(process.cwd(), 'models', 'vehiculo'));	
+const Cita = connection.define('cita', {
 		idCita: {
-			type: DataTypes.INTEGER,
+			type: Sequelize.INTEGER,
 			primaryKey: true,
 			autoIncrement: true,
 			allowNull: false
 		},
 		vehiculoCita: {
-			type: DataTypes.INTEGER,
-			references: {
-				model: vehiculo,
-				key: 'idVehiculo'
-			}
+			type: Sequelize.INTEGER
 		}, 
 		fecha: {
-			type: DataTypes.DATE
+			type: Sequelize.DATE
 		}, 
 		motivo: {
-			type: DataTypes.STRING
+			type: Sequelize.STRING
 		}
 	});	
-}
 
-const Cita = module.exports = connection.import(path.join(process.cwd(), 'models', 'cita'));
+module.exports = Cita;
 
-/*module.exports.getCitas = function(callback){ //Obtener la cola de citas (PARA EL GERENTE)
+module.exports.getCitas = function(callback){ //Obtener la cola de citas (PARA EL GERENTE)
 	Cita.findAll().then(citas => {		
 		let citas2 = citas.map(function(cita) {
 			dato = cita.dataValues;   
@@ -54,7 +41,7 @@ const Cita = module.exports = connection.import(path.join(process.cwd(), 'models
 		console.log(datos); 
 		return callback(null, datos);
 	});		
-}*/
+}
 
 module.exports.addCita = function(newCita, callback) { //Añadir una nueva cita a la cola al solicitar una
 			console.log("estoy en addCita");

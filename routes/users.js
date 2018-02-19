@@ -102,8 +102,8 @@ router.post('/registerVehiculo', (req, res, next) => {
         modelo: req.body.modelo,
         activado: req.body.activado,
         serialMotor: req.body.serialMotor,
-        año: req.body.año,
-        dueño: req.body.dueño, 
+        ano: req.body.ano,
+        dueño: req.body.dueño
        
     });
     Vehiculo.addVehiculo(newVehiculo, (err, user) => {
@@ -119,9 +119,11 @@ router.post('/registerVehiculo', (req, res, next) => {
 router.post('/registerCita', (req, res, next) => {
     
     let newCita = new Cita({
-        vehiculoCita: req.body.vehiculoCita     
+        vehiculoCita: req.body.vehiculoCita, 
+        fecha: req.body.fecha,
+        motivo: req.body.motivo   
     });
-    Cita.addCita(newCita, (err, cita) => {
+    Cita.addCita(newCita, (err, user) => {
 		if(err){
 			res.json({success:false, msg:'No funciono el registro de cita'});
 		} else {

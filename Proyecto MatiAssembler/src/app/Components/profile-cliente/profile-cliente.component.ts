@@ -30,8 +30,7 @@ export class ProfileClienteComponent implements OnInit {
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,
-              private router: Router
-              private location: Location) { 
+              private router: Router) { 
     
   }
 
@@ -54,8 +53,8 @@ export class ProfileClienteComponent implements OnInit {
   solicitarCita(idVehiculo) {
     const cita = {
       vehiculoCita: idVehiculo,
-      //fecha: this.fecha,
-      //motivo: this.motivo 
+      fecha: "05/10/2018",
+      motivo: "porquesi"
     }
 
     this.authService.solicitarCita(cita).subscribe(data => {

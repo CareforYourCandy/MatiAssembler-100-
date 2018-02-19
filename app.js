@@ -3,25 +3,11 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
+const config = require('./config/database');
+const connection = config.connection;
 
-//Conectar a la base de datos
-const Sequelize = require('sequelize');
-const connection = new Sequelize('mydb', 'root', 'pink88pink', {
-  	host: 'localhost',
-  	dialect : 'mysql',
-	define : {
-		freezeTableName : true,
-		timestamps : false
-    }
-});
-
-//Test connection
-connection.authenticate().then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+/*// Sincroniza los cambios en los modelos
+connection.sync({ logging: false });*/
 
 const app = express();
 

@@ -16,11 +16,8 @@ export class ProfileClienteComponent implements OnInit {
   user; 
   serialMotor: String; 
   modelo: String;
-<<<<<<< HEAD
   ano: Int16Array;
-=======
   fecha: String; 
->>>>>>> a6f8004504d7dd32e7026e1c110c6b3e0e2b682c
   placa: String; 
   activado: Boolean;
   marca: Int16Array;
@@ -36,12 +33,16 @@ export class ProfileClienteComponent implements OnInit {
   ngOnInit() {
       this.user = JSON.parse(localStorage.getItem("user")); 
       this.vehiculos = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
-         console.log(datos.success);
+        
       }); 
         
   }
 
   recuperarVehiculos() {
+    let datos = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
+      console.log(datos); 
+    }); 
+    this.vehiculos = datos.vehiculos; 
   }
 
   vehiculoSubmit() { 
@@ -50,16 +51,13 @@ export class ProfileClienteComponent implements OnInit {
       placa: this.placa,       
       marca: this.marca,
       modelo: this.modelo,
-<<<<<<< HEAD
-      activado: true,
-      serialMotor: this.serialMotor,     
-      año: this.ano,
-      dueño: this.user.idUsuario    
-=======
       año: this.fecha,
-      placa: this.placa, 
->>>>>>> a6f8004504d7dd32e7026e1c110c6b3e0e2b682c
+      serialMotor: this.serialMotor, 
+      activado: true, 
+      dueño: this.user.idUsuario, 
+
     }
+    
     console.log(vehiculo); //Para registrar un vehiculo
 
     //Required fields

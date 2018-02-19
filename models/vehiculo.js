@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 const path = require('path');
-const connection = new Sequelize('mydb', 'root', 'pink88pink', {
+const connection = new Sequelize('mydb', 'root', 'dictadormarico69', {
   	host: 'localhost',
   	dialect : 'mysql',
 	define : {
@@ -63,12 +63,17 @@ module.exports.getVehiculosByDueño = function(elquetal, callback){
 
 	const query = {where: {dueño: elquetal}}
 	Vehiculo.findAll(query).then(vehiculos => {
-		return vehiculos.forEach(function(vehiculo2) {
-			//console.log(vehiculo2.dataValues);
-		}) 
+		
+		let vehiculos2 = vehiculos.map(function(vehiculo) {
+			dato = vehiculo.dataValues;   
+			return dato; 
+		})
+		vehiculos = vehiculos2;
+		
+		return vehiculos; 
 	})
 	.then(datos => {
-		console.log(datos);
+		console.log(datos); 
 		return callback(null, datos);
 	});		
 }

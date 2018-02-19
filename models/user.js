@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 const path = require('path');
-const connection = new Sequelize('mydb', 'root', 'pink88pink', {
+const connection = new Sequelize('mydb', 'root', 'dictadormarico69', {
   	host: 'localhost',
   	dialect : 'mysql',
 	define : {

@@ -49,8 +49,8 @@
                     <img src="images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Juan</div>
-                    <div class="email">juan@correo.com</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nombre}}</div>
+                    <div class="email">{{user.correo}}</div>
                 </div>
             </div>
             <!-- #User Info -->
@@ -62,6 +62,10 @@
                         <a href="../index.html">
                             <i class="material-icons">home</i>
                             <span>Home</span>
+                        </a>
+                        <a  (click)="logout()" >
+                            <i class="material-icons">not_interested</i>
+                            <span>Cerrar sesión</span>
                         </a>
                     </li>
 

@@ -135,11 +135,12 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
+                                  
+                                  <tr *ngFor="let vehiculo of vehiculos">
+                                      <td>{{vehiculo.modelo}}</td>
                                       <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
+                                      <td>{{vehiculo.placa}}</td>
+                                      <td>{{vehiculo.serialMotor}}</td>
                                       <td>----</td>
                                       <td>
                                           <button type="button" class="btn bg-indigo waves-effect">
@@ -152,6 +153,7 @@
                                           </button>
                                       </td>
                                   </tr>
+                                
                                   <tr>
                                       <td>----</td>
                                       <td>----</td>

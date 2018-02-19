@@ -32,9 +32,8 @@ export class ProfileClienteComponent implements OnInit {
 
   ngOnInit() {
       this.user = JSON.parse(localStorage.getItem("user")); 
-      this.vehiculos = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
-        
-      }); 
+      this.recuperarVehiculos(); 
+      
         
   }
 
@@ -42,8 +41,9 @@ export class ProfileClienteComponent implements OnInit {
     let data = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
       console.log(datos); 
       this.vehiculos = datos.vehiculos; 
+      
     }); 
-    
+     
   }
 
   vehiculoSubmit() { 

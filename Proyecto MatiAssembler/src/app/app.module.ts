@@ -16,7 +16,9 @@ import { LoginComponent } from './Components/login/login.component';
 import { ProfileAdministradorComponent } from './Components/profile-administrador/profile-administrador.component';
 import { AgregarRepuestoComponent } from './Components/agregar-repuesto/agregar-repuesto.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
+
   const appRoutes: Routes = [ 
+      { path: '', component:HomepageComponent},
       { path: 'profile-cliente', component:ProfileClienteComponent},
       { path: 'register', component:RegisterComponent},
       { path: 'login', component:LoginComponent},

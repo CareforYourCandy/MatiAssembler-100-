@@ -83,8 +83,6 @@ module.exports.addVehiculo = function(newUser, callback) {
 			newUser.save(callback);
 			return callback();
 			console.log("añadi");
-
-
 }
 
 

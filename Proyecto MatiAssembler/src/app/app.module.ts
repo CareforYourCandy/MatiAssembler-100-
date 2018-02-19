@@ -16,6 +16,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { ProfileAdministradorComponent } from './Components/profile-administrador/profile-administrador.component';
 import { AgregarRepuestoComponent } from './Components/agregar-repuesto/agregar-repuesto.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
+import { VehiculoComponent } from './Components/vehiculo/vehiculo.component';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -34,7 +35,8 @@ import { HomepageComponent } from './Components/homepage/homepage.component';
     LoginComponent,
     ProfileAdministradorComponent,
     AgregarRepuestoComponent,
-    HomepageComponent
+    HomepageComponent,
+    VehiculoComponent
   ],
   imports: [
     BrowserModule,

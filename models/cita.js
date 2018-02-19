@@ -12,9 +12,10 @@ const connection = new Sequelize('mydb', 'root', 'pink88pink', {
 
 //Cita Schema
 module.exports = function(sequelize, DataTypes) {
-	
-	var vehiculo = connection.import(path.join(process.cwd(), 'models', 'vehiculo'));
-	
+	 
+	 var vehiculo = connection.import(path.join(process.cwd(), 'models', 'vehiculo'));
+
+	 
 	return sequelize.define('cita', {
 		idCita: {
 			type: DataTypes.INTEGER,

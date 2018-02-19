@@ -57,7 +57,7 @@ module.exports = function(sequelize, DataTypes) {
 	});	
 }
 
-const Vehiculo = module.exports = connection.import(path.join(process.cwd(), 'models', 'vehiculo'));
+const vehiculo = module.exports = connection.import(path.join(process.cwd(), 'models', 'vehiculo'));
 
 module.exports.getVehiculosByDueño = function(elquetal, callback){
 

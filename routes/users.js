@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const Vehiculo = require('../models/vehiculo'); 
+const Vehiculo = require('../models/vehiculo');
+const Cita = require('../models/cita');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
@@ -107,10 +108,24 @@ router.post('/registerVehiculo', (req, res, next) => {
     });
     Vehiculo.addVehiculo(newVehiculo, (err, user) => {
 		if(err){
-			console.log("errooooooor");
 			res.json({success:false, msg:'No funciono el registro vehiculo'});
 		} else {
 			res.json({success:true, msg:'Vehiculo registrado'});
+		}
+	});
+
+});
+
+router.post('/registerCita', (req, res, next) => {
+    
+    let newCita = new Cita({
+        vehiculoCita: req.body.vehiculoCita     
+    });
+    Cita.addCita(newCita, (err, cita) => {
+		if(err){
+			res.json({success:false, msg:'No funciono el registro de cita'});
+		} else {
+			res.json({success:true, msg:'Cita en cola :)'});
 		}
 	});
 

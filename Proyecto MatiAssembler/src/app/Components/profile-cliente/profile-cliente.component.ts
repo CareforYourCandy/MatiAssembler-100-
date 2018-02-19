@@ -4,6 +4,7 @@ import { Http, Headers } from '@angular/http';
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -16,17 +17,21 @@ export class ProfileClienteComponent implements OnInit {
   user; 
   serialMotor: String; 
   modelo: String;
-  ano: Int16Array;
-  fecha: String; 
+  ano: Int16Array;  
   placa: String; 
   activado: Boolean;
   marca: Int16Array;
   vehiculos;
 
+  fecha: String; 
+  vehiculoCita: Int16Array;
+  motivo: String;
+
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,
-              private router: Router) { 
+              private router: Router
+              private location: Location) { 
     
   }
 
@@ -46,13 +51,36 @@ export class ProfileClienteComponent implements OnInit {
      
   }
 
+  solicitarCita(idVehiculo) {
+    const cita = {
+      vehiculoCita: idVehiculo,
+      //fecha: this.fecha,
+      //motivo: this.motivo 
+    }
+
+    this.authService.solicitarCita(cita).subscribe(data => {
+      console.log(data.success); 
+      if(data.success){
+         console.log("sirvio");
+         this.router.navigate(['profile-cliente']);
+
+      } else {
+        console.log("fallo");
+        this.router.navigate(['profile-cliente']); 
+      }
+    this.recuperarVehiculos(); 
+
+    });
+
+  }
+
   vehiculoSubmit() { 
 
     const vehiculo = {
       placa: this.placa,       
       marca: this.marca,
       modelo: this.modelo,
-      año: this.fecha,
+      ano: this.ano,
       serialMotor: this.serialMotor, 
       activado: true, 
       dueño: this.user.idUsuario, 
@@ -72,14 +100,16 @@ export class ProfileClienteComponent implements OnInit {
       console.log(data.success); 
       if(data.success){
          console.log("sirvio");
+         this.router.navigate(['profile-cliente']);
+
       } else {
-        console.log("fallo");  
+        console.log("fallo");
+        this.router.navigate(['profile-cliente']); 
       }
-      this.router.navigate(['/profile-cliente']);
+    this.recuperarVehiculos(); 
+
     });
-
-    //this.router.navigate(['/login']);
-
   }
+
  
 }

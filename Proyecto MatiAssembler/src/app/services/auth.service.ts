@@ -27,6 +27,14 @@ export class AuthService {
 			.map(res => res.json());
 	}
 
+	solicitarCita(cita) {
+		//Para registrar una cita
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/registerCita', cita, {headers: headers})
+			.map(res => res.json());		
+	}
+
 	authenticateUser(user){ //Iniciar sesión
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');

@@ -12,7 +12,7 @@ router.post('/registerVehiculo', (req, res, next) => {
             placa: req.body.placa,
             modelo: req.body.modelo,
             serialMotor: req.body.serialMotor,
-            año: req.body.año,
+            ano: req.body.ano,
             dueño: req.body.dueño, 
            
         });

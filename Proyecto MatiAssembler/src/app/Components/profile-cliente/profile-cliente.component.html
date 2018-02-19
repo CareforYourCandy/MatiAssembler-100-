@@ -125,6 +125,7 @@
                           <table class="table table-hover dashboard-task-infos">
                               <thead>
                                   <tr>
+                                      <th>Marca</th>
                                       <th>Modelo</th>
                                       <th>Año</th>
                                       <th>Placa</th>
@@ -137,13 +138,14 @@
                               <tbody>
                                   
                                   <tr *ngFor="let vehiculo of vehiculos">
+                                      <td>{{vehiculo.marca}}</td>
                                       <td>{{vehiculo.modelo}}</td>
-                                      <td>----</td>
+                                      <td>{{vehiculo.ano}}</td>
                                       <td>{{vehiculo.placa}}</td>
                                       <td>{{vehiculo.serialMotor}}</td>
                                       <td>----</td>
                                       <td>
-                                          <button type="button" class="btn bg-indigo waves-effect">
+                                          <button (click)="solicitarCita(vehiculo.idVehiculo)" type="button" class="btn bg-indigo waves-effect">
                                               <i class="material-icons">date_range</i>
                                           </button>
                                       </td>

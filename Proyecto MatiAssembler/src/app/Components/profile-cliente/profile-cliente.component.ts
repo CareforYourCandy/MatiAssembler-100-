@@ -39,10 +39,11 @@ export class ProfileClienteComponent implements OnInit {
   }
 
   recuperarVehiculos() {
-    let datos = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
+    let data = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
       console.log(datos); 
+      this.vehiculos = datos.vehiculos; 
     }); 
-    this.vehiculos = datos.vehiculos; 
+    
   }
 
   vehiculoSubmit() { 

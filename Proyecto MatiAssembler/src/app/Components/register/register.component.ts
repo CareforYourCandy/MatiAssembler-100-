@@ -54,11 +54,8 @@ export class RegisterComponent implements OnInit {
     console.log("Hola3"); 
     //Registrar usuario
     this.authService.registerUser(user).subscribe(data => {
-<<<<<<< HEAD
       console.log(data.success); 
-=======
      
->>>>>>> a6f8004504d7dd32e7026e1c110c6b3e0e2b682c
       if(data.success){
 
         this.router.navigate(['/login']);
@@ -66,15 +63,10 @@ export class RegisterComponent implements OnInit {
         console.log("fallo"); 
         this.router.navigate(['/login']);
       }
-<<<<<<< HEAD
     });
 
     this.router.navigate(['/login']);
 
-=======
-    })
-    this.router.navigate(['/login']); 
->>>>>>> a6f8004504d7dd32e7026e1c110c6b3e0e2b682c
   }
 
 }

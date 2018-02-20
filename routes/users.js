@@ -133,4 +133,19 @@ router.post('/registerCita', (req, res, next) => {
 
 });
 
+router.post('/desactivarVehiculo',  (req, res, next) => {
+Vehiculo.desactivarVehiculo(req.body.idVehiculo, (err, vehiculo)  => {
+	if (err) {
+		res.json({success:false, msg:'No funciono'});
+	} else {
+		res.json({success:true, msg:'furula'});
+	}
+})
+
+}); 
+router.post('/registerRepuesto', (req, res, next) => {
+	let repuesto = {
+		
+	}
+}); 
 module.exports = router;

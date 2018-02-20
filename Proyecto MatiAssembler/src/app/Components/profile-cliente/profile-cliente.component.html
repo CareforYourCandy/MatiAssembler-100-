@@ -143,18 +143,20 @@
                                       <td>{{vehiculo.ano}}</td>
                                       <td>{{vehiculo.placa}}</td>
                                       <td>{{vehiculo.serialMotor}}</td>
-                                      <td>----</td>
+                                      <td>oooo</td>
                                       <td>
                                           <button (click)="solicitarCita(vehiculo.idVehiculo)" type="button" class="btn bg-indigo waves-effect">
                                               <i class="material-icons">date_range</i>
                                           </button>
                                       </td>
                                       <td>
-                                          <button type="button" class="btn bg-indigo waves-effect">
+                                          <button type="button" class="btn bg-indigo waves-effect" (click)="desactivarVehiculo(vehiculo.idVehiculo)">
                                               <i class="material-icons">close</i>
                                           </button>
                                       </td>
                                   </tr>
+                               
+                                
                               </tbody>
                           </table>
                       </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input} from '@angular/core';
+import { Vehiculo } from '../vehiculo/vehiculo'; 
 @Component({
   selector: 'app-vehiculo',
   templateUrl: './vehiculo.component.html',
@@ -7,25 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VehiculoComponent implements OnInit {
 
-  serialMotor: String; 
-  modelo: String;
-  ano: Int16Array;  
-  placa: String; 
-  activado: Boolean;
-  marca: Int16Array;
-  vehiculoID: String; 
+  @Input() vehiculo: Vehiculo;  
 
-  constructor(serialMotor, modelo, ano, placa, activado, marca, vehiculoID) { 
-    this.serialMotor = serialMotor;
-    this.modelo = modelo;
-    this.ano = ano;
-    this.placa = placa;
-    this.activado = activado;
-    this.marca = marca;
-    this.vehiculoID = 
+  constructor() { 
+   
   }
 
   ngOnInit() {
   }
 
 }
+
+
+

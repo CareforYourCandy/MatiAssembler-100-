@@ -5,7 +5,7 @@ import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { VehiculoComponent} from '../vehiculo/vehiculo.component'; 
+import { Vehiculo } from '../vehiculo/vehiculo'; 
 
 @Component({
   selector: 'app-profile-cliente',
@@ -21,16 +21,18 @@ export class ProfileClienteComponent implements OnInit {
   placa: String; 
   activado: Boolean;
   marca: Int16Array;
-  vehiculos;
-
+  vehiculos; 
+  vehiculos2: Vehiculo[];  
   fecha: String; 
   vehiculoCita: Int16Array;
   motivo: String;
+  vehiculoIteracion: Vehiculo; 
 
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,
-              private router: Router) { 
+              private router: Router, 
+              private location: Location) { 
     
   }
 
@@ -45,16 +47,37 @@ export class ProfileClienteComponent implements OnInit {
     let data = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
       console.log(datos); 
       this.vehiculos = datos.vehiculos; 
-      
+      let vehiculos3 = []; 
+      vehiculos3.push(datos.vehiculos.map(function(datosVehiculo) {
+        console.log(datosVehiculo); 
+        let vehiculo = new Vehiculo(datosVehiculo.serialMotor, datosVehiculo.modelo, datosVehiculo.ano, datosVehiculo.placa,
+          datosVehiculo.activado, datosVehiculo.marca, datosVehiculo.idVehiculo); 
+          console.log(vehiculo); 
+          return vehiculo; 
+          
+       
+      })); 
+      this.vehiculos2 = vehiculos3;
+       
     }); 
      
+  }
+ 
+  desactivarVehiculo(id) {
+    const vehiculo = {
+      idVehiculo: id 
+    }
+    this.authService.desactivarVehiculo(vehiculo).subscribe(data => {
+      console.log(data.success); 
+
+    })
   }
 
   solicitarCita(idVehiculo) {
     const cita = {
       vehiculoCita: idVehiculo,
-      fecha: "05/10/2018",
-      motivo: "porquesi"
+      fecha: "12/12/12",
+      motivo: "porquesi",  
     }
 
     this.authService.solicitarCita(cita).subscribe(data => {

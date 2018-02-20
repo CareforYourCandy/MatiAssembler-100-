@@ -11,6 +11,13 @@ export class AuthService {
 
 	constructor(private http:Http) { }
 
+	registerRepuesto(repuesto) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/registerRepuesto', repuesto, {headers: headers})
+		.map(res => res.json());
+	}
+	
 	registerUser(user){ 
 		//console.log(user); //Para registrar un usuario
 		let headers = new Headers();
@@ -25,6 +32,14 @@ export class AuthService {
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/registerVehiculo', carro, {headers: headers})
 			.map(res => res.json());
+	}
+
+	desactivarVehiculo(vehiculo) {
+		console.log("entro en servicio"); 
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/desactivarVehiculo', vehiculo, {headers: headers})
+		.map (res => res.json()); 
 	}
 
 	solicitarCita(cita) {

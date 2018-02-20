@@ -25,7 +25,8 @@ import { ModificarUsuarioComponent } from './Components/modificar-usuario/modifi
       { path: 'register', component:RegisterComponent},
       { path: 'login', component:LoginComponent},
       { path: 'profile-administrador', component:ProfileAdministradorComponent},
-      { path: 'agregar-repuesto', component:AgregarRepuestoComponent}
+      { path: 'agregar-repuesto', component:AgregarRepuestoComponent},
+      {path: 'modificar-usuario', component:ModificarUsuarioComponent}
     ]
 @NgModule({
   declarations: [

@@ -46,6 +46,12 @@ module.exports = function(sequelize, DataTypes) {
 		cedula: {
 			type: DataTypes.INTEGER,
 			
+		},
+		telefono: {
+			type: DataTypes.STRING,
+		},
+		direccion: {
+			type: DataTypes.STRING, 
 		}
 		
 	});	

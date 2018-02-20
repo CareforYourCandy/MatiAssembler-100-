@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModificarUsuarioComponent implements OnInit {
 
+  name: String;
+	lastname: String;
+	email: String;
+	rol: String;
+  password: String;
+  cedula: String; 
+  direccion: String;
+  telefono: String; 
+  
   constructor() { }
 
   ngOnInit() {

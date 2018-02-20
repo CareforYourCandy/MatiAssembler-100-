@@ -1,3 +1,90 @@
-<p>
-  modificar-usuario works!
-</p>
+
+  
+        <div class="signup-box">
+            <div class="logo">
+                <a href="javascript:void(0);">Mati<b>ASSEMBLER</b></a>
+                <small>Su taller de siempre, ahora mejor que nunca</small>
+            </div>
+            <div class="card">
+                <div class="body">
+                    <form >
+                        <div class="msg">Modifique el usuario</div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Nombre" required autofocus>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" class="form-control"  [(ngModel)]="lastname" name="lastname" placeholder="Apellido" required autofocus>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" class="form-control"  [(ngModel)] = "cedula" name="cedula" placeholder="Cédula" required autofocus>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">email</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">lock</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="password" class="form-control" [(ngModel)] = "password" name="password" minlength="6" placeholder="Contraseña" required>
+                            </div>
+                        </div>
+
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="btn-group">
+                                
+                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Rol <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                  <li><a >Usuario</a></li>
+                                  <li><a >Mecanico</a></li>
+                                  <li><a >Gerente</a></li>
+                                  <li><a >Administrador</a></li>
+                                  
+                              </ul>
+                            </div>
+                        </div>
+                        <div class="form-line">
+                            <input type="text" class="form-control" [(ngModel)]="telefono" name="telefono" placeholder="telefono" required autofocus>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" [(ngModel)]="direccion" name="direccion" placeholder="direccion" required autofocus>
+                        </div>
+                        <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">MODIFICAR</button>
+                    </form>
+                </div>
+            </div>
+        </div>   
+

@@ -17,7 +17,9 @@ router.post('/register', (req, res, next) => {
 		correo: req.body.correo,
 		rol: req.body.rol,
 		contraseña: req.body.contraseña,
-		cedula: req.body.cedula
+		cedula: req.body.cedula,
+		telefono: req.body.telefono,
+		direccion: req.body.direccion
 	});
 	User.addUser(newUser, (err, user) => {
 		if(err){

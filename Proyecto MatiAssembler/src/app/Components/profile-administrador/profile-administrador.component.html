@@ -103,15 +103,13 @@
                               <tr>
                                   <th>TIPO</th>
                                   <th>NOMBRE</th>
-                                  <th>PRECIO</th>
                                   <th>ELIMINAR</th>
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
+                              <tr *ngFor = "let repuesto of repuestos" >
+                                  <td>---- </td>
+                                  <td> {{repuesto.pieza}}</td>
                                   <td>
                                           <button type="button" class="btn bg-light-blue
                                           waves-effect">
@@ -119,50 +117,7 @@
                                           </button>
                                       </td>
                               </tr>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>
-                                          <button type="button" class="btn bg-light-blue
-                                          waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                              </tr>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>
-                                          <button type="button" class="btn bg-light-blue
-                                          waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                              </tr>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>
-                                          <button type="button" class="btn bg-light-blue
-                                          waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                              </tr>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>
-                                          <button type="button" class="btn bg-light-blue
-                                          waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                              </tr>
+                              
                           </tbody>
                       </table>
                   </div>

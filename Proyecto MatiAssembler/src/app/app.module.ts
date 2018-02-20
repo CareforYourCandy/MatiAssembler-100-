@@ -17,6 +17,7 @@ import { ProfileAdministradorComponent } from './Components/profile-administrado
 import { AgregarRepuestoComponent } from './Components/agregar-repuesto/agregar-repuesto.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { VehiculoComponent } from './Components/vehiculo/vehiculo.component';
+import { ModificarUsuarioComponent } from './Components/modificar-usuario/modificar-usuario.component';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -36,7 +37,8 @@ import { VehiculoComponent } from './Components/vehiculo/vehiculo.component';
     ProfileAdministradorComponent,
     AgregarRepuestoComponent,
     HomepageComponent,
-    VehiculoComponent
+    VehiculoComponent,
+    ModificarUsuarioComponent
   ],
   imports: [
     BrowserModule,

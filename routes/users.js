@@ -6,7 +6,7 @@ const Cita = require('../models/cita');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
-
+const Repuesto = require('../models/repuesto'); 
 
 //Register
 router.post('/register', (req, res, next) => {
@@ -28,10 +28,27 @@ router.post('/register', (req, res, next) => {
 	});
 });
 
+router.post('/obtenerRepuestos', (req, res, next) => {
+	console.log("Estoy en obtener repuestos"); 
+	let repuestos2 = Repuesto.getRepuesto(req, (err, repuestos) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!repuestos) {
+			console.log("No hay repuestos"); 
+		}
+		
+		res.json( {
+			success:true, 
+			repuestos
+		})
+	});
+	
+	}); 
 //Obtener Vehiculos
 router.post('/getVehiculos', (req, res, next) => {
 	const id=req.body.idUsuario;
-	console.log(id);
+	console.log();
 	Vehiculo.getVehiculosByDueño(id, (err, vehiculos) => {
 		if(err) {
 			console.log('AQUI PASO ALGO');
@@ -120,8 +137,7 @@ router.post('/registerCita', (req, res, next) => {
     
     let newCita = new Cita({
         vehiculoCita: req.body.vehiculoCita, 
-        fecha: req.body.fecha,
-        motivo: req.body.motivo   
+        
     });
     Cita.addCita(newCita, (err, user) => {
 		if(err){
@@ -144,8 +160,9 @@ Vehiculo.desactivarVehiculo(req.body.idVehiculo, (err, vehiculo)  => {
 
 }); 
 router.post('/registerRepuesto', (req, res, next) => {
-	let repuesto = {
-		
-	}
+	let repuesto = new Repuesto({
+		pieza:  req.body.pieza 
+	});
+	Repuesto.addRepuesto(repuesto);
 }); 
 module.exports = router;

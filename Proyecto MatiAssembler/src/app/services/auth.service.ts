@@ -12,9 +12,18 @@ export class AuthService {
 	constructor(private http:Http) { }
 
 	registerRepuesto(repuesto) {
+		console.log("Hola"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/registerRepuesto', repuesto, {headers: headers})
+		.map(res => res.json());
+	}
+
+	obtenerRepuestos() {
+		console.log("Hola2"); 
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/obtenerRepuestos', Object(), {headers: headers})
 		.map(res => res.json());
 	}
 	

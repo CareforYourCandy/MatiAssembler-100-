@@ -18,12 +18,7 @@ const Cita = connection.define('cita', {
 		vehiculoCita: {
 			type: Sequelize.INTEGER
 		}, 
-		fecha: {
-			type: Sequelize.DATE
-		}, 
-		motivo: {
-			type: Sequelize.STRING
-		}
+		
 	});	
 
 module.exports = Cita;

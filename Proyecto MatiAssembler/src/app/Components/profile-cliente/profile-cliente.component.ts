@@ -75,9 +75,7 @@ export class ProfileClienteComponent implements OnInit {
 
   solicitarCita(idVehiculo) {
     const cita = {
-      vehiculoCita: idVehiculo,
-      fecha: "12/12/12",
-      motivo: "porquesi",  
+      vehiculoCita: idVehiculo
     }
 
     this.authService.solicitarCita(cita).subscribe(data => {

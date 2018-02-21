@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import {MatDialog} from '@angular/material'; 
+
 
 import { AppComponent } from './app.component';
 import { ProfileClienteComponent } from './Components/profile-cliente/profile-cliente.component';
@@ -17,7 +19,8 @@ import { ProfileAdministradorComponent } from './Components/profile-administrado
 import { AgregarRepuestoComponent } from './Components/agregar-repuesto/agregar-repuesto.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { VehiculoComponent } from './Components/vehiculo/vehiculo.component';
-import { ModificarUsuarioComponent } from './Components/modificar-usuario/modificar-usuario.component';
+import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
+
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -26,7 +29,7 @@ import { ModificarUsuarioComponent } from './Components/modificar-usuario/modifi
       { path: 'login', component:LoginComponent},
       { path: 'profile-administrador', component:ProfileAdministradorComponent},
       { path: 'agregar-repuesto', component:AgregarRepuestoComponent},
-      {path: 'modificar-usuario', component:ModificarUsuarioComponent}
+      
     ]
 @NgModule({
   declarations: [
@@ -39,17 +42,22 @@ import { ModificarUsuarioComponent } from './Components/modificar-usuario/modifi
     AgregarRepuestoComponent,
     HomepageComponent,
     VehiculoComponent,
-    ModificarUsuarioComponent
+    ModificarUsuarioComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule.forRoot()
+    
+    
   ],
-  providers: [ValidateService, AuthService],
-  bootstrap: [AppComponent]
+  providers: [ValidateService, AuthService, MatDialog],
+  bootstrap: [AppComponent], 
+  
+  
  
 })
 

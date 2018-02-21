@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import {ModificarUsuarioComponent} from '../../components/modificar-usuario/modificar-usuario.component'
 @Component({
   selector: 'app-profile-administrador',
   templateUrl: './profile-administrador.component.html',
@@ -9,8 +11,8 @@ export class ProfileAdministradorComponent implements OnInit {
 
   nuevoRepuesto = false; 
   repuestos; 
-
-  constructor(private authService: AuthService) { }
+ 
+  constructor(private authService: AuthService ) { }
 
   ngOnInit() {
     this.obtenerRepuestos(); 
@@ -20,6 +22,7 @@ export class ProfileAdministradorComponent implements OnInit {
 
   agregarRepuesto() {
     this.nuevoRepuesto = true; 
+    
   }
 
   obtenerRepuestos() {

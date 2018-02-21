@@ -128,7 +128,7 @@
                       </table>
                   </div>
                   <div class="align-center">
-                          <button type="button" class="btn bg-cyan waves-effect" (click) ="agregarRepuesto()" >AGREGAR REPUESTO</button>
+                          <button type="button"  data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarRepuesto()" >AGREGAR REPUESTO</button>
                       </div>
                       <br>
               </div>
@@ -138,8 +138,7 @@
 
   
           <div *ngIf="nuevoRepuesto">
-            <app-agregar-repuesto>
-            </app-agregar-repuesto> 
+            <app-agregar-repuesto></app-agregar-repuesto> 
           </div>
 
 

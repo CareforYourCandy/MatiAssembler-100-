@@ -42,41 +42,18 @@
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>15151515</td>
-                                  <td>Cliente</td>
+                              <tr *ngFor= 'let user of usuarios' >
+                                  <td>{{user.nombre}}</td>
+                                  <td>{{user.apellido}}</td>
+                                  <td>{{user.cedula}}</td>
+                                  <td>{{user.rol}}</td>
                                   <td>
-                                  <button type="button" class="btn btn-default waves-effect">
+                                  <button type="button" (click)="modificarUsuario(user.idUsuario)" class="btn btn-default waves-effect">
                                     <i class="material-icons">settings</i>
                                 </button>
                             </td>
                               </tr>
-                              <tr>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>89574123</td>
-                                  <td>Mecánico</td>
-                              </tr>
-                              <tr>
-                                  <td>Larry</td>
-                                  <td>the Bird</td>
-                                  <td>45454545</td>
-                                  <td>Gerente</td>
-                              </tr>
-                              <tr>
-                                  <td>Larry</td>
-                                  <td>Jellybean</td>
-                                  <td>6338232</td>
-                                  <td>Cliente</td>
-                              </tr>
-                              <tr>
-                                  <td>Larry</td>
-                                  <td>Kikat</td>
-                                  <td>20259257</td>
-                                  <td>Cliente</td>
-                              </tr>
+                             
                           </tbody>
                       </table>
                   </div>
@@ -140,7 +117,9 @@
           <div *ngIf="nuevoRepuesto">
             <app-agregar-repuesto></app-agregar-repuesto> 
           </div>
-
+          <div *ngIf="modificar">
+              <app-modificar-usuario  [user]= "usuario" > </app-modificar-usuario>
+          </div>
 
 
 

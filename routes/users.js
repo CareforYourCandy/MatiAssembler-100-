@@ -29,7 +29,53 @@ router.post('/register', (req, res, next) => {
 		}
 	});
 });
+ router.post('/getUser', (req, res, next)  => {
+	id = req.body.id; 
+	
+	User.getUserByID(id, (user) => {
+		res.json( {
+			success: true,
+			user
+		})
+	});
 
+ }
+)
+router.post('/modificarUsuario'), (req, res, next) => {
+	usuario = req.body.usuario;
+	console.log("Estoy en obtener users"); 
+	let usuarios = User.getUsers(req, (err, users) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!users) {
+			console.log("No hay repuestos"); 
+		}
+		
+		res.json( {
+			success:true, 
+			users
+		})
+	});
+	
+	}
+router.post('/getUsers', (req, res, next) => {
+	console.log("Estoy en obtener users"); 
+	let usuarios = User.getUsers(req, (err, users) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!users) {
+			console.log("No hay repuestos"); 
+		}
+		
+		res.json( {
+			success:true, 
+			users
+		})
+	});
+	
+	}); 
 router.post('/obtenerRepuestos', (req, res, next) => {
 	console.log("Estoy en obtener repuestos"); 
 	let repuestos2 = Repuesto.getRepuesto(req, (err, repuestos) => {
@@ -152,6 +198,7 @@ router.post('/registerCita', (req, res, next) => {
 });
 
 router.post('/desactivarVehiculo',  (req, res, next) => {
+console.log(req.body); 
 Vehiculo.desactivarVehiculo(req.body.idVehiculo, (err, vehiculo)  => {
 	if (err) {
 		res.json({success:false, msg:'No funciono'});

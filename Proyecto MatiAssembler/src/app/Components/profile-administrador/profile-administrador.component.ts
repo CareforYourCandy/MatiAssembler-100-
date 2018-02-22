@@ -1,28 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import {ModificarUsuarioComponent} from '../../components/modificar-usuario/modificar-usuario.component'
+import { ModificarUsuarioComponent } from '../../modificar-usuario/modificar-usuario.component';
+import {AgregarRepuestoComponent} from '../agregar-repuesto/agregar-repuesto.component'; 
 @Component({
   selector: 'app-profile-administrador',
   templateUrl: './profile-administrador.component.html',
   styleUrls: ['./profile-administrador.component.css']
 })
 export class ProfileAdministradorComponent implements OnInit {
-
+  
+  modificar = false; 
   nuevoRepuesto = false; 
-  repuestos; 
- 
+  @ViewChild(AgregarRepuestoComponent)  repuestoHijo;  
+  repuestoInsertar; 
+  usuarios; 
+  usuario; 
+  repuestos;
   constructor(private authService: AuthService ) { }
-
+  
+  
+  
   ngOnInit() {
     this.obtenerRepuestos(); 
-    console.log("hola"); 
-    console.log(this.repuestos);
+    this.obtenerUsuarios();
   }
-
+  ngAfterViewInit() {
+    this.repuestoInsertar = this.repuestoHijo.repuestoGenerado;
+    console.log(this.repuestoInsertar); 
+  }
   agregarRepuesto() {
     this.nuevoRepuesto = true; 
-    
+  
   }
 
   obtenerRepuestos() {
@@ -34,4 +42,26 @@ export class ProfileAdministradorComponent implements OnInit {
       }); 
   }
 
+  obtenerUsuarios() {
+    let data = this.authService.getUsers().subscribe( datos => {
+      this.usuarios = datos.users
+      console.log(this.usuarios); 
+    })
+  }
+async modificarUsuario(id) {
+  this.modificar = true;
+  let user; 
+   
+  await this.authService.getUserById(id).subscribe(datos => {
+   
+    console.log(datos); 
+    user = datos.user; 
+    console.log(user); 
+    this.usuario = user; 
+  })  
+ 
+ console.log(this.usuario); 
+
+  
+}
 }

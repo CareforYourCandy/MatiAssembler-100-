@@ -74,8 +74,8 @@ module.exports.addVehiculo = function(newUser, callback) {
 
 module.exports.desactivarVehiculo = function(vehiculoID, callback) {
 	Vehiculo.update(
-		{activado: false},
-		{where: {dueño: vehiculoID} }
+		{activado: 0},
+		{where: {idVehiculo: vehiculoID} }
 	).then(datos => {
 		//console.log(datos);
 		return callback(null, datos);

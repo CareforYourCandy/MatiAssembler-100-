@@ -14,7 +14,7 @@ export class AgregarRepuestoComponent implements OnInit {
 pieza: String; 
 marca: String;
 modelo: String; 
-
+repuestoGenerado; 
   
 
   constructor(private validateService: ValidateService, 
@@ -28,9 +28,12 @@ modelo: String;
 
   
  registrarRepuesto() {
+  
   const repuesto = {
     pieza: this.pieza 
   }
+  this.repuestoGenerado = repuesto; 
+  
   this.authService.registerRepuesto(repuesto).subscribe(data => {
     console.log(data.success); 
   }); 

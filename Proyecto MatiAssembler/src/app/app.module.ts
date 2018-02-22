@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-import {MatDialog} from '@angular/material'; 
+import { MatDialogModule, MatDialog } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { AgregarRepuestoComponent } from './Components/agregar-repuesto/agregar-
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { VehiculoComponent } from './Components/vehiculo/vehiculo.component';
 import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
+
 
 
   const appRoutes: Routes = [ 
@@ -43,6 +44,7 @@ import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario
     HomepageComponent,
     VehiculoComponent,
     ModificarUsuarioComponent,
+
     
     
   ],
@@ -56,6 +58,7 @@ import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario
   ],
   providers: [ValidateService, AuthService, MatDialog],
   bootstrap: [AppComponent], 
+  entryComponents: [ModificarUsuarioComponent]
   
   
  

@@ -38,6 +38,7 @@ export class ProfileClienteComponent implements OnInit {
 
   ngOnInit() {
       this.user = JSON.parse(localStorage.getItem("user")); 
+      console.log(this.user); 
       this.recuperarVehiculos(); 
       
         
@@ -63,14 +64,19 @@ export class ProfileClienteComponent implements OnInit {
      
   }
  
-  desactivarVehiculo(id) {
+  desactivarVehiculo(id, carro) {
+    carro.activado = false; 
     const vehiculo = {
-      idVehiculo: id 
+      idVehiculo: id,
+      dueño: this.user.idUsuario
     }
+    console.log("El id es" + id); 
+    
     this.authService.desactivarVehiculo(vehiculo).subscribe(data => {
       console.log(data.success); 
 
     })
+    this.recuperarVehiculos(); 
   }
 
   solicitarCita(idVehiculo) {
@@ -120,13 +126,13 @@ export class ProfileClienteComponent implements OnInit {
       console.log(data.success); 
       if(data.success){
          console.log("sirvio");
-         this.router.navigate(['profile-cliente']);
+         this.vehiculos.push(vehiculo); 
 
       } else {
         console.log("fallo");
         this.router.navigate(['profile-cliente']); 
       }
-    this.recuperarVehiculos(); 
+    
 
     });
   }

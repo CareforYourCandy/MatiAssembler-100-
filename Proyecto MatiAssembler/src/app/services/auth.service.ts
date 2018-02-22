@@ -11,6 +11,14 @@ export class AuthService {
 
 	constructor(private http:Http) { }
 
+	modificarUsuario(usuario) {
+		console.log("Hola servicio"); 
+		console.log(usuario); 
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/modificarUsuario', usuario, {headers: headers})
+		.map(res => res.json());
+	}
 	registerRepuesto(repuesto) {
 		console.log("Hola"); 
 		let headers = new Headers();
@@ -19,6 +27,21 @@ export class AuthService {
 		.map(res => res.json());
 	}
 
+	getUserById(id) {
+		let idUsuario = {id}
+		
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getUser', idUsuario, {headers: headers})
+		.map(res => res.json());
+	}
+	getUsers() {
+		console.log("Hola2"); 
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getUsers', Object(), {headers: headers})
+		.map(res => res.json());
+	}
 	obtenerRepuestos() {
 		console.log("Hola2"); 
 		let headers = new Headers();
@@ -105,4 +128,6 @@ export class AuthService {
 		this.vehiculo = null;
 		localStorage.clear();
 	}
+	
+
 }

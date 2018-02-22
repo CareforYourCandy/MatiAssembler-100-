@@ -109,7 +109,7 @@ module.exports.getUsers = function(id, callback){
 module.exports.getUserByEmail = function(email, callback){
 	const query = {where: {correo: email}}
 	User.findOne(query).then(usuario => {
-		//console.log(usuario);
+		console.log(usuario);
 		return usuario.get();
 	})
 	.then(datos => {

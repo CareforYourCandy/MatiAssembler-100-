@@ -38,9 +38,7 @@ export class LoginComponent implements OnInit {
          }
         } else {
           console.log("Fallo"); 
-          this.flashMessage.show(data.msg, {
-            cssClass: 'alert-danger', 
-            timeout:5000});
+          
           this.router.navigate(['login']);
         }
       }); 

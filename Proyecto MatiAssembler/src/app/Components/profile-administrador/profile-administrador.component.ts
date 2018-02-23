@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular
 import { AuthService } from '../../services/auth.service';
 import { ModificarUsuarioComponent } from '../../modificar-usuario/modificar-usuario.component';
 import {AgregarRepuestoComponent} from '../agregar-repuesto/agregar-repuesto.component'; 
+
+
 @Component({
   selector: 'app-profile-administrador',
   templateUrl: './profile-administrador.component.html',
@@ -16,6 +18,8 @@ export class ProfileAdministradorComponent implements OnInit {
   usuarios; 
   usuario; 
   repuestos;
+
+
   constructor(private authService: AuthService ) { }
   
   

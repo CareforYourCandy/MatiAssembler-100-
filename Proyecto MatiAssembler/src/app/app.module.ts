@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-import { FlashMessagesModule } from 'angular2-flash-messages';
-import { MatDialogModule, MatDialog } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -53,12 +51,11 @@ import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    
-    
   ],
-  providers: [ValidateService, AuthService, MatDialog],
+  
+  providers: [ValidateService, AuthService],
   bootstrap: [AppComponent], 
-  entryComponents: [ModificarUsuarioComponent]
+  
   
   
  

@@ -27,7 +27,8 @@ export class ProfileClienteComponent implements OnInit {
   vehiculoCita: Int16Array;
   motivo: String;
   vehiculoIteracion: Vehiculo; 
-
+  marcas; 
+  
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,

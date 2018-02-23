@@ -48,7 +48,7 @@
                                   <td>{{user.cedula}}</td>
                                   <td>{{user.rol}}</td>
                                   <td>
-                                  <button type="button" (click)="modificarUsuario(user.idUsuario)" class="btn btn-default waves-effect">
+                                  <button type="button" data-toggle="modal" data-target="#defaultModal" (click)="modificarUsuario(user.idUsuario)" class="btn btn-default waves-effect">
                                     <i class="material-icons">settings</i>
                                 </button>
                             </td>
@@ -66,9 +66,48 @@
           </div>
 
           <!-- #END# LISTA USUARIOS -->
-
-
-
+<!--MODAL-->
+          <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="defaultModalLabel">MODIFICAR</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div *ngIf="modificar">
+                            <app-modificar-usuario  [user]= "usuario" > </app-modificar-usuario>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                       
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- MODAL REPUESTOS --> 
+<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="nuevoRepuesto">
+                    <app-agregar-repuesto></app-agregar-repuesto> 
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+                     
+                 
+                    
+<!--MODAL-->
 
 
           <!-- LISTA REPUESTOS -->
@@ -105,7 +144,7 @@
                       </table>
                   </div>
                   <div class="align-center">
-                          <button type="button"  data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarRepuesto()" >AGREGAR REPUESTO</button>
+                          <button type="button" data-toggle="modal" data-target="#smallModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarRepuesto()" >AGREGAR REPUESTO</button>
                       </div>
                       <br>
               </div>
@@ -113,14 +152,8 @@
       </div>
       <!-- #END# LISTA VEHICULOS -->
 
-  
-          <div *ngIf="nuevoRepuesto">
-            <app-agregar-repuesto></app-agregar-repuesto> 
-          </div>
-          <div *ngIf="modificar">
-              <app-modificar-usuario  [user]= "usuario" > </app-modificar-usuario>
-          </div>
-
+ 
+        
 
 
   </section>

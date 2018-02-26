@@ -14,21 +14,26 @@ import { Vehiculo } from '../vehiculo/vehiculo';
 })
 export class ProfileClienteComponent implements OnInit {
 
+  //Datos usuario 
   user; 
+
+  //Datos vehiculos 
   serialMotor: String; 
   modelo: String;
   ano: Int16Array;  
   placa: String; 
   activado: Boolean;
-  marca: Int16Array;
+  marcaNuevo: Int16Array;
   vehiculos; 
   vehiculos2: Vehiculo[];  
   fecha: String; 
   vehiculoCita: Int16Array;
-  motivo: String;
   vehiculoIteracion: Vehiculo; 
-  marcas; 
-  
+
+  //Marcas 
+  marcas = Array; 
+
+    
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,
@@ -37,14 +42,19 @@ export class ProfileClienteComponent implements OnInit {
     
   }
 
+
   ngOnInit() {
       this.user = JSON.parse(localStorage.getItem("user")); 
       console.log(this.user); 
       this.recuperarVehiculos(); 
-      
+      this.getMarcas();
         
   }
 
+  setMarcaNuevo(idMarca) {
+    this.marcaNuevo = idMarca;
+    console.log(this.marcaNuevo) ;
+  }
   recuperarVehiculos() {
     let data = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
       console.log(datos); 
@@ -105,7 +115,7 @@ export class ProfileClienteComponent implements OnInit {
 
     const vehiculo = {
       placa: this.placa,       
-      marca: this.marca,
+      marca: this.marcaNuevo,
       modelo: this.modelo,
       ano: this.ano,
       serialMotor: this.serialMotor, 
@@ -137,6 +147,13 @@ export class ProfileClienteComponent implements OnInit {
 
     });
   }
-
- 
+getMarcas() {
+  this.authService.getMarcas().subscribe(data => {
+    console.log(data); 
+    this.marcas = data.marcas; 
+  } ) 
+}
+ setMarcaVista(idMarca) {
+  return this.marcas[idMarca].marca
+ }
 }

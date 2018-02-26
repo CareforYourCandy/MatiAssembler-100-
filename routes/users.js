@@ -7,7 +7,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const Repuesto = require('../models/repuesto'); 
-
+const Marca = require('../models/marca'); 
 //Register
 router.post('/register', (req, res, next) => {
 
@@ -76,6 +76,26 @@ router.post('/getUsers', (req, res, next) => {
 	});
 	
 	}); 
+
+	router.post('/getMarcas', (req, res, next) => {
+		console.log("Estoy en obtener users"); 
+		let marcas = Marca.getMarcas(req, (err, marcas) => {
+			if (err) {
+				console.log("algo fallo"); 
+			}
+			if(!marcas) {
+				console.log("No hay marcas"); 
+			}
+			
+			res.json( {
+				success:true, 
+				marcas 
+			})
+		});
+		
+		}); 
+
+
 router.post('/obtenerRepuestos', (req, res, next) => {
 	console.log("Estoy en obtener repuestos"); 
 	let repuestos2 = Repuesto.getRepuesto(req, (err, repuestos) => {

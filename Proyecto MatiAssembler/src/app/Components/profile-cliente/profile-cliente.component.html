@@ -139,7 +139,7 @@
                                   
                                   <tr *ngFor="let vehiculo of vehiculos" >
                                        
-                                      <td>{{vehiculo.marca}}</td>
+                                      <td>{{setMarcaVista(vehiculo.marca)}}</td>
                                       <td>{{vehiculo.modelo}}</td>
                                       <td>{{vehiculo.ano}}</td>
                                       <td>{{vehiculo.placa}}</td>
@@ -228,9 +228,18 @@
                   </div>
               </div>
               <div class="input-group">
-              <ul class="dropdown-menu" *ngFor="let marca of marcas">
-                <li><a (click)= "setMarcaNuevo(marca.id)" >{{marca.nombre}}</a></li>
-            </ul>
+                    <span class="input-group-addon">
+                            <i class="material-icons">confirmation_number</i>
+                        </span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PRIMARY <span class="caret"></span>
+                    </button>
+                    <ul   class="dropdown-menu">
+                        <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca.idMarca)">{{marca.marca}}</a></li>
+                        
+                    </ul>
+                </div>
         </div>
               <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR VEHÍCULO</button>
 
@@ -265,16 +274,16 @@
 
 </div>
 </div>
-  
 
 
-
+ 
 <!-- File Upload | Drag & Drop OR With Click & Choose -->
 
 <!-- #END# File Upload | Drag & Drop OR With Click & Choose -->
 
 <button (click)= "recuperarVehiculos()" > hola123</button>
 </section>
+
 
 
 

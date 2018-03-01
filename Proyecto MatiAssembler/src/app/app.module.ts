@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-import { FlashMessagesModule } from 'angular2-flash-messages';
+
 
 import { AppComponent } from './app.component';
 import { ProfileClienteComponent } from './Components/profile-cliente/profile-cliente.component';
@@ -16,6 +16,10 @@ import { LoginComponent } from './Components/login/login.component';
 import { ProfileAdministradorComponent } from './Components/profile-administrador/profile-administrador.component';
 import { AgregarRepuestoComponent } from './Components/agregar-repuesto/agregar-repuesto.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
+import { VehiculoComponent } from './Components/vehiculo/vehiculo.component';
+import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
+
+
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -23,7 +27,8 @@ import { HomepageComponent } from './Components/homepage/homepage.component';
       { path: 'register', component:RegisterComponent},
       { path: 'login', component:LoginComponent},
       { path: 'profile-administrador', component:ProfileAdministradorComponent},
-      { path: 'agregar-repuesto', component:AgregarRepuestoComponent}
+      { path: 'agregar-repuesto', component:AgregarRepuestoComponent},
+      
     ]
 @NgModule({
   declarations: [
@@ -34,17 +39,25 @@ import { HomepageComponent } from './Components/homepage/homepage.component';
     LoginComponent,
     ProfileAdministradorComponent,
     AgregarRepuestoComponent,
-    HomepageComponent
+    HomepageComponent,
+    VehiculoComponent,
+    ModificarUsuarioComponent,
+
+    
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule.forRoot()
   ],
+  
   providers: [ValidateService, AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent], 
+  
+  
+  
  
 })
 

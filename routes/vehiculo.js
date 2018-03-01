@@ -6,6 +6,8 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
+
+
 router.post('/registerVehiculo', (req, res, next) => {
     
         let newVehiculo = new vehiculo({

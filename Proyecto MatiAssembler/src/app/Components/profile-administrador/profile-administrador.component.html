@@ -38,39 +38,22 @@
                                   <th>APELLIDO</th>
                                   <th>CÉDULA</th>
                                   <th>ROL</th>
+                                  <th>MODIFICAR</th>
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
-                                  <td>Mark</td>
-                                  <td>Otto</td>
-                                  <td>15151515</td>
-                                  <td>Cliente</td>
+                              <tr *ngFor= 'let user of usuarios' >
+                                  <td>{{user.nombre}}</td>
+                                  <td>{{user.apellido}}</td>
+                                  <td>{{user.cedula}}</td>
+                                  <td>{{user.rol}}</td>
+                                  <td>
+                                  <button type="button" data-toggle="modal" data-target="#defaultModal" (click)="modificarUsuario(user.idUsuario)" class="btn btn-default waves-effect">
+                                    <i class="material-icons">settings</i>
+                                </button>
+                            </td>
                               </tr>
-                              <tr>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>89574123</td>
-                                  <td>Mecánico</td>
-                              </tr>
-                              <tr>
-                                  <td>Larry</td>
-                                  <td>the Bird</td>
-                                  <td>45454545</td>
-                                  <td>Gerente</td>
-                              </tr>
-                              <tr>
-                                  <td>Larry</td>
-                                  <td>Jellybean</td>
-                                  <td>6338232</td>
-                                  <td>Cliente</td>
-                              </tr>
-                              <tr>
-                                  <td>Larry</td>
-                                  <td>Kikat</td>
-                                  <td>20259257</td>
-                                  <td>Cliente</td>
-                              </tr>
+                             
                           </tbody>
                       </table>
                   </div>
@@ -83,9 +66,48 @@
           </div>
 
           <!-- #END# LISTA USUARIOS -->
-
-
-
+<!--MODAL-->
+          <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="defaultModalLabel">MODIFICAR</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div *ngIf="modificar">
+                            <app-modificar-usuario  [user]= "usuario" > </app-modificar-usuario>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                       
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- MODAL REPUESTOS --> 
+<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="nuevoRepuesto">
+                    <app-agregar-repuesto></app-agregar-repuesto> 
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+                     
+                 
+                    
+<!--MODAL-->
 
 
           <!-- LISTA REPUESTOS -->
@@ -103,15 +125,13 @@
                               <tr>
                                   <th>TIPO</th>
                                   <th>NOMBRE</th>
-                                  <th>PRECIO</th>
                                   <th>ELIMINAR</th>
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
+                              <tr *ngFor = "let repuesto of repuestos" >
+                                  <td>---- </td>
+                                  <td> {{repuesto.pieza}}</td>
                                   <td>
                                           <button type="button" class="btn bg-light-blue
                                           waves-effect">
@@ -119,55 +139,12 @@
                                           </button>
                                       </td>
                               </tr>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>
-                                          <button type="button" class="btn bg-light-blue
-                                          waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                              </tr>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>
-                                          <button type="button" class="btn bg-light-blue
-                                          waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                              </tr>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>
-                                          <button type="button" class="btn bg-light-blue
-                                          waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                              </tr>
-                              <tr>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>-----</td>
-                                  <td>
-                                          <button type="button" class="btn bg-light-blue
-                                          waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                              </tr>
+                              
                           </tbody>
                       </table>
                   </div>
                   <div class="align-center">
-                          <button type="button" class="btn bg-cyan waves-effect" (click) ="agregarRepuesto()" >AGREGAR REPUESTO</button>
+                          <button type="button" data-toggle="modal" data-target="#smallModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarRepuesto()" >AGREGAR REPUESTO</button>
                       </div>
                       <br>
               </div>
@@ -175,13 +152,8 @@
       </div>
       <!-- #END# LISTA VEHICULOS -->
 
-  
-          <div *ngIf="nuevoRepuesto">
-            <app-agregar-repuesto>
-            </app-agregar-repuesto> 
-          </div>
-
-
+ 
+        
 
 
   </section>

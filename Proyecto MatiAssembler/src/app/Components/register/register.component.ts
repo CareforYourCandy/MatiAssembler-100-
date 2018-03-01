@@ -18,7 +18,9 @@ export class RegisterComponent implements OnInit {
 	rol: String;
   password: String;
   cedula: String; 
-
+  direccion: String;
+  telefono: String; 
+  
   constructor(private validateService: ValidateService, 
     private authService: AuthService,
  
@@ -36,7 +38,8 @@ export class RegisterComponent implements OnInit {
   		contraseña: this.password,
       rol: this.rol, 
       cedula: this.cedula,
-       
+      direccion: this.direccion,
+      telefono: this.telefono,  
   	}
     console.log(user); 
     console.log("Hola"); 

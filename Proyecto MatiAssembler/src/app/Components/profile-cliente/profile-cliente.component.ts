@@ -5,7 +5,7 @@ import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { Vehiculo } from '../vehiculo/vehiculo'; 
 
 @Component({
   selector: 'app-profile-cliente',
@@ -14,47 +14,85 @@ import { Location } from '@angular/common';
 })
 export class ProfileClienteComponent implements OnInit {
 
+  //Datos usuario 
   user; 
+
+  //Datos vehiculos 
   serialMotor: String; 
   modelo: String;
   ano: Int16Array;  
   placa: String; 
   activado: Boolean;
-  marca: Int16Array;
-  vehiculos;
-
+  marcaNuevo: Int16Array;
+  vehiculos; 
+  vehiculos2: Vehiculo[];  
   fecha: String; 
   vehiculoCita: Int16Array;
-  motivo: String;
+  vehiculoIteracion: Vehiculo; 
 
+  //Marcas 
+  marcas = Array; 
+
+    
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,
-              private router: Router) { 
+              private router: Router, 
+              private location: Location) { 
     
   }
 
+
   ngOnInit() {
       this.user = JSON.parse(localStorage.getItem("user")); 
+      console.log(this.user); 
       this.recuperarVehiculos(); 
-      
+      this.getMarcas();
         
   }
 
+  setMarcaNuevo(idMarca) {
+    this.marcaNuevo = idMarca;
+    console.log(this.marcaNuevo) ;
+  }
   recuperarVehiculos() {
     let data = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
       console.log(datos); 
       this.vehiculos = datos.vehiculos; 
-      
+      let vehiculos3 = []; 
+      vehiculos3.push(datos.vehiculos.map(function(datosVehiculo) {
+        console.log(datosVehiculo); 
+        let vehiculo = new Vehiculo(datosVehiculo.serialMotor, datosVehiculo.modelo, datosVehiculo.ano, datosVehiculo.placa,
+          datosVehiculo.activado, datosVehiculo.marca, datosVehiculo.idVehiculo); 
+          console.log(vehiculo); 
+          return vehiculo; 
+          
+       
+      })); 
+      this.vehiculos2 = vehiculos3;
+       
     }); 
      
+  }
+ 
+  desactivarVehiculo(id, carro) {
+    carro.activado = false; 
+    const vehiculo = {
+      idVehiculo: id,
+      dueño: this.user.idUsuario
+    }
+    console.log("El id es" + id); 
+    
+    this.authService.desactivarVehiculo(vehiculo).subscribe(data => {
+      console.log(data.success); 
+
+    })
+    this.recuperarVehiculos(); 
   }
 
   solicitarCita(idVehiculo) {
     const cita = {
-      vehiculoCita: idVehiculo,
-      fecha: "05/10/2018",
-      motivo: "porquesi"
+      vehiculoCita: idVehiculo
     }
 
     this.authService.solicitarCita(cita).subscribe(data => {
@@ -77,7 +115,7 @@ export class ProfileClienteComponent implements OnInit {
 
     const vehiculo = {
       placa: this.placa,       
-      marca: this.marca,
+      marca: this.marcaNuevo,
       modelo: this.modelo,
       ano: this.ano,
       serialMotor: this.serialMotor, 
@@ -99,16 +137,23 @@ export class ProfileClienteComponent implements OnInit {
       console.log(data.success); 
       if(data.success){
          console.log("sirvio");
-         this.router.navigate(['profile-cliente']);
+         this.vehiculos.push(vehiculo); 
 
       } else {
         console.log("fallo");
         this.router.navigate(['profile-cliente']); 
       }
-    this.recuperarVehiculos(); 
+    
 
     });
   }
-
- 
+getMarcas() {
+  this.authService.getMarcas().subscribe(data => {
+    console.log(data); 
+    this.marcas = data.marcas; 
+  } ) 
+}
+ setMarcaVista(idMarca) {
+  return this.marcas[idMarca].marca
+ }
 }

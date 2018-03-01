@@ -6,8 +6,8 @@ const Cita = require('../models/cita');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
-
-
+const Repuesto = require('../models/repuesto'); 
+const Marca = require('../models/marca'); 
 //Register
 router.post('/register', (req, res, next) => {
 
@@ -17,7 +17,9 @@ router.post('/register', (req, res, next) => {
 		correo: req.body.correo,
 		rol: req.body.rol,
 		contraseña: req.body.contraseña,
-		cedula: req.body.cedula
+		cedula: req.body.cedula,
+		telefono: req.body.telefono,
+		direccion: req.body.direccion
 	});
 	User.addUser(newUser, (err, user) => {
 		if(err){
@@ -27,11 +29,94 @@ router.post('/register', (req, res, next) => {
 		}
 	});
 });
+ router.post('/getUser', (req, res, next)  => {
+	id = req.body.id; 
+	
+	User.getUserByID(id, (user) => {
+		res.json( {
+			success: true,
+			user
+		})
+	});
 
+ }
+)
+router.post('/modificarUsuario'), (req, res, next) => {
+	usuario = req.body.usuario;
+	console.log("Estoy en obtener users"); 
+	let usuarios = User.getUsers(req, (err, users) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!users) {
+			console.log("No hay repuestos"); 
+		}
+		
+		res.json( {
+			success:true, 
+			users
+		})
+	});
+	
+	}
+router.post('/getUsers', (req, res, next) => {
+	console.log("Estoy en obtener users"); 
+	let usuarios = User.getUsers(req, (err, users) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!users) {
+			console.log("No hay repuestos"); 
+		}
+		
+		res.json( {
+			success:true, 
+			users
+		})
+	});
+	
+	}); 
+
+	router.post('/getMarcas', (req, res, next) => {
+		console.log("Estoy en obtener users"); 
+		let marcas = Marca.getMarcas(req, (err, marcas) => {
+			if (err) {
+				console.log("algo fallo"); 
+			}
+			if(!marcas) {
+				console.log("No hay marcas"); 
+			}
+			
+			res.json( {
+				success:true, 
+				marcas 
+			})
+		});
+		
+		}); 
+
+
+router.post('/obtenerRepuestos', (req, res, next) => {
+	console.log("Estoy en obtener repuestos"); 
+	let repuestos2 = Repuesto.getRepuesto(req, (err, repuestos) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!repuestos) {
+			console.log("No hay repuestos"); 
+		}
+		
+		res.json( {
+			success:true, 
+			repuestos
+		})
+	});
+	
+	}); 
 //Obtener Vehiculos
 router.post('/getVehiculos', (req, res, next) => {
 	const id=req.body.idUsuario;
-	console.log(id);
+	console.log();
 	Vehiculo.getVehiculosByDueño(id, (err, vehiculos) => {
 		if(err) {
 			console.log('AQUI PASO ALGO');
@@ -120,8 +205,7 @@ router.post('/registerCita', (req, res, next) => {
     
     let newCita = new Cita({
         vehiculoCita: req.body.vehiculoCita, 
-        fecha: req.body.fecha,
-        motivo: req.body.motivo   
+        
     });
     Cita.addCita(newCita, (err, user) => {
 		if(err){
@@ -133,4 +217,21 @@ router.post('/registerCita', (req, res, next) => {
 
 });
 
+router.post('/desactivarVehiculo',  (req, res, next) => {
+console.log(req.body); 
+Vehiculo.desactivarVehiculo(req.body.idVehiculo, (err, vehiculo)  => {
+	if (err) {
+		res.json({success:false, msg:'No funciono'});
+	} else {
+		res.json({success:true, msg:'furula'});
+	}
+})
+
+}); 
+router.post('/registerRepuesto', (req, res, next) => {
+	let repuesto = new Repuesto({
+		pieza:  req.body.pieza 
+	});
+	Repuesto.addRepuesto(repuesto);
+}); 
 module.exports = router;

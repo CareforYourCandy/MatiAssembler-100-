@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
-
+const config = require('./../config/database');
+const connection = config.connection;
 //Marca Schema
-module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('marca', {
+const Marca = connection.define('marca', {
 		idMarca: {
 			type: Sequelize.INTEGER,
 			autoIncrement: true,
@@ -11,7 +11,27 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false
 		},
 		marca: {
-			type: DataTypes.STRING
+			type: Sequelize.STRING
 		}
 	});
-}
+
+
+	module.exports.getMarcas = function(id, callback){
+		
+			
+			Marca.findAll().then(datos => {
+				
+	
+				let marcas = datos.map(function(datoCrudo) {
+					dato = datoCrudo.dataValues;   
+					return dato; 
+				})
+				
+				
+				return marcas; 
+			})
+			.then(datos => {
+				 
+				return callback(null, datos);
+			});
+		}

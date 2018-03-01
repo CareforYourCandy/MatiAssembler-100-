@@ -96,7 +96,7 @@
                   </div>
                   <div class="content">
                       <div class="text">TELEFÓNO</div>
-                      <div class="number count-to" data-from="0" data-to="5514089" data-speed="1000" data-fresh-interval="20"></div>
+                      <div class="number count-to" data-from="0" data-to="5514089" data-speed="1000" data-fresh-interval="20">{{user.telefono}}</div>
                   </div>
               </div>
 
@@ -106,7 +106,7 @@
                   </div>
                   <div class="content">
                       <div class="text">DIRECCIÓN</div>
-                      <p class="lead">Altamira, Caracas</p>
+                      <p class="lead">{{user.direccion}}</p>
                   </div>
               </div>
           </div>
@@ -130,32 +130,35 @@
                                       <th>Año</th>
                                       <th>Placa</th>
                                       <th>Serial del motor</th>
-                                      <th>Fecha de registro</th>
+                                      <th>Activado</th>
                                       <th>Solicitar Cita</th>
                                       <th>Desactivar</th>
                                   </tr>
                               </thead>
                               <tbody>
                                   
-                                  <tr *ngFor="let vehiculo of vehiculos">
-                                      <td>{{vehiculo.marca}}</td>
+                                  <tr *ngFor="let vehiculo of vehiculos" >
+                                       
+                                      <td>{{setMarcaVista(vehiculo.marca)}}</td>
                                       <td>{{vehiculo.modelo}}</td>
                                       <td>{{vehiculo.ano}}</td>
                                       <td>{{vehiculo.placa}}</td>
                                       <td>{{vehiculo.serialMotor}}</td>
-                                      <td>----</td>
+                                      <td>{{vehiculo.activado}}</td>
                                       <td>
                                           <button (click)="solicitarCita(vehiculo.idVehiculo)" type="button" class="btn bg-indigo waves-effect">
                                               <i class="material-icons">date_range</i>
                                           </button>
                                       </td>
                                       <td>
-                                          <button type="button" class="btn bg-indigo waves-effect">
+                                          <button type="button" class="btn bg-indigo waves-effect" (click)="desactivarVehiculo(vehiculo.idVehiculo, vehiculo)">
                                               <i class="material-icons">close</i>
                                           </button>
                                       </td>
+                                      
                                   </tr>
                                 
+<<<<<<< HEAD
                                   <tr>
                                       <td>----</td>
                                       <td>----</td>
@@ -210,6 +213,9 @@
                                           </button>
                                       </td>
                                   </tr>
+=======
+                                
+>>>>>>> c3efcdab37419a5c592dbc05a2832a5c5867cbb6
                               </tbody>
                           </table>
                       </div>
@@ -278,8 +284,20 @@
                       <input type="text" class="form-control" [(ngModel)]="placa" name="placa" placeholder="Placa" required autofocus>
                   </div>
               </div>
-      
-
+              <div class="input-group">
+                    <span class="input-group-addon">
+                            <i class="material-icons">confirmation_number</i>
+                        </span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PRIMARY <span class="caret"></span>
+                    </button>
+                    <ul   class="dropdown-menu">
+                        <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca.idMarca)">{{marca.marca}}</a></li>
+                        
+                    </ul>
+                </div>
+        </div>
               <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR VEHÍCULO</button>
 
           </form>
@@ -313,16 +331,16 @@
 
 </div>
 </div>
-  
 
 
-
+ 
 <!-- File Upload | Drag & Drop OR With Click & Choose -->
 
 <!-- #END# File Upload | Drag & Drop OR With Click & Choose -->
 
 <button (click)= "recuperarVehiculos()" > hola123</button>
 </section>
+
 
 
 

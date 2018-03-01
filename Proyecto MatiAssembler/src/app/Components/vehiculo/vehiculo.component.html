@@ -1,0 +1,17 @@
+
+    <td>{{vehiculo.marca}}</td>
+    <td>{{vehiculo.modelo}}</td>
+    <td>{{vehiculo.ano}}</td>
+    <td>{{vehiculo.placa}}</td>
+    <td>{{vehiculo.serialMotor}}</td>
+    <td>----</td>
+    <td>
+        <button (click)="solicitarCita(vehiculo.idVehiculo)" type="button" class="btn bg-indigo waves-effect">
+            <i class="material-icons">date_range</i>
+        </button>
+    </td>
+    <td>
+        <button type="button" class="btn bg-indigo waves-effect">
+            <i class="material-icons">close</i>
+        </button>
+    </td>

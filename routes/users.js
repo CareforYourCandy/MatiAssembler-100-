@@ -175,8 +175,9 @@ router.post('/authenticate', (req, res, next) => {
 });
 
 //Profile
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-	res.json({user: req.user});
+router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    //console.log(req.user);
+    res.json({ user: req.user });
 });
 
 router.post('/registerVehiculo', (req, res, next) => {

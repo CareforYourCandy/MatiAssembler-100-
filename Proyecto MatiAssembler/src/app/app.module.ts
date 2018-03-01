@@ -19,6 +19,8 @@ import { HomepageComponent } from './Components/homepage/homepage.component';
 import { VehiculoComponent } from './Components/vehiculo/vehiculo.component';
 import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
 
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { AuthGuard } from './guards/auth.guard';
 
 
   const appRoutes: Routes = [ 
@@ -53,7 +55,7 @@ import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario
     RouterModule.forRoot(appRoutes),
   ],
   
-  providers: [ValidateService, AuthService],
+  providers: [ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent], 
   
   

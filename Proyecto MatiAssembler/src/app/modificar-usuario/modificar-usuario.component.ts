@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { MatDialogModule } from '@angular/material';
 import { AuthService } from '../services/auth.service';
 
 @Component({

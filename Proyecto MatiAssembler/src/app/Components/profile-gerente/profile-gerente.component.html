@@ -1,0 +1,494 @@
+<div   > 
+
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="widgets/../../index.html">MATI ASSEMBLER - GERENTE</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+                    <li>
+                        <a href="javascript:void(0);" class="js-search" data-close="true">
+                            <i class="material-icons">search</i>
+                        </a>
+                    </li>
+                    <!-- #END# Call Search -->
+
+                    <li class="pull-right">
+                        <a href="javascript:void(0);" class="js-right-sidebar" data-close="true">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nombre}}</div>
+                    <div class="email">{{user.correo}}</div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header active">MENU PRINCIPAL</li>
+                    <li>
+                        <a (click)="home()">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="menu-toggle">
+                            <i class="material-icons">assignment</i>
+                            <span>Reportes</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">Historial de un cliente</a>
+                            </li>
+                            <li>
+                                <a href="#">Por vehículo</a>
+                            </li>
+                            <li>
+                                <a href="#">Por mecánico</a>
+                            </li>
+                            <li>
+                                <a href="#">Por modelo de vehículo</a>
+                            </li>
+                        </ul>
+                    </li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          Menú #1 <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Acción #1</a></li>
+          <li><a href="#">Acción #2</a></li>
+          <li><a href="#">Acción #3</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Acción #4</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Acción #5</a></li>
+        </ul>
+      </li>
+
+                    <li>
+                        <a (click)="logout()" >
+                            <i class="material-icons">not_interested</i>
+                            <span>Cerrar sesión</span>
+                        </a>
+                    </li>
+
+ 
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2018
+                    <a href="javascript:void(0);">MatiAssembler</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.0
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+
+    </section>
+
+
+    <section class="content">
+
+        <!-- LISTA CLIENTES -->
+        <div class="row clearfix">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="header bg-pink">
+                            <h2>
+                                LISTA DE CLIENTES
+                            </h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>NOMBRE</th>
+                                        <th>APELLIDO</th>
+                                        <th>CÉDULA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>15151515</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>89574123</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>45454545</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Larry</td>
+                                        <td>Jellybean</td>
+                                        <td>6338232</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Larry</td>
+                                        <td>Kikat</td>
+                                        <td>20259257</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+            <!-- #END# LISTA CLIENTES -->
+
+
+            <!-- LISTA MECANICOS -->
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="header bg-pink">
+                            <h2>
+                                LISTA DE MECÁNICOS
+                            </h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>NOMBRE</th>
+                                        <th>APELLIDO</th>
+                                        <th>CÉDULA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>15151515</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>89574123</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>45454545</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Larry</td>
+                                        <td>Jellybean</td>
+                                        <td>6338232</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Larry</td>
+                                        <td>Kikat</td>
+                                        <td>20259257</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+            <!-- #END# LISTA MECANICOS -->
+
+
+
+
+    
+<!-- LISTA VEHICULOS -->
+
+        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header bg-cyan">
+                    <h2>
+                        LISTA DE VEHICULOS
+                    </h2>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                    <th>MODELO</th>
+                                    <th>AÑO</th>
+                                    <th>PLACA</th>
+                                    <th>SERIALr</th>
+                                    <th>FECHA REGISTRO</th>
+                                    <th>FECHA ADMISIÓN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #END# LISTA VEHICULOS -->
+
+
+    <!-- COLA DE ESPERA -->
+<div class="row clearfix">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header bg-light-green">
+                    <h2>
+                            COLA DE ESPERA
+                    </h2>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                    <th>MODELO</th>
+                                    <th>AÑO</th>
+                                    <th>PLACA</th>
+                                    <th>SERIALr</th>
+                                    <th>FECHA REGISTRO</th>
+                                    <th>ASIGNAR FECHA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td><button type="button" class="btn bg-indigo waves-effect">
+                                        <i class="material-icons">date_range</i>
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td><button type="button" class="btn bg-indigo waves-effect">
+                                            <i class="material-icons">date_range</i>
+                                        </button></td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td><button type="button" class="btn bg-indigo waves-effect">
+                                            <i class="material-icons">date_range</i>
+                                        </button></td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td><button type="button" class="btn bg-indigo waves-effect">
+                                            <i class="material-icons">date_range</i>
+                                        </button></td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td><button type="button" class="btn bg-indigo waves-effect">
+                                            <i class="material-icons">date_range</i>
+                                        </button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+
+    <!-- #END# Hover Rows -->
+
+     <!-- ÓRDENES EN REPARACIÓN -->
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header bg-orange">
+                    <h2>
+                            ÓRDENES EN REPARACIÓN
+                    </h2>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                    <th>ORDEN</th>
+                                    <th>MODELO</th>
+                                    <th>AÑO</th>
+                                    <th>PLACA</th>
+                                    <th>SERIAL</th>
+                                    <th>ESTADO</th>
+                                    <th>CERRAR ORDEN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>Finalizado</td>
+                                <td>
+                                        <button type="button" class="btn bg-indigo waves-effect">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>En curso</td>
+                                    <td>
+                                            <button type="button" class="btn bg-indigo waves-effect">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>Finalizado</td>
+                                    <td>
+                                            <button type="button" class="btn bg-indigo waves-effect">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>Finalizado</td>
+                                    <td>
+                                            <button type="button" class="btn bg-indigo waves-effect">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                            </tr>
+                            <tr>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>-----</td>
+                                    <td>En curso</td>
+                                    <td>
+                                            <button type="button" class="btn bg-indigo waves-effect">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- #END# Hover Rows -->
+        
+
+
+
+
+
+    </section>
+
+
+
+
+
+</div>
+
+
+
+

@@ -77,15 +77,27 @@ module.exports.modificarUsuario = function (usuario){
  //User.update(query, {where: {idUsuario: usuario.idUsuario}}); 
 }
 
-module.exports.getUserByID= function(id, callback){
-	
-	User.findById(id, callback).then(resultado => {
-		usuario = resultado.dataValues; 
-	
-		return callback(usuario); 
-}); 
-}
+module.exports.getUserByID= async function(id, callback){
+	/*try {
+		User.findById(id, callback).then(resultado => {
+			usuario = resultado.dataValues; 
+		
+			return callback(null, usuario); 
+		}); 
+	} catch (err) {
+        console.log('Se produjo un error en getUserById(): ', err);
+    }*/
 
+    try {
+    	let resultado = User.findById(id);
+		let usuario = resultado.dataValues; 
+		callback(null, usuario); 
+
+	} catch (err) {
+        console.log('Se produjo un error en getUserById(): ', err);
+    }
+
+}
 
 module.exports.getUsers = function(id, callback){
     

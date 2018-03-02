@@ -18,6 +18,6 @@ connection.authenticate().then(() => {
   });
 
 module.exports = {
-	secret: 'yoursecret',
+	secret: 'pink88pink',
 	connection
 }

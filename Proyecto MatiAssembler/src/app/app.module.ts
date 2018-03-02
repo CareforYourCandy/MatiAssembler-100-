@@ -21,6 +21,8 @@ import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
+import { ProfileGerenteComponent } from './Components/profile-gerente/profile-gerente.component';
+import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-mecanico.component';
 
 
   const appRoutes: Routes = [ 
@@ -44,6 +46,8 @@ import { AuthGuard } from './guards/auth.guard';
     HomepageComponent,
     VehiculoComponent,
     ModificarUsuarioComponent,
+    ProfileGerenteComponent,
+    ProfileMecanicoComponent,
 
     
     

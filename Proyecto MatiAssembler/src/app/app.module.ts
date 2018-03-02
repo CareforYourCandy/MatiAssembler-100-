@@ -27,10 +27,10 @@ import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
-      { path: 'profile-cliente', component:ProfileClienteComponent},
+      { path: 'profile-cliente', component:ProfileClienteComponent, canActivate:[AuthGuard]},
       { path: 'register', component:RegisterComponent},
       { path: 'login', component:LoginComponent},
-      { path: 'profile-administrador', component:ProfileAdministradorComponent},
+      { path: 'profile-administrador', component:ProfileAdministradorComponent, canActivate:[AuthGuard]},
       { path: 'agregar-repuesto', component:AgregarRepuestoComponent},
       
     ]
@@ -57,6 +57,7 @@ import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
+    FlashMessagesModule.forRoot()
   ],
   
   providers: [ValidateService, AuthService, AuthGuard],

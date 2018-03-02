@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 
-import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
+//import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 
 @Component({

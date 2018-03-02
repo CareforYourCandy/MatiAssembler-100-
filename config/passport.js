@@ -5,11 +5,13 @@ const config = require('../config/database');
 
 module.exports = function(passport){
 	let opts = {};	
-	opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
+	//ESTE COMENTADO ES EL DEL TUTORIAL
+	//opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
+	opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 	opts.secretOrKey = config.secret;
 
 	passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-		User.getUserById(jwt_payload._id, (err, user) => {
+		User.getUserByID(jwt_payload._id, (err, user) => {
 			if(err){
 				return done(err, false);
 			} 

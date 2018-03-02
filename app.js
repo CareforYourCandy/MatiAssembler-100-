@@ -6,8 +6,8 @@ const passport = require('passport');
 const config = require('./config/database');
 const connection = config.connection;
 
-/*// Sincroniza los cambios en los modelos
-connection.sync({ logging: false });*/
+// Sincroniza los cambios en los modelos
+connection.sync({ logging: false });
 
 const app = express();
 

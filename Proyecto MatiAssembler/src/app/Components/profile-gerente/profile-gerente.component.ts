@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { timeout } from 'q';
 import { Http, Headers } from '@angular/http';
 import { ValidateService } from '../../services/validate.service';
@@ -6,6 +7,8 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Vehiculo } from '../vehiculo/vehiculo'; 
+=======
+>>>>>>> f0e27f81a1bf468431cd92345966fab76ca2c5ca
 
 @Component({
   selector: 'app-profile-gerente',
@@ -13,6 +16,7 @@ import { Vehiculo } from '../vehiculo/vehiculo';
   styleUrls: ['./profile-gerente.component.css']
 })
 export class ProfileGerenteComponent implements OnInit {
+<<<<<<< HEAD
   
   user;
 
@@ -36,6 +40,12 @@ export class ProfileGerenteComponent implements OnInit {
 
   home() {
     this.router.navigate(['']);
+=======
+
+  constructor() { }
+
+  ngOnInit() {
+>>>>>>> f0e27f81a1bf468431cd92345966fab76ca2c5ca
   }
 
 }

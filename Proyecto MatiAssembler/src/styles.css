@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+.alert.flash-message {
+  margin: 0;
+  border-radius: 0;
+}
+
+.alert.flash-message.custom-success {
+    background: #4aa05f;
+}
+
+.alert.flash-message.custom-danger {
+    background: #dd4f4f;
+}
+
+.alert.flash-message > p {
+  color: white;
+  margin: 0;
+}

@@ -43,16 +43,14 @@ import { AuthGuard } from './guards/auth.guard';
     AgregarRepuestoComponent,
     HomepageComponent,
     VehiculoComponent,
-    ModificarUsuarioComponent,
-
-    
-    
+    ModificarUsuarioComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
+    FlashMessagesModule.forRoot()
   ],
   
   providers: [ValidateService, AuthService, AuthGuard],

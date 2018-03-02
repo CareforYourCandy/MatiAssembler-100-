@@ -10,7 +10,7 @@ import {AgregarRepuestoComponent} from '../agregar-repuesto/agregar-repuesto.com
   styleUrls: ['./profile-administrador.component.css']
 })
 export class ProfileAdministradorComponent implements OnInit {
-  
+  admin: object;
   modificar = false; 
   nuevoRepuesto = false; 
   @ViewChild(AgregarRepuestoComponent)  repuestoHijo;  
@@ -25,6 +25,7 @@ export class ProfileAdministradorComponent implements OnInit {
   
   
   ngOnInit() {
+    this.admin = JSON.parse(localStorage.getItem("user")); 
     this.obtenerRepuestos(); 
     this.obtenerUsuarios();
   }

@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate() {
         if (this.authService.loggedIn()) {
-            this.authService.getProfile().subscribe(profile => {
+            /*this.authService.getProfile().subscribe(profile => {
                 this.rol = profile.user.rol;
             }, err => {
                 console.log('Error while getting the profile: ', err);
@@ -28,23 +28,7 @@ export class AuthGuard implements CanActivate {
             } else {
                 this.router.navigate(['/login']);
                 
-            }
-            return false;
-        } else {
-            this.router.navigate(['/login']);
-            return false;
-        }
-    }
-
-/*    permisoVistaCliente() {
-        this.authService.getProfile().subscribe(profile => {
-            this.rol = profile.user.rol;
-        }, err => {
-            console.log('Error while getting the profile: ', err);
-            return false;
-        });
-
-        if (this.rol == 1){
+            }*/
             return true;
         } else {
             this.router.navigate(['/login']);
@@ -52,21 +36,6 @@ export class AuthGuard implements CanActivate {
         }
     }
 
-    permisoVistaAdmin() {
-        this.authService.getProfile().subscribe(profile => {
-            this.rol = profile.user.rol;
-        }, err => {
-            console.log('Error while getting the profile: ', err);
-            return false;
-        });
 
-        if (this.rol == 2){
-            return true;
-        } else {
-            this.router.navigate(['/login']);
-            return false;
-        }
-    }
-*/
 
 }

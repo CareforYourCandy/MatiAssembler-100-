@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-
+import { tokenNotExpired } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
 import { ProfileClienteComponent } from './Components/profile-cliente/profile-cliente.component';
@@ -32,7 +32,7 @@ import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-
       { path: 'login', component:LoginComponent},
       { path: 'profile-administrador', component:ProfileAdministradorComponent, canActivate:[AuthGuard]},
       { path: 'agregar-repuesto', component:AgregarRepuestoComponent},
-      
+      { path: 'profile-gerente', component: ProfileGerenteComponent, canActivate:[AuthGuard]}, 
     ]
 @NgModule({
   declarations: [

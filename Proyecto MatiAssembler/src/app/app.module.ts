@@ -28,6 +28,8 @@ import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
       { path: 'profile-cliente', component:ProfileClienteComponent, canActivate:[AuthGuard]},
+      { path: 'profile-gerente', component:ProfileGerenteComponent, canActivate:[AuthGuard]},
+      { path: 'profile-mecanico', component:ProfileMecanicoComponent, canActivate:[AuthGuard]},
       { path: 'register', component:RegisterComponent},
       { path: 'login', component:LoginComponent},
       { path: 'profile-administrador', component:ProfileAdministradorComponent, canActivate:[AuthGuard]},
@@ -47,10 +49,7 @@ import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-
     VehiculoComponent,
     ModificarUsuarioComponent,
     ProfileGerenteComponent,
-    ProfileMecanicoComponent,
-
-    
-    
+    ProfileMecanicoComponent
   ],
   imports: [
     BrowserModule,

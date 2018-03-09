@@ -33,9 +33,9 @@ export class ProfileAdministradorComponent implements OnInit {
     this.repuestoInsertar = this.repuestoHijo.repuestoGenerado;
     console.log(this.repuestoInsertar); 
   }
+
   agregarRepuesto() {
-    this.nuevoRepuesto = true; 
-  
+    this.nuevoRepuesto = true;   
   }
 
   obtenerRepuestos() {
@@ -53,20 +53,19 @@ export class ProfileAdministradorComponent implements OnInit {
       console.log(this.usuarios); 
     })
   }
-async modificarUsuario(id) {
-  this.modificar = true;
-  let user; 
-   
-  await this.authService.getUserById(id).subscribe(datos => {
-   
-    console.log(datos); 
-    user = datos.user; 
-    console.log(user); 
-    this.usuario = user; 
-  })  
- 
- console.log(this.usuario); 
 
-  
-}
+  async modificarUsuario(id) {
+    this.modificar = true;
+    let user; 
+     
+    await this.authService.getUserById(id).subscribe(datos => {
+     
+      console.log(datos); 
+      user = datos.user; 
+      console.log(user); 
+      this.usuario = user; 
+    })     
+     console.log(this.usuario); 
+ 
+  }
 }

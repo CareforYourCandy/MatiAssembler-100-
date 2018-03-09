@@ -12,7 +12,19 @@
     background: #dd4f4f;
 }
 
-.alert.flash-message > p {
+.alert.flash-message {
   color: white;
   margin: 0;
 }
+
+/*.table-hover th, .table-hover td, .table-hover tr{
+  width: 100%;
+}
+.table-hover tbody {
+  height: 270px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-hover thead, .table-hover tbody {
+  display: block;
+}*/

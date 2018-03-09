@@ -14,6 +14,11 @@ import { Vehiculo } from '../vehiculo/vehiculo';
 })
 export class ProfileGerenteComponent implements OnInit {
   user;
+  clientes;
+  mecanicos;
+  usuarios;
+  modificar = false; 
+  usuario;
 
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -25,7 +30,8 @@ export class ProfileGerenteComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user")); 
-    //console.log(this.user); 
+    this.obtenerClientes();
+    this.obtenerMecanicos();
   }
 
   logout() {
@@ -36,4 +42,60 @@ export class ProfileGerenteComponent implements OnInit {
   home() {
     this.router.navigate(['']);
   }
+
+  obtenerClientes() {
+    let data = this.authService.getUsers().subscribe( datos => {
+      this.usuarios = datos.users
+      console.log(this.usuarios); 
+
+      this.clientes = this.usuarios.filter(function(user) {
+        if (user.rol==1) {
+           return user;
+        }
+      });
+      console.log(this.clientes); 
+    })
+  }
+
+  obtenerMecanicos() {
+    let data = this.authService.getUsers().subscribe( datos => {
+      this.usuarios = datos.users
+      console.log(this.usuarios); 
+
+      this.mecanicos = this.usuarios.filter(function(user) {
+        if (user.rol==3) {
+           return user;
+        }
+      });
+
+      console.log(this.mecanicos); 
+    })
+
+
+  }
+
+
+  async modificarUsuario(id) {
+    this.modificar = true;
+    let user; 
+     
+    await this.authService.getUserById(id).subscribe(datos => {
+     
+      console.log(datos); 
+      user = datos.user; 
+      console.log(user); 
+      this.usuario = user; 
+    })     
+     console.log(this.usuario); 
+ 
+  }
 }
+
+}
+      /*this.clientes = this.usuarios.map(function(user, index) {
+        if (user.rol==1) {
+           return user;
+        } else {
+          index=index+1;
+        }
+      });*/

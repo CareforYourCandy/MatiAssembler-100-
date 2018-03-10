@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-=======
-<div   > 
->>>>>>> 80ff9842be71842a215b75134bb4219798f98069
-
-<div   > 
+<div> 
     <!-- Top Bar -->
     <nav class="navbar">
         <div class="container-fluid">
@@ -212,54 +207,36 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                    <th>MODELO</th>
-                                    <th>AÑO</th>
-                                    <th>PLACA</th>
-                                    <th>SERIALr</th>
-                                    <th>FECHA REGISTRO</th>
-                                    <th>FECHA ADMISIÓN</th>
+                                <th>MARCA</th>
+                                <th>MODELO</th>
+                                <th>AÑO</th>
+                                <th>PLACA</th>
+                                <th>SERIAL</th>
+                                <th>Dueño</th>
+                                <th>FECHA REGISTRO</th>
+                                <th>FECHA ADMISIÓN</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>-----</td>
-                                <td>-----</td>
-                                <td>-----</td>
-                                <td>-----</td>
-                                <td>-----</td>
-                                <td>-----</td>
+                            <tr *ngFor="let vehiculo of vehiculos" >
+                               
+                              <td>{{setMarcaVista(vehiculo.marca)}}</td>
+                              <td>{{vehiculo.modelo}}</td>
+                              <td>{{vehiculo.ano}}</td>
+                              <td>{{vehiculo.placa}}</td>
+                              <td>{{vehiculo.serialMotor}}</td>
+                              <td>{{vehiculo.propietario}}</td>
+                              <td>-----</td> 
+                              <td>-----</td>           
                             </tr>
                             <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                            </tr>
-                            <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                            </tr>
-                            <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                            </tr>
-                            <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
+                                <td>-----</td>
                             </tr>
                         </tbody>
                     </table>

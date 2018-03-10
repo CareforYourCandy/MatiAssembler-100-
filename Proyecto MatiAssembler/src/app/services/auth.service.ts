@@ -122,6 +122,13 @@ export class AuthService {
 			.map(res => res.json());
 	}
 
+	obtenerListaVehiculos(){ //ObtenerVehiculos
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getVehiculos2', {headers: headers})
+			.map(res => res.json());
+	}
+
 	getProfile(){
 		let headers = new Headers();
 		this.loadToken();

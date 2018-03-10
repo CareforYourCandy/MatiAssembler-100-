@@ -78,7 +78,7 @@ export class ProfileClienteComponent implements OnInit {
     carro.activado = false; 
     const vehiculo = {
       idVehiculo: id,
-      dueño: this.user.idUsuario
+      propietario: this.user.idUsuario
     }
     console.log("El id es" + id); 
     
@@ -119,7 +119,7 @@ export class ProfileClienteComponent implements OnInit {
       ano: this.ano,
       serialMotor: this.serialMotor, 
       activado: true, 
-      dueño: this.user.idUsuario, 
+      propietario: this.user.idUsuario, 
 
     }
     

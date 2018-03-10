@@ -113,11 +113,28 @@ router.post('/obtenerRepuestos', (req, res, next) => {
 	});
 	
 	}); 
-//Obtener Vehiculos
+//Obtener Vehiculos por cliente
 router.post('/getVehiculos', (req, res, next) => {
 	const id=req.body.idUsuario;
 	console.log();
 	Vehiculo.getVehiculosByDueño(id, (err, vehiculos) => {
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!vehiculos){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'User not found'});
+		}
+		res.json({
+			success: true,
+			vehiculos});
+	});
+})
+
+//Obtener todos los Vehiculos
+router.post('/getVehiculos2', (req, res, next) => {
+	console.log();
+	Vehiculo.getVehiculos(req, (err, vehiculos) => {
 		if(err) {
 			console.log('AQUI PASO ALGO');
 		}
@@ -258,7 +275,7 @@ router.post('/registerVehiculo', (req, res, next) => {
         activado: req.body.activado,
         serialMotor: req.body.serialMotor,
         ano: req.body.ano,
-        dueño: req.body.dueño
+        propietario: req.body.propietario
        
     });
     Vehiculo.addVehiculo(newVehiculo, (err, user) => {

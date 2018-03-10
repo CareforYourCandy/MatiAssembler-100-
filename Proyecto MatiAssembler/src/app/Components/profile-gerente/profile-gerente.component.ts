@@ -22,6 +22,10 @@ export class ProfileGerenteComponent implements OnInit {
   citas;
   carrosCitas;
 
+  vehiculos;
+  //Marcas 
+  marcas = Array;
+
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,
@@ -32,9 +36,11 @@ export class ProfileGerenteComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("user")); 
+    this.getMarcas();
     this.obtenerClientes();
     this.obtenerMecanicos();
-    this.obtenerColaCitas();
+    //this.obtenerColaCitas();
+    this.obtenerVehiculos(); //Para obtener todos los vehiculos registrados en el taller
   }
 
   logout() {
@@ -44,6 +50,13 @@ export class ProfileGerenteComponent implements OnInit {
 
   home() {
     this.router.navigate(['']);
+  }
+
+  obtenerVehiculos() {
+    let data = this.authService.obtenerListaVehiculos().subscribe( datos => {
+      console.log(datos); 
+      this.vehiculos = datos.vehiculos;       
+    }); 
   }
 
   obtenerClientes() {
@@ -97,6 +110,17 @@ export class ProfileGerenteComponent implements OnInit {
       this.usuario = user; 
     })     
      console.log(this.usuario); 
+  }
+
+  getMarcas() {
+    this.authService.getMarcas().subscribe(data => {
+      console.log(data); 
+      this.marcas = data.marcas; 
+    }) 
+  }
+
+  setMarcaVista(idMarca) {
+    return this.marcas[idMarca].marca
   }
 }
 

@@ -39,7 +39,7 @@ const Vehiculo = connection.define('vehiculo', {
 		type: Sequelize.STRING
 		
 	},
-	dueño: {
+	propietario: {
         type: Sequelize.INTEGER
     }
 });	
@@ -83,7 +83,7 @@ module.exports.getVehiculoByID= function(ID, callback){
 
 module.exports.getVehiculosByDueño = function(elquetal, callback){
 
-	const query = {where: {dueño: elquetal}}
+	const query = {where: {propietario: elquetal}}
 	Vehiculo.findAll(query).then(vehiculos => {
 		
 		let vehiculos2 = vehiculos.map(function(vehiculo) {
@@ -116,6 +116,21 @@ module.exports.desactivarVehiculo = function(vehiculoID, callback) {
 		return callback(null, datos);
 	});	
 }
+
+module.exports.getVehiculos = function(req, callback){ //Obtener lista completa de vehiculos 
+	Vehiculo.findAll().then(vehiculos => {		
+		let vehi2 = vehiculos.map(function(vehiculo) {
+			dato = vehiculo.dataValues;   
+			return dato; 
+		})		
+		return vehi2; 
+	})
+	.then(datos => {
+		console.log(datos); 
+		return callback(null, datos);
+	});		
+}
+
 
 
 

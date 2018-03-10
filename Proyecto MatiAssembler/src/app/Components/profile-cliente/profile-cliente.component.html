@@ -237,12 +237,18 @@
       <div class="body">
           <form  action="/" (submit)="vehiculoSubmit()" id="frmFileUpload"  method="post">
               <div class="input-group">
-                  <span class="input-group-addon">
-                      <i class="material-icons">confirmation_number</i>
-                  </span>
-                  <div class="form-line">
-                      <input type="text" class="form-control" [(ngModel)]="marca" name="marca" placeholder="Marca" required autofocus>
-                  </div>
+                    <span class="input-group-addon">
+                            <i class="material-icons">confirmation_number</i>
+                        </span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Marca <span class="caret"></span>
+                    </button>
+                    <ul   class="dropdown-menu">
+                        <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca.idMarca)">{{marca.marca}}</a></li>
+                        
+                    </ul>
+                </div>
               </div>
 
               <div class="input-group">
@@ -280,20 +286,6 @@
                       <input type="text" class="form-control" [(ngModel)]="placa" name="placa" placeholder="Placa" required autofocus>
                   </div>
               </div>
-              <div class="input-group">
-                    <span class="input-group-addon">
-                            <i class="material-icons">confirmation_number</i>
-                        </span>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        PRIMARY <span class="caret"></span>
-                    </button>
-                    <ul   class="dropdown-menu">
-                        <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca.idMarca)">{{marca.marca}}</a></li>
-                        
-                    </ul>
-                </div>
-        </div>
               <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR VEHÍCULO</button>
 
           </form>

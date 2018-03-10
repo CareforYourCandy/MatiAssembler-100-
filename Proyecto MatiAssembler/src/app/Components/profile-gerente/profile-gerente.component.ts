@@ -19,6 +19,8 @@ export class ProfileGerenteComponent implements OnInit {
   usuarios;
   modificar = false; 
   usuario;
+  citas;
+  carrosCitas;
 
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -32,6 +34,7 @@ export class ProfileGerenteComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("user")); 
     this.obtenerClientes();
     this.obtenerMecanicos();
+    this.obtenerColaCitas();
   }
 
   logout() {
@@ -70,10 +73,17 @@ export class ProfileGerenteComponent implements OnInit {
 
       console.log(this.mecanicos); 
     })
-
-
   }
 
+  obtenerColaCitas() {
+    let data = this.authService.obtenerCitas().subscribe( datos => {
+      this.citas = datos.rcitas
+      this.carrosCitas = datos.vehiculosCitas
+      console.log(this.citas); 
+      console.log(this.carrosCitas); 
+
+    })
+  }
 
   async modificarUsuario(id) {
     this.modificar = true;
@@ -87,15 +97,7 @@ export class ProfileGerenteComponent implements OnInit {
       this.usuario = user; 
     })     
      console.log(this.usuario); 
- 
   }
 }
 
-}
-      /*this.clientes = this.usuarios.map(function(user, index) {
-        if (user.rol==1) {
-           return user;
-        } else {
-          index=index+1;
-        }
-      });*/
+ 

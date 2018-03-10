@@ -131,6 +131,72 @@ router.post('/getVehiculos', (req, res, next) => {
 	});
 })
 
+
+//Obtener la cola de citas por asignar
+router.post('/getCitas', (req, res, next) => {
+	console.log("Estoy en obtener citas"); 
+	let citas = Cita.getCitas(req, (err, rcitas) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!rcitas) {
+			console.log("No hay citas"); 
+		}
+		let vehiculosCitas = rcitas.map ( function(cita) {
+			Vehiculo.getVehiculoByID(cita.vehiculoCita, (err, vehiculo) => {
+				console.log('ESTE ES EL VEHICULO RESP:');
+				console.log(vehiculo);
+				if(err) {
+					console.log('AQUI PASO ALGO');
+				}
+				if(!vehiculo){
+					console.log('AQUI PASO ALGO2');
+					return res.json({success: false, msg:'Vehiculo not found'});
+				}
+				return vehiculo; //AQUI NO SE COMO RETORNARLO
+			});
+		});
+		console.log('vehiculosCitas:');
+		console.log(vehiculosCitas);
+		res.json({
+			success: true,
+			rcitas,
+			vehiculosCitas
+		});
+	});	
+})
+
+//Obtener los vehiculos de la cola de citas
+/*router.post('/getVehiculosCola', (req, res, next) => {
+	console.log("Estoy en obtener vehiculos de la cola"); 
+	let idVehiculo = req.body.idVehiculo;
+	Vehiculo.getVehiculoByID(idVehiculo, (err, carro) => {
+				
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!carro){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'Carro no encontrado'});
+		}
+		console.log('este es el carro:');
+		console.log(carro);
+		res.json({
+			success: true,
+			vehiculo: {
+				idVehiculo: carro.idVehiculo,
+				placa: carro.placa,
+				marca: carro.marca,
+				modelo: carro.modelo,
+				activado: carro.activado,
+				serialMotor: carro.serialMotor,
+				ano: carro.ano
+			}
+		});
+
+	});
+});*/
+
 //Authenticate
 router.post('/authenticate', (req, res, next) => {
 	const correo = req.body.correo;
@@ -165,7 +231,9 @@ router.post('/authenticate', (req, res, next) => {
 						apellido: user.apellido,
 						correo: user.correo,
 						rol: user.rol,
-						cedula: user.cedula
+						cedula: user.cedula,
+						direccion: user.direccion,
+						telefono: user.telefono
 					}
 				});
 			} else {
@@ -203,6 +271,8 @@ router.post('/registerVehiculo', (req, res, next) => {
 
 });
 
+
+
 router.post('/registerCita', (req, res, next) => {
     
     let newCita = new Cita({
@@ -218,6 +288,8 @@ router.post('/registerCita', (req, res, next) => {
 	});
 
 });
+
+
 
 router.post('/desactivarVehiculo',  (req, res, next) => {
 console.log(req.body); 

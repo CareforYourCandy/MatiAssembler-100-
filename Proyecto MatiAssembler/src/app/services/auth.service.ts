@@ -51,6 +51,23 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/getUsers', Object(), {headers: headers})
 		.map(res => res.json());
 	}
+
+
+	obtenerCitas() {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getCitas', {headers: headers})
+		.map(res => res.json());
+	}
+
+	/*obtenerVehiculo(ID) {
+		let idVehiculo = {ID}
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getVehiculosCola', idVehiculo, {headers: headers})
+		.map(res => res.json());
+	}*/
+
 	obtenerRepuestos() {
 		console.log("Hola2"); 
 		let headers = new Headers();
@@ -121,11 +138,6 @@ export class AuthService {
 		this.user = user;
 	}
 
-	storeVehiculosData(vehiculos) {
-		localStorage.setItem('vehicles', JSON.stringify(vehiculos));
-		this.vehiculo = vehiculos;
-	}
-
 	loadToken(){
 		const token = localStorage.getItem('id_token');
 		this.authToken = token;
@@ -142,5 +154,10 @@ export class AuthService {
 	return tokenNotExpired('id_token');
 	}
 	
+
+	/*storeVehiculosData(vehiculos) {
+		localStorage.setItem('vehicles', JSON.stringify(vehiculos));
+		this.vehiculo = vehiculos;
+	}*/
 
 }

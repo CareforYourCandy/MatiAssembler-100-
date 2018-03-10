@@ -23,20 +23,21 @@ const Cita = connection.define('cita', {
 
 module.exports = Cita;
 
-module.exports.getCitas = function(callback){ //Obtener la cola de citas (PARA EL GERENTE)
+module.exports.getCitas = function(req, callback){ //Obtener la cola de citas (PARA EL GERENTE)
 	Cita.findAll().then(citas => {		
 		let citas2 = citas.map(function(cita) {
 			dato = cita.dataValues;   
 			return dato; 
 		})
-		citas = citas2;		
-		return citas; 
+		//citas = citas2;		
+		return citas2; 
 	})
 	.then(datos => {
 		console.log(datos); 
 		return callback(null, datos);
 	});		
 }
+
 
 module.exports.addCita = function(newCita, callback) { //Añadir una nueva cita a la cola al solicitar una
 			console.log("estoy en addCita");

@@ -77,44 +77,30 @@ module.exports.modificarUsuario = function (usuario){
  //User.update(query, {where: {idUsuario: usuario.idUsuario}}); 
 }
 
-module.exports.getUserByID= async function(id, callback){
-	/*try {
-		User.findById(id, callback).then(resultado => {
-			usuario = resultado.dataValues; 
-		
-			return callback(null, usuario); 
-		}); 
-	} catch (err) {
-        console.log('Se produjo un error en getUserById(): ', err);
-    }*/
-
-    try {
-    	let resultado = User.findById(id);
-		let usuario = resultado.dataValues; 
-		callback(null, usuario); 
-
-	} catch (err) {
-        console.log('Se produjo un error en getUserById(): ', err);
-    }
-
+module.exports.getUserByID= function(ID, callback){
+	//console.log('EL ID DEL VEHICULO ES:'+ID);
+	const query = {where: {idUsuario: ID}}
+	User.findOne(query).then(dato => {
+		console.log(dato.get());
+		return dato.get();
+	})
+	.then(datos => {
+		//console.log('aqui los datos son');
+		//console.log(datos);
+		callback(null, datos);
+	});	
 }
 
 module.exports.getUsers = function(id, callback){
-    
-        
+      
         User.findAll().then(datos => {
-            
-
             let users = datos.map(function(datoCrudo) {
                 dato = datoCrudo.dataValues;   
                 return dato; 
-            })
-            
-            
+            })          
             return users; 
         })
-        .then(datos => {
-             
+        .then(datos => {             
             return callback(null, datos);
         });
     }

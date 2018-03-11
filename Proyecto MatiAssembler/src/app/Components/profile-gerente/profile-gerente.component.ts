@@ -132,16 +132,5 @@ export class ProfileGerenteComponent implements OnInit {
       this.router.navigate(['detalle-vehiculo']);
 
     });
-
+  }
 }
-
-       /* const vehiculo = {
-          placa: this.placa,       
-          marca: this.marcaNuevo,
-          modelo: this.modelo,
-          ano: this.ano,
-          serialMotor: this.serialMotor, 
-          activado: true, 
-          propietario: this.user.idUsuario, 
-        }
-      */

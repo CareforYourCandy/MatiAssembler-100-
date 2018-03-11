@@ -95,8 +95,8 @@
                     <div class="body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            	<br>
-                                <div>Marca: {{vehiculo.marca}}</div>
+                                <br>
+                                <div>Marca: {{setMarcaVista(vehiculo.marca)}}</div>
                                 <br>
                                 <div>Modelo: {{vehiculo.modelo}}</div>
                                 <br>
@@ -182,14 +182,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let orden of ordenes" >
-									<td>-----</td>
+                                <tr *ngFor="let orden of historial" >
+                                    <td>{{orden.idOrden}}</td>
                                     <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-									<td> <button type="button" (click)="verDetalleOrden(orden.idOrden)" class="btn btn-default waves-effect">
-										<i class="material-icons">visibility</i>
-									</button></td> 
+                                    <td>{{orden.idMecanico}}</td>
+                                    <td>{{orden.diagnostico}}</td>
+                                    <td> <button type="button" (click)="verDetalleOrden(orden.idOrden)" class="btn btn-default waves-effect">
+                                        <i class="material-icons">visibility</i>
+                                    </button></td> 
 
                                 </tr>
                                 <tr>
@@ -197,9 +197,9 @@
                                     <td>-----</td>
                                     <td>-----</td>
                                     <td>-----</td>
-									<td> <button type="button" (click)="verDetalleOrden(orden.idOrden)" class="btn btn-default waves-effect">
-										<i class="material-icons">visibility</i>
-									</button></td> 
+                                    <td> <button type="button" (click)="verDetalleOrden(orden.idOrden)" class="btn btn-default waves-effect">
+                                        <i class="material-icons">visibility</i>
+                                    </button></td> 
                                 </tr>
                             </tbody>
                         </table>
@@ -211,6 +211,8 @@
 
 </section>
 </div>
+
+
 
 
 

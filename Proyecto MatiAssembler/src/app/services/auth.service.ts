@@ -9,6 +9,7 @@ export class AuthService {
 	authToken: any;
 	user: any;
 	vehiculo: any;
+	orden: any;
 
 	constructor(private http:Http) { }
 
@@ -37,14 +38,14 @@ export class AuthService {
 		.map(res => res.json());
 	}
 
-	getUserById(id) {
-		let idUsuario = {id}
-		
+	getUserById(ID) {
+		let idUsuario = {ID};
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/getUser', idUsuario, {headers: headers})
 		.map(res => res.json());
 	}
+	
 	getUsers() {
 		console.log("Hola2"); 
 		let headers = new Headers();
@@ -66,6 +67,14 @@ export class AuthService {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/getVehiculo', idVehiculo, {headers: headers})
+		.map(res => res.json());
+	}
+
+	getOrden(ID) {
+		let idOrden = {ID}
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getOrden', idOrden, {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -123,6 +132,13 @@ export class AuthService {
 			.map(res => res.json());
 	}
 
+	obtenerOrdenes(vehiculo){ //Obtener Ordenes por vehiculo
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getOrdenes', vehiculo, {headers: headers})
+			.map(res => res.json());
+	}
+
 	obtenerListaVehiculos(){ //Obtener todos los Vehiculos
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
@@ -168,9 +184,14 @@ export class AuthService {
 	}
 	
 
-	almacenarVehiculoLS(vehiculo) {
+	almacenarVehiculoLS(vehiculo) { //Almacenar un vehiculo en Local Storage
 		localStorage.setItem('vehiculo', JSON.stringify(vehiculo));
 		this.vehiculo = vehiculo;
+	}
+
+	almacenarOrdenLS(orden) { //Almacenar una orden en Local Storage
+		localStorage.setItem('orden', JSON.stringify(orden));
+		this.orden = orden;
 	}
 
 }

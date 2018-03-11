@@ -43,7 +43,7 @@ export class ModificarUsuarioComponent implements OnInit, OnChanges {
     this.rol = numero; 
   }
 
-  async modificarUsuario() {
+  modificarUsuario() {
     console.log("hola"); 
     let usuario = {
       nombre: this.name,
@@ -56,6 +56,6 @@ export class ModificarUsuarioComponent implements OnInit, OnChanges {
       telefono: this.telefono
     }
     console.log(usuario); 
-    await this.authService.modificarUsuario(usuario); 
+    this.authService.modificarUsuario(usuario); 
   }
 }

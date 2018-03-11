@@ -24,6 +24,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ProfileGerenteComponent } from './Components/profile-gerente/profile-gerente.component';
 import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-mecanico.component';
 import { DetalleVehiculoComponent } from './Components/detalle-vehiculo/detalle-vehiculo.component';
+import { DetalleOrdenComponent } from './Components/detalle-orden/detalle-orden.component';
 
 
   const appRoutes: Routes = [ 
@@ -53,7 +54,8 @@ import { DetalleVehiculoComponent } from './Components/detalle-vehiculo/detalle-
     ModificarUsuarioComponent,
     ProfileGerenteComponent,
     ProfileMecanicoComponent,
-    DetalleVehiculoComponent
+    DetalleVehiculoComponent,
+    DetalleOrdenComponent
   ],
   imports: [
     BrowserModule,

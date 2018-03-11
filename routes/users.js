@@ -32,7 +32,8 @@ router.post('/register', (req, res, next) => {
  router.post('/getUser', (req, res, next)  => {
 	id = req.body.id; 
 	
-	User.getUserByID(id, (user) => {
+	User.getUserByID(id, (err, user) => {
+	
 		res.json( {
 			success: true,
 			user
@@ -41,24 +42,7 @@ router.post('/register', (req, res, next) => {
 
  }
 )
-router.post('/modificarUsuario'), (req, res, next) => {
-	usuario = req.body.usuario;
-	console.log("Estoy en obtener users"); 
-	let usuarios = User.getUsers(req, (err, users) => {
-		if (err) {
-			console.log("algo fallo"); 
-		}
-		if(!users) {
-			console.log("No hay repuestos"); 
-		}
-		
-		res.json( {
-			success:true, 
-			users
-		})
-	});
-	
-	}
+
 router.post('/getUsers', (req, res, next) => {
 	console.log("Estoy en obtener users"); 
 	let usuarios = User.getUsers(req, (err, users) => {
@@ -148,7 +132,22 @@ router.post('/getVehiculos2', (req, res, next) => {
 	});
 })
 
-
+router.post('/getOrdenesMecanico', (req, res, next) => {
+	console.log("Estoy en obtener ordenes por mecanico");
+	let ordenes = Orden.getOrdenesMecanico(req, (err, ordenes) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!marcas) {
+			console.log("No hay marcas"); 
+		}
+		
+		res.json( {
+			success:true, 
+			ordenes
+		})
+	});
+})
 //Obtener la cola de citas por asignar
 router.post('/getCitas', (req, res, next) => {
 	console.log("Estoy en obtener citas"); 

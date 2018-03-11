@@ -25,6 +25,7 @@ export class AuthService {
 		console.log(usuario); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
+		console.log("Voy a hacer el post"); 
 		return this.http.post('http://localhost:3000/users/modificarUsuario', usuario, {headers: headers})
 		.map(res => res.json());
 	}
@@ -128,7 +129,12 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/getVehiculos2', {headers: headers})
 			.map(res => res.json());
 	}
-
+	getOrdenesMecanico() {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.get('http://localhost:3000/users/getOrdenesMecanico', {headers: headers})
+		.map(res => res.json());
+	}
 	getProfile(){
 		let headers = new Headers();
 		this.loadToken();

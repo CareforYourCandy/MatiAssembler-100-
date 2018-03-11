@@ -23,6 +23,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 import { ProfileGerenteComponent } from './Components/profile-gerente/profile-gerente.component';
 import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-mecanico.component';
+import { DetalleVehiculoComponent } from './detalle-vehiculo/detalle-vehiculo.component';
 
 
   const appRoutes: Routes = [ 
@@ -49,7 +50,8 @@ import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-
     VehiculoComponent,
     ModificarUsuarioComponent,
     ProfileGerenteComponent,
-    ProfileMecanicoComponent
+    ProfileMecanicoComponent,
+    DetalleVehiculoComponent
   ],
   imports: [
     BrowserModule,

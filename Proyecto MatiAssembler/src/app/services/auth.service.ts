@@ -61,13 +61,13 @@ export class AuthService {
 		.map(res => res.json());
 	}
 
-	/*obtenerVehiculo(ID) {
+	getVehiculo(ID) {
 		let idVehiculo = {ID}
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getVehiculosCola', idVehiculo, {headers: headers})
+		return this.http.post('http://localhost:3000/users/getVehiculo', idVehiculo, {headers: headers})
 		.map(res => res.json());
-	}*/
+	}
 
 	obtenerRepuestos() {
 		console.log("Hola2"); 
@@ -116,14 +116,14 @@ export class AuthService {
 			.map(res => res.json());
 	}
 
-	obtenerVehiculos(user){ //ObtenerVehiculos
+	obtenerVehiculos(user){ //Obtener Vehiculos por cliente
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/getVehiculos', user, {headers: headers})
 			.map(res => res.json());
 	}
 
-	obtenerListaVehiculos(){ //ObtenerVehiculos
+	obtenerListaVehiculos(){ //Obtener todos los Vehiculos
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/getVehiculos2', {headers: headers})
@@ -168,9 +168,9 @@ export class AuthService {
 	}
 	
 
-	/*storeVehiculosData(vehiculos) {
-		localStorage.setItem('vehicles', JSON.stringify(vehiculos));
-		this.vehiculo = vehiculos;
-	}*/
+	almacenarVehiculoLS(vehiculo) {
+		localStorage.setItem('vehiculo', JSON.stringify(vehiculo));
+		this.vehiculo = vehiculo;
+	}
 
 }

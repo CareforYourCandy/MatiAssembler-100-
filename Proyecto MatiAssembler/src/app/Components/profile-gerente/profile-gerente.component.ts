@@ -25,6 +25,7 @@ export class ProfileGerenteComponent implements OnInit {
   vehiculos;
   //Marcas 
   marcas = Array;
+  vehiculoTemp;
 
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -122,6 +123,25 @@ export class ProfileGerenteComponent implements OnInit {
   setMarcaVista(idMarca) {
     return this.marcas[idMarca].marca
   }
+
+  verDetalle(idVehiculo) {
+    this.authService.getVehiculo(idVehiculo).subscribe(data => {
+      console.log(data); 
+      this.vehiculoTemp = data.vehiculo; 
+      this.authService.almacenarVehiculoLS(this.vehiculoTemp);
+      this.router.navigate(['detalle-vehiculo']);
+
+    });
+
 }
 
- 
+       /* const vehiculo = {
+          placa: this.placa,       
+          marca: this.marcaNuevo,
+          modelo: this.modelo,
+          ano: this.ano,
+          serialMotor: this.serialMotor, 
+          activado: true, 
+          propietario: this.user.idUsuario, 
+        }
+      */

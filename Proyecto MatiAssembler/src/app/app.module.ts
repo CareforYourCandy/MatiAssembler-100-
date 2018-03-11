@@ -17,13 +17,13 @@ import { ProfileAdministradorComponent } from './Components/profile-administrado
 import { AgregarRepuestoComponent } from './Components/agregar-repuesto/agregar-repuesto.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
 import { VehiculoComponent } from './Components/vehiculo/vehiculo.component';
-import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
+import { ModificarUsuarioComponent } from './Components/modificar-usuario/modificar-usuario.component';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 import { ProfileGerenteComponent } from './Components/profile-gerente/profile-gerente.component';
 import { ProfileMecanicoComponent } from './Components/profile-mecanico/profile-mecanico.component';
-import { DetalleVehiculoComponent } from './detalle-vehiculo/detalle-vehiculo.component';
+import { DetalleVehiculoComponent } from './Components/detalle-vehiculo/detalle-vehiculo.component';
 
 
   const appRoutes: Routes = [ 
@@ -36,6 +36,8 @@ import { DetalleVehiculoComponent } from './detalle-vehiculo/detalle-vehiculo.co
       { path: 'profile-administrador', component:ProfileAdministradorComponent, canActivate:[AuthGuard]},
       { path: 'agregar-repuesto', component:AgregarRepuestoComponent},
       { path: 'profile-gerente', component: ProfileGerenteComponent, canActivate:[AuthGuard]}, 
+      { path: 'detalle-vehiculo', component: DetalleVehiculoComponent, canActivate:[AuthGuard]},
+      { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate:[AuthGuard]}
     ]
 @NgModule({
   declarations: [

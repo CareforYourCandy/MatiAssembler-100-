@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-modificar-usuario',

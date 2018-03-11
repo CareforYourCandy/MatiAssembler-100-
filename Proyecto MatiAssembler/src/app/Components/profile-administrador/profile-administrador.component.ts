@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { ModificarUsuarioComponent } from '../../modificar-usuario/modificar-usuario.component';
+import { ModificarUsuarioComponent } from '../modificar-usuario/modificar-usuario.component';
 import {AgregarRepuestoComponent} from '../agregar-repuesto/agregar-repuesto.component'; 
 
 

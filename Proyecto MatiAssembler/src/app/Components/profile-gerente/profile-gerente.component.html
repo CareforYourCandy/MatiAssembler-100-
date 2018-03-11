@@ -215,6 +215,7 @@
                                 <th>Dueño</th>
                                 <th>FECHA REGISTRO</th>
                                 <th>FECHA ADMISIÓN</th>
+                                <th>Ver</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -227,7 +228,10 @@
                               <td>{{vehiculo.serialMotor}}</td>
                               <td>{{vehiculo.propietario}}</td>
                               <td>-----</td> 
-                              <td>-----</td>           
+                              <td>-----</td> 
+                              <td> <button type="button" (click)="verDetalle(vehiculo.idVehiculo)" class="btn btn-default waves-effect">
+                                    <i class="material-icons">pageview</i>
+                                </button></td>          
                             </tr>
                             <tr>
                                 <td>-----</td>

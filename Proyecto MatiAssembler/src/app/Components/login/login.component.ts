@@ -35,9 +35,16 @@ export class LoginComponent implements OnInit {
          if ( data.user.rol == 1) {
           this.router.navigate(['profile-cliente']);
          }
-         if (data.user.rol == 4) {
+         if (data.user.rol == 2) {
            this.router.navigate(['profile-administrador']); 
          }
+         if (data.user.rol == 3) {
+           this.router.navigate(['profile-gerente']); 
+         }
+         if (data.user.rol == 4) {
+           this.router.navigate(['profile-mecanico']); 
+         }
+         
         } else {
           console.log("Fallo"); 
           //this.flashMessage.show('Usuario/Contraseña incorrectos. Intentelo de Nuevo', { cssClass: 'custom-danger', timeout: 6000 });

@@ -133,7 +133,7 @@ router.post('/getVehiculos', (req, res, next) => {
 
 //Obtener todos los Vehiculos
 router.post('/getVehiculos2', (req, res, next) => {
-	console.log();
+	//console.log();
 	Vehiculo.getVehiculos(req, (err, vehiculos) => {
 		if(err) {
 			console.log('AQUI PASO ALGO');
@@ -213,6 +213,38 @@ router.post('/getCitas', (req, res, next) => {
 
 	});
 });*/
+
+//Obtener un solo vehiculo por su id
+router.post('/getVehiculo', (req, res, next) => {
+	id = req.body.ID;
+	console.log(req.body);
+	console.log('el id del vehiculo es:');
+	console.log(id);
+	Vehiculo.getVehiculoByID(id, (err, carro) => {
+		console.log('ESTE ES EL VEHICULO RESP:');
+		console.log(carro);
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!carro){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'Vehiculo not found'});
+		}
+		res.json({
+			success: true,
+			vehiculo: {
+				idVehiculo: carro.idVehiculo,
+				placa: carro.placa,
+				marca: carro.marca,
+				modelo: carro.modelo,
+				activado: carro.activado,
+				serialMotor: carro.serialMotor,
+				ano: carro.ano,
+				propietario: carro.propietario
+			}
+		});
+	});
+});
 
 //Authenticate
 router.post('/authenticate', (req, res, next) => {

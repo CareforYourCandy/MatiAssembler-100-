@@ -61,7 +61,7 @@ export class ProfileAdministradorComponent implements OnInit {
     await this.authService.getUserById(id).subscribe(datos => {
      
       console.log(datos); 
-      user = datos.user; 
+      user = datos.usuario; 
       console.log(user); 
       this.usuario = user; 
     })     

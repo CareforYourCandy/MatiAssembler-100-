@@ -80,7 +80,14 @@ router.post('/getUsers', (req, res, next) => {
 		})
 	});
 	
-	}); 
+}); 
+
+router.post('/modificarUsuario', (req, res, next) => {
+	console.log("Estoy en modificar usuario"); 
+	console.log(req.body);
+	User.modificarUsuario(req.body);
+	
+}); 
 
 	router.post('/getMarcas', (req, res, next) => {
 		console.log("Estoy en obtener users"); 

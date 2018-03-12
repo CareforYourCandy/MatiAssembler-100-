@@ -22,7 +22,7 @@ export class ProfileGerenteComponent implements OnInit {
   citas = [];
   carrosCitas = [];
 
-  vehiculos;
+  vehiculos = [];
   //Marcas 
   marcas = Array;
   vehiculoTemp;
@@ -59,6 +59,7 @@ export class ProfileGerenteComponent implements OnInit {
 
   obtenerVehiculos() {
     let data = this.authService.obtenerListaVehiculos().subscribe( datos => {
+      console.log("Aqui estan los vehiculos"); 
       console.log(datos); 
       this.vehiculos = datos.vehiculos;       
     }); 
@@ -93,17 +94,29 @@ export class ProfileGerenteComponent implements OnInit {
     })
   }
 
-  async obtenerColaCitas() {
-    let data = await this.authService.obtenerCitas().subscribe( datos => {
+  obtenerColaCitas() {
+    let data = this.authService.obtenerCitas().subscribe( datos => {
      
       console.log("AQUI ESTOY IMPRIMIENDO LOS DATOS"); 
       console.log(datos);
       this.citas = datos.rcitas;
       console.log(this.citas); 
-      
+      let vehiculos2 = this.vehiculos; 
+      console.log(vehiculos2); 
+      for (let i = 0; i < this.citas.length; i++) {
+      let data2 = this.authService.getVehiculo(this.citas[i].vehiculoCita).subscribe( datos => {
+        console.log("IMPRIMIRE MAS DATOS"); 
+        console.log(datos); 
+        this.carrosCitas.push(datos.vehiculo); 
+        this.citas[i].vehiculo = datos.vehiculo; 
+      })
+    }
+    console.log("ARRAY FINALES");
+    console.log(this.citas);
+    console.log(this.carrosCitas); 
 
-    })
-    await this.cuadrarCarros(); 
+    }); 
+ 
  
   }
 cuadrarCarros() {

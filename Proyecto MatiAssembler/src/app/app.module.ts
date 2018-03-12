@@ -38,6 +38,7 @@ import { DetalleOrdenComponent } from './Components/detalle-orden/detalle-orden.
       { path: 'agregar-repuesto', component:AgregarRepuestoComponent},
       { path: 'profile-gerente', component: ProfileGerenteComponent, canActivate:[AuthGuard]}, 
       { path: 'detalle-vehiculo', component: DetalleVehiculoComponent, canActivate:[AuthGuard]},
+      { path: 'detalle-orden', component: DetalleOrdenComponent, canActivate:[AuthGuard]},
       { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate:[AuthGuard]}
     ]
 @NgModule({

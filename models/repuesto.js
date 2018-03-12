@@ -28,23 +28,23 @@ module.exports.addRepuesto = function(newRepuesto, callback) { //Añadir una nue
 }
 
 
+
+
     
 module.exports.getRepuesto = function(id, callback){
-    
+           
+    Repuesto.findAll().then(datos => {
         
-        Repuesto.findAll().then(datos => {
-            
 
-            let repuestos = datos.map(function(datoCrudo) {
-                dato = datoCrudo.dataValues;   
-                return dato; 
-            })
-            
-            
-            return repuestos; 
+        let repuestos = datos.map(function(datoCrudo) {
+            dato = datoCrudo.dataValues;   
+            return dato; 
         })
-        .then(datos => {
-            console.log(datos); 
-            return callback(null, datos);
-        });
-    }
+               
+        return repuestos; 
+    })
+    .then(datos => {
+        console.log(datos); 
+        return callback(null, datos);
+    });
+}

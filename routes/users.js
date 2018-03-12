@@ -401,8 +401,6 @@ router.post('/registerCita', (req, res, next) => {
 
 });
 
-
-
 router.post('/desactivarVehiculo',  (req, res, next) => {
 console.log(req.body); 
 Vehiculo.desactivarVehiculo(req.body.idVehiculo, (err, vehiculo)  => {
@@ -414,10 +412,19 @@ Vehiculo.desactivarVehiculo(req.body.idVehiculo, (err, vehiculo)  => {
 })
 
 }); 
+
 router.post('/registerRepuesto', (req, res, next) => {
 	let repuesto = new Repuesto({
 		pieza:  req.body.pieza 
 	});
-	Repuesto.addRepuesto(repuesto);
+	Repuesto.addRepuesto(repuesto, (err, repuesto) => {
+		if(err){
+			res.json({success:false, msg:'No funciono el registro de usuario'});
+		} else {
+			res.json({success:true, msg:'Usuario registrado'});
+		}
+	});
 }); 
+
 module.exports = router;
+

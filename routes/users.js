@@ -179,32 +179,25 @@ router.post('/getCitas', (req, res, next) => {
 		if(!rcitas) {
 			console.log("No hay citas"); 
 		}
-		let vehiculosCitas = rcitas.map ( function(cita) {
-			Vehiculo.getVehiculoByID(cita.vehiculoCita, (err, vehiculo) => {
-				console.log('ESTE ES EL VEHICULO RESP:');
-				console.log(vehiculo);
-				if(err) {
-					console.log('AQUI PASO ALGO');
-				}
-				if(!vehiculo){
-					console.log('AQUI PASO ALGO2');
-					return res.json({success: false, msg:'Vehiculo not found'});
-				}
-				return vehiculo; //AQUI NO SE COMO RETORNARLO
-			});
-		});
+		let vehiculosCitas = new Array(); 
+		console.log("Aqui esta rcitas"); 
+		console.log(rcitas); 
+		
+		
+	
+
 		console.log('vehiculosCitas:');
 		console.log(vehiculosCitas);
 		res.json({
 			success: true,
-			rcitas,
-			vehiculosCitas
+			rcitas
+			
 		});
 	});	
 })
 
 //Obtener los vehiculos de la cola de citas
-/*router.post('/getVehiculosCola', (req, res, next) => {
+router.post('/getVehiculosCola', (req, res, next) => {
 	console.log("Estoy en obtener vehiculos de la cola"); 
 	let idVehiculo = req.body.idVehiculo;
 	Vehiculo.getVehiculoByID(idVehiculo, (err, carro) => {
@@ -232,7 +225,7 @@ router.post('/getCitas', (req, res, next) => {
 		});
 
 	});
-});*/
+});
 
 //Obtener un solo vehiculo por su id
 router.post('/getVehiculo', (req, res, next) => {
@@ -250,6 +243,9 @@ router.post('/getVehiculo', (req, res, next) => {
 			console.log('AQUI PASO ALGO2');
 			return res.json({success: false, msg:'Vehiculo not found'});
 		}
+		
+
+
 		res.json({
 			success: true,
 			vehiculo: {
@@ -260,7 +256,7 @@ router.post('/getVehiculo', (req, res, next) => {
 				activado: carro.activado,
 				serialMotor: carro.serialMotor,
 				ano: carro.ano,
-				propietario: carro.propietario
+				propietario: carro.propietario 
 			}
 		});
 	});

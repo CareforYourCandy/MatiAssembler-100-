@@ -33,6 +33,7 @@ module.exports.getCitas = function(req, callback){ //Obtener la cola de citas (P
 		return citas2; 
 	})
 	.then(datos => {
+		console.log("LOS DATOS ESTAN AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
 		console.log(datos); 
 		return callback(null, datos);
 	});		

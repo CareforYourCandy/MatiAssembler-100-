@@ -137,6 +137,7 @@ router.post('/getVehiculos', (req, res, next) => {
 			console.log('AQUI PASO ALGO2');
 			return res.json({success: false, msg:'User not found'});
 		}
+		console.log(vehiculos);
 		res.json({
 			success: true,
 			vehiculos});
@@ -186,15 +187,8 @@ router.post('/getCitas', (req, res, next) => {
 		if(!rcitas) {
 			console.log("No hay citas"); 
 		}
-		let vehiculosCitas = new Array(); 
 		console.log("Aqui esta rcitas"); 
 		console.log(rcitas); 
-		
-		
-	
-
-		console.log('vehiculosCitas:');
-		console.log(vehiculosCitas);
 		res.json({
 			success: true,
 			rcitas
@@ -227,7 +221,9 @@ router.post('/getVehiculosCola', (req, res, next) => {
 				modelo: carro.modelo,
 				activado: carro.activado,
 				serialMotor: carro.serialMotor,
-				ano: carro.ano
+				ano: carro.ano,
+				propietario: carro.propietario,
+				fechaRegistro: carro.fechaRegistro
 			}
 		});
 
@@ -263,7 +259,8 @@ router.post('/getVehiculo', (req, res, next) => {
 				activado: carro.activado,
 				serialMotor: carro.serialMotor,
 				ano: carro.ano,
-				propietario: carro.propietario 
+				propietario: carro.propietario,
+				fechaRegistro: carro.fechaRegistro
 			}
 		});
 	});
@@ -377,7 +374,8 @@ router.post('/registerVehiculo', (req, res, next) => {
         activado: req.body.activado,
         serialMotor: req.body.serialMotor,
         ano: req.body.ano,
-        propietario: req.body.propietario
+        propietario: req.body.propietario,
+        fechaRegistro: req.body.fechaRegistro
        
     });
     Vehiculo.addVehiculo(newVehiculo, (err, user) => {
@@ -395,7 +393,8 @@ router.post('/registerVehiculo', (req, res, next) => {
 router.post('/registerCita', (req, res, next) => {
     
     let newCita = new Cita({
-        vehiculoCita: req.body.vehiculoCita, 
+        vehiculoCita: req.body.vehiculoCita,
+        fechaSolicitud: req.body.fechaSolicitud 
         
     });
     Cita.addCita(newCita, (err, user) => {

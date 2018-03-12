@@ -41,7 +41,11 @@ const Vehiculo = connection.define('vehiculo', {
 	},
 	propietario: {
         type: Sequelize.INTEGER
+    }, 
+    fechaRegistro: {
+        type: Sequelize.DATE
     }
+
 });	
 
 module.exports = Vehiculo;
@@ -95,7 +99,7 @@ module.exports.getVehiculosByDueño = function(elquetal, callback){
 		return vehiculos; 
 	})
 	.then(datos => {
-		console.log(datos); 
+		//console.log(datos); 
 		return callback(null, datos);
 	});		
 }

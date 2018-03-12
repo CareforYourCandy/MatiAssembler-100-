@@ -27,6 +27,9 @@ import { DetalleVehiculoComponent } from './Components/detalle-vehiculo/detalle-
 import { DetalleOrdenComponent } from './Components/detalle-orden/detalle-orden.component';
 
 
+// Pipes
+import { DatePipe } from '@angular/common';
+
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
       { path: 'profile-cliente', component:ProfileClienteComponent, canActivate:[AuthGuard]},
@@ -66,7 +69,7 @@ import { DetalleOrdenComponent } from './Components/detalle-orden/detalle-orden.
     FlashMessagesModule.forRoot()
   ],
   
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, AuthGuard, DatePipe],
   bootstrap: [AppComponent], 
   
   

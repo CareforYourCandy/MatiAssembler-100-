@@ -131,6 +131,7 @@
                                       <th>Placa</th>
                                       <th>Serial del motor</th>
                                       <th>Activado</th>
+                                      <th>Fecha Registro</th>
                                       <th>Solicitar Cita</th>
                                       <th>Desactivar</th>
                                   </tr>
@@ -145,6 +146,7 @@
                                       <td>{{vehiculo.placa}}</td>
                                       <td>{{vehiculo.serialMotor}}</td>
                                       <td>{{vehiculo.activado}}</td>
+                                      <td>{{vehiculo.fechaRegistro}}</td>
                                       <td>
                                           <button (click)="solicitarCita(vehiculo.idVehiculo)" type="button" class="btn bg-indigo waves-effect">
                                               <i class="material-icons">date_range</i>
@@ -160,41 +162,6 @@
                                 
                                   <tr>
                                       <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>
-                                          <button type="button" class="btn bg-indigo waves-effect">
-                                              <i class="material-icons">date_range</i>
-                                          </button>
-                                      </td>
-                                      <td>
-                                          <button type="button" class="btn bg-indigo waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>
-                                          <button type="button" class="btn bg-indigo waves-effect">
-                                              <i class="material-icons">date_range</i>
-                                          </button>
-                                      </td>
-                                      <td>
-                                          <button type="button" class="btn bg-indigo waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
-                                  </tr>
-                                  <tr>
                                       <td>----</td>
                                       <td>----</td>
                                       <td>----</td>
@@ -309,12 +276,11 @@
                       <h3>Arrastre las fotos o de click para seleccionarlas.</h3>
                   </div>
                   <div class="fallback">
-                      <input name="file" type="file" multiple />
+                      <input [(ngModel)]="file" name="file" type="file" multiple />
                   </div>
               </form>
           </div>
-      
-  
+
 </div>
 
 </div>

@@ -6,7 +6,7 @@
     </div>
     <div class="card">
         <div class="body">
-            <form>
+            <form  action="/" (submit)="modificarUsuario()" id="frmFileUpload"  method="post">
                 <div class="msg">Modifique el usuario</div>
                 <div class="input-group">
                     <span class="input-group-addon">
@@ -78,7 +78,7 @@
                     <div class="form-line">
                         <input type="text" class="form-control" [(ngModel)]="direccion" name="direccion" placeholder="direccion" required autofocus>
                     </div>
-                    <button class="btn btn-block btn-lg bg-pink waves-effect" (click) ="modificarUsuario()">MODIFICAR</button>
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit" data-dismiss="modal">MODIFICAR</button>
                 </div>
             </form>
         </div>

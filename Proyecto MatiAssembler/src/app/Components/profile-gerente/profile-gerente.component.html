@@ -214,7 +214,6 @@
                                 <th>SERIAL</th>
                                 <th>Dueño</th>
                                 <th>FECHA REGISTRO</th>
-                                <th>FECHA ADMISIÓN</th>
                                 <th>Ver</th>
                             </tr>
                         </thead>
@@ -227,8 +226,7 @@
                               <td>{{vehiculo.placa}}</td>
                               <td>{{vehiculo.serialMotor}}</td>
                               <td>{{vehiculo.propietario}}</td>
-                              <td>-----</td> 
-                              <td>-----</td> 
+                              <td>{{vehiculo.fechaRegistro}}</td> 
                               <td> <button type="button" (click)="verDetalle(vehiculo.idVehiculo)" class="btn btn-default waves-effect">
                                     <i class="material-icons">pageview</i>
                                 </button></td>          
@@ -268,17 +266,17 @@
                                     <th>AÑO</th>
                                     <th>PLACA</th>
                                     <th>SERIAL</th>
-                                    <th>FECHA REGISTRO</th>
+                                    <th>FECHA SOLICITUD</th>
                                     <th>ASIGNAR FECHA</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>hola</td>
-                                <td>como</td>
-                                <td>estas</td>
-                                <td>bien</td>
-                                <td>y tu?</td>
+                            <tr *ngFor="let carro of carrosCitas">
+                                <td>{{carro.modelo}}</td>
+                                <td>{{carro.ano}}</td>
+                                <td>{{carro.placa}}</td>
+                                <td>{{carro.serialMotor}}</td>
+                                <td></td>
                                 <td><button type="button" class="btn bg-indigo waves-effect">
                                         <i class="material-icons">date_range</i>
                                     </button></td>

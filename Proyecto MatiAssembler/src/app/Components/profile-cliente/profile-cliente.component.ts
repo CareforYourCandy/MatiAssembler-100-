@@ -6,6 +6,8 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Vehiculo } from '../vehiculo/vehiculo'; 
+import { DatePipe } from '@angular/common';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-profile-cliente',
@@ -13,7 +15,7 @@ import { Vehiculo } from '../vehiculo/vehiculo';
   styleUrls: ['./profile-cliente.component.css']
 })
 export class ProfileClienteComponent implements OnInit {
-
+  form: FormGroup;
   //Datos usuario 
   user; 
 
@@ -22,9 +24,11 @@ export class ProfileClienteComponent implements OnInit {
   modelo: String;
   ano: Int16Array;  
   placa: String; 
+  fechatemp: any;
+  fechaRegistro: any;
   activado: Boolean;
   marcaNuevo: Int16Array;
-  vehiculos; 
+  vehiculos= []; 
   vehiculos2: Vehiculo[];  
   fecha: String; 
   vehiculoCita: Int16Array;
@@ -32,22 +36,29 @@ export class ProfileClienteComponent implements OnInit {
 
   //Marcas 
   marcas = Array; 
+  file;
 
     
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,
               private router: Router, 
-              private location: Location) { 
+              private location: Location,
+              private datePipe: DatePipe ) { 
     
   }
 
   ngOnInit() {
       this.user = JSON.parse(localStorage.getItem("user")); 
       console.log(this.user); 
-      this.recuperarVehiculos(); 
       this.getMarcas();
+      this.recuperarVehiculos(); 
+      
         
+  }
+  ngAfterInit() {
+    this.getMarcas();
+    this.recuperarVehiculos();
   }
 
   setMarcaNuevo(idMarca) {
@@ -58,17 +69,18 @@ export class ProfileClienteComponent implements OnInit {
     let data = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
       console.log(datos); 
       this.vehiculos = datos.vehiculos; 
-      let vehiculos3 = []; 
+      console.log(this.vehiculos);
+      /*let vehiculos3 = []; 
       vehiculos3.push(datos.vehiculos.map(function(datosVehiculo) {
         console.log(datosVehiculo); 
         let vehiculo = new Vehiculo(datosVehiculo.serialMotor, datosVehiculo.modelo, datosVehiculo.ano, datosVehiculo.placa,
-          datosVehiculo.activado, datosVehiculo.marca, datosVehiculo.idVehiculo); 
+          datosVehiculo.activado, datosVehiculo.marca, datosVehiculo.idVehiculo, datosVehiculo.fechaRegistro); 
           console.log(vehiculo); 
           return vehiculo; 
           
        
       })); 
-      this.vehiculos2 = vehiculos3;
+      this.vehiculos2 = vehiculos3;*/
        
     }); 
      
@@ -90,8 +102,11 @@ export class ProfileClienteComponent implements OnInit {
   }
 
   solicitarCita(idVehiculo) {
+    this.fechatemp= new Date();
+    this.fechaRegistro= this.datePipe.transform(this.fechatemp);
     const cita = {
-      vehiculoCita: idVehiculo
+      vehiculoCita: idVehiculo,
+      fechaSolicitud:this.fechaRegistro 
     }
 
     this.authService.solicitarCita(cita).subscribe(data => {
@@ -111,7 +126,9 @@ export class ProfileClienteComponent implements OnInit {
   }
 
   vehiculoSubmit() { 
-
+    this.fechatemp= new Date();
+    this.fechaRegistro= this.datePipe.transform(this.fechatemp);
+    console.log(this.fechaRegistro); 
     const vehiculo = {
       placa: this.placa,       
       marca: this.marcaNuevo,
@@ -120,13 +137,13 @@ export class ProfileClienteComponent implements OnInit {
       serialMotor: this.serialMotor, 
       activado: true, 
       propietario: this.user.idUsuario, 
-
+      fechaRegistro: this.fechaRegistro
     }
     
     console.log(vehiculo); //Para registrar un vehiculo
 
     //Required fields
-    if(!this.validateService.validateRegisterVehiculo(vehiculo)){
+    if(this.validateService.validateRegisterVehiculo(vehiculo)){
      console.log("Fallo validacion del vehiculo");
       return false;
     }
@@ -137,7 +154,6 @@ export class ProfileClienteComponent implements OnInit {
       if(data.success){
          console.log("sirvio");
          this.vehiculos.push(vehiculo); 
-
       } else {
         console.log("fallo");
         this.router.navigate(['profile-cliente']); 
@@ -155,4 +171,18 @@ getMarcas() {
  setMarcaVista(idMarca) {
   return this.marcas[idMarca].marca
  }
+
+ /*imprimirFile(event){
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.file.setValue({
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.split(',')[1]          
+        })
+      };
+ }*/
 }

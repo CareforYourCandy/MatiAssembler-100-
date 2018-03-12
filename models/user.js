@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 const path = require('path');
-const connection = new Sequelize('mydb', 'root', 'dictadormarico69', {
+const connection = new Sequelize('mydb', 'root', 'pink88pink', {
   	host: 'localhost',
   	dialect : 'mysql',
 	define : {
@@ -60,22 +60,6 @@ module.exports = function(sequelize, DataTypes) {
 
 
 const User = module.exports = connection.import(path.join(process.cwd(), 'models', 'user'));
-
-
-module.exports.getUserByID =  function(id, callback){
-	try {
-		User.findById(id, callback).then(resultado => {
-			usuario = resultado.dataValues; 
-			console.log(usuario); 
-			return callback(null, usuario); 
-		}); 
-	} catch (err) {
-        console.log('Se produjo un error en getUserById(): ', err);
-    }
-
-  
-
-}
 
 module.exports.modificarUsuario = function (usuario){
 	

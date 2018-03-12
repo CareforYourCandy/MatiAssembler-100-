@@ -17,7 +17,10 @@ const Cita = connection.define('cita', {
 		},
 		vehiculoCita: {
 			type: Sequelize.INTEGER
-		}, 
+		},
+		fechaSolicitud: {
+			type: Sequelize.DATE
+		} 
 		
 	});	
 

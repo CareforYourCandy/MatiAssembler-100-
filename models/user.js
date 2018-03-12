@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 const path = require('path');
-const connection = new Sequelize('mydb', 'root', 'pink88pink', {
+const connection = new Sequelize('mydb', 'root', 'dictadormarico69', {
   	host: 'localhost',
   	dialect : 'mysql',
 	define : {
@@ -61,7 +61,24 @@ module.exports = function(sequelize, DataTypes) {
 
 const User = module.exports = connection.import(path.join(process.cwd(), 'models', 'user'));
 
+
+module.exports.getUserByID =  function(id, callback){
+	try {
+		User.findById(id, callback).then(resultado => {
+			usuario = resultado.dataValues; 
+			console.log(usuario); 
+			return callback(null, usuario); 
+		}); 
+	} catch (err) {
+        console.log('Se produjo un error en getUserById(): ', err);
+    }
+
+  
+
+}
+
 module.exports.modificarUsuario = function (usuario){
+	
 	query = {idUsuario: usuario.idUsuario,
 		nombre: usuario.nombre,
 		apellido: usuario.apellido,
@@ -72,31 +89,23 @@ module.exports.modificarUsuario = function (usuario){
 		telefono: usuario.telefono,
 		direccion: usuario.direccion
 	}
-	
+	texto = "Update Usuario SET "  +  
+	"nombre = " + usuario.nombre + 
+	", apellido = " + usuario.apellido +
+	", correo = " + usuario.correo +
+	", rol = " + usuario.rol +
+	", contraseña = " + usuario.contraseña +
+	", cedula = " + usuario.cedula +
+	", telefono = " + usuario.telefono +
+	", direccion = " + usuario.direccion +
+	", WHERE idUsuario = " + usuario.idUsuario; 
+	console.log(texto);
+	sequelize.query(texto).spread(results, metadata => {
+		return results; 
+	})
+
 
  //User.update(query, {where: {idUsuario: usuario.idUsuario}}); 
-}
-
-module.exports.getUserByID= async function(id, callback){
-	/*try {
-		User.findById(id, callback).then(resultado => {
-			usuario = resultado.dataValues; 
-		
-			return callback(null, usuario); 
-		}); 
-	} catch (err) {
-        console.log('Se produjo un error en getUserById(): ', err);
-    }*/
-
-    try {
-    	let resultado = User.findById(id);
-		let usuario = resultado.dataValues; 
-		callback(null, usuario); 
-
-	} catch (err) {
-        console.log('Se produjo un error en getUserById(): ', err);
-    }
-
 }
 
 module.exports.getUsers = function(id, callback){

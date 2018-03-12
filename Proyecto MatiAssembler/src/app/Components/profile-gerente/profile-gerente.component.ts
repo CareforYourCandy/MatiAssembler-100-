@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { timeout } from 'q';
 import { Http, Headers } from '@angular/http';
 import { ValidateService } from '../../services/validate.service';
@@ -19,8 +19,8 @@ export class ProfileGerenteComponent implements OnInit {
   usuarios;
   modificar = false; 
   usuario;
-  citas;
-  carrosCitas;
+  citas = [];
+  carrosCitas = [];
 
   vehiculos;
   //Marcas 
@@ -40,10 +40,14 @@ export class ProfileGerenteComponent implements OnInit {
     this.getMarcas();
     this.obtenerClientes();
     this.obtenerMecanicos();
-    //this.obtenerColaCitas();
-    this.obtenerVehiculos(); //Para obtener todos los vehiculos registrados en el taller
+    
+    this.obtenerColaCitas();
+    console.log("Ya se obtuvieron la cola de las citas")
+    this.obtenerVehiculos(); 
+   
+   //Para obtener todos los vehiculos registrados en el taller
   }
-
+  
   logout() {
     this.authService.logout(); 
     this.router.navigate(['login']); 
@@ -89,16 +93,30 @@ export class ProfileGerenteComponent implements OnInit {
     })
   }
 
-  obtenerColaCitas() {
-    let data = this.authService.obtenerCitas().subscribe( datos => {
-      this.citas = datos.rcitas
-      this.carrosCitas = datos.vehiculosCitas
+  async obtenerColaCitas() {
+    let data = await this.authService.obtenerCitas().subscribe( datos => {
+     
+      console.log("AQUI ESTOY IMPRIMIENDO LOS DATOS"); 
+      console.log(datos);
+      this.citas = datos.rcitas;
       console.log(this.citas); 
-      console.log(this.carrosCitas); 
+      
 
     })
+    await this.cuadrarCarros(); 
+ 
   }
+cuadrarCarros() {
+  console.log("LAS CITAS SON ")
+  console.log(this.citas); 
+  this.citas.forEach(function(cita) {
+    let data2 = this.authService.getVehiculo(cita.vehiculoCita).subscribe( datos => {
+      console.log("IMPRIMIRE MAS DATOS"); 
+      this.carrosCitas.push(datos); 
+    })
+  })
 
+}
   async modificarUsuario(id) {
     this.modificar = true;
     let user; 
@@ -145,3 +163,4 @@ export class ProfileGerenteComponent implements OnInit {
           propietario: this.user.idUsuario, 
         }
       */
+      }

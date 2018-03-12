@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const Vehiculo = require('../models/vehiculo');
 const Cita = require('../models/cita');
+const Orden = require('../models/orden');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
@@ -29,19 +30,39 @@ router.post('/register', (req, res, next) => {
 		}
 	});
 });
- router.post('/getUser', (req, res, next)  => {
-	id = req.body.id; 
-	
-	User.getUserByID(id, (err, user) => {
-	
-		res.json( {
-			success: true,
-			user
-		})
-	});
 
- }
-)
+
+//Obtener un solo usuario por su id
+router.post('/getUser', (req, res, next) => {
+	id = req.body.ID;
+	console.log('el id del usuario es:');
+	console.log(id);
+
+	User.getUserByID(id, (err, user) => {
+		console.log('ESTE ES EL Usuario RESP:');
+		console.log(user);
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!user){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'Vehiculo not found'});
+		}
+		res.json({
+			success: true,
+			usuario: {
+				idUsuario: user.idUsuario,
+				nombre: user.nombre,
+				apellido: user.apellido,
+				correo: user.correo,
+				rol: user.rol,
+				cedula: user.cedula,
+				direccion: user.direccion,
+				telefono: user.telefono
+			}
+		});
+	});
+});
 
 router.post('/getUsers', (req, res, next) => {
 	console.log("Estoy en obtener users"); 
@@ -240,6 +261,53 @@ router.post('/getVehiculo', (req, res, next) => {
 		});
 	});
 });
+
+//Obtener una orden por su id
+router.post('/getOrden', (req, res, next) => {
+	id = req.body.ID;
+	console.log('el id de la orden es:');
+	console.log(id);
+	Orden.getOrdenByID(id, (err, orden) => {
+		console.log('ESTE ES EL VEHICULO RESP:');
+		console.log(orden);
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!orden){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'Orden not found'});
+		}
+		res.json({
+			success: true,
+			orden: {
+				idOrden: orden.idOrden,
+				idVehiculo: orden.idVehiculo,
+				idMecanico: orden.idMecanico,
+				diagnostico: orden.diagnostico,
+				motivo: orden.motivo,
+				activada: orden.activada
+			}
+		});
+	});
+});
+
+//Obtener todas las Ordenes por cliente
+router.post('/getOrdenes', (req, res, next) => {
+	const id=req.body.idVehiculo;
+	console.log();
+	Orden.getOrdenesPorVehiculo(id, (err, ordenes) => {
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!ordenes){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'User not found'});
+		}
+		res.json({
+			success: true,
+			ordenes});
+	});
+})
 
 //Authenticate
 router.post('/authenticate', (req, res, next) => {

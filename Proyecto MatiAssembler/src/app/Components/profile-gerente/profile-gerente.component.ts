@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, ViewChild,} from '@angular/core';
 import { timeout } from 'q';
 import { Http, Headers } from '@angular/http';
 import { ValidateService } from '../../services/validate.service';
@@ -6,6 +6,8 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Vehiculo } from '../vehiculo/vehiculo'; 
+import { EmitirOrdenComponent } from '../emitir-orden/emitir-orden.component'; 
+
 
 @Component({
   selector: 'app-profile-gerente',
@@ -13,6 +15,8 @@ import { Vehiculo } from '../vehiculo/vehiculo';
   styleUrls: ['./profile-gerente.component.css']
 })
 export class ProfileGerenteComponent implements OnInit {
+
+  @ViewChild(EmitirOrdenComponent)  ordenHijo;
   user;
   clientes;
   mecanicos;
@@ -26,6 +30,9 @@ export class ProfileGerenteComponent implements OnInit {
   //Marcas 
   marcas = Array;
   vehiculoTemp;
+  ordenInsertar;
+  nuevaOrden = false;
+  idVehiculotemp;
 
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -46,6 +53,11 @@ export class ProfileGerenteComponent implements OnInit {
     this.obtenerVehiculos(); 
    
    //Para obtener todos los vehiculos registrados en el taller
+  }
+
+  ngAfterViewInit() {
+    this.ordenInsertar = this.ordenHijo.ordenGenerada;
+    console.log(this.ordenInsertar); 
   }
   
   logout() {
@@ -164,5 +176,26 @@ modificarUsuario(id) {
       this.router.navigate(['detalle-vehiculo']);
 
     });
+  }
+
+  /*agregarOrden() {
+    this.nuevaOrden = true;  
+    //this.idVehiculotemp=idVehiculo; 
+  }*/
+
+  agregarOrden(idVehiculo) {
+    this.nuevaOrden = true;  
+    this.idVehiculotemp=idVehiculo; 
+    /*let user; 
+     
+    await this.authService.getUserById(id).subscribe(datos => {
+     
+      console.log(datos); 
+      user = datos.usuario; 
+      console.log(user); 
+      this.usuario = user; 
+    })    */ 
+     console.log(this.idVehiculotemp); 
+ 
   }
 }

@@ -451,7 +451,25 @@ router.post('/registerRepuesto', (req, res, next) => {
 			res.json({success:true, msg:'Usuario registrado'});
 		}
 	});
-}); 
+});
+
+router.post('/registerOrden', (req, res, next) => {
+	let orden = new Orden({
+		idVehiculo: req.body.idVehiculo,
+	    idMecanico: req.body.idMecanico,
+	    diagnostico: req.body.diagnostico,
+	    fecha: req.body.fecha,
+	    motivo: req.body.motivo,
+	    activada: req.body.activada 
+	});
+	Orden.addOrden(orden, (err, orden) => {
+		if(err){
+			res.json({success:false, msg:'No funciono el registro de usuario'});
+		} else {
+			res.json({success:true, msg:'Usuario registrado'});
+		}
+	});
+});  
 
 module.exports = router;
 

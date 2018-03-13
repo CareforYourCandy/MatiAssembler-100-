@@ -45,6 +45,14 @@ export class AuthService {
 		.map(res => res.json());
 	}
 
+	registerOrden(orden) {
+		console.log("Hola aqui en registrar orden"); 
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/registerOrden', orden, {headers: headers})
+		.map(res => res.json());
+	}
+
 	getUserById(ID) {
 		let idUsuario = {ID};
 		let headers = new Headers();

@@ -252,9 +252,7 @@
                                 <td>{{carro.placa}}</td>
                                 <td>{{carro.serialMotor}}</td>
                                 <td></td>
-                                <td><button type="button" class="btn bg-indigo waves-effect">
-                                        <i class="material-icons">date_range</i>
-                                    </button></td>
+                                <td><button type="button" data-toggle="modal" data-target="#smallModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarOrden(carro.idVehiculo)" >ASIGNAR FECHA</button></td>
                             </tr>
                            
                         </tbody>
@@ -378,8 +376,10 @@
                     </div>
                 </div>
             </div>
+
+
 <!--MODALS PARA REPORTES -->
-<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
 <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -394,6 +394,26 @@
     </div>
 </div>
 </div>
+
+<!-- MODAL REPUESTOS --> 
+<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="nuevaOrden">
+                    <app-emitir-orden [idVehiculo]=idVehiculotemp > </app-emitir-orden> 
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 </div>

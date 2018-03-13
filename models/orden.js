@@ -21,9 +21,9 @@ const Orden = connection.define('orden', {
     diagnostico: {
         type: Sequelize.STRING
     },  
-    imagenes: {
+    /*imagenes: {
         type: Sequelize.STRING  
-    },
+    },*/
     fecha: {
         type: Sequelize.DATE
     },
@@ -36,6 +36,13 @@ const Orden = connection.define('orden', {
 });
 
 module.exports = Orden;
+
+module.exports.addOrden = function(newOrden, callback) { //Añadir una nueva orden de reparacion
+    console.log("estoy en addRepuesto");
+    newOrden.save(callback);
+ 
+
+}
 
 module.exports.getOrdenbyMecanico = function(id, callback){
 	const query = {where: {idMecanico: id }}

@@ -109,6 +109,19 @@ module.exports.getUserByID= function(ID, callback){
 		callback(null, datos);
 	});	
 }
+module.exports.getUsers = function(id, callback){
+	
+	  User.findAll().then(datos => {
+		  let users = datos.map(function(datoCrudo) {
+			  dato = datoCrudo.dataValues;   
+			  return dato; 
+		  })          
+		  return users; 
+	  })
+	  .then(datos => {             
+		  return callback(null, datos);
+	  });
+  }
 
 module.exports.getUsers = function(id, callback){
       

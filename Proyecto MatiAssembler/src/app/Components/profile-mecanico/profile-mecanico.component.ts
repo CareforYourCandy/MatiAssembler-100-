@@ -11,5 +11,6 @@ export class ProfileMecanicoComponent implements OnInit {
 
   ngOnInit() {
   }
+  
 
 }

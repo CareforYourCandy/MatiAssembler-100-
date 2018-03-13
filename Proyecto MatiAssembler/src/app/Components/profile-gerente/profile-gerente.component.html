@@ -252,7 +252,7 @@
                                 <td>{{carro.placa}}</td>
                                 <td>{{carro.serialMotor}}</td>
                                 <td></td>
-                                <td><button type="button" data-toggle="modal" data-target="#smallModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarOrden(carro.idVehiculo)" >ASIGNAR FECHA</button></td>
+                                <td><button type="button" data-toggle="modal" data-target="#smallModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarOrden(carro.idVehiculo, carro.idCita)" >ASIGNAR FECHA</button></td>
                             </tr>
                            
                         </tbody>
@@ -287,71 +287,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>-----</td>
-                                <td>-----</td>
-                                <td>-----</td>
-                                <td>-----</td>
-                                <td>-----</td>
-                                <td>Finalizado</td>
+                            <tr *ngFor = "let orden of ordenes" >
+                                <td>{{orden.idOrden}}</td>
+                                <td>{{orden.vehiculo.modelo}}</td>
+                                <td>{{orden.vehiculo.ano}}</td>
+                                <td>{{orden.vehiculo.placa}}</td>
+                                <td>{{orden.vehiculo.serialMotor}}</td>
+                                <td>{{orden.activada}}</td>
                                 <td>
                                         <button type="button" class="btn bg-indigo waves-effect">
                                             <i class="material-icons">close</i>
                                         </button>
                                     </td>
                             </tr>
-                            <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>En curso</td>
-                                    <td>
-                                            <button type="button" class="btn bg-indigo waves-effect">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                            </tr>
-                            <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>Finalizado</td>
-                                    <td>
-                                            <button type="button" class="btn bg-indigo waves-effect">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                            </tr>
-                            <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>Finalizado</td>
-                                    <td>
-                                            <button type="button" class="btn bg-indigo waves-effect">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                            </tr>
-                            <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>En curso</td>
-                                    <td>
-                                            <button type="button" class="btn bg-indigo waves-effect">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
-                            </tr>
+                           
+                            
                         </tbody>
                     </table>
                 </div>
@@ -404,7 +354,7 @@
             </div>
             <div class="modal-body">
                 <div *ngIf="nuevaOrden">
-                    <app-emitir-orden [idVehiculo]=idVehiculotemp > </app-emitir-orden> 
+                    <app-emitir-orden [idVehiculo]=idVehiculotemp [idCita]=idCitatemp> </app-emitir-orden> 
                   </div>
             </div>
             <div class="modal-footer">

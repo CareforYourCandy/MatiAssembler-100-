@@ -86,6 +86,14 @@ export class AuthService {
 		.map(res => res.json());
 	}
 
+
+	getOrdenes() {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getOrdenes', Object(), {headers: headers})
+		.map(res => res.json());
+
+	}
 	getVehiculo(ID) {
 		let idVehiculo = {ID}
 		let headers = new Headers();
@@ -140,6 +148,14 @@ export class AuthService {
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/registerCita', cita, {headers: headers})
 			.map(res => res.json());		
+	}
+
+	eliminarCita(idCita) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		
+		return this.http.post('http://localhost:3000/users/eliminarCita', {idCita}, {headers: headers})
+			.map(res => res.json());	
 	}
 
 	authenticateUser(user){ //Iniciar sesión

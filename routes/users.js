@@ -77,6 +77,33 @@ router.post('/getUser', (req, res, next) => {
 	});
 });
 
+router.post('/eliminarCita', (req, res, next) => {
+
+	console.log("Estoy en eliminar cita"); 
+	console.log(req.body); 
+	let cita = Cita.eliminarCitas(req.body.idCita, (err, cita) => {
+		res.json( {
+			success: true
+		})
+	})
+	
+})
+router.post('/getOrdenes', (req, res, next) => {
+	console.log("Estoy en obtener ordenes"); 
+	let ordenes = Orden.getOrdenes(req, (err, ordenes) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!ordenes) {
+			console.log("No hay ordenes"); 
+		}
+		console.log("Hare un response ahora"); 
+		res.json( {
+			success:true, 
+			ordenes
+		})
+	});
+})
 router.post('/getUsers', (req, res, next) => {
 	console.log("Estoy en obtener users"); 
 	let usuarios = User.getUsers(req, (err, users) => {
@@ -414,7 +441,30 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res
     //console.log(req.user);
     res.json({ user: req.user });
 });
+router.post('/registerOrden', (req, res, next) => {
+	console.log(req.body);
+	
+	let newOrden = {
+	
+		idVehiculo: req.body.idVehiculo,
+		idMecanico: req.body.idMecanico,
+		diagnostico: req.body.diagnostico,
+		motivo: req.body.motivo,
+		fecha: req.body.fecha,
+		activada: true, 
 
+	}
+	console.log(newOrden); 
+
+    Orden.addOrden(newOrden, (err, orden) => {
+		if(err){
+			res.json({success:false, msg:'No funciono el registro vehiculo'});
+		} else {
+			res.json({success:true, msg:'Vehiculo registrado'});
+		}
+	});
+
+});
 router.post('/registerVehiculo', (req, res, next) => {
     
     let newVehiculo = new Vehiculo({

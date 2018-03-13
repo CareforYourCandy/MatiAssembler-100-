@@ -103,16 +103,16 @@
                                 <div>Diagnóstico: {{orden.diagnostico}}</div>
                                 <div>Mecánico asignado: {{orden.idMecanico}}</div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">Repuestos:      
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">Repuestos: ---     
                                 <div>{{hola}}</div>
                             </div>
-                            <div *ngFor= "let accs of accesorios" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div>Objetos encontrados:</div>
-                                <div>Caucho de repuesto: {{accs.cauchoRepuesto}}</div>
-                                <div>Llaves: {{accs.llaves}}</div>
-                                <div>Gato: {{accs.gato}}</div>
-                                <div>Herramientas: {{accs.herramientas}}</div>
-                                <div>Equipo de Sonido: {{accs.equipodeSonido}}</div>
+                                <div>Caucho de repuesto: {{setBoolean(accesorios.cauchoRepuesto)}}</div>
+                                <div>Llaves: {{setBoolean(accesorios.llaves)}}</div>
+                                <div>Gato: {{setBoolean(accesorios.gato)}}</div>
+                                <div>Herramientas: {{setBoolean(accesorios.herramientas)}}</div>
+                                <div>Equipo de Sonido: {{setBoolean(accesorios.equipodeSonido)}}</div>
                             </div>
                         </div>
 

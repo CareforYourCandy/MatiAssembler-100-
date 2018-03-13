@@ -64,4 +64,12 @@ export class DetalleOrdenComponent implements OnInit {
 		})
 	}
 
+	setBoolean(variable){
+		if(variable){
+			return "si";
+		} else {
+			return "no";
+		}
+	}
+
 }

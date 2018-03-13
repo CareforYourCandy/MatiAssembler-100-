@@ -14,7 +14,7 @@ export class DetalleOrdenComponent implements OnInit {
 	gerente;
 	orden;
 	marcas = Array;
-	accesorios;
+	accesorios= [];
 
 	constructor(private authService: AuthService,
 	          private router: Router,
@@ -57,6 +57,7 @@ export class DetalleOrdenComponent implements OnInit {
 
 	obtenerAccesorios() {
 		console.log(this.orden.idOrden);
+		console.log('ESTOY EN OBT ACCS');
 		this.authService.getAccesorios(this.orden.idOrden).subscribe(data => {
 		console.log(data.accesorios); 
 		this.accesorios = data.accesorios; 

@@ -361,7 +361,7 @@ router.post('/getAccesorios', (req, res, next) => {
 			accesorios: {
 				idAccesoriosOrden: accs.idAccesoriosOrden,
 				idOrden: accs.idOrden,
-				cauchoRepuesto: acaccs.cauchoRepuesto,
+				cauchoRepuesto: accs.cauchoRepuesto,
 				llaves: accs.llaves,
 				gato: accs.gato,
 				herramientas: accs.herramientas,

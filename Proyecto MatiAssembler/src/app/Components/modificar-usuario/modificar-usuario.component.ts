@@ -8,7 +8,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ModificarUsuarioComponent implements OnInit, OnChanges {
 
-  @Input() user;   
+  @Input() user;  
+  id; 
   name: String;
 	lastname: String;
 	email: String;
@@ -30,6 +31,7 @@ export class ModificarUsuarioComponent implements OnInit, OnChanges {
   }
   obtenerDatos(user) {
     console.log(user); 
+    this.id = user.idUsuario;
     this.name = user.nombre;
     this.lastname = user.apellido;
     this.email = user.correo;
@@ -46,14 +48,16 @@ export class ModificarUsuarioComponent implements OnInit, OnChanges {
   modificarUsuario() {
     console.log("hola"); 
     let usuario = {
+      idUsuario: this.id,
       nombre: this.name,
       apellido: this.lastname,
       correo: this.email,
       rol: this.rol,
-      password: this.password,
+      contraseña: this.password,
       cedula: this.cedula,
-      direccion: this.direccion,
-      telefono: this.telefono
+      telefono: this.telefono,
+      direccion: this.direccion
+      
     }
     console.log(usuario); 
     this.authService.modificarUsuario(usuario); 

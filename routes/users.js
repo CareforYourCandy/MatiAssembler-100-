@@ -9,6 +9,18 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const Repuesto = require('../models/repuesto'); 
 const Marca = require('../models/marca'); 
+
+
+router.post('/modificarUsuario', (req, res, next) => {
+	console.log("Estoy en modificar usuario"); 
+	console.log(req.body);
+	res.json({success:true, msg:'Usuario registrado'});
+	//User.modificarUsuario(req.body);
+	
+}); 
+
+
+
 //Register
 router.post('/register', (req, res, next) => {
 
@@ -56,6 +68,7 @@ router.post('/getUser', (req, res, next) => {
 				apellido: user.apellido,
 				correo: user.correo,
 				rol: user.rol,
+				contraseña: user.contraseña,
 				cedula: user.cedula,
 				direccion: user.direccion,
 				telefono: user.telefono
@@ -81,6 +94,7 @@ router.post('/getUsers', (req, res, next) => {
 	});
 	
 }); 
+
 router.post('/getMecanicos', (req, res, next ) => {
 	let mecanicos = User.getMecanicos(req, (err, mecanicos) => {
 		res.json( {
@@ -353,6 +367,7 @@ router.post('/authenticate', (req, res, next) => {
 						apellido: user.apellido,
 						correo: user.correo,
 						rol: user.rol,
+						contraseña: user.contraseña,
 						cedula: user.cedula,
 						direccion: user.direccion,
 						telefono: user.telefono
@@ -370,7 +385,30 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res
     //console.log(req.user);
     res.json({ user: req.user });
 });
+router.post('/registerOrden', (req, res, next) => {
+	console.log(req.body);
+	
+	let newOrden = {
+	
+		idVehiculo: req.body.idVehiculo,
+		idMecanico: req.body.idMecanico,
+		diagnostico: req.body.diagnostico,
+		motivo: req.body.motivo,
+		fecha: req.body.fecha,
+		activada: true, 
 
+	}
+	console.log(newOrden); 
+
+    Orden.addOrden(newOrden, (err, orden) => {
+		if(err){
+			res.json({success:false, msg:'No funciono el registro vehiculo'});
+		} else {
+			res.json({success:true, msg:'Vehiculo registrado'});
+		}
+	});
+
+});
 router.post('/registerVehiculo', (req, res, next) => {
     
     let newVehiculo = new Vehiculo({
@@ -436,7 +474,25 @@ router.post('/registerRepuesto', (req, res, next) => {
 			res.json({success:true, msg:'Usuario registrado'});
 		}
 	});
-}); 
+});
+
+router.post('/registerOrden', (req, res, next) => {
+	let orden = new Orden({
+		idVehiculo: req.body.idVehiculo,
+	    idMecanico: req.body.idMecanico,
+	    diagnostico: req.body.diagnostico,
+	    fecha: req.body.fecha,
+	    motivo: req.body.motivo,
+	    activada: req.body.activada 
+	});
+	Orden.addOrden(orden, (err, orden) => {
+		if(err){
+			res.json({success:false, msg:'No funciono el registro de usuario'});
+		} else {
+			res.json({success:true, msg:'Usuario registrado'});
+		}
+	});
+});  
 
 module.exports = router;
 

@@ -46,7 +46,9 @@ import { EmitirOrdenComponent } from './Components/emitir-orden/emitir-orden.com
       { path: 'profile-gerente', component: ProfileGerenteComponent, canActivate:[AuthGuard]}, 
       { path: 'detalle-vehiculo', component: DetalleVehiculoComponent, canActivate:[AuthGuard]},
       { path: 'detalle-orden', component: DetalleOrdenComponent, canActivate:[AuthGuard]},
-      { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate:[AuthGuard]}
+      { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate:[AuthGuard]},
+      { path: 'emitir-orden', component: EmitirOrdenComponent, canActivate:[AuthGuard]}
+
     ]
 @NgModule({
   declarations: [

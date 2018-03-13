@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 const path = require('path');
-const connection = new Sequelize('mydb', 'root', 'pink88pink', {
+const connection = new Sequelize('mydb', 'root', 'dictadormarico69', {
   	host: 'localhost',
   	dialect : 'mysql',
 	define : {
@@ -82,7 +82,8 @@ module.exports.modificarUsuario = function (usuario){
 	", cedula = " + usuario.cedula +
 	", telefono = " + usuario.telefono +
 	", direccion = " + usuario.direccion +
-	", WHERE idUsuario = " + usuario.idUsuario; 
+	" WHERE idUsuario = " + usuario.idUsuario; 
+	console.log("ESTOY UPDATEANDO USUARIO");
 	console.log(texto);
 	sequelize.query(texto).spread(results, metadata => {
 		return results; 

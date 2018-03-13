@@ -1,3 +1,52 @@
-<p>
-  emitir-orden works!
-</p>
+
+    <div class="card">
+        <div class="header">
+            <h2>EMITIR ORDEN DE REPARACIÓN</h2>
+        </div>
+        <div class="body">
+            <form  action="/" (submit)="emitirOrden()" id="frmFileUpload"  method="post">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">date_range</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="text" class="form-control" [(ngModel)]="fechaOrden" name="fecha" placeholder="Fecha" required autofocus>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">check_circle</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="text" class="form-control" [(ngModel)]="diagnostico" name="diagnostico" placeholder="Diagnostico" >
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">accessibility</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="text" class="form-control" [(ngModel)]="mecanico" name="mecanico" placeholder="Mecanico Asignado" >
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">build</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="text" class="form-control" [(ngModel)]="repuesto" name="repuesto" placeholder="Repuestos" >
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">check_circle</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="text" class="form-control" [(ngModel)]="motivo" name="motivo" placeholder="Motivo" >
+                    </div>
+                </div>                                
+
+                <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "registrarOrden()" type="submit" data-dismiss="modal">AÑADIR REPUESTO</button>
+  
+            </form>
+        </div>

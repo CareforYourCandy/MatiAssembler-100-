@@ -20,7 +20,7 @@ const Repuesto = connection.define('repuesto', {
 });
 module.exports = Repuesto;
 
-module.exports.addRepuesto = function(newRepuesto, callback) { //Añadir una nueva cita a la cola al solicitar una
+module.exports.addRepuesto = function(newRepuesto, callback) { //Añadir un nuevo repuesto
     console.log("estoy en addRepuesto");
     newRepuesto.save(callback);
  

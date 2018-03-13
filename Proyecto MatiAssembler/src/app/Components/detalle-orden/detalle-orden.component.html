@@ -1,22 +1,85 @@
-<!-- Page Loader -->
-  <!-- #END# Page Loader -->
-  <!-- Overlay For Sidebars -->
-  <div class="overlay"></div>
-  <!-- #END# Overlay For Sidebars -->
-  <!-- Search Bar -->
-  <div class="search-bar">
-      <div class="search-icon">
-          <i class="material-icons">search</i>
-      </div>
-      <input type="text" placeholder="START TYPING...">
-      <div class="close-search">
-          <i class="material-icons">close</i>
-      </div>
-  </div>
-  <!-- #END# Search Bar -->
-  <!-- Top Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="widgets/../../index.html">MATI ASSEMBLER - GERENTE</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+                    <li>
+                        <a href="javascript:void(0);" class="js-search" data-close="true">
+                            <i class="material-icons">search</i>
+                        </a>
+                    </li>
+                    <!-- #END# Call Search -->
 
-  <app-navbar> </app-navbar> 
+                    <li class="pull-right">
+                        <a href="javascript:void(0);" class="js-right-sidebar" data-close="true">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{gerente.nombre}}</div>
+                    <div class="email">{{gerente.correo}}</div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header active">MENU PRINCIPAL</li>
+                    <li>
+                        <a (click)="home()">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="goBack()" >
+                            <i class="material-icons">keyboard_return</i>
+                            <span>Volver</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="logout()" >
+                            <i class="material-icons">not_interested</i>
+                            <span>Cerrar sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2018
+                    <a href="javascript:void(0);">MatiAssembler</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.0
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+
+    </section>
 
       <section class="content">
 
@@ -31,22 +94,26 @@
                     <div class="body">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div>Orden #: ---------</div>
-                                <div>Modelo: ---------</div>
-                                <div>Año: -----------</div>
-                                <div>Placa: ---------</div>
-                                <div>Serial motor: ------</div>
-                                <div>Fecha admisión: -----</div>
+                                <div>Orden #: --</div>
+                                <div>Modelo: {{vehiculo.modelo}}</div>
+                                <div>Año:{{vehiculo.ano}}</div>
+                                <div>Placa: {{vehiculo.placa}}</div>
+                                <div>Serial motor: {{vehiculo.serialMotor}}</div>
+                                <div>Fecha admisión: {{orden.fecha}}</div>
+                                <div>Diagnóstico: {{orden.diagnostico}}</div>
+                                <div>Mecánico asignado: {{orden.idMecanico}}</div>
                             </div>
-
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">Repuestos: ---     
+                                <div>{{hola}}</div>
+                            </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div>Diagnóstico:</div>
-                                <div>Repuestos:</div>
-                                <div>Mecánico asignado:</div>
                                 <div>Objetos encontrados:</div>
-                                <div>Desperfectos carrocería:</div>
+                                <div>Caucho de repuesto: {{setBoolean(accesorios.cauchoRepuesto)}}</div>
+                                <div>Llaves: {{setBoolean(accesorios.llaves)}}</div>
+                                <div>Gato: {{setBoolean(accesorios.gato)}}</div>
+                                <div>Herramientas: {{setBoolean(accesorios.herramientas)}}</div>
+                                <div>Equipo de Sonido: {{setBoolean(accesorios.equipodeSonido)}}</div>
                             </div>
-
                         </div>
 
                     </div>

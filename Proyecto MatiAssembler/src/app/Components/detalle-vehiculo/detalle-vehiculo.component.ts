@@ -66,7 +66,7 @@ export class DetalleVehiculoComponent implements OnInit {
 		console.log(data); 
 		this.ordenTemp = data.orden; 
 		this.authService.almacenarOrdenLS(this.ordenTemp);
-		//this.router.navigate(['detalle-orden']);
+		this.router.navigate(['detalle-orden']);
 		});
     }
 

@@ -37,6 +37,15 @@ const Orden = connection.define('orden', {
 
 module.exports = Orden;
 
+module.exports.desactivarOrden = function(ordenID, callback) {
+	Orden.update(
+		{activada: 0},
+		{where: {idOrden: ordenID} }
+	).then(datos => {
+		//console.log(datos);
+		return callback(null, datos);
+	});	
+}
 module.exports.addOrden = function(orden, callback) {
     console.log("estoy en addOrden");
     console.log(orden);

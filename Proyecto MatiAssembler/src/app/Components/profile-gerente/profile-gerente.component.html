@@ -300,7 +300,7 @@
                                 <td>{{orden.vehiculo.serialMotor}}</td>
                                 <td>{{orden.activada}}</td>
                                 <td>
-                                        <button type="button" class="btn bg-indigo waves-effect">
+                                        <button type="button" class="btn bg-indigo waves-effect" (click)="desactivarOrden(orden.idOrden)">
                                             <i class="material-icons">close</i>
                                         </button>
                                     </td>

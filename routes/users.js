@@ -505,7 +505,17 @@ Vehiculo.desactivarVehiculo(req.body.idVehiculo, (err, vehiculo)  => {
 })
 
 }); 
-
+router.post('/desactivarOrden',  (req, res, next) => {
+	console.log(req.body); 
+	Orden.desactivarOrden(req.body.idOrden, (err, orden)  => {
+		if (err) {
+			res.json({success:false, msg:'No funciono'});
+		} else {
+			res.json({success:true, msg:'furula'});
+		}
+	})
+	
+	}); 
 router.post('/registerRepuesto', (req, res, next) => {
 	let repuesto = new Repuesto({
 		pieza:  req.body.pieza 

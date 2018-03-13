@@ -175,7 +175,12 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/getOrdenes', {idMecanico}, {headers: headers})
 			.map(res => res.json());
 	}
-
+	desactivarOrden(idOrden) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/desactivarOrden', {idOrden}, {headers: headers})
+			.map(res => res.json());
+	}
 	obtenerListaVehiculos(){ //Obtener todos los Vehiculos
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');

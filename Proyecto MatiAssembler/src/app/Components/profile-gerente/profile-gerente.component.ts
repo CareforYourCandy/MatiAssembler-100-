@@ -130,11 +130,12 @@ cuadrarCarros() {
   })
 
 }
-  async modificarUsuario(id) {
+
+modificarUsuario(id) {
     this.modificar = true;
     let user; 
      
-    await this.authService.getUserById(id).subscribe(datos => {
+     this.authService.getUserById(id).subscribe(datos => {
      
       console.log(datos); 
       user = datos.user; 
@@ -142,7 +143,7 @@ cuadrarCarros() {
       this.usuario = user; 
     })     
      console.log(this.usuario); 
-  }
+}
 
   getMarcas() {
     this.authService.getMarcas().subscribe(data => {

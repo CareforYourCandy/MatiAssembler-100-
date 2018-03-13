@@ -9,6 +9,18 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const Repuesto = require('../models/repuesto'); 
 const Marca = require('../models/marca'); 
+
+
+router.post('/modificarUsuario', (req, res, next) => {
+	console.log("Estoy en modificar usuario"); 
+	console.log(req.body);
+	res.json({success:true, msg:'Usuario registrado'});
+	//User.modificarUsuario(req.body);
+	
+}); 
+
+
+
 //Register
 router.post('/register', (req, res, next) => {
 
@@ -56,6 +68,7 @@ router.post('/getUser', (req, res, next) => {
 				apellido: user.apellido,
 				correo: user.correo,
 				rol: user.rol,
+				contraseña: user.contraseña,
 				cedula: user.cedula,
 				direccion: user.direccion,
 				telefono: user.telefono
@@ -79,13 +92,6 @@ router.post('/getUsers', (req, res, next) => {
 			users
 		})
 	});
-	
-}); 
-
-router.post('/modificarUsuario', (req, res, next) => {
-	console.log("Estoy en modificar usuario"); 
-	console.log(req.body);
-	User.modificarUsuario(req.body);
 	
 }); 
 
@@ -347,6 +353,7 @@ router.post('/authenticate', (req, res, next) => {
 						apellido: user.apellido,
 						correo: user.correo,
 						rol: user.rol,
+						contraseña: user.contraseña,
 						cedula: user.cedula,
 						direccion: user.direccion,
 						telefono: user.telefono

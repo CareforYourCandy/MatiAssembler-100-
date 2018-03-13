@@ -149,7 +149,6 @@
                                         <th>NOMBRE</th>
                                         <th>APELLIDO</th>
                                         <th>CÉDULA</th>
-                                        <th>MODIFICAR</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -157,9 +156,6 @@
                                       <td>{{user.nombre}}</td>
                                       <td>{{user.apellido}}</td>
                                       <td>{{user.cedula}}</td>
-                                      <td> <button type="button" data-toggle="modal" data-target="#defaultModal" (click)="modificarCliente(user.idUsuario)" class="btn btn-default waves-effect">
-                                        <i class="material-icons">settings</i> </button>
-                                        </td>
                                      </tr>
                                 </tbody>
                             </table>

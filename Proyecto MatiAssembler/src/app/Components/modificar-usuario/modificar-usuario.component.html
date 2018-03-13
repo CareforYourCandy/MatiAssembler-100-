@@ -78,7 +78,7 @@
                     <div class="form-line">
                         <input type="text" class="form-control" [(ngModel)]="direccion" name="direccion" placeholder="direccion" required autofocus>
                     </div>
-                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit" data-dismiss="modal">MODIFICAR</button>
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "modificarUsuario()" type="submit" data-dismiss="modal">MODIFICAR</button>
                 </div>
             </form>
         </div>

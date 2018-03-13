@@ -82,7 +82,8 @@ module.exports.modificarUsuario = function (usuario){
 	", cedula = " + usuario.cedula +
 	", telefono = " + usuario.telefono +
 	", direccion = " + usuario.direccion +
-	", WHERE idUsuario = " + usuario.idUsuario; 
+	" WHERE idUsuario = " + usuario.idUsuario; 
+	console.log("ESTOY UPDATEANDO USUARIO");
 	console.log(texto);
 	sequelize.query(texto).spread(results, metadata => {
 		return results; 

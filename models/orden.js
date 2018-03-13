@@ -68,6 +68,13 @@ module.exports.addOrden = function(newOrden, callback) { //Añadir una nueva ord
 
 }
 
+module.exports.addOrden = function(newOrden, callback) { //Añadir una nueva orden de reparacion
+    console.log("estoy en addRepuesto");
+    newOrden.save(callback);
+ 
+
+}
+
 module.exports.getOrdenbyMecanico = function(id, callback){
 	const query = {where: {idMecanico: id }}
 	Orden.findOne(query).then(orden => {

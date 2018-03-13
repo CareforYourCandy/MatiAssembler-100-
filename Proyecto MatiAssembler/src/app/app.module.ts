@@ -29,6 +29,9 @@ import { DetalleOrdenComponent } from './Components/detalle-orden/detalle-orden.
 
 // Pipes
 import { DatePipe } from '@angular/common';
+import { ReporteVehiculoComponent } from './Components/reporte-vehiculo/reporte-vehiculo.component';
+import { ReporteMecanicoComponent } from './Components/reporte-mecanico/reporte-mecanico.component';
+import { ReporteClienteComponent } from './Components/reporte-cliente/reporte-cliente.component';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -59,7 +62,10 @@ import { DatePipe } from '@angular/common';
     ProfileGerenteComponent,
     ProfileMecanicoComponent,
     DetalleVehiculoComponent,
-    DetalleOrdenComponent
+    DetalleOrdenComponent,
+    ReporteVehiculoComponent,
+    ReporteMecanicoComponent,
+    ReporteClienteComponent
   ],
   imports: [
     BrowserModule,

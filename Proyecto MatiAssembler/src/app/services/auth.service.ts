@@ -13,6 +13,13 @@ export class AuthService {
 
 	constructor(private http:Http) { }
 
+	getMecanicos() {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getMecanicos', Object(), {headers: headers})
+		.map(res => res.json());
+	}
+
 	getMarcas() {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');

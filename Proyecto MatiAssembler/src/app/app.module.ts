@@ -32,6 +32,7 @@ import { DatePipe } from '@angular/common';
 import { ReporteVehiculoComponent } from './Components/reporte-vehiculo/reporte-vehiculo.component';
 import { ReporteMecanicoComponent } from './Components/reporte-mecanico/reporte-mecanico.component';
 import { ReporteClienteComponent } from './Components/reporte-cliente/reporte-cliente.component';
+import { EmitirOrdenComponent } from './Components/emitir-orden/emitir-orden.component';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -65,7 +66,8 @@ import { ReporteClienteComponent } from './Components/reporte-cliente/reporte-cl
     DetalleOrdenComponent,
     ReporteVehiculoComponent,
     ReporteMecanicoComponent,
-    ReporteClienteComponent
+    ReporteClienteComponent,
+    EmitirOrdenComponent
   ],
   imports: [
     BrowserModule,

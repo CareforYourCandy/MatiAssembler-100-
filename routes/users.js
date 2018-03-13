@@ -8,8 +8,8 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const Repuesto = require('../models/repuesto'); 
-const Marca = require('../models/marca'); 
-
+const Marca = require('../models/marca');
+const AccesoriosOrden = require('../models/accesoriosorden'); 
 
 router.post('/modificarUsuario', (req, res, next) => {
 	console.log("Estoy en modificar usuario"); 
@@ -266,9 +266,7 @@ router.post('/getVehiculo', (req, res, next) => {
 			console.log('AQUI PASO ALGO2');
 			return res.json({success: false, msg:'Vehiculo not found'});
 		}
-		
-
-
+	
 		res.json({
 			success: true,
 			vehiculo: {
@@ -309,7 +307,38 @@ router.post('/getOrden', (req, res, next) => {
 				idMecanico: orden.idMecanico,
 				diagnostico: orden.diagnostico,
 				motivo: orden.motivo,
-				activada: orden.activada
+				activada: orden.activada,
+				fecha: orden.fecha
+			}
+		});
+	});
+});
+
+//Obtener accesorio  por su idOrden
+router.post('/getAccesorios', (req, res, next) => {
+	id = req.body.ID;
+	console.log(req.body);
+	console.log('el id de la orden es:');
+	console.log(id);
+	AccesoriosOrden.getAccesorioByOrden(id, (err, accs) => {
+		console.log(accs);
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!accs){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'Vehiculo not found'});
+		}
+		res.json({
+			success: true,
+			accesorios: {
+				idAccesoriosOrden: accs.idAccesoriosOrden,
+				idOrden: accs.idOrden,
+				cauchoRepuesto: acaccs.cauchoRepuesto,
+				llaves: accs.llaves,
+				gato: accs.gato,
+				herramientas: accs.herramientas,
+				equipodeSonido: accs.equipodeSonido
 			}
 		});
 	});

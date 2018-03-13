@@ -28,6 +28,15 @@ export class AuthService {
 
 	}
 
+	getAccesorios(ID) {
+		let idOrden = {ID}
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getAccesorios', idOrden, {headers: headers})
+		.map(res => res.json());
+
+	}
+
 	modificarUsuario(usuario) {
 		console.log("Hola servicio"); 
 		console.log(usuario); 

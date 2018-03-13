@@ -25,7 +25,7 @@ export class ProfileGerenteComponent implements OnInit {
   usuario;
   citas = [];
   carrosCitas = [];
-
+  ordenes = [];
   vehiculos = [];
   //Marcas 
   marcas = Array;
@@ -33,6 +33,7 @@ export class ProfileGerenteComponent implements OnInit {
   ordenInsertar;
   nuevaOrden = false;
   idVehiculotemp;
+  idCitatemp;
 
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -51,13 +52,16 @@ export class ProfileGerenteComponent implements OnInit {
     this.obtenerColaCitas();
     console.log("Ya se obtuvieron la cola de las citas")
     this.obtenerVehiculos(); 
-   
+    console.log("Se van a obtener las ordenes"); 
+    this.obtenerOrdenes(); 
+
    //Para obtener todos los vehiculos registrados en el taller
   }
 
   ngAfterViewInit() {
     this.ordenInsertar = this.ordenHijo.ordenGenerada;
     console.log(this.ordenInsertar); 
+    this.obtenerOrdenes(); 
   }
   
   logout() {
@@ -68,7 +72,22 @@ export class ProfileGerenteComponent implements OnInit {
   home() {
     this.router.navigate(['']);
   }
+  
+  obtenerOrdenes() {
+    console.log("Voy a obtener las ordenes"); 
+    let data = this.authService.getOrdenes().subscribe( datos => {
+      this.ordenes = datos.ordenes;
+      for (let i = 0; i < this.ordenes.length; i++) {
+        let data2 = this.authService.getVehiculo(this.ordenes[i].idVehiculo).subscribe( datos => {
+          console.log("IMPRIMIRE MAS DATOS"); 
+          console.log(datos); 
+          this.ordenes[i].vehiculo = datos.vehiculo; 
+        })
+      }
+    });
+   
 
+  }
   obtenerVehiculos() {
     let data = this.authService.obtenerListaVehiculos().subscribe( datos => {
       console.log("Aqui estan los vehiculos"); 
@@ -119,6 +138,7 @@ export class ProfileGerenteComponent implements OnInit {
       let data2 = this.authService.getVehiculo(this.citas[i].vehiculoCita).subscribe( datos => {
         console.log("IMPRIMIRE MAS DATOS"); 
         console.log(datos); 
+        datos.vehiculo.idCita = this.citas[i].idCita; 
         this.carrosCitas.push(datos.vehiculo); 
         this.citas[i].vehiculo = datos.vehiculo; 
       })
@@ -183,9 +203,11 @@ modificarUsuario(id) {
     //this.idVehiculotemp=idVehiculo; 
   }*/
 
-  agregarOrden(idVehiculo) {
+  agregarOrden(idVehiculo, idCita) {
     this.nuevaOrden = true;  
     this.idVehiculotemp=idVehiculo; 
+    this.idCitatemp = idCita; 
+    console.log(this.idCitatemp); 
     /*let user; 
      
     await this.authService.getUserById(id).subscribe(datos => {

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class EmitirOrdenComponent implements OnInit {
 	@Input() idVehiculo;
+	@Input() idCita; 
 	fechaOrden: String;
 	diagnostico: String;
 	mecanico: String;
@@ -38,9 +39,18 @@ export class EmitirOrdenComponent implements OnInit {
 	  this.ordenGenerada = orden; 
 	  
 	  this.authService.registerOrden(orden).subscribe(data => {
-	    console.log(data.success); 
-	    this.router.navigate['profile-gerente'];
-	  }); 
+			console.log(data.success); 
+			if(data.success) {
+			this.authService.eliminarCita(this.idCita).subscribe( data => { 
+				console.log(data.success); 
+			})
+		}
+		
+			this.router.navigate['profile-gerente'];
+			
+		}); 
+		
+		
 
  }
 

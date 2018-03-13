@@ -26,6 +26,13 @@ const Cita = connection.define('cita', {
 
 module.exports = Cita;
 
+module.exports.eliminarCitas = function(id, callback) {
+	const query = {where: {idCita: id}}
+	Cita.destroy(query).then( cita => {
+		return callback(null, cita); 
+	})
+}
+
 module.exports.getCitas = function(req, callback){ //Obtener la cola de citas (PARA EL GERENTE)
 	Cita.findAll().then(citas => {		
 		let citas2 = citas.map(function(cita) {

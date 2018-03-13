@@ -360,6 +360,22 @@ router.post('/getOrdenes', (req, res, next) => {
 	});
 })
 
+router.post('/getOrdenesMecanico', (req, res, next) => {
+	const id=req.body.idMecanico
+	console.log();
+	Orden.getOrdenesByMecanico(id, (err, ordenes) => {
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!ordenes){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'User not found'});
+		}
+		res.json({
+			success: true,
+			ordenes});
+	});
+})
 //Authenticate
 router.post('/authenticate', (req, res, next) => {
 	const correo = req.body.correo;

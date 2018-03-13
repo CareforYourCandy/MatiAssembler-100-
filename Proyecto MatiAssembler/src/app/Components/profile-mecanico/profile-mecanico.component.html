@@ -27,75 +27,23 @@
                                     <th>AÑO</th>
                                     <th>PLACA</th>
                                     <th>SERIAL</th>
-                                    <th>ESTADO</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>
-                                        <select class="form-control show-tick">
-                                            <option>En curso</option>
-                                            <option>Finalizado</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>
-                                        <select class="form-control show-tick">
-                                            <option>En curso</option>
-                                            <option>Finalizado</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>
-                                        <select class="form-control show-tick">
-                                            <option>En curso</option>
-                                            <option>Finalizado</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>
-                                        <select class="form-control show-tick">
-                                            <option>En curso</option>
-                                            <option>Finalizado</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>-----</td>
-                                    <td>
-                                        <select class="form-control show-tick">
-                                            <option>En curso</option>
-                                            <option>Finalizado</option>
-                                        </select>
-                                    </td>
-                                </tr>
+                                
+                                    <tr *ngFor = "let orden of ordenes" >
+                                        <td>{{orden.idOrden}}</td>
+                                        <td>{{orden.vehiculo.modelo}}</td>
+                                        <td>{{orden.vehiculo.ano}}</td>
+                                        <td>{{orden.vehiculo.placa}}</td>
+                                        <td>{{orden.vehiculo.serialMotor}}</td>
+                                      
+                                     
+                                    </tr>
+                                    
+                               
+                                
                             </tbody>
                         </table>
                     </div>

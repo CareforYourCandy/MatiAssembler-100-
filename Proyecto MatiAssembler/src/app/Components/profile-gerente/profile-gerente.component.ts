@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Vehiculo } from '../vehiculo/vehiculo'; 
 import { EmitirOrdenComponent } from '../emitir-orden/emitir-orden.component'; 
-
+import {ReporteMecanicoComponent} from '../reporte-mecanico/reporte-mecanico.component'; 
 
 @Component({
   selector: 'app-profile-gerente',
@@ -34,6 +34,7 @@ export class ProfileGerenteComponent implements OnInit {
   nuevaOrden = false;
   idVehiculotemp;
   idCitatemp;
+  mecanicoReporte
 
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -219,5 +220,10 @@ modificarUsuario(id) {
     })    */ 
      console.log(this.idVehiculotemp); 
  
+  }
+
+  verReporte(id) {
+    this.mecanicoReporte = id; 
+
   }
 }

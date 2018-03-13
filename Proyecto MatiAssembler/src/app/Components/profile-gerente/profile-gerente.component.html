@@ -149,6 +149,7 @@
                                         <th>NOMBRE</th>
                                         <th>APELLIDO</th>
                                         <th>CÉDULA</th>
+                                        <th>VER ORDENES</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -156,6 +157,10 @@
                                       <td>{{user.nombre}}</td>
                                       <td>{{user.apellido}}</td>
                                       <td>{{user.cedula}}</td>
+                                      <td> <button type="button" data-toggle="modal" data-target="#largeModal"(click)="verReporte(user.idUsuario)" class="btn btn-default waves-effect">
+                                        <i class="material-icons">pageview</i>
+                                    </button></td>   
+                                    
                                      </tr>
                                 </tbody>
                             </table>
@@ -343,6 +348,22 @@
         </div>
     </div>
 </div>
+</div>
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="largeModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <app-reporte-mecanico [idMecanico]=mecanicoReporte> </app-reporte-mecanico>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- MODAL REPUESTOS --> 

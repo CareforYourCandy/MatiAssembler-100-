@@ -169,6 +169,12 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/getOrdenes', vehiculo, {headers: headers})
 			.map(res => res.json());
 	}
+	getOrdenesMecanico(idMecanico) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getOrdenes', {idMecanico}, {headers: headers})
+			.map(res => res.json());
+	}
 
 	obtenerListaVehiculos(){ //Obtener todos los Vehiculos
 		let headers = new Headers();
@@ -176,12 +182,7 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/getVehiculos2', {headers: headers})
 			.map(res => res.json());
 	}
-	getOrdenesMecanico() {
-		let headers = new Headers();
-		headers.append('Content-Type','application/json');
-		return this.http.get('http://localhost:3000/users/getOrdenesMecanico', {headers: headers})
-		.map(res => res.json());
-	}
+
 	getProfile(){
 		let headers = new Headers();
 		this.loadToken();

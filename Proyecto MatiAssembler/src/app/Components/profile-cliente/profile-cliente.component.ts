@@ -37,7 +37,7 @@ export class ProfileClienteComponent implements OnInit {
   //Marcas 
   marcas = Array; 
   file;
-
+  vista=1;
     
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -59,6 +59,19 @@ export class ProfileClienteComponent implements OnInit {
   ngAfterInit() {
     this.getMarcas();
     this.recuperarVehiculos();
+  }
+
+  logout() {
+    this.authService.logout(); 
+    this.router.navigate(['login']); 
+  }
+
+  home() {
+    this.router.navigate(['']);
+  }
+
+  setVista(id) {
+    this.vista=id;
   }
 
   setMarcaNuevo(idMarca) {

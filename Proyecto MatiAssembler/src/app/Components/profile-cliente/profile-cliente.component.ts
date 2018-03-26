@@ -169,7 +169,7 @@ getMarcas() {
   } ) 
 }
  setMarcaVista(idMarca) {
-  return this.marcas[idMarca].marca
+  return this.marcas[idMarca - 1].marca
  }
 
  /*imprimirFile(event){

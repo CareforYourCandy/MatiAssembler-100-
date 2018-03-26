@@ -75,6 +75,8 @@ export class ProfileGerenteComponent implements OnInit {
   }
   
   obtenerOrdenes() {
+    this.ordenes = new Array(); 
+
     console.log("Voy a obtener las ordenes"); 
     let data = this.authService.getOrdenes().subscribe( datos => {
       this.ordenes = datos.ordenes;
@@ -117,7 +119,7 @@ export class ProfileGerenteComponent implements OnInit {
       console.log(this.usuarios); 
 
       this.mecanicos = this.usuarios.filter(function(user) {
-        if (user.rol==3) {
+        if (user.rol==2) {
            return user;
         }
       });
@@ -140,8 +142,10 @@ export class ProfileGerenteComponent implements OnInit {
         console.log("IMPRIMIRE MAS DATOS"); 
         console.log(datos); 
         datos.vehiculo.idCita = this.citas[i].idCita; 
+        datos.vehiculo.fecha = this.citas[i].fechaSolicitud; 
         this.carrosCitas.push(datos.vehiculo); 
         this.citas[i].vehiculo = datos.vehiculo; 
+       //ESTE CODIGO ESTA MUY FEO HAY QUE HACERLE REFACTOR 
       })
     }
     console.log("ARRAY FINALES");
@@ -186,7 +190,7 @@ modificarUsuario(id) {
   }
 
   setMarcaVista(idMarca) {
-    return this.marcas[idMarca].marca
+    return this.marcas[idMarca - 1].marca
   }
 
   verDetalle(idVehiculo) {
@@ -232,6 +236,6 @@ modificarUsuario(id) {
     this.authService.desactivarOrden(id).subscribe(data => {
       console.log(data); 
     })
-    this.ordenes[id].activada = 0; 
+    this.obtenerOrdenes(); 
   }
 }

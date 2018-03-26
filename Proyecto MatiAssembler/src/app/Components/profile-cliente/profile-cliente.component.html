@@ -1,24 +1,5 @@
 <div  *ngIf="user.rol == 1" > 
- <!-- Page Loader 
- <div class="page-loader-wrapper">
-  <div class="loader">
-      <div class="preloader">
-          <div class="spinner-layer pl-red">
-              <div class="circle-clipper left">
-                  <div class="circle"></div>
-              </div>
-              <div class="circle-clipper right">
-                  <div class="circle"></div>
-              </div>
-          </div>
-      </div>
-      <p>Please wait...</p>
-  </div>
-</div>
- #END# Page Loader -->
-<!-- Overlay For Sidebars -->
-<div class="overlay"></div>
-<!-- #END# Overlay For Sidebars -->
+
 <!-- Search Bar -->
 <div class="search-bar">
   <div class="search-icon">
@@ -32,11 +13,92 @@
 <!-- #END# Search Bar -->
 
 <!-- Top Bar -->
-  <app-navbar> </app-navbar> 
+<nav class="navbar">
+    <div class="container-fluid bg-deep-orange">
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" >MATI ASSEMBLER - CLIENTE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Call Search -->
+                <li>
+                    <a href="javascript:void(0);" class="js-search" data-close="true">
+                        <i class="material-icons">search</i>
+                    </a>
+                </li>
+                <!-- #END# Call Search -->
+
+                <li class="pull-right">
+                    <a href="javascript:void(0);" class="js-right-sidebar" data-close="true">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #Top Bar -->
+<section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info bg-light-green">
+                <div class="image">
+                    <img src="images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nombre}}</div>
+                    <div class="email">{{user.correo}}</div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header active">MENU PRINCIPAL</li>
+                    <li>
+                        <a (click)="setVista(1)">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="setVista(2)">
+                            <i class="material-icons">directions_car</i>
+                            <span>Registrar vehículo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  (click)="logout()" >
+                            <i class="material-icons">not_interested</i>
+                            <span>Cerrar sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2018
+                    <a href="javascript:void(0);">MatiAssembler</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.0
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+ </section>
 
 <section class="content">
 
   <div class="container-fluid">
+
+<div  *ngIf="vista == 1">
       <div class="block-header">
           <h2>USUARIO</h2>
       </div>
@@ -44,9 +106,7 @@
       <!-- DATOS -->
       <div class="row clearfix">
 
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-
-
+          <div class="col-xs-12 col-sm-6">
               <div class="info-box bg-pink hover-expand-effect">
                   <div class="icon">
                       <i class="material-icons">person</i>
@@ -56,8 +116,9 @@
                       <p class="lead">{{user.nombre}}</p>
                   </div>
               </div>
+          </div>
 
-
+          <div class="col-xs-12 col-sm-6">
               <div class="info-box bg-purple hover-expand-effect">
                   <div class="icon">
                       <i class="material-icons">person</i>
@@ -67,8 +128,9 @@
                       <p class="lead">{{user.apellido}}</p>
                   </div>
               </div>
+          </div>
 
-
+          <div class="col-xs-12 col-sm-6">
               <div class="info-box bg-indigo hover-expand-effect">
                   <div class="icon">
                       <i class="material-icons">confirmation_number</i>
@@ -78,8 +140,9 @@
                       <div class="number count-to" data-from="0" data-to="10330574" data-speed="1000" data-fresh-interval="20"> {{user.cedula}} </div>
                   </div>
               </div>
+          </div>
 
-
+          <div class="col-xs-12 col-sm-6">            
               <div class="info-box bg-cyan hover-expand-effect">
                   <div class="icon">
                       <i class="material-icons">email</i>
@@ -89,7 +152,9 @@
                       <p class="lead">{{user.correo}}</p>
                   </div>
               </div>
+          </div>
 
+          <div class="col-xs-12 col-sm-6">
               <div class="info-box bg-light-green hover-expand-effect">
                   <div class="icon">
                       <i class="material-icons">local_phone</i>
@@ -99,7 +164,9 @@
                       <div class="number count-to" data-from="0" data-to="5514089" data-speed="1000" data-fresh-interval="20">{{user.telefono}}</div>
                   </div>
               </div>
+          </div>
 
+          <div class="col-xs-12 col-sm-6">
               <div class="info-box bg-orange hover-expand-effect">
                   <div class="icon">
                       <i class="material-icons">directions</i>
@@ -110,12 +177,12 @@
                   </div>
               </div>
           </div>
-
+      </div>
           <!-- #END# DATOS -->
 
-
+      <div class="row clearfix">
           <!-- VEHICULOS -->
-          <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+          <div >
               <div class="card">
                   <div class="header">
                       <h2>VEHÍCULOS REGISTRADOS</h2>
@@ -184,120 +251,109 @@
                       </div>
                   </div>
 
-                 <!-- <div class="body">
-                      <button type="button" class="btn bg-pink waves-effect">AGREGAR VEHÍCULO</button>
-                  </div>
-              -->
-
               </div>
           </div>
           <!-- #END# VEHICULOS -->
       </div>
   </div>
 
-<div class="row clearfix">
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-  <div class="card">
-      <div class="header">
-          <h2>REGISTRAR NUEVO VEHICULO</h2>
+
+<div  *ngIf="vista == 2">
+  <div class="row clearfix">
+    <div>
+      <div class="card">
+          <div class="header">
+              <h2>REGISTRAR NUEVO VEHICULO</h2>
+          </div>
+          <div class="body">
+              <form  action="/" (submit)="vehiculoSubmit()" id="frmFileUpload"  method="post">
+                  <div class="input-group">
+                        <span class="input-group-addon">
+                                <i class="material-icons">confirmation_number</i>
+                            </span>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Marca <span class="caret"></span>
+                        </button>
+                        <ul   class="dropdown-menu">
+                            <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca.idMarca)">{{marca.marca}}</a></li>
+                            
+                        </ul>
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">directions_car</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="email" class="form-control"[(ngModel)]="modelo" name="modelo" placeholder="Modelo" required>
+                      </div>
+                  </div>
+
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">confirmation_number</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control" name="ano" [(ngModel)]="ano"  placeholder="Año" required>
+                      </div>
+                  </div>
+
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">confirmation_number</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control" name="confirm" [(ngModel)]="serialMotor" placeholder="serialMotor" required>
+                      </div>
+                  </div>
+
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">confirmation_number</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control" [(ngModel)]="placa" name="placa" placeholder="Placa" required autofocus>
+                      </div>
+                  </div>
+                  <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR VEHÍCULO</button>
+
+              </form>
+          </div>
       </div>
-      <div class="body">
-          <form  action="/" (submit)="vehiculoSubmit()" id="frmFileUpload"  method="post">
-              <div class="input-group">
-                    <span class="input-group-addon">
-                            <i class="material-icons">confirmation_number</i>
-                        </span>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Marca <span class="caret"></span>
-                    </button>
-                    <ul   class="dropdown-menu">
-                        <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca.idMarca)">{{marca.marca}}</a></li>
-                        
-                    </ul>
-                </div>
+    </div>
+
+    <div>
+          <div class="card">
+              <div class="header">
+                  <h2>
+                      FOTO DEL VEHICULO
+                  </h2>
+              </div>
+              <div class="body">
+                  <form action="/" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
+                      <div class="dz-message">
+                          <div class="drag-icon-cph">
+                              <i class="material-icons">touch_app</i>
+                          </div>
+                          <h3>Arrastre las fotos o de click para seleccionarlas.</h3>
+                      </div>
+                      <div class="fallback">
+                          <input [(ngModel)]="file" name="file" type="file" multiple />
+                      </div>
+                  </form>
               </div>
 
-              <div class="input-group">
-                  <span class="input-group-addon">
-                      <i class="material-icons">directions_car</i>
-                  </span>
-                  <div class="form-line">
-                      <input type="email" class="form-control"[(ngModel)]="modelo" name="modelo" placeholder="Modelo" required>
-                  </div>
-              </div>
+          </div>
 
-              <div class="input-group">
-                  <span class="input-group-addon">
-                      <i class="material-icons">confirmation_number</i>
-                  </span>
-                  <div class="form-line">
-                      <input type="text" class="form-control" name="ano" [(ngModel)]="ano"  placeholder="Año" required>
-                  </div>
-              </div>
-
-              <div class="input-group">
-                  <span class="input-group-addon">
-                      <i class="material-icons">confirmation_number</i>
-                  </span>
-                  <div class="form-line">
-                      <input type="text" class="form-control" name="confirm" [(ngModel)]="serialMotor" placeholder="serialMotor" required>
-                  </div>
-              </div>
-
-              <div class="input-group">
-                  <span class="input-group-addon">
-                      <i class="material-icons">confirmation_number</i>
-                  </span>
-                  <div class="form-line">
-                      <input type="text" class="form-control" [(ngModel)]="placa" name="placa" placeholder="Placa" required autofocus>
-                  </div>
-              </div>
-              <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR VEHÍCULO</button>
-
-          </form>
-      </div>
+    </div>
   </div>
 </div>
 
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-      <div class="card">
-          <div class="header">
-              <h2>
-                  FOTO DEL VEHICULO
-              </h2>
-          </div>
-          <div class="body">
-              <form action="/" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
-                  <div class="dz-message">
-                      <div class="drag-icon-cph">
-                          <i class="material-icons">touch_app</i>
-                      </div>
-                      <h3>Arrastre las fotos o de click para seleccionarlas.</h3>
-                  </div>
-                  <div class="fallback">
-                      <input [(ngModel)]="file" name="file" type="file" multiple />
-                  </div>
-              </form>
-          </div>
+
 
 </div>
-
-</div>
-</div>
-
-
- 
-<!-- File Upload | Drag & Drop OR With Click & Choose -->
-
-<!-- #END# File Upload | Drag & Drop OR With Click & Choose -->
-
-<button (click)= "recuperarVehiculos()" > hola123</button>
 </section>
-
-
 </div>
-
-
-
 

@@ -16,6 +16,7 @@ import {ReporteMecanicoComponent} from '../reporte-mecanico/reporte-mecanico.com
 })
 export class ProfileGerenteComponent implements OnInit {
 
+  vista=1;
   @ViewChild(EmitirOrdenComponent)  ordenHijo;
   user;
   clientes;
@@ -57,6 +58,10 @@ export class ProfileGerenteComponent implements OnInit {
     this.obtenerOrdenes(); 
 
    //Para obtener todos los vehiculos registrados en el taller
+  }
+
+  setVista(id) {
+    this.vista=id;
   }
 
   ngAfterViewInit() {

@@ -1,4 +1,4 @@
-<div  *ngIf="admin.rol == 1" > 
+<div  *ngIf="admin.rol == 3" > 
   <!-- Search Bar -->
   <div class="search-bar">
       <div class="search-icon">
@@ -11,13 +11,11 @@
   </div>
   <!-- #END# Search Bar -->
   
-  <!-- Top Bar -->
+<!-- Top Bar -->
 <nav class="navbar">
     <div class="container-fluid bg-deep-orange">
         <div class="navbar-header">
-            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
-            <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" >MATI ASSEMBLER - ADMINISTRADOR</a>
+            <a class="navbar-brand" style="cursor:pointer" onclick="openNav()">&#9776; MATI ASSEMBLER - ADMINISTRADOR</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -48,6 +46,7 @@
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{admin.nombre}}</div>
                     <div class="email">{{admin.correo}}</div>
                 </div>
+                <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>                
             </div>
             <!-- #User Info -->
             <!-- Menu -->
@@ -57,19 +56,19 @@
                     <li>
                         <a (click)="setVista(1)">
                             <i class="material-icons">person</i>
-                            <span>Usuarios</span>
+                            <span style="cursor:pointer">Usuarios</span>
                         </a>
                     </li>
                     <li>
                         <a (click)="setVista(2)">
                             <i class="material-icons">settings</i>
-                            <span>Repuestos</span>
+                            <span style="cursor:pointer">Repuestos</span>
                         </a>
                     </li>
                     <li>
                         <a  (click)="logout()" >
                             <i class="material-icons">not_interested</i>
-                            <span>Cerrar sesión</span>
+                            <span style="cursor:pointer">Cerrar sesión</span>
                         </a>
                     </li>
                 </ul>
@@ -90,7 +89,9 @@
         <!-- #END# Left Sidebar -->
  </section>
 
-  <section class="content">
+  <section id="main" class="content">
+    
+      <div class="container-fluid">
 
     <!-- LISTA USUARIOS -->
     <div  *ngIf="vista == 1">
@@ -103,7 +104,7 @@
                       </h2>
                   </div>
                   <div class="body table-responsive" >
-                      <table class="table table-hover">
+                      <table class="table table-hover dashboard-task-infos">
                           <thead>
                               <tr>
                                   <th>NOMBRE</th>
@@ -183,46 +184,46 @@
     </div>
     <!-- #END# LISTA VEHICULOS -->
 
-<!--MODAL-->
-          <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="defaultModalLabel">MODIFICAR</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div *ngIf="modificar">
-                            <app-modificar-usuario  [user]= "usuario" > </app-modificar-usuario>
+        <!--MODAL-->
+                  <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="defaultModalLabel">MODIFICAR</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div *ngIf="modificar">
+                                    <app-modificar-usuario  [user]= "usuario" > </app-modificar-usuario>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                               
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                            </div>
                         </div>
                     </div>
+                </div>
+
+        <!-- MODAL REPUESTOS --> 
+        <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div *ngIf="nuevoRepuesto">
+                            <app-agregar-repuesto></app-agregar-repuesto> 
+                          </div>
+                    </div>
                     <div class="modal-footer">
-                       
                         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
                     </div>
                 </div>
             </div>
         </div>
-
-<!-- MODAL REPUESTOS --> 
-<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <div *ngIf="nuevoRepuesto">
-                    <app-agregar-repuesto></app-agregar-repuesto> 
-                  </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-            </div>
-        </div>
-    </div>
-</div>
-                    
-  </section>
+  </div>               
+</section>
 
 
 

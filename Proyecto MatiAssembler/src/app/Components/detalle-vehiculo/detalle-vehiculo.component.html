@@ -2,10 +2,9 @@
     <!-- Top Bar -->
     <nav class="navbar">
         <div class="container-fluid">
-            <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
-                <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="widgets/../../index.html">MATI ASSEMBLER - GERENTE</a>
+             <div class="navbar-header">
+                <a class="navbar-brand" style="cursor:pointer" onclick="openNav()">&#9776; MATI ASSEMBLER - GERENTE</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -32,13 +31,11 @@
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info">
-                <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
-                </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{gerente.nombre}}</div>
                     <div class="email">{{gerente.correo}}</div>
                 </div>
+                <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
             </div>
             <!-- #User Info -->
             <!-- Menu -->
@@ -46,21 +43,15 @@
                 <ul class="list">
                     <li class="header active">MENU PRINCIPAL</li>
                     <li>
-                        <a (click)="home()">
-                            <i class="material-icons">home</i>
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li>
                         <a (click)="goBack()" >
                             <i class="material-icons">keyboard_return</i>
-                            <span>Volver</span>
+                            <span  style="cursor:pointer">Volver</span>
                         </a>
                     </li>
                     <li>
                         <a (click)="logout()" >
                             <i class="material-icons">not_interested</i>
-                            <span>Cerrar sesión</span>
+                            <span  style="cursor:pointer">Cerrar sesión</span>
                         </a>
                     </li>
                 </ul>
@@ -82,42 +73,101 @@
 
     </section>
 
-    <section class="content">
+    <section id="main" class="content">
+        <div class="container-fluid">
+            <div class="row clearfix">
 
-        <div class="row clearfix">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="card">
-                    <div class="header bg-pink">
-                        <h2>
-                            DETALLE DEL VEHICULO
-                        </h2>
-                    </div>
-                    <div class="body">
-                        <div class="row">
-                            <div class="col-lg-6 col-xs-12">
-                                <br>
-                                <div>Marca: {{setMarcaVista(vehiculo.marca)}}</div>
-                                <br>
-                                <div>Modelo: {{vehiculo.modelo}}</div>
-                                <br>
-                                <div>Año: {{vehiculo.ano}}</div>
-                                <br>
-                                <div>Placa: {{vehiculo.placa}}</div>
-                                <br>
-                                <div>Serial motor: {{vehiculo.serialMotor}}</div>
-                                <br>
-                                <div>Propietario: {{vehiculo.propietario}}</div>
-                                <br>
-                                <div>Fecha registro:{{vehiculo.fechaRegistro}}</div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- DATOS -->
+              <div class="block-header">
+                  <h2>DETALLE DEL VEHÍCULO</h2>
+              </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="info-box bg-pink hover-expand-effect">
+                      <div class="icon">
+                          <i class="material-icons">person</i>
+                      </div>
+                      <div class="content">
+                          <div class="text">MARCA</div>
+                          <p class="lead">{{setMarcaVista(vehiculo.marca)}}</p>
+                      </div>
+                  </div>
+                </div>
 
+                <div class="col-xs-12 col-sm-6">
+                  <div class="info-box bg-purple hover-expand-effect">
+                      <div class="icon">
+                          <i class="material-icons">person</i>
+                      </div>
+                      <div class="content">
+                          <div class="text">MODELO</div>
+                          <p class="lead">{{vehiculo.modelo}}</p>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                  <div class="info-box bg-indigo hover-expand-effect">
+                      <div class="icon">
+                          <i class="material-icons">confirmation_number</i>
+                      </div>
+                      <div class="content">
+                          <div class="text">AÑO</div>
+                          <div class="lead"> {{vehiculo.ano}} </div>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">            
+                  <div class="info-box bg-cyan hover-expand-effect">
+                      <div class="icon">
+                          <i class="material-icons">email</i>
+                      </div>
+                      <div class="content">
+                          <div class="text">PLACA</div>
+                          <p class="lead">{{vehiculo.placa}}</p>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                  <div class="info-box bg-light-green hover-expand-effect">
+                      <div class="icon">
+                          <i class="material-icons">local_phone</i>
+                      </div>
+                      <div class="content">
+                          <div class="text">SERIAL MOTOR</div>
+                          <div class="lead">{{vehiculo.serialMotor}}</div>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                  <div class="info-box bg-orange hover-expand-effect">
+                      <div class="icon">
+                          <i class="material-icons">directions</i>
+                      </div>
+                      <div class="content">
+                          <div class="text">PROPIETARIO</div>
+                          <p class="lead">{{vehiculo.propietario}}</p>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12">
+                    <div class="info-box bg-red hover-expand-effect">
+                      <div class="icon">
+                          <i class="material-icons">directions</i>
+                      </div>
+                      <div class="content">
+                          <div class="text">FECHA REGISTRO</div>
+                          <p class="lead">{{vehiculo.fechaRegistro}}</p>
+                      </div>
+                    </div>
                 </div>
             </div>
+          <!-- #END# DATOS -->
 
-
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div  class="row clearfix">
                 <div class="card">
                     <div class="header bg-deep-purple">
                         <h2>FOTOS</h2>
@@ -157,13 +207,12 @@
                     </div>
                 </div>
             </div>
-
-        </div>
+        
 
         <br>
 
         <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div >
                 <div class="card">
                     <div class="header bg-cyan">
                         <h2>
@@ -208,7 +257,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
 </section>
 </div>
 

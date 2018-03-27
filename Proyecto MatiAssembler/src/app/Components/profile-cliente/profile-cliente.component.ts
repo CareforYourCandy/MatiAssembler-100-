@@ -139,51 +139,53 @@ export class ProfileClienteComponent implements OnInit {
   }
 
   vehiculoSubmit() { 
-    this.fechatemp= new Date();
-    this.fechaRegistro= this.datePipe.transform(this.fechatemp);
-    console.log(this.fechaRegistro); 
-    const vehiculo = {
-      placa: this.placa,       
-      marca: this.marcaNuevo,
-      modelo: this.modelo,
-      ano: this.ano,
-      serialMotor: this.serialMotor, 
-      activado: true, 
-      propietario: this.user.idUsuario, 
-      fechaRegistro: this.fechaRegistro
-    }
-    
-    console.log(vehiculo); //Para registrar un vehiculo
+        this.fechatemp= new Date();
+        this.fechaRegistro= this.datePipe.transform(this.fechatemp);
+        console.log(this.fechaRegistro); 
+        const vehiculo = {
+          placa: this.placa,       
+          marca: this.marcaNuevo,
+          modelo: this.modelo,
+          ano: this.ano,
+          serialMotor: this.serialMotor, 
+          activado: true, 
+          propietario: this.user.idUsuario, 
+          fechaRegistro: this.fechaRegistro
+        }
+        
+        console.log(vehiculo); //Para registrar un vehiculo
 
-    //Required fields
-    if(this.validateService.validateRegisterVehiculo(vehiculo)){
-     console.log("Fallo validacion del vehiculo");
-      return false;
-    }
+        //Required fields
+        if(this.validateService.validateRegisterVehiculo(vehiculo)){
+         console.log("Fallo validacion del vehiculo");
+          return false;
+        }
 
-    //Registrar usuario
-    this.authService.registerVehiculo(vehiculo).subscribe(data => {
-      console.log(data.success); 
-      if(data.success){
-         console.log("sirvio");
-         this.vehiculos.push(vehiculo); 
-      } else {
-        console.log("fallo");
-        this.router.navigate(['profile-cliente']); 
-      }
-    
+        //Registrar usuario
+        this.authService.registerVehiculo(vehiculo).subscribe(data => {
+          console.log(data.success); 
+          if(data.success){
+             console.log("sirvio");
+             this.vehiculos.push(vehiculo); 
+          } else {
+            console.log("fallo");
+            this.router.navigate(['profile-cliente']); 
+          }
+        
 
-    });
+        });
   }
-getMarcas() {
-  this.authService.getMarcas().subscribe(data => {
-    console.log(data); 
-    this.marcas = data.marcas; 
-  } ) 
-}
- setMarcaVista(idMarca) {
-  return this.marcas[idMarca - 1].marca
- }
+
+  getMarcas() {
+    this.authService.getMarcas().subscribe(data => {
+      console.log(data); 
+      this.marcas = data.marcas; 
+    } ) 
+  }
+  
+  setMarcaVista(idMarca) {
+  return this.marcas[idMarca].marca
+  }
 
  /*imprimirFile(event){
     let reader = new FileReader();

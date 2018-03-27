@@ -18,7 +18,7 @@ export class ProfileAdministradorComponent implements OnInit {
   usuarios; 
   usuario; 
   repuestos;
-
+  vista=1;
 
   constructor(private authService: AuthService ) { }
   
@@ -32,6 +32,10 @@ export class ProfileAdministradorComponent implements OnInit {
   ngAfterViewInit() {
     this.repuestoInsertar = this.repuestoHijo.repuestoGenerado;
     console.log(this.repuestoInsertar); 
+  }
+
+  setVista(id) {
+    this.vista=id;
   }
 
   agregarRepuesto() {

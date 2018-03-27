@@ -32,9 +32,6 @@
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info">
-                <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
-                </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nombre}}</div>
                     <div class="email">{{user.correo}}</div>
@@ -45,12 +42,6 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header active">MENU PRINCIPAL</li>
-                    <li>
-                        <a (click)="home()">
-                            <i class="material-icons">home</i>
-                            <span>Home</span>
-                        </a>
-                    </li>
                     <li>
                         <a (click)="setVista(1)">
                             <i class="material-icons">person</i>
@@ -72,7 +63,9 @@
 
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      Reportes <b class="caret"></b>
+                        <i class="material-icons">assignment</i>
+                        <span>Reportes</span>
+                     <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                       <li><a href="#">Cliente</a></li>
@@ -271,7 +264,7 @@
                                 <td>{{carro.ano}}</td>
                                 <td>{{carro.placa}}</td>
                                 <td>{{carro.serialMotor}}</td>
-                                <td></td>
+                                <td>{{carro.fechaSolicitud}}</td>
                                 <td><button type="button" data-toggle="modal" data-target="#smallModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarOrden(carro.idVehiculo, carro.idCita)" >ASIGNAR FECHA</button></td>
                             </tr>
                            
@@ -379,23 +372,23 @@
 </div>
 
 <!-- MODAL REPUESTOS --> 
-<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <div *ngIf="nuevaOrden">
-                    <app-emitir-orden [idVehiculo]=idVehiculotemp [idCita]=idCitatemp> </app-emitir-orden> 
-                  </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+    <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="nuevaOrden">
+                        <app-emitir-orden [idVehiculo]=idVehiculotemp [idCita]=idCitatemp> </app-emitir-orden> 
+                      </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 

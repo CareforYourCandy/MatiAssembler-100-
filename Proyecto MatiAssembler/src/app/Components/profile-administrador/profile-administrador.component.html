@@ -1,10 +1,4 @@
-<body   class="theme-red">
-  
-  <!-- Page Loader -->
-  <!-- #END# Page Loader -->
-  <!-- Overlay For Sidebars -->
-  <div class="overlay"></div>
-  <!-- #END# Overlay For Sidebars -->
+<div  *ngIf="admin.rol == 1" > 
   <!-- Search Bar -->
   <div class="search-bar">
       <div class="search-icon">
@@ -16,15 +10,92 @@
       </div>
   </div>
   <!-- #END# Search Bar -->
+  
   <!-- Top Bar -->
+<nav class="navbar">
+    <div class="container-fluid bg-deep-orange">
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" >MATI ASSEMBLER - ADMINISTRADOR</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Call Search -->
+                <li>
+                    <a href="javascript:void(0);" class="js-search" data-close="true">
+                        <i class="material-icons">search</i>
+                    </a>
+                </li>
+                <!-- #END# Call Search -->
 
-  <app-navbar> </app-navbar> 
+                <li class="pull-right">
+                    <a href="javascript:void(0);" class="js-right-sidebar" data-close="true">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #Top Bar -->
+<section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info bg-light-green">
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{admin.nombre}}</div>
+                    <div class="email">{{admin.correo}}</div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header active">MENU PRINCIPAL</li>
+                    <li>
+                        <a (click)="setVista(1)">
+                            <i class="material-icons">person</i>
+                            <span>Usuarios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="setVista(2)">
+                            <i class="material-icons">settings</i>
+                            <span>Repuestos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  (click)="logout()" >
+                            <i class="material-icons">not_interested</i>
+                            <span>Cerrar sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2018
+                    <a href="javascript:void(0);">MatiAssembler</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.0
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+ </section>
 
   <section class="content">
 
-      <!-- LISTA USUARIOS -->
+    <!-- LISTA USUARIOS -->
+    <div  *ngIf="vista == 1">
       <div class="row clearfix">
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div>
               <div class="card">
                   <div class="header bg-pink">
                       <h2>
@@ -65,54 +136,13 @@
 
               </div>
           </div>
-
-          <!-- #END# LISTA USUARIOS -->
-<!--MODAL-->
-          <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="defaultModalLabel">MODIFICAR</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div *ngIf="modificar">
-                            <app-modificar-usuario  [user]= "usuario" > </app-modificar-usuario>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                       
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-<!-- MODAL REPUESTOS --> 
-<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <div *ngIf="nuevoRepuesto">
-                    <app-agregar-repuesto></app-agregar-repuesto> 
-                  </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-            </div>
-        </div>
+      </div>
     </div>
-</div>
-                     
-                 
-                    
-<!--MODAL-->
-
-
-          <!-- LISTA REPUESTOS -->
-
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <!-- #END# LISTA USUARIOS -->
+    <!-- LISTA REPUESTOS -->
+    <div  *ngIf="vista == 2">
+      <div class="row clearfix">
+          <div>
               <div class="card">
                   <div class="header bg-deep-purple">
                       <h2>
@@ -150,14 +180,50 @@
               </div>
           </div>
       </div>
-      <!-- #END# LISTA VEHICULOS -->
+    </div>
+    <!-- #END# LISTA VEHICULOS -->
 
- 
-        
+<!--MODAL-->
+          <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="defaultModalLabel">MODIFICAR</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div *ngIf="modificar">
+                            <app-modificar-usuario  [user]= "usuario" > </app-modificar-usuario>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                       
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
+<!-- MODAL REPUESTOS --> 
+<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="nuevoRepuesto">
+                    <app-agregar-repuesto></app-agregar-repuesto> 
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+                    
   </section>
 
 
 
-</body>
+</div>

@@ -50,6 +50,7 @@ import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modi
       { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate:[AuthGuard]},
       { path: 'emitir-orden', component: EmitirOrdenComponent, canActivate:[AuthGuard]},
       { path: 'navbar', component:NavbarComponent},
+      { path: 'modificar-repuesto', component:ModificarRepuestoComponent}
 
     ]
 @NgModule({

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, ViewChild,} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ModificarRepuestoComponent } from '../modificar-repuesto/modificar-repuesto.component'; 
+
 
 @Component({
   selector: 'app-detalle-orden',
@@ -9,6 +11,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./detalle-orden.component.css']
 })
 export class DetalleOrdenComponent implements OnInit {
+
+	@ViewChild(ModificarRepuestoComponent) repuestoHijo;
+	nuevoRepuesto = false;
 
 	vehiculo;
 	gerente;
@@ -35,7 +40,8 @@ export class DetalleOrdenComponent implements OnInit {
 
 	repuestos;
 	ordenTemp;
-	repuestosTemp= [];
+	repuestosOrden = [];
+	repuestosOrdenAux;
 
 	constructor(private authService: AuthService,
 	          private router: Router,
@@ -43,11 +49,13 @@ export class DetalleOrdenComponent implements OnInit {
 
 	ngOnInit() {
 		console.log('marcas y usuarios:');
-		this.getMarcas();
-		this.obtenerRepuestos();			
+		//this.getMarcas();
+		//this.obtenerRepuestos();			
 		this.gerente = JSON.parse(localStorage.getItem("user")); 
 		this.vehiculo = JSON.parse(localStorage.getItem("vehiculo")); 
 		this.orden = JSON.parse(localStorage.getItem("orden")); 
+		this.obtenerRepuestosOrden();
+		console.log(this.repuestosOrden);		
 		console.log(this.orden);
 		this.obtenerAccesorios();
 		this.estado = this.orden.activada;
@@ -68,6 +76,10 @@ export class DetalleOrdenComponent implements OnInit {
 	this.location.back();
 	}
 
+	modificarRepuestos() {
+		this.nuevoRepuesto = true;  
+		
+	}
 
 	getMarcas() {
 		this.authService.getMarcas().subscribe(data => {
@@ -132,14 +144,6 @@ export class DetalleOrdenComponent implements OnInit {
 		}
 	}
 
-	obtenerRepuestos() {
-		let data = this.authService.obtenerRepuestos().subscribe( datos => {
-			this.repuestos = datos.repuestos;
-			console.log("AQUI LOS REPUESTOS"); 
-			console.log(this.repuestos); 
-		}); 
-	}
-
 	actualizarOrden() {
 	  	console.log(this.idOrden);
 		  const orden = {
@@ -152,21 +156,33 @@ export class DetalleOrdenComponent implements OnInit {
 		this.authService.actualizarOrden(orden).subscribe(data => {
 			console.log(data.success); 
 
-			this.authService.añadirRepuestosOrden(this.repuestosTemp).subscribe(data => {
-				console.log(data);
+			/*this.authService.añadirRepuestosOrden(this.repuestosTemp).subscribe(data => {
+				console.log(data);*/
 				this.authService.getOrden(orden.idOrden).subscribe(data => {
 					console.log(data); 
 					this.ordenTemp = data.orden; 
 					this.authService.almacenarOrdenLS(this.ordenTemp);
 					this.router.navigate['detalle-orden'];     
 				});						
-			});	
+			//});	
 		}); 
 	}
 
-	sumarRepuesto(idRepuesto) {
-		this.repuestosTemp.push(idRepuesto);
-		console.log(this.repuestosTemp);
+	obtenerRepuestosOrden() {
+		this.authService.obtenerRepuestosOrden(this.orden).subscribe( datos => {
+			this.repuestosOrdenAux=datos.repuestosOrden;
+			console.log("id repuestos aux:");
+			console.log(this.repuestosOrdenAux);
+			for (let i = 0; i < this.repuestosOrdenAux.length; i++) {
+				this.authService.obtenerRepuesto(this.repuestosOrdenAux[i].idRepuesto).subscribe( datos => {
+					console.log(datos.repuesto);
+					this.repuestosOrden.push(datos.repuesto);
+				})
+			}
+			console.log("AQUI LOS REPUESTOS de la orden"); 
+			console.log(this.repuestosOrden); 
+		}); 
 	}
+
 
 }

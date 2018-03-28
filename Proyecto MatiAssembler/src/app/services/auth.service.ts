@@ -125,6 +125,23 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/obtenerRepuestos', Object(), {headers: headers})
 		.map(res => res.json());
 	}
+
+	obtenerRepuesto(ID) { //Obtener repuesto por id
+		let idRepuesto = {ID} 
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/obtenerRepuesto', idRepuesto, {headers: headers})
+		.map(res => res.json());
+	}
+
+	obtenerRepuestosOrden(orden) { //Obtener id de repuestos de una orden
+		console.log("Hola repuestos orden"); 
+		//let idOrden = {ID} 		
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/obtenerRepuestosOrden', orden, {headers: headers})
+		.map(res => res.json());
+	}
 	
 	registerUser(user){ 
 		//console.log(user); //Para registrar un usuario

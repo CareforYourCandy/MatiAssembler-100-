@@ -26,11 +26,7 @@ module.exports.addRepuesto = function(newRepuesto, callback) { //Añadir un nuev
  
 
 }
-
-
-
-
-    
+  
 module.exports.getRepuesto = function(id, callback){
            
     Repuesto.findAll().then(datos => {
@@ -44,7 +40,20 @@ module.exports.getRepuesto = function(id, callback){
         return repuestos; 
     })
     .then(datos => {
+        console.log("repuestos todos:");
         console.log(datos); 
         return callback(null, datos);
     });
+}
+
+module.exports.getRepuestoByID= function(ID, callback){
+    const query = {where: {idRepuesto: ID}}
+    console.log(" AQUI ADENTRO DEL CAMBIO");
+    Repuesto.findOne(query).then(dato => {
+        console.log(dato.get());
+        return dato.get();
+    })
+    .then(datos => {
+        callback(null, datos);
+    }); 
 }

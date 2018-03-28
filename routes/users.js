@@ -9,7 +9,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const Repuesto = require('../models/repuesto'); 
 const Marca = require('../models/marca');
-const AccesoriosOrden = require('../models/accesoriosorden'); 
+const AccesoriosOrden = require('../models/accesoriosOrden'); 
+const RepuestosOrden = require('../models/repuestosOrden'); 
 
 router.post('/modificarUsuario', (req, res, next) => {
 	console.log("Estoy en modificar usuario"); 
@@ -170,8 +171,70 @@ router.post('/obtenerRepuestos', (req, res, next) => {
 			repuestos
 		})
 	});
-	
-	}); 
+});
+
+//Obtener 1 repuesto por su ID
+router.post('/obtenerRepuesto', (req, res, next) => {
+	console.log("AQUI CAMBIANDO REPUESTOS");
+	const id = req.body.ID;
+	Repuesto.getRepuestoByID(id, (err, repuesto) => {
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!repuesto){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'Repuesto not found'});
+		}
+		res.json({
+			success: true,
+			repuesto: {
+				idRepuesto: repuesto.idRepuesto,
+				pieza: repuesto.pieza
+			}
+		});
+	});
+});  
+
+//Obtener los id de repuestos de una orden
+router.post('/obtenerRepuestosOrden', (req, res, next) => {
+	console.log("Estoy en obtener repuestos de la orden"); 
+	const id = req.body.idOrden;
+	RepuestosOrden.getRepuestosOrden(id, (err, repuestosOrden) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!repuestosOrden) {
+			console.log("No hay repuestos"); 
+		}
+		
+		res.json( {
+			success:true, 
+			repuestosOrden
+		})
+	});
+});
+
+
+//Obtener Vehiculos por cliente
+/*router.post('/getVehiculos', (req, res, next) => {
+	const id=req.body.idUsuario;
+	console.log();
+	Vehiculo.getVehiculosByDueño(id, (err, vehiculos) => {
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!vehiculos){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'User not found'});
+		}
+		console.log(vehiculos);
+		res.json({
+			success: true,
+			vehiculos});
+	});
+})*/
+
+
 //Obtener Vehiculos por cliente
 router.post('/getVehiculos', (req, res, next) => {
 	const id=req.body.idUsuario;

@@ -277,13 +277,13 @@
                             <span class="input-group-addon"><i class="material-icons">build</i> Repuestos: 
                             </span> <br>
 
-                            <div class="demo-radio-button">
-                                <div *ngFor="let repuesto of repuestos">
-                                    <input (click)="sumarRepuesto(repuesto.idRepuesto)" type="radio" id={{repuesto.idRepuesto}} class="with-gap radio-col-light-blue"/>
-                                    <label for={{repuesto.idRepuesto}}>{{repuesto.pieza}}</label>
+                            <div class="demo-checkbox"> 
+                                <div *ngFor="let repuesto of repuestosOrden">    
+                                        <input type="checkbox" id={{repuesto.idRepuesto}} class="chk-col-light-blue" checked disabled/>
+                                        <label for={{repuesto.idRepuesto}}>{{repuesto.pieza}}</label>    
                                 </div>
                             </div>
-                            <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "actualizarOrden()" type="button" >MODIFICAR</button> <br><br>
+                            <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "modificarRepuestos()" type="button" >MODIFICAR</button> <br><br>
 
 
                             <span class="input-group-addon"> <i class="material-icons">settings</i> Accesorios: </span> <br> 
@@ -324,20 +324,20 @@
                                         <label for="acc4" >Herramientas</label>
                                     </div> 
 
-                                    <div *ngIf="accesorios.equipoSonido">
+                                    <div *ngIf="accesorios.equipodeSonido">
                                         <input type="checkbox" id="acc5" class="chk-col-light-blue" checked disabled/>
                                         <label for="acc5" >Equipo de Sonido</label>
                                     </div>  
-                                    <div *ngIf="accesorios.equipoSonido==false">
+                                    <div *ngIf="accesorios.equipodeSonido==false">
                                         <input type="checkbox" id="acc5" class="chk-col-light-blue" disabled/>
                                         <label for="acc5" >Equipo de Sonido</label>
                                     </div>                                                     
 
                                     <div *ngIf="accesorios.desperfectoCarroceria">
                                         <input type="checkbox" id="acc6" class="chk-col-light-blue" checked disabled/>
-                                        <label for="acc6" >Equipo de Sonido</label>
+                                        <label for="acc6" >Desperfecto Carroceria: {{accesorios.desperfectoCarroceria}}</label>
                                     </div>  
-                                    <div *ngIf="accesorios.desperfectoCarroceria==false">
+                                    <div *ngIf="accesorios.desperfectoCarroceria==null">
                                         <input type="checkbox" id="acc6" class="chk-col-light-blue" disabled/>
                                         <label for="acc6" >Desperfecto Carroceria</label>
                                     </div>
@@ -354,8 +354,21 @@
 </section>
 
 
-<div class="card">
-        <div class="body">
-            
+<!-- MODAL REPUESTOS --> 
+    <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="smallModalLabel">Actualizar repuestos</h4>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="nuevoRepuesto">
+                        <app-modificar-repuesto> </app-modificar-repuesto> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
         </div>
     </div>

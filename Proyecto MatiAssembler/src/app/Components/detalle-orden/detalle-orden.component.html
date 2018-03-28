@@ -1,31 +1,29 @@
-    <!-- Top Bar -->
-    <nav class="navbar">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
-                <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="widgets/../../index.html">MATI ASSEMBLER - GERENTE</a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Call Search -->
-                    <li>
-                        <a href="javascript:void(0);" class="js-search" data-close="true">
-                            <i class="material-icons">search</i>
-                        </a>
-                    </li>
-                    <!-- #END# Call Search -->
-
-                    <li class="pull-right">
-                        <a href="javascript:void(0);" class="js-right-sidebar" data-close="true">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<!-- Top Bar -->
+<nav class="navbar">
+    <div class="container-fluid bg-deep-orange">
+        <div class="navbar-header">
+            <a class="navbar-brand" style="cursor:pointer" onclick="openNav()">&#9776; MATI ASSEMBLER - GERENTE</a>
         </div>
-    </nav>
-    <!-- #Top Bar -->
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Call Search -->
+                <li>
+                    <a href="javascript:void(0);" class="js-search" data-close="true">
+                        <i class="material-icons">search</i>
+                    </a>
+                </li>
+                <!-- #END# Call Search -->
+
+                <li class="pull-right">
+                    <a href="javascript:void(0);" class="js-right-sidebar" data-close="true">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
@@ -38,6 +36,7 @@
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{gerente.nombre}}</div>
                     <div class="email">{{gerente.correo}}</div>
                 </div>
+                <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
             </div>
             <!-- #User Info -->
             <!-- Menu -->
@@ -45,21 +44,15 @@
                 <ul class="list">
                     <li class="header active">MENU PRINCIPAL</li>
                     <li>
-                        <a (click)="home()">
-                            <i class="material-icons">home</i>
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li>
                         <a (click)="goBack()" >
                             <i class="material-icons">keyboard_return</i>
-                            <span>Volver</span>
+                            <span style="cursor:pointer">Volver</span>
                         </a>
                     </li>
                     <li>
                         <a (click)="logout()" >
                             <i class="material-icons">not_interested</i>
-                            <span>Cerrar sesión</span>
+                            <span style="cursor:pointer">Cerrar sesión</span>
                         </a>
                     </li>
                 </ul>
@@ -81,8 +74,8 @@
 
     </section>
 
-      <section class="content">
-
+<section id="main" class="content">
+    <div class="container-fluid">
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
@@ -161,6 +154,208 @@
             </div>
         </div>
 
-    </section>
+
+<div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header bg-cyan">
+                        <h2>
+                            DETALLE DE LA ORDEN
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <form  action="/" (submit)="modificarOrden()" id="frmFileUpload"  method="post">
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                            N° Orden
+                                            </span>
+                                    <div class="form-line disabled">
+                                        <input type="text" class="form-control" [(ngModel)]="idOrden" name="idOrden" placeholder="N° Orden" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                                Mecanico 
+                                            </span>
+                                    <div class="form-line disabled">
+                                        <input type="text" class="form-control" [(ngModel)]="mecanico" name="mecanico" placeholder="Mecanico asignado" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                                Modelo
+                                            </span>
+                                    <div class="form-line disabled">
+                                        <input type="text" class="form-control" [(ngModel)]="modelo" name="modelo" placeholder="Modelo" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                                Año
+                                            </span>
+                                    <div class="form-line disabled">
+                                        <input type="text" class="form-control" [(ngModel)]="ano" name="ano" placeholder="Año" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                                Placa
+                                            </span>
+                                    <div class="form-line disabled">
+                                        <input type="text" class="form-control" [(ngModel)]="placa" name="placa" placeholder="Placa" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                                Serial
+                                            </span>
+                                    <div class="form-line disabled">
+                                        <input type="text" class="form-control" [(ngModel)]="serialMotor" name="serialMotor" placeholder="Serial Motor" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                                Fecha
+                                            </span>
+                                    <div class="form-line disabled">
+                                        <input type="text" class="form-control" [(ngModel)]="fechaAdmision" name="fechaAdmision" placeholder="Fecha Admision" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                                <i class="material-icons">today</i> Diagnostico
+                                            </span>
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" [(ngModel)]="diagnostico" name="diagnostico" placeholder="Diagnostico" required autofocus>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                                Procedimiento
+                                            </span>
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" [(ngModel)]="procedimiento" name="procedimiento" placeholder="Procedimiento" required autofocus>
+                                    </div>
+                                </div>
+                            </div>   
+                            <div >                                            
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                                <i class="material-icons">thumbs_up_down</i> Estado:
+                                            </span>
+                                    <div class="btn-group">
+                                        
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                                                {{obtenerEstado()}}<span class="caret"></span>
+                                              </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a (click)= "setEstado(1)" >En curso</a></li>
+                                            <li><a (click)= "setEstado(2)" >Finalizada</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "actualizarOrden()" type="button" >MODIFICAR</button> <br><br>
+
+                            <span class="input-group-addon"><i class="material-icons">build</i> Repuestos: 
+                            </span> <br>
+
+                            <div class="demo-radio-button">
+                                <div *ngFor="let repuesto of repuestos">
+                                    <input (click)="sumarRepuesto(repuesto.idRepuesto)" type="radio" id={{repuesto.idRepuesto}} class="with-gap radio-col-light-blue"/>
+                                    <label for={{repuesto.idRepuesto}}>{{repuesto.pieza}}</label>
+                                </div>
+                            </div>
+                            <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "actualizarOrden()" type="button" >MODIFICAR</button> <br><br>
 
 
+                            <span class="input-group-addon"> <i class="material-icons">settings</i> Accesorios: </span> <br> 
+                            <div class="demo-checkbox">     
+                                    <div *ngIf="accesorios.cauchoRepuesto"> 
+                                        <input type="checkbox" id="acc1" class="chk-col-light-blue" checked disabled/>
+                                        <label for="acc1" >Caucho Repuesto</label>    
+                                    </div>
+                                    <div *ngIf="accesorios.cauchoRepuesto==false"> 
+                                        <input type="checkbox" id="acc1" class="chk-col-light-blue" disabled/>
+                                        <label for="acc1" >Caucho Repuesto</label>    
+                                    </div>
+
+                                    <div *ngIf="accesorios.llaves">
+                                        <input type="checkbox" id="acc2" class="chk-col-light-blue" checked disabled/>
+                                        <label for="acc2" >Llaves</label>
+                                    </div> 
+                                    <div *ngIf="accesorios.llaves==false">
+                                        <input type="checkbox" id="acc2" class="chk-col-light-blue" disabled/>
+                                        <label for="acc2" >Llaves</label>
+                                    </div> 
+
+                                    <div *ngIf="accesorios.gato">
+                                        <input type="checkbox" id="acc3" class="chk-col-light-blue" checked disabled/>
+                                        <label for="acc3" >Gato</label>
+                                    </div>
+                                    <div *ngIf="accesorios.gato==false">
+                                        <input type="checkbox" id="acc3" class="chk-col-light-blue" disabled/>
+                                        <label for="acc3" >Gato</label>
+                                    </div> 
+
+                                    <div *ngIf="accesorios.herramientas">
+                                        <input type="checkbox" id="acc4" class="chk-col-light-blue" checked disabled/>
+                                        <label for="acc4" >Herramientas</label>
+                                    </div> 
+                                    <div *ngIf="accesorios.herramientas==false">
+                                        <input type="checkbox" id="acc4" class="chk-col-light-blue" disabled/>
+                                        <label for="acc4" >Herramientas</label>
+                                    </div> 
+
+                                    <div *ngIf="accesorios.equipoSonido">
+                                        <input type="checkbox" id="acc5" class="chk-col-light-blue" checked disabled/>
+                                        <label for="acc5" >Equipo de Sonido</label>
+                                    </div>  
+                                    <div *ngIf="accesorios.equipoSonido==false">
+                                        <input type="checkbox" id="acc5" class="chk-col-light-blue" disabled/>
+                                        <label for="acc5" >Equipo de Sonido</label>
+                                    </div>                                                     
+
+                                    <div *ngIf="accesorios.desperfectoCarroceria">
+                                        <input type="checkbox" id="acc6" class="chk-col-light-blue" checked disabled/>
+                                        <label for="acc6" >Equipo de Sonido</label>
+                                    </div>  
+                                    <div *ngIf="accesorios.desperfectoCarroceria==false">
+                                        <input type="checkbox" id="acc6" class="chk-col-light-blue" disabled/>
+                                        <label for="acc6" >Desperfecto Carroceria</label>
+                                    </div>
+                            </div>                                                      
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<div class="card">
+        <div class="body">
+            
+        </div>
+    </div>

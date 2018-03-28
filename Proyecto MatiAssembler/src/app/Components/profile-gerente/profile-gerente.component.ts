@@ -55,6 +55,7 @@ export class ProfileGerenteComponent implements OnInit {
     console.log("Ya se obtuvieron la cola de las citas")
     this.obtenerVehiculos(); 
     console.log("Se van a obtener las ordenes"); 
+    this.obtenerColaCitas();
     this.obtenerOrdenes(); 
 
    //Para obtener todos los vehiculos registrados en el taller
@@ -208,11 +209,6 @@ modificarUsuario(id) {
     });
   }
 
-  /*agregarOrden() {
-    this.nuevaOrden = true;  
-    //this.idVehiculotemp=idVehiculo; 
-  }*/
-
   agregarOrden(idVehiculo, idCita) {
     this.nuevaOrden = true;  
     this.idVehiculotemp=idVehiculo; 
@@ -235,12 +231,12 @@ modificarUsuario(id) {
     this.mecanicoReporte = id; 
 
   }
-
+/*
   desactivarOrden(id) {
     console.log(id);
     this.authService.desactivarOrden(id).subscribe(data => {
       console.log(data); 
     })
     this.obtenerOrdenes(); 
-  }
+  }*/
 }

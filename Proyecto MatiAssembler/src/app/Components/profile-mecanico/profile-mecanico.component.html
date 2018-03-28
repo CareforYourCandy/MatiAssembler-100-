@@ -1,12 +1,83 @@
 
+<!-- Top Bar -->
+<nav class="navbar">
+    <div class="container-fluid bg-deep-orange">
+        <div class="navbar-header">
+            <a class="navbar-brand" style="cursor:pointer" onclick="openNav()">&#9776; MATI ASSEMBLER - MECÁNICO</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Call Search -->
+                <li>
+                    <a href="javascript:void(0);" class="js-search" data-close="true">
+                        <i class="material-icons">search</i>
+                    </a>
+                </li>
+                <!-- #END# Call Search -->
+
+                <li class="pull-right">
+                    <a href="javascript:void(0);" class="js-right-sidebar" data-close="true">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #Top Bar -->
+<section>
+    <div >
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info bg-light-green">
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nombre}}</div>
+                    <div class="email">{{user.correo}} HOLA</div>
+                </div>
+                <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
+
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header active">MENU PRINCIPAL</li>
+                    <li>
+                        <a (click)="home()">
+                            <i class="material-icons">home</i>
+                            <span style="cursor:pointer">Home</span>
+                        </a>
+                        <a  (click)="logout()" >
+                            <i class="material-icons">not_interested</i>
+                            <span style="cursor:pointer">Cerrar sesión</span>
+                        </a>
+                    </li>
+
+
+ 
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2018
+                    <p >MatiAssembler</p>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.0
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </div>
+</section>
 
 
 
-
-<body class="theme-red">
-   <app-navbar></app-navbar> 
-  
-    <section class="content">
+<section id="main" class="content">
 
 
         <!-- ÓRDENES EN REPARACIÓN -->
@@ -27,6 +98,7 @@
                                     <th>AÑO</th>
                                     <th>PLACA</th>
                                     <th>SERIAL</th>
+                                    <th>Ver detalle</th>
                                     
                                 </tr>
                             </thead>
@@ -38,12 +110,13 @@
                                         <td>{{orden.vehiculo.ano}}</td>
                                         <td>{{orden.vehiculo.placa}}</td>
                                         <td>{{orden.vehiculo.serialMotor}}</td>
-                                      
+                                        <td> 
+                                            <button type="button" (click)="verDetalleOrden(orden)" class="btn btn-default waves-effect">
+                                                <i class="material-icons">visibility</i>
+                                            </button>
+                                        </td> 
                                      
-                                    </tr>
-                                    
-                               
-                                
+                                    </tr>                        
                             </tbody>
                         </table>
                     </div>
@@ -52,17 +125,4 @@
         </div>
 
         <!-- #END# Hover Rows -->
-
-
-
-
-
-
-    </section>
-
-
-
-
-
-</body>
-
+</section>

@@ -333,7 +333,7 @@ router.post('/getOrden', (req, res, next) => {
 				idVehiculo: orden.idVehiculo,
 				idMecanico: orden.idMecanico,
 				diagnostico: orden.diagnostico,
-				motivo: orden.motivo,
+				procedimiento: orden.procedimiento,
 				activada: orden.activada,
 				fecha: orden.fecha
 			}
@@ -365,7 +365,8 @@ router.post('/getAccesorios', (req, res, next) => {
 				llaves: accs.llaves,
 				gato: accs.gato,
 				herramientas: accs.herramientas,
-				equipodeSonido: accs.equipodeSonido
+				equipodeSonido: accs.equipodeSonido,
+				desperfectoCarroceria: accs.desperfectoCarroceria
 			}
 		});
 	});
@@ -457,30 +458,7 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res
     //console.log(req.user);
     res.json({ user: req.user });
 });
-router.post('/registerOrden', (req, res, next) => {
-	console.log(req.body);
-	
-	let newOrden = {
-	
-		idVehiculo: req.body.idVehiculo,
-		idMecanico: req.body.idMecanico,
-		diagnostico: req.body.diagnostico,
-		motivo: req.body.motivo,
-		fecha: req.body.fecha,
-		activada: true, 
 
-	}
-	console.log(newOrden); 
-
-    Orden.addOrden(newOrden, (err, orden) => {
-		if(err){
-			res.json({success:false, msg:'No funciono el registro vehiculo'});
-		} else {
-			res.json({success:true, msg:'Vehiculo registrado'});
-		}
-	});
-
-});
 router.post('/registerVehiculo', (req, res, next) => {
     
     let newVehiculo = new Vehiculo({
@@ -543,8 +521,30 @@ router.post('/desactivarOrden',  (req, res, next) => {
 			res.json({success:true, msg:'furula'});
 		}
 	})
-	
-	}); 
+}); 
+
+router.post('/activarOrden',  (req, res, next) => {
+	console.log(req.body); 
+	Orden.activarOrden(req.body.idOrden, (err, orden)  => {
+		if (err) {
+			res.json({success:false, msg:'No funciono'});
+		} else {
+			res.json({success:true, msg:'furula'});
+		}
+	})	
+}); 
+
+router.post('/cerrarOrden',  (req, res, next) => {
+	console.log(req.body); 
+	Orden.cerrarOrden(req.body.idOrden, (err, orden)  => {
+		if (err) {
+			res.json({success:false, msg:'No funciono'});
+		} else {
+			res.json({success:true, msg:'furula'});
+		}
+	})	
+});
+
 router.post('/registerRepuesto', (req, res, next) => {
 	let repuesto = new Repuesto({
 		pieza:  req.body.pieza 
@@ -559,22 +559,50 @@ router.post('/registerRepuesto', (req, res, next) => {
 });
 
 router.post('/registerOrden', (req, res, next) => {
-	let orden = new Orden({
+	console.log(req.body);
+	
+	let newOrden = {
+	
 		idVehiculo: req.body.idVehiculo,
-	    idMecanico: req.body.idMecanico,
-	    diagnostico: req.body.diagnostico,
-	    fecha: req.body.fecha,
-	    motivo: req.body.motivo,
-	    activada: req.body.activada 
-	});
-	Orden.addOrden(orden, (err, orden) => {
+		idMecanico: req.body.idMecanico,
+		diagnostico: req.body.diagnostico,
+		procedimiento: req.body.procedimiento,
+		fecha: req.body.fecha,
+		activada: 1, 
+
+	}
+	console.log(newOrden); 
+
+    Orden.addOrden(newOrden, (err, orden) => {
 		if(err){
-			res.json({success:false, msg:'No funciono el registro de usuario'});
+			res.json({success:false, msg:'No funciono el registro orden'});
 		} else {
-			res.json({success:true, msg:'Usuario registrado'});
+			res.json({success:true, msg:'Orden registrada'});
 		}
 	});
-});  
+
+}); 
+
+router.post('/modificarOrden', (req, res, next) => {
+	console.log(req.body);
+	
+	let newOrden = {	
+		idOrden: req.body.idOrden,
+		diagnostico: req.body.diagnostico,
+		procedimiento: req.body.procedimiento,
+		activada: req.body.activada, 
+	}
+	console.log(newOrden); 
+
+    Orden.modificarOrden(newOrden, (err, orden) => {
+		if(err){
+			res.json({success:false, msg:'No funciono la actualizacion de orden'});
+		} else {
+			res.json({success:true, msg:'Orden actualizada'});
+		}
+	});
+
+}); 
 
 module.exports = router;
 

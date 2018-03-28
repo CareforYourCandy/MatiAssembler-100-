@@ -26,6 +26,9 @@ const AccesoriosOrden = connection.define('accesoriosorden', {
     },  
     equipodeSonido: {
         type: Sequelize.BOOLEAN
+    },
+    desperfectoCarroceria: {
+        type: Sequelize.BOOLEAN
     }
 });
 

@@ -15,7 +15,7 @@ export class EmitirOrdenComponent implements OnInit {
 	diagnostico: String;
 	mecanico: String;
 	repuesto: String;
-	motivo: String;
+	procedimiento: String;
 	ordenGenerada;
 	activada: Boolean;
 
@@ -33,8 +33,8 @@ export class EmitirOrdenComponent implements OnInit {
 	    idMecanico: this.mecanico,
 	    diagnostico: this.diagnostico,
 	    fecha: this.fechaOrden,
-	    motivo: this.motivo,
-	    activada: true
+	    procedimiento: this.procedimiento,
+	    activada: 1
 	  }
 	  this.ordenGenerada = orden; 
 	  

@@ -1,44 +1,40 @@
 <div> 
-    <!-- Top Bar -->
-    <nav class="navbar">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
-                <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="widgets/../../index.html">MATI ASSEMBLER - GERENTE</a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Call Search -->
-                    <li>
-                        <a href="javascript:void(0);" class="js-search" data-close="true">
-                            <i class="material-icons">search</i>
-                        </a>
-                    </li>
-                    <!-- #END# Call Search -->
-
-                    <li class="pull-right">
-                        <a href="javascript:void(0);" class="js-right-sidebar" data-close="true">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<!-- Top Bar -->
+<nav class="navbar">
+    <div class="container-fluid bg-deep-orange">
+        <div class="navbar-header">
+            <a class="navbar-brand" style="cursor:pointer" onclick="openNav()">&#9776; MATI ASSEMBLER - GERENTE</a>
         </div>
-    </nav>
-    <!-- #Top Bar -->
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Call Search -->
+                <li>
+                    <a href="javascript:void(0);" class="js-search" data-close="true">
+                        <i class="material-icons">search</i>
+                    </a>
+                </li>
+                <!-- #END# Call Search -->
+
+                <li class="pull-right">
+                    <a href="javascript:void(0);" class="js-right-sidebar" data-close="true">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info">
-                <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
-                </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nombre}}</div>
                     <div class="email">{{user.correo}}</div>
                 </div>
+                <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
             </div>
             <!-- #User Info -->
             <!-- Menu -->
@@ -46,33 +42,29 @@
                 <ul class="list">
                     <li class="header active">MENU PRINCIPAL</li>
                     <li>
-                        <a (click)="home()">
-                            <i class="material-icons">home</i>
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li>
                         <a (click)="setVista(1)">
                             <i class="material-icons">person</i>
-                            <span>Ver mecanicos y clientes</span>
+                            <span style="cursor:pointer">Ver mecanicos y clientes</span>
                         </a>
                     </li>
                     <li>
                         <a (click)="setVista(2)">
                             <i class="material-icons">directions_car</i>
-                            <span>Ver vehículos</span>
+                            <span style="cursor:pointer">Ver vehículos</span>
                         </a>
                     </li>
                     <li>
                         <a (click)="setVista(3)">
                             <i class="material-icons">event_available</i>
-                            <span>Citas y órdenes</span>
+                            <span style="cursor:pointer">Citas y órdenes</span>
                         </a>
                     </li>                    
 
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      Reportes <b class="caret"></b>
+                        <i class="material-icons">assignment</i>
+                        <span>Reportes</span>
+                     <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                       <li><a href="#">Cliente</a></li>
@@ -86,7 +78,7 @@
                     <li>
                         <a (click)="logout()" >
                             <i class="material-icons">not_interested</i>
-                            <span>Cerrar sesión</span>
+                            <span style="cursor:pointer">Cerrar sesión</span>
                         </a>
                     </li>
 
@@ -110,222 +102,222 @@
 
     </section>
 
-
-    <section class="content">
-    <div  *ngIf="vista == 1">
-        <!-- LISTA CLIENTES -->
-        <div class="row clearfix">
-                <div>
-                    <div class="card">
-                        <div class="header bg-pink">
-                            <h2>
-                                LISTA DE CLIENTES
-                            </h2>
-                        </div>
-                        <div class="body table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                      <th>NOMBRE</th>
-                                      <th>APELLIDO</th>
-                                      <th>CÉDULA</th>
-                                      <th>MODIFICAR</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor= 'let user of clientes' >
-                                      <td>{{user.nombre}}</td>
-                                      <td>{{user.apellido}}</td>
-                                      <td>{{user.cedula}}</td>
-                                      <td> <button type="button" data-toggle="modal" data-target="#defaultModal" (click)="modificarCliente(user.idUsuario)" class="btn btn-default waves-effect">
-                                        <i class="material-icons">settings</i> </button>
-                                        </td>
-                                     </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            
-            <!-- #END# LISTA CLIENTES -->
-
-
-            <!-- LISTA MECANICOS -->
-                <div>
-                    <div class="card">
-                        <div class="header bg-pink">
-                            <h2>
-                                LISTA DE MECÁNICOS
-                            </h2>
-                        </div>
-                        <div class="body table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>NOMBRE</th>
-                                        <th>APELLIDO</th>
-                                        <th>CÉDULA</th>
-                                        <th>VER ORDENES</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor= 'let user of mecanicos' >
-                                      <td>{{user.nombre}}</td>
-                                      <td>{{user.apellido}}</td>
-                                      <td>{{user.cedula}}</td>
-                                      <td> <button type="button" data-toggle="modal" data-target="#largeModal"(click)="verReporte(user.idUsuario)" class="btn btn-default waves-effect">
-                                        <i class="material-icons">pageview</i>
-                                    </button></td>   
-                                    
-                                     </tr>
-                                </tbody>
-                            </table>
+<section id="main" class="content">
+    <div class="container-fluid">
+        <div  *ngIf="vista == 1">
+            <!-- LISTA CLIENTES -->
+            <div class="row clearfix">
+                    <div>
+                        <div class="card">
+                            <div class="header bg-pink">
+                                <h2>
+                                    LISTA DE CLIENTES
+                                </h2>
+                            </div>
+                            <div class="body table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                          <th>NOMBRE</th>
+                                          <th>APELLIDO</th>
+                                          <th>CÉDULA</th>
+                                          <th>MODIFICAR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor= 'let user of clientes' >
+                                          <td>{{user.nombre}}</td>
+                                          <td>{{user.apellido}}</td>
+                                          <td>{{user.cedula}}</td>
+                                          <td> <button type="button" data-toggle="modal" data-target="#defaultModal" (click)="modificarCliente(user.idUsuario)" class="btn btn-default waves-effect">
+                                            <i class="material-icons">settings</i> </button>
+                                            </td>
+                                         </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-            
-            <!-- #END# LISTA MECANICOS -->
-        </div>
-    </div>
+                
+                <!-- #END# LISTA CLIENTES -->
 
 
-<div *ngIf="vista == 2">
-<!-- LISTA VEHICULOS -->
-    <div class="row clearfix">
-            <div class="card">
-                <div class="header bg-cyan">
-                    <h2>
-                        LISTA DE VEHICULOS
-                    </h2>
-                </div>
-                <div class="body table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>MARCA</th>
-                                <th>MODELO</th>
-                                <th>AÑO</th>
-                                <th>PLACA</th>
-                                <th>SERIAL</th>
-                                <th>Dueño</th>
-                                <th>FECHA REGISTRO</th>
-                                <th>Ver</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let vehiculo of vehiculos" >
-                               
-                              <td>{{setMarcaVista(vehiculo.marca)}}</td>
-                              <td>{{vehiculo.modelo}}</td>
-                              <td>{{vehiculo.ano}}</td>
-                              <td>{{vehiculo.placa}}</td>
-                              <td>{{vehiculo.serialMotor}}</td>
-                              <td>{{vehiculo.propietario}}</td>
-                              <td>{{vehiculo.fechaRegistro}}</td> 
-                              <td> <button type="button" (click)="verDetalle(vehiculo.idVehiculo)" class="btn btn-default waves-effect">
-                                    <i class="material-icons">pageview</i>
-                                </button></td>          
-                            </tr>
-                       
-                        </tbody>
-                    </table>
-                </div>
+                <!-- LISTA MECANICOS -->
+                    <div>
+                        <div class="card">
+                            <div class="header bg-pink">
+                                <h2>
+                                    LISTA DE MECÁNICOS
+                                </h2>
+                            </div>
+                            <div class="body table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>NOMBRE</th>
+                                            <th>APELLIDO</th>
+                                            <th>CÉDULA</th>
+                                            <th>VER ORDENES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor= 'let user of mecanicos' >
+                                          <td>{{user.nombre}}</td>
+                                          <td>{{user.apellido}}</td>
+                                          <td>{{user.cedula}}</td>
+                                          <td> <button type="button" data-toggle="modal" data-target="#largeModal"(click)="verReporte(user.idUsuario)" class="btn btn-default waves-effect">
+                                            <i class="material-icons">pageview</i>
+                                        </button></td>   
+                                        
+                                         </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                
+                <!-- #END# LISTA MECANICOS -->
             </div>
         </div>
-</div>
+
+
+        <div *ngIf="vista == 2">
+        <!-- LISTA VEHICULOS -->
+            <div class="row clearfix">
+                    <div class="card">
+                        <div class="header bg-cyan">
+                            <h2>
+                                LISTA DE VEHICULOS
+                            </h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>MARCA</th>
+                                        <th>MODELO</th>
+                                        <th>AÑO</th>
+                                        <th>PLACA</th>
+                                        <th>SERIAL</th>
+                                        <th>Dueño</th>
+                                        <th>FECHA REGISTRO</th>
+                                        <th>Ver</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let vehiculo of vehiculos" >
+                                       
+                                      <td>{{setMarcaVista(vehiculo.marca)}}</td>
+                                      <td>{{vehiculo.modelo}}</td>
+                                      <td>{{vehiculo.ano}}</td>
+                                      <td>{{vehiculo.placa}}</td>
+                                      <td>{{vehiculo.serialMotor}}</td>
+                                      <td>{{vehiculo.propietario}}</td>
+                                      <td>{{vehiculo.fechaRegistro}}</td> 
+                                      <td> <button type="button" (click)="verDetalle(vehiculo.idVehiculo)" class="btn btn-default waves-effect">
+                                            <i class="material-icons">pageview</i>
+                                        </button></td>          
+                                    </tr>
+                               
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
     <!-- #END# LISTA VEHICULOS -->
 
-<div *ngIf="vista == 3">
-    <!-- COLA DE ESPERA -->
-<div class="row clearfix">
-        <div >
-            <div class="card">
-                <div class="header bg-light-green">
-                    <h2>
-                            COLA DE ESPERA
-                    </h2>
+        <div *ngIf="vista == 3">
+            <!-- COLA DE ESPERA -->
+        <div class="row clearfix">
+                <div >
+                    <div class="card">
+                        <div class="header bg-light-green">
+                            <h2>
+                                    COLA DE ESPERA
+                            </h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                            <th>MODELO</th>
+                                            <th>AÑO</th>
+                                            <th>PLACA</th>
+                                            <th>SERIAL</th>
+                                            <th>FECHA SOLICITUD</th>
+                                            <th>ASIGNAR FECHA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let carro of carrosCitas">
+                                        <td>{{carro.modelo}}</td>
+                                        <td>{{carro.ano}}</td>
+                                        <td>{{carro.placa}}</td>
+                                        <td>{{carro.serialMotor}}</td>
+                                        <td> {{carro.fecha}}</td>
+                                        <td><button type="button" data-toggle="modal" data-target="#smallModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarOrden(carro.idVehiculo, carro.idCita)" >ASIGNAR FECHA</button></td>
+                                    </tr>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="body table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                    <th>MODELO</th>
-                                    <th>AÑO</th>
-                                    <th>PLACA</th>
-                                    <th>SERIAL</th>
-                                    <th>FECHA SOLICITUD</th>
-                                    <th>ASIGNAR FECHA</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let carro of carrosCitas">
-                                <td>{{carro.modelo}}</td>
-                                <td>{{carro.ano}}</td>
-                                <td>{{carro.placa}}</td>
-                                <td>{{carro.serialMotor}}</td>
-                                <td> {{carro.fecha}}</td>
-                                <td><button type="button" data-toggle="modal" data-target="#smallModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarOrden(carro.idVehiculo, carro.idCita)" >ASIGNAR FECHA</button></td>
-                            </tr>
-                           
-                        </tbody>
-                    </table>
+            
+
+            <!-- #END# Hover Rows -->
+
+             <!-- ÓRDENES EN REPARACIÓN -->
+
+                <div >
+                    <div class="card">
+                        <div class="header bg-orange">
+                            <h2>
+                                    ÓRDENES EN REPARACIÓN
+                            </h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                            <th>ORDEN</th>
+                                            <th>MODELO</th>
+                                            <th>AÑO</th>
+                                            <th>PLACA</th>
+                                            <th>SERIAL</th>
+                                            <th>ESTADO</th>
+                                            <th>CERRAR ORDEN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor = "let orden of ordenes" >
+                                        <td>{{orden.idOrden}}</td>
+                                        <td>{{orden.vehiculo.modelo}}</td>
+                                        <td>{{orden.vehiculo.ano}}</td>
+                                        <td>{{orden.vehiculo.placa}}</td>
+                                        <td>{{orden.vehiculo.serialMotor}}</td>
+                                        <td>{{orden.activada}}</td>
+                                        <td>
+                                                <button type="button" class="btn bg-indigo waves-effect" (click)="desactivarOrden(orden.idOrden)">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                    </tr>
+                                   
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    
-
-    <!-- #END# Hover Rows -->
-
-     <!-- ÓRDENES EN REPARACIÓN -->
-
-        <div >
-            <div class="card">
-                <div class="header bg-orange">
-                    <h2>
-                            ÓRDENES EN REPARACIÓN
-                    </h2>
-                </div>
-                <div class="body table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                    <th>ORDEN</th>
-                                    <th>MODELO</th>
-                                    <th>AÑO</th>
-                                    <th>PLACA</th>
-                                    <th>SERIAL</th>
-                                    <th>ESTADO</th>
-                                    <th>CERRAR ORDEN</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor = "let orden of ordenes" >
-                                <td>{{orden.idOrden}}</td>
-                                <td>{{orden.vehiculo.modelo}}</td>
-                                <td>{{orden.vehiculo.ano}}</td>
-                                <td>{{orden.vehiculo.placa}}</td>
-                                <td>{{orden.vehiculo.serialMotor}}</td>
-                                <td>{{orden.activada}}</td>
-                                <td>
-                                        <button type="button" class="btn bg-indigo waves-effect" (click)="desactivarOrden(orden.idOrden)">
-                                            <i class="material-icons">close</i>
-                                        </button>
-                                    </td>
-                            </tr>
-                           
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
     
     <!-- #END# Hover Rows -->
         
-
- </section>
+    </div>
+</section>
 <div class="body">
     <div class="row clearfix">
         <div class="col-sm-4">
@@ -371,23 +363,23 @@
 </div>
 
 <!-- MODAL REPUESTOS --> 
-<div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <div *ngIf="nuevaOrden">
-                    <app-emitir-orden [idVehiculo]=idVehiculotemp [idCita]=idCitatemp> </app-emitir-orden> 
-                  </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+    <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="nuevaOrden">
+                        <app-emitir-orden [idVehiculo]=idVehiculotemp [idCita]=idCitatemp> </app-emitir-orden> 
+                      </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 

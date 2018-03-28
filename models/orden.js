@@ -27,11 +27,11 @@ const Orden = connection.define('orden', {
     fecha: {
         type: Sequelize.DATE
     },
-    motivo: {
+    procedimiento: {
         type: Sequelize.STRING      
     },  
-    activada: {
-        type: Sequelize.BOOLEAN
+    activada: {                  //1: en curso, 2: finalizada, 0: cerrada
+        type: Sequelize.INTEGER
     }
 });
 
@@ -39,13 +39,34 @@ module.exports = Orden;
 
 module.exports.desactivarOrden = function(ordenID, callback) {
 	Orden.update(
-		{activada: 0},
+		{activada: 2},
 		{where: {idOrden: ordenID} }
 	).then(datos => {
 		//console.log(datos);
 		return callback(null, datos);
 	});	
 }
+
+module.exports.activarOrden = function(ordenID, callback) {
+    Orden.update(
+        {activada: 1},
+        {where: {idOrden: ordenID} }
+    ).then(datos => {
+        //console.log(datos);
+        return callback(null, datos);
+    }); 
+}
+
+module.exports.cerrarOrden = function(ordenID, callback) {
+    Orden.update(
+        {activada: 0},
+        {where: {idOrden: ordenID} }
+    ).then(datos => {
+        //console.log(datos);
+        return callback(null, datos);
+    }); 
+}
+
 module.exports.addOrden = function(orden, callback) {
     console.log("estoy en addOrden");
     console.log(orden);
@@ -121,3 +142,18 @@ module.exports.getOrdenByID= function(ID, callback){
         callback(null, datos);
     }); 
 }
+
+module.exports.modificarOrden = function(orden, callback) {
+    
+    query = {diagnostico: orden.diagnostico,
+        procedimiento: orden.procedimiento,
+        activada: orden.activada
+    }
+    
+    console.log("ESTOY UPDATEANDO ORDENES");
+    Orden.update(query, {where: {idOrden: orden.idOrden}}); 
+
+    return callback();
+    console.log("update orden exitosa");
+}
+

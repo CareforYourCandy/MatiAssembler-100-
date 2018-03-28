@@ -1,30 +1,6 @@
-<meta charset="UTF-8">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+<div  *ngIf="user.rol == 3" > 
 
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-<!-- <div  *ngIf="user.rol == 1" > -->
- <!-- Page Loader 
- <div class="page-loader-wrapper">
-  <div class="loader">
-      <div class="preloader">
-          <div class="spinner-layer pl-red">
-              <div class="circle-clipper left">
-                  <div class="circle"></div>
-              </div>
-              <div class="circle-clipper right">
-                  <div class="circle"></div>
-              </div>
-          </div>
-      </div>
-      <p>Please wait...</p>
-  </div>
-</div>
- #END# Page Loader -->
-<!-- Overlay For Sidebars -->
-<div class="overlay"></div>
-<!-- #END# Overlay For Sidebars -->
 <!-- Search Bar -->
 <div class="search-bar">
   <div class="search-icon">
@@ -37,13 +13,12 @@
 </div>
 <!-- #END# Search Bar -->
 
+
 <!-- Top Bar -->
 <nav class="navbar">
     <div class="container-fluid bg-deep-orange">
         <div class="navbar-header">
-            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
-            <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" >MATI ASSEMBLER - CLIENTE</a>
+            <a class="navbar-brand" style="cursor:pointer" onclick="openNav()">&#9776; MATI ASSEMBLER - CLIENTE</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -70,13 +45,11 @@
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info bg-light-green">
-                <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
-                </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nombre}}</div>
                     <div class="email">{{user.correo}}</div>
                 </div>
+                <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
             </div>
             <!-- #User Info -->
             <!-- Menu -->
@@ -86,19 +59,19 @@
                     <li>
                         <a (click)="setVista(1)">
                             <i class="material-icons">home</i>
-                            <span>Home</span>
+                            <span style="cursor:pointer">Home</span>
                         </a>
                     </li>
                     <li>
                         <a (click)="setVista(2)">
                             <i class="material-icons">directions_car</i>
-                            <span>Registrar vehículo</span>
+                            <span style="cursor:pointer">Registrar vehículo</span>
                         </a>
                     </li>
                     <li>
                         <a  (click)="logout()" >
                             <i class="material-icons">not_interested</i>
-                            <span>Cerrar sesión</span>
+                            <span style="cursor:pointer">Cerrar sesión</span>
                         </a>
                     </li>
                 </ul>
@@ -119,7 +92,7 @@
         <!-- #END# Left Sidebar -->
  </section>
 
-<section class="content">
+<section id="main" class="content">
 
   <div class="container-fluid">
 
@@ -162,7 +135,7 @@
                   </div>
                   <div class="content">
                       <div class="text">CÉDULA</div>
-                      <div class="number count-to" data-from="0" data-to="10330574" data-speed="1000" data-fresh-interval="20"> {{user.cedula}} </div>
+                      <div class="lead"> {{user.cedula}} </div>
                   </div>
               </div>
           </div>
@@ -186,7 +159,7 @@
                   </div>
                   <div class="content">
                       <div class="text">TELEFÓNO</div>
-                      <div class="number count-to" data-from="0" data-to="5514089" data-speed="1000" data-fresh-interval="20">{{user.telefono}}</div>
+                      <div class="lead">{{user.telefono}}</div>
                   </div>
               </div>
           </div>
@@ -381,6 +354,4 @@
 </div>
 </section>
 
-
-<!-- </div> --> 
-
+</div>

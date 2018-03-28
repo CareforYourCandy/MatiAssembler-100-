@@ -33,6 +33,7 @@ import { ReporteVehiculoComponent } from './Components/reporte-vehiculo/reporte-
 import { ReporteMecanicoComponent } from './Components/reporte-mecanico/reporte-mecanico.component';
 import { ReporteClienteComponent } from './Components/reporte-cliente/reporte-cliente.component';
 import { EmitirOrdenComponent } from './Components/emitir-orden/emitir-orden.component';
+import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modificar-repuesto.component';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -47,7 +48,8 @@ import { EmitirOrdenComponent } from './Components/emitir-orden/emitir-orden.com
       { path: 'detalle-vehiculo', component: DetalleVehiculoComponent, canActivate:[AuthGuard]},
       { path: 'detalle-orden', component: DetalleOrdenComponent, canActivate:[AuthGuard]},
       { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate:[AuthGuard]},
-      { path: 'emitir-orden', component: EmitirOrdenComponent, canActivate:[AuthGuard]}
+      { path: 'emitir-orden', component: EmitirOrdenComponent, canActivate:[AuthGuard]},
+      { path: 'navbar', component:NavbarComponent},
 
     ]
 @NgModule({
@@ -69,7 +71,8 @@ import { EmitirOrdenComponent } from './Components/emitir-orden/emitir-orden.com
     ReporteVehiculoComponent,
     ReporteMecanicoComponent,
     ReporteClienteComponent,
-    EmitirOrdenComponent
+    EmitirOrdenComponent,
+    ModificarRepuestoComponent
   ],
   imports: [
     BrowserModule,

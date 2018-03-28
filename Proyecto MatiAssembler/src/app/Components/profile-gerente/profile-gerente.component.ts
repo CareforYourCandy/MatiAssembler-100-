@@ -231,12 +231,12 @@ modificarUsuario(id) {
     this.mecanicoReporte = id; 
 
   }
-
+/*
   desactivarOrden(id) {
     console.log(id);
     this.authService.desactivarOrden(id).subscribe(data => {
       console.log(data); 
     })
     this.obtenerOrdenes(); 
-  }
+  }*/
 }

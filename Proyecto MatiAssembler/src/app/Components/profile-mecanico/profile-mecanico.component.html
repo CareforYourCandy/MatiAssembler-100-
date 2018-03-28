@@ -98,6 +98,7 @@
                                     <th>AÑO</th>
                                     <th>PLACA</th>
                                     <th>SERIAL</th>
+                                    <th>Ver detalle</th>
                                     
                                 </tr>
                             </thead>
@@ -109,12 +110,13 @@
                                         <td>{{orden.vehiculo.ano}}</td>
                                         <td>{{orden.vehiculo.placa}}</td>
                                         <td>{{orden.vehiculo.serialMotor}}</td>
-                                      
+                                        <td> 
+                                            <button type="button" (click)="verDetalleOrden(orden)" class="btn btn-default waves-effect">
+                                                <i class="material-icons">visibility</i>
+                                            </button>
+                                        </td> 
                                      
-                                    </tr>
-                                    
-                               
-                                
+                                    </tr>                        
                             </tbody>
                         </table>
                     </div>

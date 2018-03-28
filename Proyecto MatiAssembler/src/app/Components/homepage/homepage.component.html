@@ -75,3 +75,42 @@
     </div>
 </section>
 
+
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Example select</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+
+
+    <select (click)= "prueba()" name="valor" [(ngModel)]="valor" class="form-control show-tick">
+        <option value="1">En curso</option>
+        <option value="0">Finalizado</option>
+    </select>
+
+<div class="container">
+  <h2>Form control: inline checkbox</h2>
+  <p>The form below contains three inline checkboxes:</p>
+  <form>
+    <label class="checkbox-inline">
+      <input (click)= "prueba(valor)" type="checkbox" name="valor" [(ngModel)]="valor">Option 1
+    </label>
+    <label class="checkbox-inline">
+      <input (click)= "prueba(valor2)" type="checkbox" name="valor2" [(ngModel)]="valor2">Option 2
+    </label>
+    <label class="checkbox-inline">
+      <input (click)= "prueba(valor3)" type="checkbox" name="valor3" [(ngModel)]="valor3">Option 3
+    </label>
+  </form>
+</div>
+
+
+<div class="demo-checkbox">
+    <input (click)= "prueba()" type="checkbox" id="md_checkbox_1" name="valor" [(ngModel)]="valor" class="chk-col-red" checked />
+    <label for="md_checkbox_1">RED</label>
+</div>

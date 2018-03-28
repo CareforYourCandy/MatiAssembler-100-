@@ -13,7 +13,10 @@ export class ProfileMecanicoComponent implements OnInit {
 
   ordenes = []; 
   user; 
-  
+  estado; //Estado de una orden (en curso, finalizada)
+  ordenTemp;
+  vehiculoTemp;
+
   constructor(private http:Http,
     private validateService: ValidateService, 
     private authService: AuthService,
@@ -40,6 +43,36 @@ export class ProfileMecanicoComponent implements OnInit {
           })
         }
       } ) 
+    }
+
+    finalizarOrden(idOrden) { //Marcar orden como finalizada
+      console.log(idOrden);
+      if(this.estado==2) { //Finalizar orden
+        this.authService.desactivarOrden(idOrden).subscribe(data => {
+          console.log(data); 
+        })        
+      }
+      if(this.estado==1) { //Poner en curso otra vez
+        this.authService.activarOrden(idOrden).subscribe(data => {
+          console.log(data); 
+        })        
+      }
+      this.obtenerOrdenes(this.user.idUsuario); 
+    }
+
+    verDetalleOrden(orden) {
+      this.authService.getOrden(orden.idOrden).subscribe(data => {
+      console.log(data); 
+      this.ordenTemp = data.orden; 
+      this.authService.almacenarOrdenLS(this.ordenTemp);
+      this.authService.getVehiculo(orden.idVehiculo).subscribe(data => {
+        console.log(data); 
+        this.vehiculoTemp = data.vehiculo; 
+        this.authService.almacenarVehiculoLS(this.vehiculoTemp);
+        this.router.navigate(['detalle-orden']);
+      });      
+      
+      });
     }
   
 

@@ -61,39 +61,21 @@ module.exports = function(sequelize, DataTypes) {
 
 const User = module.exports = connection.import(path.join(process.cwd(), 'models', 'user'));
 
-module.exports.modificarUsuario = function (usuario){
+module.exports.modificarUsuario = function(usuario, callback) {
 	
-	query = {idUsuario: usuario.idUsuario,
+	query = {
 		nombre: usuario.nombre,
 		apellido: usuario.apellido,
 		correo: usuario.correo,
 		rol: usuario.rol,
-		contraseña: usuario.contraseña,
 		cedula: usuario.cedula,
 		telefono: usuario.telefono,
 		direccion: usuario.direccion
 	}
-	texto = "Update Usuario SET "  +  
-	"nombre = " + usuario.nombre + 
-	", apellido = " + usuario.apellido +
-	", correo = " + usuario.correo +
-	", rol = " + usuario.rol +
-	", contraseña = " + usuario.contraseña +
-	", cedula = " + usuario.cedula +
-	", telefono = " + usuario.telefono +
-	", direccion = " + usuario.direccion +
-	" WHERE idUsuario = " + usuario.idUsuario; 
-	console.log("ESTOY UPDATEANDO USUARIO");
-	console.log(texto);
-	sequelize.query(texto).spread(results, metadata => {
-		return results; 
-	})
-
-
- //User.update(query, {where: {idUsuario: usuario.idUsuario}}); 
-	
-
- //User.update(query, {where: {idUsuario: usuario.idUsuario}}); 
+	console.log("ESTOY UPDATEANDO UN USUARIO");
+	User.update(query, {where: {idUsuario: usuario.idUsuario}}); 
+    console.log("update USUARIO exitoso");	
+    return callback();
 }
 
 module.exports.getUserByID= function(ID, callback){

@@ -14,13 +14,27 @@ const RepuestosOrden = require('../models/repuestosOrden');
 
 router.post('/modificarUsuario', (req, res, next) => {
 	console.log("Estoy en modificar usuario"); 
-	console.log(req.body);
-	res.json({success:true, msg:'Usuario registrado'});
-	//User.modificarUsuario(req.body);
-	
+	console.log(req.body);	
+	let newUsuario = {
+		idUsuario: req.body.idUsuario,
+		nombre: req.body.nombre,
+		apellido: req.body.apellido,
+		correo: req.body.correo,
+		rol: req.body.rol,
+		contraseña: req.body.contraseña,
+		cedula: req.body.cedula,
+		telefono: req.body.telefono,		
+		direccion: req.body.direccion
+	}
+
+	User.modificarUsuario(newUsuario, (err, respuesta) => {
+		if(err){
+			res.json({success:false, msg:'No funciono la actualizacion de orden'});
+		} else {
+			res.json({success:true, msg:'Usuario actualizado'});
+		}
+	});
 }); 
-
-
 
 //Register
 router.post('/register', (req, res, next) => {

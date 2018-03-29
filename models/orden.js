@@ -90,14 +90,6 @@ module.exports.getOrdenes =  function(req, callback){ //Obtener lista completa d
 		return callback(null, datos);
 	});		
 }
-/*
-module.exports.addOrden = function(newOrden, callback) { //Añadir una nueva orden de reparacion
-    console.log("estoy en addRepuesto");
-    newOrden.save(callback);
- 
-
-}
-*/
 
 module.exports.getOrdenbyMecanico = function(id, callback){
 	const query = {where: {idMecanico: id }}

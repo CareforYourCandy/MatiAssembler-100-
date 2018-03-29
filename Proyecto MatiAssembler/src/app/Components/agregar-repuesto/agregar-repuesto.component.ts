@@ -37,6 +37,7 @@ repuestoGenerado;
   this.authService.registerRepuesto(repuesto).subscribe(data => {
     console.log(data.success); 
   }); 
+  this.router.navigate['profile-administrador'];
 
  }
 

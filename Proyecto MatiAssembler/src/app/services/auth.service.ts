@@ -37,12 +37,10 @@ export class AuthService {
 
 	}
 
-	modificarUsuario(usuario) {
-		console.log("Hola servicio"); 
-		console.log(usuario); 
+	actualizarUsuario(usuario) {
+		console.log("Hola aqui en actualizar usuario"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		console.log("Voy a hacer el post"); 
 		return this.http.post('http://localhost:3000/users/modificarUsuario', usuario, {headers: headers})
 		.map(res => res.json());
 	}

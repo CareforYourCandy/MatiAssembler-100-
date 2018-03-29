@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class ModificarUsuarioComponent implements OnInit, OnChanges {
       console.log(this.user); 
     }
   }
-  constructor(private authService: AuthService ) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -47,7 +49,7 @@ export class ModificarUsuarioComponent implements OnInit, OnChanges {
 
   modificarUsuario() {
     console.log("hola"); 
-    let usuario = {
+    const usuario = {
       idUsuario: this.id,
       nombre: this.name,
       apellido: this.lastname,
@@ -60,6 +62,9 @@ export class ModificarUsuarioComponent implements OnInit, OnChanges {
       
     }
     console.log(usuario); 
-    this.authService.modificarUsuario(usuario); 
+    this.authService.actualizarUsuario(usuario).subscribe(data => {
+          console.log(data.success); 
+          this.router.navigate['profile-administrador'];      
+    });  
   }
 }

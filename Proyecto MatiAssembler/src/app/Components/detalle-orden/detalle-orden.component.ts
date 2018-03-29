@@ -48,17 +48,15 @@ export class DetalleOrdenComponent implements OnInit {
 	          private location: Location) { }
 
 	ngOnInit() {
-		console.log('marcas y usuarios:');
-		//this.getMarcas();
-		//this.obtenerRepuestos();			
 		this.gerente = JSON.parse(localStorage.getItem("user")); 
 		this.vehiculo = JSON.parse(localStorage.getItem("vehiculo")); 
 		this.orden = JSON.parse(localStorage.getItem("orden")); 
+		this.estado = this.orden.activada;
 		this.obtenerRepuestosOrden();
 		console.log(this.repuestosOrden);		
 		console.log(this.orden);
 		this.obtenerAccesorios();
-		this.estado = this.orden.activada;
+
 		this.obtenerDatos();
 
 	}

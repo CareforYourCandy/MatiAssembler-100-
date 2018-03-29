@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { tokenNotExpired } from 'angular2-jwt';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+
 
 import { AppComponent } from './app.component';
 import { ProfileClienteComponent } from './Components/profile-cliente/profile-cliente.component';
@@ -80,7 +82,8 @@ import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modi
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    NgxQRCodeModule
   ],
   
   providers: [ValidateService, AuthService, AuthGuard, DatePipe],
@@ -91,4 +94,7 @@ import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modi
  
 })
 
-export class AppModule { }
+export class AppModule {
+
+ 
+ }

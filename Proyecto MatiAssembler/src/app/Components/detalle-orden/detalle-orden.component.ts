@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ModificarRepuestoComponent } from '../modificar-repuesto/modificar-repuesto.component'; 
-
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 @Component({
   selector: 'app-detalle-orden',
@@ -37,8 +37,10 @@ export class DetalleOrdenComponent implements OnInit {
 	equipoSonido: String;
 	desperfectoCarroceria: String;
 	estado;
+	elementType : 'url' | 'canvas' | 'img' = 'url';
+	qr : String;
 
-	repuestos;
+	repuestos; 
 	ordenTemp;
 	repuestosOrden = [];
 	repuestosOrdenAux;
@@ -59,6 +61,9 @@ export class DetalleOrdenComponent implements OnInit {
 
 		this.obtenerDatos();
 
+		this.qr = this.orden.idOrden.toString(); 
+		this.qr = "Www.hola.com";
+		
 	}
 
 	logout() {

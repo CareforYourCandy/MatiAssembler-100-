@@ -87,11 +87,12 @@ export class ProfileGerenteComponent implements OnInit {
       this.ordenes = datos.ordenes;
       for (let i = 0; i < this.ordenes.length; i++) {
         let data2 = this.authService.getVehiculo(this.ordenes[i].idVehiculo).subscribe( datos => {
-          console.log("IMPRIMIRE MAS DATOS"); 
-          console.log(datos); 
+          //console.log("IMPRIMIRE MAS DATOS"); 
+          //console.log(datos); 
           this.ordenes[i].vehiculo = datos.vehiculo; 
         })
       }
+      console.log(this.ordenes);
     });
    
 
@@ -230,12 +231,20 @@ modificarUsuario(id) {
     this.mecanicoReporte = id;
     this.nuevoReporte = true;  
   }
-/*
-  desactivarOrden(id) {
-    console.log(id);
-    this.authService.desactivarOrden(id).subscribe(data => {
+
+  cerrarOrden(orden) {
+    let id=orden.idOrden;
+    if(orden.activada==2) { //Cerrar la orden solo si esta finalizada, si esta en curso no permitirlo
+    this.authService.cerrarOrden(id).subscribe(data => {
       console.log(data); 
-    })
-    this.obtenerOrdenes(); 
-  }*/
+      //this.obtenerOrdenes(); 
+      for (let i = 0; i < this.ordenes.length ; i++) {
+        if(this.ordenes[i].idOrden==id){
+          this.ordenes.splice(i, 1);
+        }
+      }
+    })      
+    }
+
+  }
 }

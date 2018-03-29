@@ -318,16 +318,6 @@
         
     </div>
 </section>
-<div class="body">
-    <div class="row clearfix">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <div class="form-line">
-                    <input type="text" class="datepicker form-control" placeholder="Please choose a date...">
-                </div>
-            </div>
-        </div>
-
 
 <!--MODALS PARA REPORTES -->
 <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
@@ -352,7 +342,9 @@
                 <h4 class="modal-title" id="largeModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <app-reporte-mecanico [idMecanico]=mecanicoReporte> </app-reporte-mecanico>
+                <div *ngIf="nuevoReporte">
+                    <app-reporte-mecanico [idMecanico]=mecanicoReporte> </app-reporte-mecanico>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
@@ -381,8 +373,4 @@
         </div>
     </div>
 </div>
-</div>
 
-
-
-</div>

@@ -4,7 +4,7 @@
             <h2>EMITIR ORDEN DE REPARACIÓN</h2>
         </div>
         <div class="body">
-            <form  action="/" (submit)="registrarOrden()" id="frmFileUpload"  method="post">
+            <form  action="/" id="frmFileUpload"  method="post">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="material-icons">date_range</i>
@@ -42,11 +42,11 @@
                         <i class="material-icons">check_circle</i>
                     </span>
                     <div class="form-line">
-                        <input type="text" class="form-control" [(ngModel)]="procedimiento" name="procedimiento" placeholder="Motivo" >
+                        <input type="text" class="form-control" [(ngModel)]="motivo" name="motivo" placeholder="Motivo" >
                     </div>
                 </div>                                
 
-                <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "registrarOrden()" type="submit" data-dismiss="modal">AÑADIR ORDEN</button>
+                <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "registrarOrden()" type="text" data-dismiss="modal">AÑADIR ORDEN</button>
   
             </form>
         </div>

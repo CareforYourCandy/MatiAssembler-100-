@@ -8,12 +8,13 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "*",
-    "mysql2": "^1.4.2",
     "bcryptjs": "*",
-    "cors": "*",
-    "jsonwebtoken": "*",
     "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mysql2": "^1.4.2",
+    "nodemailer": "^4.6.3",
     "passport": "*",
     "passport-jwt": "*",
     "sequelize": "^4.22.5"

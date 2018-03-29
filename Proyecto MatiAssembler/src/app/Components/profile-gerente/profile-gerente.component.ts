@@ -36,6 +36,7 @@ export class ProfileGerenteComponent implements OnInit {
   idVehiculotemp;
   idCitatemp;
   mecanicoReporte
+  nuevoReporte = false;
 
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -49,13 +50,11 @@ export class ProfileGerenteComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("user")); 
     this.getMarcas();
     this.obtenerClientes();
-    this.obtenerMecanicos();
-    
+    this.obtenerMecanicos();  
     this.obtenerColaCitas();
     console.log("Ya se obtuvieron la cola de las citas")
     this.obtenerVehiculos(); 
     console.log("Se van a obtener las ordenes"); 
-    this.obtenerColaCitas();
     this.obtenerOrdenes(); 
 
    //Para obtener todos los vehiculos registrados en el taller
@@ -143,7 +142,7 @@ export class ProfileGerenteComponent implements OnInit {
       console.log(this.citas); 
       let vehiculos2 = this.vehiculos; 
       console.log(vehiculos2); 
-      for (let i = 0; i < this.citas.length; i++) {
+      for (let i = 0; i < this.citas.length ; i++) {
       let data2 = this.authService.getVehiculo(this.citas[i].vehiculoCita).subscribe( datos => {
         console.log("IMPRIMIRE MAS DATOS"); 
         console.log(datos); 
@@ -228,8 +227,8 @@ modificarUsuario(id) {
   }
 
   verReporte(id) {
-    this.mecanicoReporte = id; 
-
+    this.mecanicoReporte = id;
+    this.nuevoReporte = true;  
   }
 /*
   desactivarOrden(id) {

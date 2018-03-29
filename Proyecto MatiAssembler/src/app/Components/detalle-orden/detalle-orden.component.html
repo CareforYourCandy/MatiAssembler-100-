@@ -1,4 +1,4 @@
-<div *ngIf="gerente.rol==4">
+<div *ngIf="gerente.rol==2">
 <!-- Top Bar -->
 <nav class="navbar">
     <div class="container-fluid bg-deep-orange">
@@ -264,6 +264,7 @@
                                         <input type="checkbox" id="acc6" class="chk-col-light-blue" disabled/>
                                         <label for="acc6" >Desperfecto Carroceria</label>
                                     </div>
+                                   
                             </div>                                                      
                         </form>
 
@@ -272,7 +273,17 @@
                 </div>
             </div>
         </div>
-  
+        <div class= "card">
+                <div class="header bg-cyan">
+                        <h2>
+                            CÓDIGO QR
+                        </h2>
+                    </div> 
+                    <div style="text-align: center"> 
+        <ngx-qrcode [qrc-element-type]="elementType" [qrc-value] = "qr"> </ngx-qrcode>
+                    </div>
+        </div>
+        
         <div class="card">
             <div class="header bg-deep-purple">
                 <h2>FOTOS</h2>

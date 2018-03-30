@@ -33,7 +33,7 @@ export class ProfileClienteComponent implements OnInit {
   fecha: String; 
   vehiculoCita: Int16Array;
   vehiculoIteracion: Vehiculo; 
-
+  myDatepicker; 
   //Marcas 
   marcas = Array; 
   file;

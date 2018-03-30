@@ -14,6 +14,10 @@
                     </div>
                 </div>
                 <div class="input-group">
+                    <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                    [(ngModel)]="model" required></my-date-picker>
+                </div>
+                <div class="input-group">
                     <span class="input-group-addon">
                         <i class="material-icons">check_circle</i>
                     </span>

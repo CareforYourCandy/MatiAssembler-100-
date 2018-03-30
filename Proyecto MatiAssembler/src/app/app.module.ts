@@ -6,7 +6,10 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { tokenNotExpired } from 'angular2-jwt';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material'; 
+import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppComponent } from './app.component';
 import { ProfileClienteComponent } from './Components/profile-cliente/profile-cliente.component';
@@ -75,7 +78,8 @@ import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modi
     ReporteMecanicoComponent,
     ReporteClienteComponent,
     EmitirOrdenComponent,
-    ModificarRepuestoComponent
+    ModificarRepuestoComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -83,7 +87,11 @@ import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modi
     HttpModule,
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot(),
-    NgxQRCodeModule
+    NgxQRCodeModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    MyDatePickerModule 
   ],
   
   providers: [ValidateService, AuthService, AuthGuard, DatePipe],

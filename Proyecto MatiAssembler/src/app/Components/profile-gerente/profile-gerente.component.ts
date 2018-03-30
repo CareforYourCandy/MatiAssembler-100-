@@ -8,7 +8,8 @@ import { Location } from '@angular/common';
 import { Vehiculo } from '../vehiculo/vehiculo'; 
 import { EmitirOrdenComponent } from '../emitir-orden/emitir-orden.component'; 
 import {ReporteMecanicoComponent} from '../reporte-mecanico/reporte-mecanico.component'; 
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material'; 
 @Component({
   selector: 'app-profile-gerente',
   templateUrl: './profile-gerente.component.html',
@@ -35,7 +36,8 @@ export class ProfileGerenteComponent implements OnInit {
   nuevaOrden = false;
   idVehiculotemp;
   idCitatemp;
-  mecanicoReporte
+  mecanicoReporte;
+  myDatepicker; 
 
   constructor(private http:Http,
               private validateService: ValidateService, 

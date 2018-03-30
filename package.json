@@ -8,12 +8,13 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "*",
-    "mysql2": "^1.4.2",
     "bcryptjs": "*",
-    "cors": "*",
-    "jsonwebtoken": "*",
     "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mydatepicker": "^2.6.3",
+    "mysql2": "^1.4.2",
     "passport": "*",
     "passport-jwt": "*",
     "sequelize": "^4.22.5"

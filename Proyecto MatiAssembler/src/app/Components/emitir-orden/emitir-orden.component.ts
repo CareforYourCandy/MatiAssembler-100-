@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import {IMyDpOptions} from 'mydatepicker';
 
 @Component({
   selector: 'app-emitir-orden',
@@ -18,7 +19,12 @@ export class EmitirOrdenComponent implements OnInit {
 	procedimiento: String;
 	ordenGenerada;
 	activada: Boolean;
-
+	myDatepicker; 
+	public myDatePickerOptions: IMyDpOptions = {
+		// other options...
+		dateFormat: 'yyyy.mm.dd',
+	};
+	public model: any = { date: { year: 2018, month: 10, day: 9 } };
   constructor(private validateService: ValidateService, 
 			    private authService: AuthService,
 			    private router: Router) { }
@@ -27,7 +33,8 @@ export class EmitirOrdenComponent implements OnInit {
   }
 
   registrarOrden() {
-  	console.log(this.idVehiculo);
+	  console.log(this.idVehiculo);
+	  this.fechaOrden = JSON.stringify(this.model); 
 	  const orden = {
 	    idVehiculo: this.idVehiculo,
 	    idMecanico: this.mecanico,

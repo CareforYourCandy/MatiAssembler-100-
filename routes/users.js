@@ -643,7 +643,7 @@ router.post('/registerOrden', (req, res, next) => {
 		idVehiculo: req.body.idVehiculo,
 		idMecanico: req.body.idMecanico,
 		diagnostico: req.body.diagnostico,
-		procedimiento: req.body.procedimiento,
+		motivo: req.body.motivo,
 		fecha: req.body.fecha,
 		activada: 1, 
 

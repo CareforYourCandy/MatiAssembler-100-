@@ -16,7 +16,7 @@ export class EmitirOrdenComponent implements OnInit {
 	diagnostico: String;
 	mecanico: String;
 	repuesto: String;
-	procedimiento: String;
+	motivo: String;
 	ordenGenerada;
 	activada: Boolean;
 	myDatepicker; 
@@ -40,7 +40,7 @@ export class EmitirOrdenComponent implements OnInit {
 	    idMecanico: this.mecanico,
 	    diagnostico: this.diagnostico,
 	    fecha: this.fechaOrden,
-	    procedimiento: this.procedimiento,
+	    motivo: this.motivo,
 	    activada: 1
 	  }
 	  this.ordenGenerada = orden; 
@@ -49,11 +49,12 @@ export class EmitirOrdenComponent implements OnInit {
 			console.log(data.success); 
 			if(data.success) {
 			this.authService.eliminarCita(this.idCita).subscribe( data => { 
-				console.log(data.success); 
+				console.log(data.success); 			
+				this.router.navigate['home-page'];
 			})
 		}
 		
-			this.router.navigate['profile-gerente'];
+
 			
 		}); 
 		

@@ -4,6 +4,10 @@ const connection = config.connection;
 
 const bcrypt = require('bcryptjs');
 const path = require('path');
+var nodemailer = require('nodemailer');
+const User = require('../models/user');
+const Vehiculo = require('../models/vehiculo');
+const Marca = require('../models/marca');
 
 const Orden = connection.define('orden', {
     idOrden: {
@@ -71,8 +75,118 @@ module.exports.addOrden = function(orden, callback) {
     console.log("estoy en addOrden");
     console.log(orden);
     Orden.create(orden); 
-    
-    
+
+    //let vehiculo = await Usuario.findById(vehiculo.Cliente);
+    //let cliente = buscarCliente.dataValues;
+
+
+    Vehiculo.getVehiculoByID(orden.idVehiculo, (err, carro) => {
+        //console.log('adentro de obtener el vehiculo');
+        //console.log(carro);
+        if(err) {
+            console.log('AQUI PASO ALGO');
+        }
+        if(!carro){
+            console.log('AQUI PASO ALGO2');
+            return res.json({success: false, msg:'Vehiculo not found'});
+        }
+
+        User.getUserByID(carro.propietario, (err, user) => {
+            //console.log('adentro de obtener el usuario');
+            //console.log(user);
+            if(err) {
+                console.log('AQUI PASO ALGO');
+            }
+            if(!user){
+                console.log('AQUI PASO ALGO2');
+                return res.json({success: false, msg:'User not found'});
+            }
+
+            Marca.getMarcaByID(carro.marca, (err, marca) => {
+                //console.log('adentro de obtener la marca');
+                //console.log(marca);
+                if(err) {
+                    console.log('AQUI PASO ALGO');
+                }
+                if(!marca){
+                    console.log('AQUI PASO ALGO2');
+                    return res.json({success: false, msg:'Marca not found'});
+                }
+
+                //------Enviar EMAIL ----------//
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    secure: false,
+                    port: 25,
+                    auth: {
+                        user: 'matiassembler@gmail.com',
+                        pass: 'comprometido100'
+                    },
+                    tls: {
+                        rejectUnauthorized: false
+                    }
+                }); 
+
+                let HelperOptions = {
+                    from: '"Equipo MatiAssembler" <matiassembler@gmail.com>',
+                    to: user.correo,
+                    subject: 'Se procesó la admisión de vehículo!',                                      
+                    html: `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="utf-8" />
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        <meta name="viewport" content="width=device-width, initial-scale=1">
+                    </head>
+                    <body class="bg-light">
+                                <div class="container-fluid">
+                                    <div class="row clearfix">
+                                        <div class="card mx-auto my-5 p-5 col-12 col-md-8 col-lg-6">
+                                            <p class="lead body">
+                                                <span class="titulo">Hola ${user.nombre},</span>
+                                                <br>
+                                                <br>La solicitud de reparación para su ${marca.marca} ${carro.modelo} fue procesada con éxito. Su vehículo será admitido el dia ${orden.fecha} al taller, lo esperamos!
+                                                <br>El servicio de ${orden.motivo} solicitado se realizará tan pronto su vehículo llegue.
+                                                <br><br>
+                                                Gracias por confiar en nosotros la reparación de su vehículo.
+                                                <br>
+                                                Saludos,<h4> Equipo Matiassembler</h4>.
+                                            </p>          
+                                        </div>
+                                    </div>
+                                </div>
+                                <style>
+                                    .title {
+                                        min-height: 10rem;
+                                    }
+                                    .titulo {
+                                        font-size: 20pt;
+                                    }
+                                    .body {
+                                        font-size: 16pt;
+                                    }
+                                    .card {
+                                        box-shadow: 0px 3px 15px rgba(0,0,0,0.2) !important;
+                                    }
+                                </style>
+                                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                                    crossorigin="anonymous"></script>
+                    </body>        
+                    </html>   
+                `};
+
+                transporter.sendMail(HelperOptions, (error, info) => {
+                    if(error){
+                        return console.log(error);
+                    }
+                    console.log("El mail fue enviado con exito!");
+                    console.log(info);
+                })
+                //---------------FIN ENVIAR MAIL ----------------------
+            });
+        });
+    });
     return callback();
     console.log("añadi");
 }

@@ -13,8 +13,8 @@
     "cors": "*",
     "express": "*",
     "jsonwebtoken": "*",
-    "mydatepicker": "^2.6.3",
     "mysql2": "^1.4.2",
+    "nodemailer": "^4.6.3",
     "passport": "*",
     "passport-jwt": "*",
     "sequelize": "^4.22.5"

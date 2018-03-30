@@ -38,6 +38,8 @@ export class ProfileGerenteComponent implements OnInit {
   idCitatemp;
   mecanicoReporte;
   myDatepicker; 
+  
+  nuevoReporte = false;
 
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -51,13 +53,11 @@ export class ProfileGerenteComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("user")); 
     this.getMarcas();
     this.obtenerClientes();
-    this.obtenerMecanicos();
-    
+    this.obtenerMecanicos();  
     this.obtenerColaCitas();
     console.log("Ya se obtuvieron la cola de las citas")
     this.obtenerVehiculos(); 
     console.log("Se van a obtener las ordenes"); 
-    this.obtenerColaCitas();
     this.obtenerOrdenes(); 
 
    //Para obtener todos los vehiculos registrados en el taller
@@ -91,11 +91,12 @@ export class ProfileGerenteComponent implements OnInit {
       this.ordenes = datos.ordenes;
       for (let i = 0; i < this.ordenes.length; i++) {
         let data2 = this.authService.getVehiculo(this.ordenes[i].idVehiculo).subscribe( datos => {
-          console.log("IMPRIMIRE MAS DATOS"); 
-          console.log(datos); 
+          //console.log("IMPRIMIRE MAS DATOS"); 
+          //console.log(datos); 
           this.ordenes[i].vehiculo = datos.vehiculo; 
         })
       }
+      console.log(this.ordenes);
     });
    
 
@@ -146,7 +147,7 @@ export class ProfileGerenteComponent implements OnInit {
       console.log(this.citas); 
       let vehiculos2 = this.vehiculos; 
       console.log(vehiculos2); 
-      for (let i = 0; i < this.citas.length; i++) {
+      for (let i = 0; i < this.citas.length ; i++) {
       let data2 = this.authService.getVehiculo(this.citas[i].vehiculoCita).subscribe( datos => {
         console.log("IMPRIMIRE MAS DATOS"); 
         console.log(datos); 
@@ -231,15 +232,23 @@ modificarUsuario(id) {
   }
 
   verReporte(id) {
-    this.mecanicoReporte = id; 
+    this.mecanicoReporte = id;
+    this.nuevoReporte = true;  
+  }
+
+  cerrarOrden(orden) {
+    let id=orden.idOrden;
+    if(orden.activada==2) { //Cerrar la orden solo si esta finalizada, si esta en curso no permitirlo
+    this.authService.cerrarOrden(id).subscribe(data => {
+      console.log(data); 
+      //this.obtenerOrdenes(); 
+      for (let i = 0; i < this.ordenes.length ; i++) {
+        if(this.ordenes[i].idOrden==id){
+          this.ordenes.splice(i, 1);
+        }
+      }
+    })      
+    }
 
   }
-/*
-  desactivarOrden(id) {
-    console.log(id);
-    this.authService.desactivarOrden(id).subscribe(data => {
-      console.log(data); 
-    })
-    this.obtenerOrdenes(); 
-  }*/
 }

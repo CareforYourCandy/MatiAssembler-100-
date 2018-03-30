@@ -299,7 +299,7 @@
                                         <td>{{orden.vehiculo.serialMotor}}</td>
                                         <td>{{orden.activada}}</td>
                                         <td>
-                                                <button type="button" class="btn bg-indigo waves-effect" (click)="desactivarOrden(orden.idOrden)">
+                                                <button type="button" class="btn bg-indigo waves-effect" (click)="cerrarOrden(orden)">
                                                     <i class="material-icons">close</i>
                                                 </button>
                                             </td>
@@ -353,7 +353,9 @@
                 <h4 class="modal-title" id="largeModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <app-reporte-mecanico [idMecanico]=mecanicoReporte> </app-reporte-mecanico>
+                <div *ngIf="nuevoReporte">
+                    <app-reporte-mecanico [idMecanico]=mecanicoReporte> </app-reporte-mecanico>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
@@ -382,8 +384,4 @@
         </div>
     </div>
 </div>
-</div>
 
-
-
-</div>

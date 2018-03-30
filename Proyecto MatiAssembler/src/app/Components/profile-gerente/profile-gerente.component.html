@@ -67,10 +67,10 @@
                      <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a href="#">Cliente</a></li>
-                      <li><a href="#">Vehículo</a></li>
-                      <li><a href="#">Mecánico</a></li>
-                      <li><a href="#">Modelo de vehículo</a></li>
+                      <li><a (click)= "setVista(4)">Cliente</a></li>
+                      <li><a (click)="setVista(5)">Vehículo</a></li>
+                      <li><a (click)="setVista(6)">Mecánico</a></li>
+                      <li><a (click)="setVista(7)">Modelo de vehículo</a></li>
                      
                     </ul>
                   </li>
@@ -313,7 +313,13 @@
                 </div>
             </div>
         </div>
-    
+        <div *ngIf="vista == 5"> 
+            <app-reporte-vehiculo> </app-reporte-vehiculo>
+        </div>
+        <div *ngIf="vista == 6"> 
+            <app-reporte-mecanico> </app-reporte-mecanico>
+        </div>
+       
     <!-- #END# Hover Rows -->
         
     </div>
@@ -339,6 +345,7 @@
     </div>
 </div>
 </div>
+<!-- 
 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -355,7 +362,7 @@
         </div>
     </div>
 </div>
-
+--> 
 <!-- MODAL REPUESTOS --> 
     <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">

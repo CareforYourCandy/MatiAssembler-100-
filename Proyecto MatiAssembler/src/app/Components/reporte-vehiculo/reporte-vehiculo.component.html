@@ -1,1 +1,67 @@
+<div class="card">
+    <div class="header">
+        <h2>VEHÍCULOS REGISTRADOS</h2>
+    </div>
+    <div *ngIf="mostrarAlerta">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   El vehículo no poseé ordenes 
+                </div>
+    </div> 
+    <div class="body">
+        <div class="table-responsive">
+            <table class="table table-hover dashboard-task-infos">
+                <thead>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Año</th>
+                        <th>Placa</th>
+                        <th>Serial del motor</th>
+                        <th>Activado</th>
+                        <th>Fecha Registro</th>
+                        <th>Generar Reporte</th>
 
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr *ngFor="let vehiculo of vehiculos" >
+                         
+                        <td>{{setMarcaVista(vehiculo.marca)}}</td>
+                        <td>{{vehiculo.modelo}}</td>
+                        <td>{{vehiculo.ano}}</td>
+                        <td>{{vehiculo.placa}}</td>
+                        <td>{{vehiculo.serialMotor}}</td>
+                        <td>{{vehiculo.activado}}</td>
+                        <td>{{vehiculo.fechaRegistro}}</td>
+                        <td>
+                            <button (click)="generarReporte(vehiculo)" type="button" class="btn bg-indigo waves-effect">
+                                <i class="material-icons">date_range</i>
+                            </button>
+                        </td>
+                  
+                        
+                    </tr>
+                  
+                    <tr>
+                        <td>----</td>
+                        <td>----</td>
+                        <td>----</td>
+                        <td>----</td>
+                        <td>----</td>
+                        <td>----</td>
+                    
+                        <td>
+                            <button type="button" class="btn bg-indigo waves-effect">
+                                <i class="material-icons">date_range</i>
+                            </button>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

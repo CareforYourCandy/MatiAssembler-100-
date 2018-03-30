@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
   <div class="card">
       <div class="header bg-orange">
           <h2>
@@ -15,7 +15,7 @@
                           <th>PLACA</th>
                           <th>SERIAL</th>
                           <th>ESTADO</th>
-                          <th>CERRAR ORDEN</th>
+         
                   </tr>
               </thead>
               <tbody>
@@ -34,4 +34,29 @@
           </table>
       </div>
   </div>
-</div>
+
+
+    <div class="card">
+        <div class="header bg-orange">
+            <h2>
+                    MECANICO
+            </h2>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Marca <span class="caret"></span>
+            </button>
+            <ul   class="dropdown-menu">
+                <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico)">{{mecanico.nombre}}</a></li>
+                
+            </ul>
+        </div>
+        <div class="input-group">
+            <my-date-picker name="fechaInicio" [options]="myDatePickerOptions"
+            [(ngModel)]="fechaInicio" required></my-date-picker>
+        </div>
+        <div class="input-group">
+            <my-date-picker name="fechaFin" [options]="myDatePickerOptions"
+            [(ngModel)]="fechaFin" required></my-date-picker>
+        </div>
+    </div>

@@ -3,7 +3,7 @@ import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Http, Headers } from '@angular/http';
-
+import {IMyDpOptions} from 'mydatepicker';
 @Component({
   selector: 'app-reporte-mecanico',
   templateUrl: './reporte-mecanico.component.html',
@@ -13,6 +13,14 @@ export class ReporteMecanicoComponent implements OnInit {
 
 @Input() idMecanico; 
 ordenes = []; 
+mecanicos = [];
+mecanico; 
+public myDatePickerOptions: IMyDpOptions = {
+  // other options...
+  dateFormat: 'yyyy.mm.dd',
+};
+public fechaInicio: any = { date: { year: 2018, month: 10, day: 9 } };
+public fechaFin: any = { date: { year: 2018, month: 10, day: 9 } };
 
 
 constructor(private http:Http,
@@ -30,6 +38,26 @@ constructor(private http:Http,
     this.obtenerVehiculos(this.idMecanico); 
     }
   }
+  obtenerMecanicos() {
+    let data = this.authService.getUsers().subscribe( datos => {
+      this.mecanicos = datos.users
+      
+
+      this.mecanicos = this.mecanicos.filter(function(user) {
+        if (user.rol==2) {
+           return user;
+        }
+      });
+
+  
+    })
+  }
+generarReporte() {
+
+}
+seleccionarMecanico(meca) {
+  this.mecanico = meca; 
+}
 
   obtenerVehiculos(id) {
     this.authService.getOrdenesMecanico(id).subscribe(data => {

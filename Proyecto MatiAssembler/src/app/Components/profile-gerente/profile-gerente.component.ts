@@ -65,6 +65,7 @@ export class ProfileGerenteComponent implements OnInit {
 
   setVista(id) {
     this.vista=id;
+    console.log(this.vista); 
   }
 
   ngAfterViewInit() {

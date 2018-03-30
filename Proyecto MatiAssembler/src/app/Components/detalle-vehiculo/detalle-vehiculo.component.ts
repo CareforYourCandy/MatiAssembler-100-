@@ -47,12 +47,12 @@ export class DetalleVehiculoComponent implements OnInit {
 	}
 
 	obtenerHistorial() {
-		this.authService.obtenerOrdenes(this.vehiculo).subscribe( datos => {
+		this.authService.obtenerOrdenesVehiculo(this.vehiculo).subscribe( datos => {
 			this.ordenes = datos.ordenes;
 			console.log(this.ordenes); 
 
 			this.historial = this.ordenes.filter(function(orden) {
-				if (!orden.activada) {
+				if (orden.activada==0) {
 					return orden;
 				}
 			});

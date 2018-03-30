@@ -195,16 +195,16 @@ export class AuthService {
 			.map(res => res.json());
 	}
 
-	obtenerOrdenes(vehiculo){ //Obtener Ordenes por vehiculo
+	obtenerOrdenesVehiculo(vehiculo){ //Obtener Ordenes por vehiculo
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getOrdenes', vehiculo, {headers: headers})
+		return this.http.post('http://localhost:3000/users/getOrdenesVehiculo', vehiculo, {headers: headers})
 			.map(res => res.json());
 	}
 	getOrdenesMecanico(idMecanico) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getOrdenes', {idMecanico}, {headers: headers})
+		return this.http.post('http://localhost:3000/users/getOrdenesMecanico', {idMecanico}, {headers: headers})
 			.map(res => res.json());
 	}
 	desactivarOrden(idOrden) {

@@ -48,7 +48,7 @@ export class ReporteVehiculoComponent implements OnInit {
     console.log(vehiculo); 
     this.ordenes = null; 
     
-        this.authService.obtenerOrdenes(vehiculo).subscribe( datos => {
+        this.authService.obtenerOrdenesVehiculo(vehiculo).subscribe( datos => {
           this.ordenes = datos.ordenes;
          
           var ordenesTemp= [];

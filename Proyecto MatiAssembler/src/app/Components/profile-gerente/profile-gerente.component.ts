@@ -28,6 +28,7 @@ export class ProfileGerenteComponent implements OnInit {
   citas = [];
   carrosCitas = [];
   ordenes = [];
+  ordenesActivas = [];
   vehiculos = [];
   //Marcas 
   marcas = Array;
@@ -89,14 +90,21 @@ export class ProfileGerenteComponent implements OnInit {
     console.log("Voy a obtener las ordenes"); 
     let data = this.authService.getOrdenes().subscribe( datos => {
       this.ordenes = datos.ordenes;
-      for (let i = 0; i < this.ordenes.length; i++) {
-        let data2 = this.authService.getVehiculo(this.ordenes[i].idVehiculo).subscribe( datos => {
+
+      this.ordenesActivas = this.ordenes.filter(function(orden) {
+        if (orden.activada!=0) {
+          return orden;
+        }
+      });
+
+      for (let i = 0; i < this.ordenesActivas.length; i++) {
+        let data2 = this.authService.getVehiculo(this.ordenesActivas[i].idVehiculo).subscribe( datos => {
           //console.log("IMPRIMIRE MAS DATOS"); 
           //console.log(datos); 
-          this.ordenes[i].vehiculo = datos.vehiculo; 
+          this.ordenesActivas[i].vehiculo = datos.vehiculo; 
         })
       }
-      console.log(this.ordenes);
+      console.log(this.ordenesActivas);
     });
    
 
@@ -241,10 +249,10 @@ modificarUsuario(id) {
     if(orden.activada==2) { //Cerrar la orden solo si esta finalizada, si esta en curso no permitirlo
     this.authService.cerrarOrden(id).subscribe(data => {
       console.log(data); 
-      //this.obtenerOrdenes(); 
-      for (let i = 0; i < this.ordenes.length ; i++) {
-        if(this.ordenes[i].idOrden==id){
-          this.ordenes.splice(i, 1);
+
+      for (let i = 0; i < this.ordenesActivas.length ; i++) {
+        if(this.ordenesActivas[i].idOrden==id){
+          this.ordenesActivas.splice(i, 1);
         }
       }
     })      

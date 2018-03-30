@@ -103,7 +103,7 @@ router.post('/eliminarCita', (req, res, next) => {
 	})
 	
 })
-router.post('/getOrdenes', (req, res, next) => {
+router.post('/getOrdenes', (req, res, next) => { //Obtener todas las ordenes
 	console.log("Estoy en obtener ordenes"); 
 	let ordenes = Orden.getOrdenes(req, (err, ordenes) => {
 		if (err) {
@@ -285,7 +285,7 @@ router.post('/getVehiculos2', (req, res, next) => {
 	});
 })
 
-router.post('/getOrdenesMecanico', (req, res, next) => {
+router.post('/getOrdenesMecanico', (req, res, next) => { //Obtener ordenes por mecánico
 	console.log("Estoy en obtener ordenes por mecanico");
 	let ordenes = Orden.getOrdenesMecanico(req, (err, ordenes) => {
 		if (err) {
@@ -449,8 +449,8 @@ router.post('/getAccesorios', (req, res, next) => {
 	});
 });
 
-//Obtener todas las Ordenes por cliente
-router.post('/getOrdenes', (req, res, next) => {
+//Obtener todas las Ordenes por vehiculo de cliente
+router.post('/getOrdenesVehiculo', (req, res, next) => {
 	const id=req.body.idVehiculo;
 	console.log();
 	Orden.getOrdenesPorVehiculo(id, (err, ordenes) => {

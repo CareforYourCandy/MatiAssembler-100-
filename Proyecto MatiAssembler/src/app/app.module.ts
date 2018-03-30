@@ -39,6 +39,7 @@ import { ReporteMecanicoComponent } from './Components/reporte-mecanico/reporte-
 import { ReporteClienteComponent } from './Components/reporte-cliente/reporte-cliente.component';
 import { EmitirOrdenComponent } from './Components/emitir-orden/emitir-orden.component';
 import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modificar-repuesto.component';
+import { AgregarUsuarioComponent } from './Components/agregar-usuario/agregar-usuario.component';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -79,6 +80,7 @@ import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modi
     ReporteClienteComponent,
     EmitirOrdenComponent,
     ModificarRepuestoComponent,
+    AgregarUsuarioComponent,
 
   ],
   imports: [

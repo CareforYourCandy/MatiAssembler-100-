@@ -297,7 +297,7 @@
                                         <td>{{orden.vehiculo.ano}}</td>
                                         <td>{{orden.vehiculo.placa}}</td>
                                         <td>{{orden.vehiculo.serialMotor}}</td>
-                                        <td>{{orden.activada}}</td>
+                                        <td>{{setEstado(orden.activada)}}</td>
                                         <td>
                                                 <button type="button" class="btn bg-indigo waves-effect" (click)="cerrarOrden(orden)">
                                                     <i class="material-icons">close</i>

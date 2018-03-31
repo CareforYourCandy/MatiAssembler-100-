@@ -95,7 +95,7 @@ module.exports.cerrarOrden = function(orden, callback) {
                 if(!repuesto){
                     console.log('AQUI PASO ALGO2');
                     return res.json({success: false, msg:'Repuesto not found'});
-                }
+                }                        
                 repuestosFinal.push(repuesto);
 
                 if(i == (repuestosOrden.length-1)){

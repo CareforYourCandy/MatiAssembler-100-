@@ -262,6 +262,17 @@ cuadrarCarros() {
       }
     })      
     }
+  }
 
+  setEstado(id){
+    if(id==1){
+      return "En curso";
+    }
+    if(id==2){
+      return "Finalizada";
+    }
+    if(id==0){
+      return "Cerrada";
+    }
   }
 }

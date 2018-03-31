@@ -27,6 +27,7 @@ export class ProfileMecanicoComponent implements OnInit {
   
     ngOnInit() {
       this.user = JSON.parse(localStorage.getItem("user")); 
+      console.log(this.user.idUsuario); 
       this.obtenerOrdenes(this.user.idUsuario); 
     }
    

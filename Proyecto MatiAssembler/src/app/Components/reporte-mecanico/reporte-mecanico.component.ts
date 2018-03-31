@@ -94,7 +94,7 @@ constructor(private http:Http,
       
 
       this.mecanicos = this.mecanicos.filter(function(user) {
-        if (user.rol==2) {
+        if (user.rol==4) {
            return user;
         }
       });

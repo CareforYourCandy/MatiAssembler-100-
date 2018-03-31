@@ -95,20 +95,20 @@ module.exports.cerrarOrden = function(orden, callback) {
                 if(!repuesto){
                     console.log('AQUI PASO ALGO2');
                     return res.json({success: false, msg:'Repuesto not found'});
-                }
-                repuestosFinal.push(repuesto);               
-            });
-            if(i == (repuestosOrden.length-1)){
-                return res.json({repuestos: repuestosFinal});
-            }             
+                }                        
+                repuestosFinal.push(repuesto);
+
+                if(i == (repuestosOrden.length-1)){
+                    console.log('array repuestos final:');
+                    console.log(repuestosFinal);
+                    return repuestosFinal; 
+                }                
+            });            
             console.log(repuestosFinal);
-            console.log(repuestos);
         }
-        console.log('array repuestos final:');
-        console.log(repuestosFinal);
+      
     });
-    console.log("Se cerro chevere");
-    return callback();
+   
 }
 
 module.exports.addOrden = function(orden, callback) {
@@ -252,6 +252,23 @@ module.exports.getOrdenbyMecanico = function(id, callback){
         return callback(null, datos);
         
 	});		
+}
+
+module.exports.getOrdenesByMecanico = function(req, callback){
+ console.log(req.body); 
+	const query = {where: {idMecanico: req.body.idMecanico }}
+	Orden.findAll(query).then(ordenes => {
+        let ordenes2 = ordenes.map(function(orden) {
+            dato = orden.dataValues;   
+            return dato; 
+        })
+        ordenes = ordenes2;
+        return ordenes; 
+    })
+    .then(datos => {
+        console.log(datos); 
+        return callback(null, datos);
+    });     	
 }
 
 module.exports.getOrdenesPorVehiculo = function(elquetal, callback){

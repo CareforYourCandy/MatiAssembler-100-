@@ -208,6 +208,12 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/getOrdenesMecanico', {idMecanico}, {headers: headers})
 			.map(res => res.json());
 	}
+	getOrdenesFecha(fechas) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/getOrdenesFecha', {fechas}, {headers: headers})
+			.map(res => res.json());
+	}
 	desactivarOrden(idOrden) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');

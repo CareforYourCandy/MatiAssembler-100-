@@ -466,7 +466,22 @@ router.post('/getOrdenesVehiculo', (req, res, next) => {
 			ordenes});
 	});
 })
-
+router.post('/getOrdenesFecha', (req, res, next) => {
+	let fechas = req.body.fechas; 
+	console.log(fechas); 
+	Orden.getOrdenesByFecha(fechas, (err, ordenes) => {
+		if(err) {
+			console.log('AQUI PASO ALGO');
+		}
+		if(!ordenes){
+			console.log('AQUI PASO ALGO2');
+			return res.json({success: false, msg:'User not found'});
+		}
+		res.json({
+			success: true,
+			ordenes});
+	}) 
+}) 
 router.post('/getOrdenesMecanico', (req, res, next) => {
 	const id=req.body.idMecanico
 	console.log();

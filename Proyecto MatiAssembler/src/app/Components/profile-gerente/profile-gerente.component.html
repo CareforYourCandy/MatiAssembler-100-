@@ -313,43 +313,19 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="vista == 4"> 
+            <app-reporte-cliente [clientes]= "clientes"  [marcas] = "marcas" > </app-reporte-cliente>
+        </div>
         <div *ngIf="vista == 5"> 
             <app-reporte-vehiculo> </app-reporte-vehiculo>
         </div>
         <div *ngIf="vista == 6"> 
-            <app-reporte-mecanico> </app-reporte-mecanico>
+            <app-reporte-mecanico [mecanicos] = "mecanicos" [vehiculos] = "vehiculos" > </app-reporte-mecanico>
         </div>
        
     <!-- #END# Hover Rows -->
         
-
-
-<!-- MODAL ORDENES --> 
-    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">Gestión de cola de citas</h4>
-                </div>
-                <div class="modal-body">
-                    <div *ngIf="nuevaOrden">
-                        <app-emitir-orden [idVehiculo]=idVehiculotemp [idCita]=idCitatemp> </app-emitir-orden> 
-                      </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-</section>
-<div class="body">
-    <div class="row clearfix">
        
-
-
         <!--MODALS PARA REPORTES -->
         <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
@@ -358,7 +334,9 @@
                     <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
                 </div>
                 <div class="modal-body">
-                   
+                    <div *ngIf="nuevaOrden">
+                        <app-emitir-orden [idVehiculo]=idVehiculotemp [idCita]=idCitatemp [mecanicos]="mecanicos"> </app-emitir-orden> 
+                      </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>

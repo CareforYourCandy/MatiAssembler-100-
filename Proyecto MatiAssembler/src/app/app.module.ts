@@ -40,6 +40,7 @@ import { ReporteClienteComponent } from './Components/reporte-cliente/reporte-cl
 import { EmitirOrdenComponent } from './Components/emitir-orden/emitir-orden.component';
 import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modificar-repuesto.component';
 import { AgregarUsuarioComponent } from './Components/agregar-usuario/agregar-usuario.component';
+import { ReporteModeloComponent } from './Components/reporte-modelo/reporte-modelo.component';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -81,6 +82,7 @@ import { AgregarUsuarioComponent } from './Components/agregar-usuario/agregar-us
     EmitirOrdenComponent,
     ModificarRepuestoComponent,
     AgregarUsuarioComponent,
+    ReporteModeloComponent,
 
   ],
   imports: [

@@ -96,13 +96,13 @@ module.exports.cerrarOrden = function(orden, callback) {
                     console.log('AQUI PASO ALGO2');
                     return res.json({success: false, msg:'Repuesto not found'});
                 }
-                repuestosFinal.push(repuesto);
-
-                if(i == (repuestosOrden.length-1)){
-                    //return callback();
-                }                
-            });            
+                repuestosFinal.push(repuesto);               
+            });
+            if(i == (repuestosOrden.length-1)){
+                return res.json({repuestos: repuestosFinal});
+            }             
             console.log(repuestosFinal);
+            console.log(repuestos);
         }
         console.log('array repuestos final:');
         console.log(repuestosFinal);

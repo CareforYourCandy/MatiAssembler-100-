@@ -1,62 +1,87 @@
-<p>
+<div class="signup-box">
+    <div class="logo">
+        <a href="javascript:void(0);">Mati<b>ASSEMBLER</b></a>
+        <small>Su taller de siempre, ahora mejor que nunca</small>
+    </div>
 
-      <div class="signup-box">
-          <div class="logo">
-              <a href="javascript:void(0);">Mati<b>ASSEMBLER</b></a>
-              <small>Su taller de siempre, ahora mejor que nunca</small>
-          </div>
-          <div class="card">
-              <div class="body">
-                  <form (submit) = "onRegisterSubmit()">
-                      <div class="msg">Registre una nueva cuenta</div>
-                      <div class="input-group">
-                          <span class="input-group-addon">
-                              <i class="material-icons">person</i>
-                          </span>
-                          <div class="form-line">
-                              <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Nombre" required autofocus>
-                          </div>
+    <div  *ngIf="Vista == 1">
+        <div class="card">
+            <div class="body">
+                <form action="/" (submit) = "onRegisterSubmitCliente()" id="frmFileUpload"  method="post">
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Nombre" required autofocus>
                       </div>
-                      <div class="input-group">
-                          <span class="input-group-addon">
-                              <i class="material-icons">person</i>
-                          </span>
-                          <div class="form-line">
-                              <input type="text" class="form-control"  [(ngModel)]="lastname" name="lastname" placeholder="Apellido" required autofocus>
-                          </div>
+                  </div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control"  [(ngModel)]="lastname" name="lastname" placeholder="Apellido" required autofocus>
                       </div>
-                      <div class="input-group">
-                          <span class="input-group-addon">
-                              <i class="material-icons">person</i>
-                          </span>
-                          <div class="form-line">
-                              <input type="text" class="form-control"  [(ngModel)] = "cedula" name="cedula" placeholder="Cédula" required autofocus>
-                          </div>
+                  </div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control"  [(ngModel)] = "cedula" name="cedula" placeholder="Cédula" required autofocus>
                       </div>
-                  
-                      
-                      <div class="input-group">
-                          <span class="input-group-addon">
-                              <i class="material-icons">email</i>
-                          </span>
-                          <div class="form-line">
-                              <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" required>
-                          </div>
+                  </div>                            
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">email</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" required>
                       </div>
-                      <div class="input-group">
-                          <span class="input-group-addon">
-                              <i class="material-icons">lock</i>
-                          </span>
-                          <div class="form-line">
-                              <input type="password" class="form-control" [(ngModel)] = "password" name="password" minlength="6" placeholder="Contraseña" required>
-                          </div>
+                  </div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">lock</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="password" class="form-control" [(ngModel)] = "password" name="password" minlength="6" placeholder="Contraseña" required>
                       </div>
-                      <div class="input-group">
+                  </div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control" [(ngModel)]="telefono" name="telefono" placeholder="Telefono" required autofocus>
+                      </div>
+                  </div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control" [(ngModel)]="direccion" name="direccion" placeholder="Direccion" required autofocus>
+                      </div>
+                  </div>
+
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "onRegisterSubmitCliente()" type="text" data-dismiss="modal">REGISTRAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div  *ngIf="Vista == 2">
+        <div class="card">
+            <div class="body">
+                <form action="/" (submit) = "onRegisterSubmit()" id="frmFileUpload"  method="post">
+                    <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" [(ngModel)]="rol" name="rol" placeholder="rol" required autofocus>
+                            <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Nombre" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -64,7 +89,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" [(ngModel)]="telefono" name="telefono" placeholder="telefono" required autofocus>
+                            <input type="text" class="form-control"  [(ngModel)]="lastname" name="lastname" placeholder="Apellido" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -72,19 +97,68 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" [(ngModel)]="direccion" name="direccion" placeholder="direccion" required autofocus>
+                            <input type="text" class="form-control"  [(ngModel)] = "cedula" name="cedula" placeholder="Cédula" required autofocus>
                         </div>
                     </div>
-  
-                      <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR</button>
-  
-                      <div class="m-t-25 m-b--5 align-center">
-                          <a [routerLink]="['/login']" >¿Ya tienes una cuenta?</a>
+                
+                    
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">email</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Email" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" [(ngModel)] = "password" name="password" minlength="6" placeholder="Contraseña" required>
+                        </div>
+                    </div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                                  <i class="material-icons">person</i>
+                      </span>
+                      <div class="btn-group">
+
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{obtenerRol()}}<span class="caret"></span>
+                                </button>
+                          <ul class="dropdown-menu">
+                              <li><a (click)= "setRol(1)" >Usuario</a></li>
+                              <li><a (click)= "setRol(2)" >Mecanico</a></li>
+                              <li><a (click)= "setRol(3)">Gerente</a></li>
+                              <li><a (click)= "setRol(4)"> Administrador</a></li>
+                          </ul>
                       </div>
-                  </form>
-              </div>
-          </div>
-      </div>
+                  </div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control" [(ngModel)]="telefono" name="telefono" placeholder="Telefono" required autofocus>
+                      </div>
+                  </div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control" [(ngModel)]="direccion" name="direccion" placeholder="Direccion" required autofocus>
+                      </div>
+                  </div>
+
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "onRegisterSubmit()" type="text"  data-dismiss="modal">REGISTRAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
   
      
   

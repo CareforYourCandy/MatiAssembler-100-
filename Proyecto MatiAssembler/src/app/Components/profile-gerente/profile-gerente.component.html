@@ -256,7 +256,7 @@
                                         <td>{{carro.placa}}</td>
                                         <td>{{carro.serialMotor}}</td>
                                         <td> {{carro.fecha}}</td>
-                                        <td><button type="button" data-toggle="modal" data-target="#smallModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarOrden(carro.idVehiculo, carro.idCita)" >ASIGNAR FECHA</button></td>
+                                        <td><button type="button" data-toggle="modal" data-target="#defaultModal" data-type="basic" class="btn bg-cyan waves-effect" (click) ="agregarOrden(carro.idVehiculo, carro.idCita)" >ASIGNAR FECHA</button></td>
                                     </tr>
                                    
                                 </tbody>
@@ -322,55 +322,14 @@
        
     <!-- #END# Hover Rows -->
         
-    </div>
-</section>
-<div class="body">
-    <div class="row clearfix">
-       
 
 
-<!--MODALS PARA REPORTES -->
-<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
-<div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
-        </div>
-        <div class="modal-body">
-           
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-        </div>
-    </div>
-</div>
-</div>
-<!-- 
-<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="largeModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <div *ngIf="nuevoReporte">
-                    <app-reporte-mecanico [idMecanico]=mecanicoReporte> </app-reporte-mecanico>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
-                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-            </div>
-        </div>
-    </div>
-</div>
---> 
-<!-- MODAL REPUESTOS --> 
-    <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
+<!-- MODAL ORDENES --> 
+    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+                    <h4 class="modal-title" id="defaultModalLabel">Gestión de cola de citas</h4>
                 </div>
                 <div class="modal-body">
                     <div *ngIf="nuevaOrden">
@@ -385,3 +344,30 @@
     </div>
 </div>
 
+</section>
+<div class="body">
+    <div class="row clearfix">
+       
+
+
+        <!--MODALS PARA REPORTES -->
+        <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+</div>
+</div>
+</div>

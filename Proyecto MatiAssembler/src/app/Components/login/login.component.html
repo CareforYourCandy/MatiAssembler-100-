@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-
 
 <body class="login-page">
     <div class="login-box">
@@ -32,19 +28,41 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">INGRESAR</button>
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">INGRESAR</button> 
 
                     <div class="row m-t-15 m-b--20">
-                        <div class="col-xs-6">
-                            <a [routerLink]="['/register']">Registrate Ahora!</a>
+                        <div class="col-xs-12">
+                            <a>No tienes cuenta?</a>
+                            <button type="button" data-toggle="modal" data-target="#defaultModal" (click)="Registrar(1)" data-type="basic" class="btn btn-lg bg-cyan waves-effect">Registrate Ahora!</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+
+
+</div>
+
+
+<!-- MODAL REGISTRAR --> 
+    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Registro - Cliente</h4>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="nuevoRegistro">
+                        <app-register [Vista]=vistaTemp> </app-register> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </body>
 
-</html>
+
+

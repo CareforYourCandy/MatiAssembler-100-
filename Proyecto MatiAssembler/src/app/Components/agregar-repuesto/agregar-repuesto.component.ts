@@ -15,7 +15,7 @@ pieza: String;
 marca: String;
 modelo: String; 
 repuestoGenerado; 
-  
+nuevo = false;
 
   constructor(private validateService: ValidateService, 
     private authService: AuthService,
@@ -32,12 +32,16 @@ repuestoGenerado;
   const repuesto = {
     pieza: this.pieza 
   }
-  this.repuestoGenerado = repuesto; 
-  
+
   this.authService.registerRepuesto(repuesto).subscribe(data => {
-    console.log(data.success); 
+    console.log(data.success);
+    //this.repuestoGenerado = repuesto; 
+    //this.nuevo=true;
+    this.authService.almacenarNuevoLS(repuesto);
+    this.router.navigate(['/profile-administrador']);
+
   }); 
-  this.router.navigate['profile-administrador'];
+
 
  }
 

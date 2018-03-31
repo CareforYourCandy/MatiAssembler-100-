@@ -10,6 +10,7 @@ export class AuthService {
 	user: any;
 	vehiculo: any;
 	orden: any;
+	nuevo: any;
 
 	constructor(private http:Http) { }
 
@@ -273,6 +274,15 @@ export class AuthService {
 	almacenarOrdenLS(orden) { //Almacenar una orden en Local Storage
 		localStorage.setItem('orden', JSON.stringify(orden));
 		this.orden = orden;
+	}
+
+	almacenarNuevoLS(nuevo) { //Almacenar una orden en Local Storage
+		localStorage.setItem('nuevo', JSON.stringify(nuevo));
+		this.nuevo = nuevo;;
+	}
+
+	borrarNuevoLS(){
+		localStorage.removeItem('nuevo');
 	}
 
 }

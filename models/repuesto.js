@@ -22,8 +22,10 @@ module.exports = Repuesto;
 
 module.exports.addRepuesto = function(newRepuesto, callback) { //Añadir un nuevo repuesto
     console.log("estoy en addRepuesto");
-    newRepuesto.save(callback);
- 
+    //newRepuesto.save(callback);
+    Repuesto.create(newRepuesto); 
+    return callback();
+    console.log("añadi");
 
 }
   

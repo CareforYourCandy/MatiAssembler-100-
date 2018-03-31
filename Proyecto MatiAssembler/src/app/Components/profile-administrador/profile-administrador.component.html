@@ -131,7 +131,7 @@
                       </table>
                   </div>
                   <div class="align-center">
-                      <button type="button" class="btn bg-cyan waves-effect">AGREGAR USUARIO</button>
+                      <button type="button" data-toggle="modal" data-target="#defaultModal2" (click)="Registrar(2)" data-type="basic" class="btn bg-cyan waves-effect">AGREGAR USUARIO</button>
                   </div>
                   <br>
 
@@ -222,6 +222,26 @@
                 </div>
             </div>
         </div>
+
+    <!-- MODAL REGISTRAR --> 
+        <div class="modal fade" id="defaultModal2" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="defaultModalLabel">Registro - Usuario</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div *ngIf="nuevoRegistro">
+                            <app-register [Vista]=vistaTemp> </app-register> 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
   </div>               
 </section>
 

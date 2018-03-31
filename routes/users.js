@@ -623,10 +623,11 @@ router.post('/cerrarOrden',  (req, res, next) => {
 });
 
 router.post('/registerRepuesto', (req, res, next) => {
-	let repuesto = new Repuesto({
+	let newRepuesto = {
 		pieza:  req.body.pieza 
-	});
-	Repuesto.addRepuesto(repuesto, (err, repuesto) => {
+	}
+
+	Repuesto.addRepuesto(newRepuesto, (err, repuesto) => {
 		if(err){
 			res.json({success:false, msg:'No funciono el registro de usuario'});
 		} else {

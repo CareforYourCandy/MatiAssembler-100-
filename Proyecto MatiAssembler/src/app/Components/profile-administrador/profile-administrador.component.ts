@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ModificarUsuarioComponent } from '../modificar-usuario/modificar-usuario.component';
-import {AgregarRepuestoComponent} from '../agregar-repuesto/agregar-repuesto.component'; 
+import { AgregarRepuestoComponent } from '../agregar-repuesto/agregar-repuesto.component'; 
 
 
 @Component({
@@ -19,7 +19,9 @@ export class ProfileAdministradorComponent implements OnInit {
   usuario; 
   repuestos;
   vista=1;
-
+  vistaTemp;
+  nuevoRegistro = false;
+  nuevoRep;
   constructor(private authService: AuthService ) { }
   
   
@@ -28,14 +30,31 @@ export class ProfileAdministradorComponent implements OnInit {
     this.admin = JSON.parse(localStorage.getItem("user")); 
     this.obtenerRepuestos(); 
     this.obtenerUsuarios();
+    this.nuevoRep = JSON.parse(localStorage.getItem("nuevo")); 
+      console.log(this.nuevoRep);
+      /*this.repuestos.push(this.nuevoRep);
+      console.log(this.repuestos);*/
+  }
+
+  /*ngAfterInit() {
+    this.nuevoRep = JSON.parse(localStorage.getItem("nuevo")); 
+    console.log(this.nuevoRep);
   }
   ngAfterViewInit() {
-    this.repuestoInsertar = this.repuestoHijo.repuestoGenerado;
-    console.log(this.repuestoInsertar); 
-  }
+    if(this.repuestoHijo.nuevo) {
+      this.repuestoInsertar = this.repuestoHijo.repuestoGenerado;
+      console.log(this.repuestoInsertar); 
+      this.repuestos.push(this.repuestoInsertar);      
+    }
+  }*/
 
   setVista(id) {
     this.vista=id;
+  }
+
+  Registrar(id) {
+    this.nuevoRegistro=true;      
+    this.vistaTemp=id;
   }
 
   agregarRepuesto() {

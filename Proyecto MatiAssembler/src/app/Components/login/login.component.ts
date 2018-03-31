@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, ViewChild,} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { RegisterComponent } from '../register/register.component'; 
+
 //import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
@@ -12,6 +14,9 @@ export class LoginComponent implements OnInit {
   
     email: String;
     password: String; 
+    vistaTemp;
+    nuevoRegistro = false;
+    //@ViewChild(RegisterComponent);
   
     constructor(private authService: AuthService,
                 private router: Router
@@ -51,6 +56,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['login']);
         }
       }); 
+    }
+
+    Registrar(id) {
+      this.nuevoRegistro=true;      
+      this.vistaTemp=id;
     }
   
   }

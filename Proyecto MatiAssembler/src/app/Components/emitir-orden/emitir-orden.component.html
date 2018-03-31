@@ -5,14 +5,8 @@
         </div>
         <div class="body">
             <form  action="/" id="frmFileUpload"  method="post">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="material-icons">date_range</i>
-                    </span>
-                    <div class="form-line">
-                        <input type="text" class="form-control" [(ngModel)]="fechaOrden" name="fecha" placeholder="Fecha (YYYY-MM-DD)" required autofocus>
-                    </div>
-                </div>
+              
+            
                 <div class="input-group">
                     <my-date-picker name="mydate" [options]="myDatePickerOptions"
                     [(ngModel)]="model" required></my-date-picker>
@@ -26,13 +20,17 @@
                     </div>
                 </div>
                 <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="material-icons">accessibility</i>
-                    </span>
-                    <div class="form-line">
-                        <input type="text" class="form-control" [(ngModel)]="mecanico" name="mecanico" placeholder="Mecanico Asignado" >
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mecanicos <span class="caret"></span>
+                        </button>
+                        <ul   class="dropdown-menu">
+                            <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico.idUsuario)">{{mecanico.nombre}}</a></li>
+                            
+                        </ul>
+                      
                     </div>
-                </div>
+                </div> 
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="material-icons">build</i>

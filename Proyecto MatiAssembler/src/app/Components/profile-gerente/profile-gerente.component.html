@@ -320,7 +320,7 @@
             <app-reporte-vehiculo> </app-reporte-vehiculo>
         </div>
         <div *ngIf="vista == 6"> 
-            <app-reporte-mecanico> </app-reporte-mecanico>
+            <app-reporte-mecanico [mecanicos] = "mecanicos" [vehiculos] = "vehiculos" > </app-reporte-mecanico>
         </div>
        
     <!-- #END# Hover Rows -->
@@ -377,7 +377,7 @@
                 </div>
                 <div class="modal-body">
                     <div *ngIf="nuevaOrden">
-                        <app-emitir-orden [idVehiculo]=idVehiculotemp [idCita]=idCitatemp> </app-emitir-orden> 
+                        <app-emitir-orden [idVehiculo]=idVehiculotemp [idCita]=idCitatemp [mecanicos]="mecanicos"> </app-emitir-orden> 
                       </div>
                 </div>
                 <div class="modal-footer">

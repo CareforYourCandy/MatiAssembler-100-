@@ -1,62 +1,70 @@
 
-  <div class="card">
-      <div class="header bg-orange">
-          <h2>
-                  ÓRDENES EN REPARACIÓN
-          </h2>
-      </div>
-      <div class="body table-responsive">
-          <table class="table table-hover">
-              <thead>
-                  <tr>
-                          <th>ORDEN</th>
-                          <th>MODELO</th>
-                          <th>AÑO</th>
-                          <th>PLACA</th>
-                          <th>SERIAL</th>
-                          <th>ESTADO</th>
-         
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor = "let orden of ordenes" >
-                      <td>{{orden.idOrden}}</td>
-                      <td>{{orden.vehiculo.modelo}}</td>
-                      <td>{{orden.vehiculo.ano}}</td>
-                      <td>{{orden.vehiculo.placa}}</td>
-                      <td>{{orden.vehiculo.serialMotor}}</td>
-                      <td>{{orden.activada}}</td>
-                   
-                  </tr>
-                 
-                  
-              </tbody>
-          </table>
-      </div>
-  </div>
+  
 
 
     <div class="card">
         <div class="header bg-orange">
             <h2>
-                    MECANICO
+                    MECANICO   {{mecanico.nombre}} {{mecanico.apellido}}
             </h2>
         </div>
+        <div class="input-group">
         <div class="btn-group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Marca <span class="caret"></span>
+                Mecanicos <span class="caret"></span>
             </button>
             <ul   class="dropdown-menu">
                 <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico)">{{mecanico.nombre}}</a></li>
                 
             </ul>
+          
+        </div>
         </div>
         <div class="input-group">
             <my-date-picker name="fechaInicio" [options]="myDatePickerOptions"
             [(ngModel)]="fechaInicio" required></my-date-picker>
         </div>
         <div class="input-group">
-            <my-date-picker name="fechaFin" [options]="myDatePickerOptions"
-            [(ngModel)]="fechaFin" required></my-date-picker>
+            <my-date-picker name="fechaFin" [options]="myDatePickerOptions2"
+            [(ngModel)]="fechaFinal" required></my-date-picker>
         </div>
+        <button type="button" class="btn btn-warning waves-effect" (click)="obtenerOrdenes()">Obtener Ordenes </button>
     </div>
+
+    <div class="card">
+            <div class="header bg-orange">
+                <h2>
+                        ÓRDENES EN REPARACIÓN
+                </h2>
+            </div>
+            <div class="body table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                                <th>ORDEN</th>
+                                <th>MODELO</th>
+                                <th>AÑO</th>
+                                <th>PLACA</th>
+                                <th>SERIAL</th>
+                                <th>ESTADO</th>
+               
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = "let orden of ordenes" >
+                            <td>{{orden.idOrden}}</td>
+                            <td>{{orden.vehiculo.modelo}}</td>
+                            <td>{{orden.vehiculo.ano}}</td>
+                            <td>{{orden.vehiculo.placa}}</td>
+                            <td>{{orden.vehiculo.serialMotor}}</td>
+                            <td>{{orden.activada}}</td>
+                         
+                        </tr>
+                       
+                        
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-warning waves-effect" (click)="generarReporte()">Generar Reporte</button>
+            </div>
+         
+        </div>

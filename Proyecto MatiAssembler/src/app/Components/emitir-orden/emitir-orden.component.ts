@@ -12,6 +12,7 @@ import {IMyDpOptions} from 'mydatepicker';
 export class EmitirOrdenComponent implements OnInit {
 	@Input() idVehiculo;
 	@Input() idCita; 
+	@Input() mecanicos; 
 	fechaOrden: String;
 	diagnostico: String;
 	mecanico: String;
@@ -31,15 +32,19 @@ export class EmitirOrdenComponent implements OnInit {
 
   ngOnInit() {
   }
+  seleccionarMecanico(id) {
+	  this.mecanico = id; 
+  }
 
   registrarOrden() {
 	  console.log(this.idVehiculo);
-	  this.fechaOrden = JSON.stringify(this.model); 
+	   let fechaOrdenFormateada = ""; 
+	   fechaOrdenFormateada += this.model.date.year + "." + this.model.date.month + "." + this.model.date.day; 
 	  const orden = {
 	    idVehiculo: this.idVehiculo,
 	    idMecanico: this.mecanico,
 	    diagnostico: this.diagnostico,
-	    fecha: this.fechaOrden,
+	    fecha: fechaOrdenFormateada,
 	    motivo: this.motivo,
 	    activada: 1
 	  }

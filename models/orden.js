@@ -8,6 +8,7 @@ var nodemailer = require('nodemailer');
 const User = require('../models/user');
 const Vehiculo = require('../models/vehiculo');
 const Marca = require('../models/marca');
+const Op = Sequelize.Op; 
 
 const Orden = connection.define('orden', {
     idOrden: {
@@ -249,6 +250,27 @@ module.exports.getOrdenByID= function(ID, callback){
     }); 
 }
 
+module.exports.getOrdenesByFecha = function(fechas, callback) {
+    const query = { where: { fecha: { 
+        [Op.between] : [fechas.fechaInicio, fechas.fechaFinal]
+    }
+
+    }};
+    Orden.findAll(query).then(ordenes => {
+        
+        let ordenes2 = ordenes.map(function(orden) {
+            dato = orden.dataValues;   
+            return dato; 
+        })
+        ordenes = ordenes2;
+        return ordenes; 
+    })
+    .then(datos => {
+        console.log(datos); 
+        return callback(null, datos);
+    });     
+}
+
 module.exports.modificarOrden = function(orden, callback) {
     
     query = {diagnostico: orden.diagnostico,
@@ -262,4 +284,6 @@ module.exports.modificarOrden = function(orden, callback) {
     return callback();
     console.log("update orden exitosa");
 }
+
+
 

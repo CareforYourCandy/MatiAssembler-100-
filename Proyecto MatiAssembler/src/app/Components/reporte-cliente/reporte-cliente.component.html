@@ -1,3 +1,137 @@
-<p>
-  reporte-cliente works!
-</p>
+<div class="row clearfix">
+<div class="card">
+  <div class="header bg-pink">
+      <h2>
+          LISTA DE CLIENTES
+      </h2>
+  </div>
+  <div class="body table-responsive">
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                <th>NOMBRE</th>
+                <th>APELLIDO</th>
+                <th>CÉDULA</th>
+                <th>VER VEHÍCULOS</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor= 'let user of clientes' >
+                <td>{{user.nombre}}</td>
+                <td>{{user.apellido}}</td>
+                <td>{{user.cedula}}</td>
+                <td> <button type="button"  (click)="recuperarVehiculos(user)" class="btn btn-default waves-effect">
+                  <i class="material-icons">settings</i> </button>
+                  </td>
+               </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+    <!-- VEHICULOS -->
+    
+    <div >
+        <div class="card">
+            <div class="header bg-pink">
+                <h2>VEHÍCULOS CLIENTE:  {{userSeleccionado.nombre}} {{userSeleccionado.apellido}}</h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-hover dashboard-task-infos">
+                        <thead>
+                            <tr>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Año</th>
+                                <th>Placa</th>
+                                <th>Serial del motor</th>
+                                <th> Activado </th>
+                                <th>Fecha Registro</th>
+                                <th>Ver ordenes </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr *ngFor="let vehiculo of vehiculos" >
+                                 
+                                <td>{{setMarcaVista(vehiculo.marca)}}</td>
+                                <td>{{vehiculo.modelo}}</td>
+                                <td>{{vehiculo.ano}}</td>
+                                <td>{{vehiculo.placa}}</td>
+                                <td>{{vehiculo.serialMotor}}</td>
+                                <td> {{vehiculo.activado}}</td>
+                                <td>{{vehiculo.fechaRegistro}}</td>
+                                <td>
+                                    <button (click)="verCitas(vehiculo)" data-toggle="modal" data-target="#largeModal" type="button" class="btn bg-indigo waves-effect">
+                                        <i class="material-icons">date_range</i>
+                                    </button>
+                                </td>
+                            
+                                
+                            </tr>
+                          
+                        
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-danger waves-effect" (click)="generarReporte()">Generar Reporte</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- #END# VEHICULOS -->
+  </div>
+
+  <!--MODAL HISTORIAL-->
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="largeModalLabel">Ordenes</h4>
+            </div>
+            <div class="modal-body">
+                <!-- HISTORIAL --> 
+                <div >
+                    <div class="card">
+                        <div class="header bg-cyan">
+                            <h2>
+                                ORDENES 
+                            </h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ORDEN</th>
+                                        <th>FECHA ADMISIÓN</th>
+                                        <th>MECÁNICO</th>
+                                        <th>DIAGNÓSTICO</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let orden of ordenes" >
+                                        <td>{{orden.idOrden}}</td>
+                                        <td>{{orden.fecha}}</td>
+                                        <td>{{orden.idMecanico}}</td>
+                                        <td>{{orden.diagnostico}}</td>
+                                       
+    
+                                    </tr>
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+    
+                    </div>
+                </div>
+                 <!--FIN HISTORIAL -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--FIN MODAL HISTORIAL-->

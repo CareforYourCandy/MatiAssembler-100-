@@ -17,6 +17,7 @@ export class ReporteVehiculoComponent implements OnInit {
   marcas; 
   ordenes; 
   mostrarAlerta = false; 
+ 
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,

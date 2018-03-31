@@ -313,6 +313,9 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="vista == 4"> 
+            <app-reporte-cliente [clientes]= "clientes"  [marcas] = "marcas" > </app-reporte-cliente>
+        </div>
         <div *ngIf="vista == 5"> 
             <app-reporte-vehiculo> </app-reporte-vehiculo>
         </div>

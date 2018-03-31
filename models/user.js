@@ -1,14 +1,8 @@
 const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
 const path = require('path');
-const connection = new Sequelize('mydb', 'root', 'pink88pink', {
-  	host: 'localhost',
-  	dialect : 'mysql',
-	define : {
-		freezeTableName : true,
-		timestamps : false
-    }
-});
+const config = require('./../config/database');
+const connection = config.connection;
 
 //User Schema
 module.exports = function(sequelize, DataTypes) {

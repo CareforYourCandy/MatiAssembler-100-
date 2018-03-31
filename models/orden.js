@@ -99,16 +99,16 @@ module.exports.cerrarOrden = function(orden, callback) {
                 repuestosFinal.push(repuesto);
 
                 if(i == (repuestosOrden.length-1)){
-                    return res.json({success: true, repuestos: repuestosFinal}); 
+                    console.log('array repuestos final:');
+                    console.log(repuestosFinal);
+                    return repuestosFinal; 
                 }                
             });            
             console.log(repuestosFinal);
         }
-        console.log('array repuestos final:');
-        console.log(repuestosFinal);
+      
     });
-    console.log("Se cerro chevere");
-    return callback();
+   
 }
 
 module.exports.addOrden = function(orden, callback) {

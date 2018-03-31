@@ -62,7 +62,7 @@ export class DetalleOrdenComponent implements OnInit {
 		this.obtenerDatos();
 
 		this.qr = this.orden.idOrden.toString(); 
-		this.qr = "Www.hola.com";
+	
 		
 	}
 

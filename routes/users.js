@@ -628,7 +628,7 @@ router.post('/activarOrden',  (req, res, next) => {
 
 router.post('/cerrarOrden',  (req, res, next) => {
 	console.log(req.body); 
-	Orden.cerrarOrden(req.body.idOrden, (err, orden)  => {
+	Orden.cerrarOrden(req.body, (err, orden)  => {
 		if (err) {
 			res.json({success:false, msg:'No funciono'});
 		} else {

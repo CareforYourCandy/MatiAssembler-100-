@@ -129,7 +129,7 @@
                                           <td>{{user.nombre}}</td>
                                           <td>{{user.apellido}}</td>
                                           <td>{{user.cedula}}</td>
-                                          <td> <button type="button" data-toggle="modal" data-target="#defaultModal" (click)="modificarCliente(user.idUsuario)" class="btn btn-default waves-effect">
+                                          <td> <button type="button" data-toggle="modal" data-target="#defaultModal2" (click)="modificarCliente(user.idUsuario)" class="btn btn-default waves-effect">
                                             <i class="material-icons">settings</i> </button>
                                             </td>
                                          </tr>
@@ -325,13 +325,20 @@
        
     <!-- #END# Hover Rows -->
         
+</div>
+
+</section>
+<div class="body">
+    <div class="row clearfix">
        
-        <!--MODALS PARA REPORTES -->
+
+
+        <!--MODALS ORDENES -->
         <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+                    <h4 class="modal-title" id="smallModalLabel">Gestión de citas</h4>
                 </div>
                 <div class="modal-body">
                     <div *ngIf="nuevaOrden">
@@ -344,6 +351,26 @@
             </div>
         </div>
         </div>
+
+        <!--MODAL MODIFICAR USUARIOS-->
+                  <div class="modal fade" id="defaultModal2" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="defaultModalLabel">MODIFICAR</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div *ngIf="modificar">
+                                    <app-modificar-usuario [Vista]="vistaModificar" [user]= "usuario"> </app-modificar-usuario>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                               
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 </div>

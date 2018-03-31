@@ -9,6 +9,8 @@ const User = require('../models/user');
 const Vehiculo = require('../models/vehiculo');
 const Marca = require('../models/marca');
 const Op = Sequelize.Op; 
+const RepuestosOrden = require('../models/repuestosOrden'); 
+const Repuesto = require('../models/repuesto'); 
 
 const Orden = connection.define('orden', {
     idOrden: {
@@ -32,11 +34,14 @@ const Orden = connection.define('orden', {
     fecha: {
         type: Sequelize.DATE
     },
-    procedimiento: {
+    motivo: {
         type: Sequelize.STRING      
     },  
     activada: {                  //1: en curso, 2: finalizada, 0: cerrada
         type: Sequelize.INTEGER
+    },
+    procedimiento: {
+        type: Sequelize.STRING      
     }
 });
 
@@ -62,24 +67,54 @@ module.exports.activarOrden = function(ordenID, callback) {
     }); 
 }
 
-module.exports.cerrarOrden = function(ordenID, callback) {
+module.exports.cerrarOrden = function(orden, callback) {
     Orden.update(
         {activada: 0},
-        {where: {idOrden: ordenID} }
-    ).then(datos => {
-        //console.log(datos);
-        return callback(null, datos);
-    }); 
+        {where: {idOrden: orden.idOrden} }
+    );
+
+    RepuestosOrden.getRepuestosOrden(orden.idOrden, (err, repuestosOrden) => {
+        console.log('adentro de obtener los id repuestos orden');
+        console.log(repuestosOrden);
+        if(err) {
+            console.log('AQUI PASO ALGO');
+        }
+        if(!repuestosOrden){
+            console.log('AQUI PASO ALGO2');
+            return res.json({success: false, msg:'Vehiculo not found'});
+        }
+        const repuestosFinal = [];
+
+        for (let i = 0; i < repuestosOrden.length; i++) {
+            Repuesto.getRepuestoByID(repuestosOrden[i].idRepuesto, (err, repuesto) => {
+                //console.log('adentro de obtener cada nombre repuestos orden');
+                //console.log(repuesto);
+                if(err) {
+                    console.log('AQUI PASO ALGO');
+                }
+                if(!repuesto){
+                    console.log('AQUI PASO ALGO2');
+                    return res.json({success: false, msg:'Repuesto not found'});
+                }
+                repuestosFinal.push(repuesto);
+
+                if(i == (repuestosOrden.length-1)){
+                    //return callback();
+                }                
+            });            
+            console.log(repuestosFinal);
+        }
+        console.log('array repuestos final:');
+        console.log(repuestosFinal);
+    });
+    console.log("Se cerro chevere");
+    return callback();
 }
 
 module.exports.addOrden = function(orden, callback) {
     console.log("estoy en addOrden");
     console.log(orden);
     Orden.create(orden); 
-
-    //let vehiculo = await Usuario.findById(vehiculo.Cliente);
-    //let cliente = buscarCliente.dataValues;
-
 
     Vehiculo.getVehiculoByID(orden.idVehiculo, (err, carro) => {
         //console.log('adentro de obtener el vehiculo');

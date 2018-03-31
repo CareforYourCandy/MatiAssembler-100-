@@ -16,13 +16,13 @@
                         <i class="material-icons">check_circle</i>
                     </span>
                     <div class="form-line">
-                        <input type="text" class="form-control" [(ngModel)]="diagnostico" name="diagnostico" placeholder="Diagnostico" >
+                        <input type="text" class="form-control" [(ngModel)]="motivo" name="motivo" placeholder="Motivo" >
                     </div>
                 </div>
                 <div class="input-group">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Mecanicos <span class="caret"></span>
+                            Mecanicos<span class="caret"></span>
                         </button>
                         <ul   class="dropdown-menu">
                             <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico.idUsuario)">{{mecanico.nombre}}</a></li>
@@ -30,23 +30,15 @@
                         </ul>
                       
                     </div>
-                </div> 
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="material-icons">build</i>
-                    </span>
-                    <div class="form-line">
-                        <input type="text" class="form-control" [(ngModel)]="repuesto" name="repuesto" placeholder="Repuestos" >
-                    </div>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="material-icons">check_circle</i>
                     </span>
                     <div class="form-line">
-                        <input type="text" class="form-control" [(ngModel)]="motivo" name="motivo" placeholder="Motivo" >
+                        <input type="text" class="form-control" [(ngModel)]="diagnostico" name="diagnostico" placeholder="Diagnostico" >
                     </div>
-                </div>                                
+                </div> 
 
                 <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "registrarOrden()" type="text" data-dismiss="modal">AÑADIR ORDEN</button>
   

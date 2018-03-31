@@ -24,6 +24,7 @@ export class ProfileGerenteComponent implements OnInit {
   mecanicos;
   usuarios;
   modificar = false; 
+  vistaModificar;
   usuario;
   citas = [];
   carrosCitas = [];
@@ -137,7 +138,7 @@ export class ProfileGerenteComponent implements OnInit {
       console.log(this.usuarios); 
 
       this.mecanicos = this.usuarios.filter(function(user) {
-        if (user.rol==2) {
+        if (user.rol==4) {
            return user;
         }
       });
@@ -186,19 +187,22 @@ cuadrarCarros() {
 
 }
 
-modificarUsuario(id) {
+  async modificarCliente(id) {
     this.modificar = true;
+    this.vistaModificar=2;
+
     let user; 
      
-     this.authService.getUserById(id).subscribe(datos => {
+    await this.authService.getUserById(id).subscribe(datos => {
      
       console.log(datos); 
-      user = datos.user; 
+      user = datos.usuario; 
       console.log(user); 
       this.usuario = user; 
     })     
      console.log(this.usuario); 
-}
+ 
+  }
 
   getMarcas() {
     this.authService.getMarcas().subscribe(data => {
@@ -247,7 +251,7 @@ modificarUsuario(id) {
   cerrarOrden(orden) {
     let id=orden.idOrden;
     if(orden.activada==2) { //Cerrar la orden solo si esta finalizada, si esta en curso no permitirlo
-    this.authService.cerrarOrden(id).subscribe(data => {
+    this.authService.cerrarOrden(orden).subscribe(data => {
       console.log(data); 
 
       for (let i = 0; i < this.ordenesActivas.length ; i++) {

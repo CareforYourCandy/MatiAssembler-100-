@@ -1,4 +1,4 @@
-<div  *ngIf="admin.rol == 2" > 
+<div   > 
   <!-- Search Bar -->
   <div class="search-bar">
       <div class="search-icon">
@@ -119,7 +119,7 @@
                                   <td>{{user.nombre}}</td>
                                   <td>{{user.apellido}}</td>
                                   <td>{{user.cedula}}</td>
-                                  <td>{{user.rol}}</td>
+                                  <td>{{obtenerRol(user.rol)}}</td>
                                   <td>
                                   <button type="button" data-toggle="modal" data-target="#defaultModal" (click)="modificarUsuario(user.idUsuario)" class="btn btn-default waves-effect">
                                     <i class="material-icons">settings</i>
@@ -184,7 +184,7 @@
     </div>
     <!-- #END# LISTA VEHICULOS -->
 
-        <!--MODAL-->
+        <!--MODAL MODIFICAR USUARIOS-->
                   <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -193,7 +193,7 @@
                             </div>
                             <div class="modal-body">
                                 <div *ngIf="modificar">
-                                    <app-modificar-usuario  [user]= "usuario" > </app-modificar-usuario>
+                                    <app-modificar-usuario [Vista]="vistaModificar" [user]= "usuario" > </app-modificar-usuario>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -209,7 +209,7 @@
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="smallModalLabel">Modal title</h4>
+                        <h4 class="modal-title" id="smallModalLabel">Gestión Repuestos</h4>
                     </div>
                     <div class="modal-body">
                         <div *ngIf="nuevoRepuesto">

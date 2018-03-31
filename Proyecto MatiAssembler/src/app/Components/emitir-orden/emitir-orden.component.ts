@@ -23,7 +23,7 @@ export class EmitirOrdenComponent implements OnInit {
 	myDatepicker; 
 	public myDatePickerOptions: IMyDpOptions = {
 		// other options...
-		dateFormat: 'yyyy.mm.dd',
+		dateFormat: 'yyyy-mm-dd',
 	};
 	public model: any = { date: { year: 2018, month: 10, day: 9 } };
   constructor(private validateService: ValidateService, 
@@ -33,38 +33,42 @@ export class EmitirOrdenComponent implements OnInit {
   ngOnInit() {
   }
   seleccionarMecanico(id) {
-	  this.mecanico = id; 
+	  this.mecanico = id;
   }
 
-  registrarOrden() {
-	  console.log(this.idVehiculo);
-	   let fechaOrdenFormateada = ""; 
-	   fechaOrdenFormateada += this.model.date.year + "." + this.model.date.month + "." + this.model.date.day; 
-	  const orden = {
-	    idVehiculo: this.idVehiculo,
-	    idMecanico: this.mecanico,
-	    diagnostico: this.diagnostico,
-	    fecha: fechaOrdenFormateada,
-	    motivo: this.motivo,
-	    activada: 1
-	  }
-	  this.ordenGenerada = orden; 
-	  
-	  this.authService.registerOrden(orden).subscribe(data => {
+	registrarOrden() {
+		console.log(this.idVehiculo);
+		let fechaOrdenFormateada = ""; 
+		fechaOrdenFormateada += this.model.date.year + "-" + this.model.date.month + "-" + this.model.date.day; 
+		const orden = {
+		idVehiculo: this.idVehiculo,
+		idMecanico: this.mecanico,
+		diagnostico: this.diagnostico,
+		fecha: fechaOrdenFormateada,
+		motivo: this.motivo,
+		activada: 1
+		}
+		this.ordenGenerada = orden; 
+
+		this.authService.registerOrden(orden).subscribe(data => {
 			console.log(data.success); 
 			if(data.success) {
-			this.authService.eliminarCita(this.idCita).subscribe( data => { 
-				console.log(data.success); 			
-				this.router.navigate['home-page'];
-			})
-		}
-		
-
-			
+				this.authService.eliminarCita(this.idCita).subscribe( data => { 
+					console.log(data.success); 			
+					this.router.navigate['home-page'];
+				})
+			}			
 		}); 
-		
-		
+	}
 
- }
+  /*obtenerMecanico() {
+  	let mecanicoAux = this.mecanicos.filter(function(user) {
+        if (user.idUsuario==aux) {
+           return user;
+        }
+    });
+  	console.log(mecanicoAux[0]);
+    return mecanicoAux[0].nombre || "Mecanicos"; 
+  }*/
 
 }

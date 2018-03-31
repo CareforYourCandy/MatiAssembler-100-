@@ -107,16 +107,16 @@ export class RegisterComponent implements OnInit {
 
   obtenerRol() {
     if(this.rol==1) {
-      return "Usuario";
+      return "Cliente";
     }
     if(this.rol==2) {
-      return "Mecanico";
+      return "Administrador";
     }
     if(this.rol==3) {
       return "Gerente";
     }
     if(this.rol==4) {
-      return "Administrador";
+      return "Mecanico";
     }
   }
 

@@ -8,13 +8,14 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./modificar-usuario.component.css']
 })
 export class ModificarUsuarioComponent implements OnInit, OnChanges {
-
+  
+  @Input() Vista;
   @Input() user;  
   id; 
   name: String;
 	lastname: String;
 	email: String;
-	rol: String;
+	rol;
   password: String;
   cedula: String; 
   direccion: String;
@@ -43,9 +44,6 @@ export class ModificarUsuarioComponent implements OnInit, OnChanges {
     this.direccion = user.direccion;
     this.telefono = user.telefono; 
   }
-  setRol(numero) {
-    this.rol = numero; 
-  }
 
   modificarUsuario() {
     console.log("hola"); 
@@ -66,5 +64,24 @@ export class ModificarUsuarioComponent implements OnInit, OnChanges {
           console.log(data.success); 
           this.router.navigate['profile-administrador'];      
     });  
+  }
+
+  setRol(numero) {
+    this.rol = numero; 
+  }
+
+  obtenerRol() {
+    if(this.rol==1) {
+      return "Cliente";
+    }
+    if(this.rol==2) {
+      return "Administrador";
+    }
+    if(this.rol==3) {
+      return "Gerente";
+    }
+    if(this.rol==4) {
+      return "Mecanico";
+    }
   }
 }

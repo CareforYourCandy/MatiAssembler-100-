@@ -226,10 +226,10 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/activarOrden', {idOrden}, {headers: headers})
 			.map(res => res.json());
 	}
-	cerrarOrden(idOrden) {
+	cerrarOrden(orden) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/cerrarOrden', {idOrden}, {headers: headers})
+		return this.http.post('http://localhost:3000/users/cerrarOrden', orden, {headers: headers})
 			.map(res => res.json());
 	}
 	obtenerListaVehiculos(){ //Obtener todos los Vehiculos

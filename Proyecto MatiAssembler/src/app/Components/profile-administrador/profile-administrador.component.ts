@@ -12,6 +12,7 @@ import { AgregarRepuestoComponent } from '../agregar-repuesto/agregar-repuesto.c
 export class ProfileAdministradorComponent implements OnInit {
   admin: object;
   modificar = false; 
+  vistaModificar;
   nuevoRepuesto = false; 
   @ViewChild(AgregarRepuestoComponent)  repuestoHijo;  
   repuestoInsertar; 
@@ -79,6 +80,7 @@ export class ProfileAdministradorComponent implements OnInit {
 
   async modificarUsuario(id) {
     this.modificar = true;
+    this.vistaModificar=1;
     let user; 
      
     await this.authService.getUserById(id).subscribe(datos => {
@@ -91,4 +93,17 @@ export class ProfileAdministradorComponent implements OnInit {
      console.log(this.usuario); 
  
   }
-}
+  obtenerRol(rol) {
+    if(rol==1) {
+      return "Cliente";
+    }
+    if(rol==2) {
+      return "Administrador";
+    }
+    if(rol==3) {
+      return "Gerente";
+    }
+    if(rol==4) {
+      return "Mecanico";
+    }
+  }

@@ -88,12 +88,13 @@ export class ProfileGerenteComponent implements OnInit {
   obtenerOrdenes() {
     this.ordenes = new Array(); 
 
-    console.log("Voy a obtener las ordenes"); 
-    let data = this.authService.getOrdenes().subscribe( datos => {
+     
+    this.authService.getOrdenes().subscribe( datos => {
       this.ordenes = datos.ordenes;
-
+      console.log("Voy a obtener las ordenes");
+      console.log(this.ordenes); 
       this.ordenesActivas = this.ordenes.filter(function(orden) {
-        if (orden.activada!=0) {
+        if (orden.activada != 0 ) {
           return orden;
         }
       });

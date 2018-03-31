@@ -287,13 +287,7 @@ router.post('/getVehiculos2', (req, res, next) => {
 
 router.post('/getOrdenesMecanico', (req, res, next) => { //Obtener ordenes por mecánico
 	console.log("Estoy en obtener ordenes por mecanico");
-	let ordenes = Orden.getOrdenesMecanico(req, (err, ordenes) => {
-		if (err) {
-			console.log("algo fallo"); 
-		}
-		if(!marcas) {
-			console.log("No hay marcas"); 
-		}
+	let ordenes = Orden.getOrdenesByMecanico(req, (err, ordenes) => {
 		
 		res.json( {
 			success:true, 

@@ -99,7 +99,7 @@ module.exports.cerrarOrden = function(orden, callback) {
                 repuestosFinal.push(repuesto);
 
                 if(i == (repuestosOrden.length-1)){
-                    //return callback();
+                    return res.json({success: true, repuestos: repuestosFinal}); 
                 }                
             });            
             console.log(repuestosFinal);
@@ -252,6 +252,23 @@ module.exports.getOrdenbyMecanico = function(id, callback){
         return callback(null, datos);
         
 	});		
+}
+
+module.exports.getOrdenesByMecanico = function(req, callback){
+ console.log(req.body); 
+	const query = {where: {idMecanico: req.body.idMecanico }}
+	Orden.findAll(query).then(ordenes => {
+        let ordenes2 = ordenes.map(function(orden) {
+            dato = orden.dataValues;   
+            return dato; 
+        })
+        ordenes = ordenes2;
+        return ordenes; 
+    })
+    .then(datos => {
+        console.log(datos); 
+        return callback(null, datos);
+    });     	
 }
 
 module.exports.getOrdenesPorVehiculo = function(elquetal, callback){

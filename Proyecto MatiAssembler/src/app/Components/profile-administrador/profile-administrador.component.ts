@@ -107,3 +107,5 @@ export class ProfileAdministradorComponent implements OnInit {
       return "Mecanico";
     }
   }
+}
+

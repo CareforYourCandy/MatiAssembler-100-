@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="header bg-orange">
+      <h2>
+              Seleccionar fechas 
+      </h2>
+  </div>
+
+  <div class="input-group">
+      <my-date-picker name="fechaInicio" [options]="myDatePickerOptions"
+      [(ngModel)]="fechaInicio" required></my-date-picker>
+  </div>
+  <div class="input-group">
+      <my-date-picker name="fechaFin" [options]="myDatePickerOptions2"
+      [(ngModel)]="fechaFinal" required></my-date-picker>
+  </div>
+  <button type="button" class="btn btn-warning waves-effect" (click) = "obtenerVistaPrevia() ">Obtener Vista Previa  </button>
+</div>
+
+<div class="card">
+  <div class="header bg-orange">
+      <h2>
+              Modelos Atentidos
+      </h2>
+  </div>
+  <div class="body table-responsive">
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                      <th>MODELO</th>
+                      <th>CANTIDAD</th>
+                    
+     
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor = "let modelo of modelos" >
+                  <td>{{modelo.modelo}}</td>
+                  <td>{{modelo.cantidad}}</td>
+                  
+               
+              </tr>
+             
+              
+          </tbody>
+      </table>
+      <button type="button" class="btn btn-warning waves-effect" (click)="generarReporte()">Generar Reporte</button>
+  </div>
+
+</div>

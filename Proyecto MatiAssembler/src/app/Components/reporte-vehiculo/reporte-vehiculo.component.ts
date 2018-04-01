@@ -68,6 +68,7 @@ export class ReporteVehiculoComponent implements OnInit {
         reporte += "Fecha" + "," + "idMecanico" + "," + "Diagnostico" + "," + "Procedimiento" + "\r\n";
         console.log(this.ordenes.length); 
         if ( this.ordenes !== undefined && this.ordenes.length > 0  ) {
+        this.mostrarAlerta = false;
         this.ordenes.forEach(orden => {
            
           reporte += orden.fecha + "," + orden.idMecanico + "," + orden.diagnostico + "," + orden.procedimiento + "\r\n";
@@ -98,5 +99,7 @@ export class ReporteVehiculoComponent implements OnInit {
     return this.marcas[idMarca -1].marca
     }
 
-    
+  cerrarAlerta() {
+    this.mostrarAlerta = false; 
+  }
 }

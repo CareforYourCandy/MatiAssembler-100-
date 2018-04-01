@@ -55,6 +55,9 @@ router.post('/register', (req, res, next) => {
 		} else {
 			res.json({success:true, msg:'Usuario registrado'});
 		}
+		res.json({
+			success: true
+		});
 	});
 });
 

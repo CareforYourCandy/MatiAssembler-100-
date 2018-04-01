@@ -4,8 +4,8 @@
     </div>
     <div *ngIf="mostrarAlerta">
             <div class="alert alert-warning alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                   El vehículo no poseé ordenes 
+                    <button (click)="cerrarAlerta()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   El vehículo no posee ordenes 
                 </div>
     </div> 
     <div class="body">
@@ -21,7 +21,6 @@
                         <th>Activado</th>
                         <th>Fecha Registro</th>
                         <th>Generar Reporte</th>
-
                     </tr>
                 </thead>
                 <tbody>

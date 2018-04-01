@@ -27,22 +27,17 @@ nuevo = false;
   }
 
   
- registrarRepuesto() {
-  
-  const repuesto = {
-    pieza: this.pieza 
+  registrarRepuesto() {
+    const repuesto = {
+      pieza: this.pieza 
+    }
+    this.authService.registerRepuesto(repuesto).subscribe(data => {
+      console.log(data.success);
+      //this.repuestoGenerado = repuesto; 
+      //this.nuevo=true;
+      this.authService.almacenarNuevoLS(repuesto);
+      this.router.navigate(['/profile-administrador']);
+    }); 
   }
-
-  this.authService.registerRepuesto(repuesto).subscribe(data => {
-    console.log(data.success);
-    //this.repuestoGenerado = repuesto; 
-    //this.nuevo=true;
-    this.authService.almacenarNuevoLS(repuesto);
-    this.router.navigate(['/profile-administrador']);
-
-  }); 
-
-
- }
 
 }

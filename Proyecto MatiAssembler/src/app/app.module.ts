@@ -41,6 +41,7 @@ import { EmitirOrdenComponent } from './Components/emitir-orden/emitir-orden.com
 import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modificar-repuesto.component';
 import { AgregarUsuarioComponent } from './Components/agregar-usuario/agregar-usuario.component';
 import { ReporteModeloComponent } from './Components/reporte-modelo/reporte-modelo.component';
+import { UploadFileService } from './services/upload-file.service';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -98,7 +99,7 @@ import { ReporteModeloComponent } from './Components/reporte-modelo/reporte-mode
     MyDatePickerModule 
   ],
   
-  providers: [ValidateService, AuthService, AuthGuard, DatePipe],
+  providers: [ValidateService, AuthService, AuthGuard, DatePipe, UploadFileService ],
   bootstrap: [AppComponent], 
   
   

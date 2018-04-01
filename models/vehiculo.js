@@ -12,6 +12,7 @@ const path = require('path');
 const Vehiculo = connection.define('vehiculo', {
 	idVehiculo: {
 		type: Sequelize.INTEGER,
+		unique: true, 
 		primaryKey: true,
 		autoIncrement: true,
 		allowNull: false
@@ -104,11 +105,17 @@ module.exports.getVehiculosByDueño = function(elquetal, callback){
 	});		
 }
 
-module.exports.addVehiculo = function(newUser, callback) {
-			console.log("estoy en addVehiculo");
-			newUser.save(callback);
-			return callback();
-			console.log("añadi");
+module.exports.addVehiculo = function(vehiculoNuevo, callback) {
+	console.log("EL VEHICULO NUEVO ES"); 
+	console.log(vehiculoNuevo); 
+
+			Vehiculo.create(vehiculoNuevo.dataValues).then(function(vehiculoGuardado) {
+				console.log("EL VEHICULO GUARDADO ES"); 
+				console.log(vehiculoGuardado.dataValues); 
+				return callback(false,vehiculoGuardado.dataValues);
+				
+			});
+		
 }
 
 module.exports.desactivarVehiculo = function(vehiculoID, callback) {

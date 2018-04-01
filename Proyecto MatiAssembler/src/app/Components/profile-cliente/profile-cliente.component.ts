@@ -3,6 +3,7 @@ import { timeout } from 'q';
 import { Http, Headers } from '@angular/http';
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
+import {UploadFileService} from '../../services/upload-file.service'; 
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Vehiculo } from '../vehiculo/vehiculo'; 
@@ -44,7 +45,8 @@ export class ProfileClienteComponent implements OnInit {
               private authService: AuthService,
               private router: Router, 
               private location: Location,
-              private datePipe: DatePipe ) { 
+              private datePipe: DatePipe,
+              private uploadService: UploadFileService ) { 
     
   }
 
@@ -146,9 +148,16 @@ export class ProfileClienteComponent implements OnInit {
         //var fileInput2= document.querySelector("#fileItem").ATTRIBUTE_NODE;
         //var file= fileInput.item(0);
         var inputFile = (<HTMLInputElement>document.getElementById('fileItem')).files;
-        var file= inputFile.item(0);
+        var file; 
         console.log(inputFile);
         console.log(file);
+        let informacion = []; 
+        console.log("hola"); 
+        for ( var i = 0; i < inputFile.length; i++) {
+          file = inputFile.item(i); 
+          informacion.push(this.uploadService.uploadfile(file)); 
+        } 
+        console.log(informacion); 
         const vehiculo = {
           placa: this.placa,       
           marca: this.marcaNuevo,
@@ -170,7 +179,8 @@ export class ProfileClienteComponent implements OnInit {
 
         //Registrar usuario
         this.authService.registerVehiculo(vehiculo).subscribe(data => {
-          console.log(data.success); 
+       console.log("EL RESPONSE ES "); 
+          console.log(data); 
           if(data.success){
              console.log("sirvio");
              this.vehiculos.push(vehiculo); 

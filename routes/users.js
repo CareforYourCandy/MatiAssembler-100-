@@ -11,6 +11,7 @@ const Repuesto = require('../models/repuesto');
 const Marca = require('../models/marca');
 const AccesoriosOrden = require('../models/accesoriosOrden'); 
 const RepuestosOrden = require('../models/repuestosOrden'); 
+const ImagenesVehiculo = require('../models/imagenesvehiculo'); 
 
 router.post('/modificarUsuario', (req, res, next) => {
 	console.log("Estoy en modificar usuario"); 
@@ -231,7 +232,38 @@ router.post('/obtenerRepuestosOrden', (req, res, next) => {
 	});
 });
 
+router.post('/addImagenesVehiculo', (req, res, next) => {
+	const imagenesVehiculo = req.body.imagenesVehiculo;
+	ImagenesVehiculo.addImagenesVehiculo(imageneVehiculo, (err, imagenesVehiculo) => {
+		if(err){
+			res.json({success:false, msg:'NO se añadieron las imagenes'});
+		} else {
+			res.json({success:true, msg:'Se añadieron las imagenes'});
+		}
+		res.json({
+			success: true
+		});
+	});
+})
 
+
+router.post('/obtenerImagenesVehiculo', (req, res, next) => {
+	console.log("Estoy en obtener repuestos de la orden"); 
+	const id = req.body.idVehiculo;
+	ImagenesVehiculo.getImagenesByVehiculo(id, (err, imagenesVehiculo) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!repuestosOrden) {
+			console.log("No hay imagenes"); 
+		}
+		
+		res.json( {
+			success:true, 
+			imagenesVehiculo
+		})
+	});
+});
 //Obtener Vehiculos por cliente
 /*router.post('/getVehiculos', (req, res, next) => {
 	const id=req.body.idUsuario;
@@ -561,11 +593,13 @@ router.post('/registerVehiculo', (req, res, next) => {
         fechaRegistro: req.body.fechaRegistro
        
     });
-    Vehiculo.addVehiculo(newVehiculo, (err, user) => {
+    Vehiculo.addVehiculo(newVehiculo, (err, vehiculo) => {
+		console.log("EL VEHICULO ES"); 
+		console.log(vehiculo); 
 		if(err){
 			res.json({success:false, msg:'No funciono el registro vehiculo'});
 		} else {
-			res.json({success:true, msg:'Vehiculo registrado'});
+			res.json({success:true, msg:'Vehiculo registrado', vehiculo});
 		}
 	});
 

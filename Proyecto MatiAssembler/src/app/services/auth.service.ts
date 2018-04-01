@@ -208,6 +208,18 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/getOrdenesMecanico', {idMecanico}, {headers: headers})
 			.map(res => res.json());
 	}
+	getImagenesVehiculo(idVehiculo) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/obtenerImagenesVehiculo', {idVehiculo}, {headers: headers})
+			.map(res => res.json());
+	}
+	addImagenesVehiculo(imagenesVehiculo) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/obtenerImagenesVehiculo', imagenesVehiculo , {headers: headers})
+			.map(res => res.json());
+	}
 	getOrdenesFecha(fechas) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');

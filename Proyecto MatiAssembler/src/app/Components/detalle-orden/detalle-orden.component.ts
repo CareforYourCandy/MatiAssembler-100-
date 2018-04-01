@@ -71,10 +71,6 @@ export class DetalleOrdenComponent implements OnInit {
 		this.router.navigate(['login']); 
 	}
 
-	home() {
-		this.router.navigate(['']);
-	}
-
 	goBack(): void { //Volver a vista gerente
 	this.location.back();
 	}

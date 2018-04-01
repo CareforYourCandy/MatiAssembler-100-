@@ -1,5 +1,5 @@
 
-<div  *ngIf="user.rol == 1" > 
+<div > 
 
 <!-- Search Bar -->
 <div class="search-bar">
@@ -195,7 +195,7 @@
                                       <th>Año</th>
                                       <th>Placa</th>
                                       <th>Serial del motor</th>
-                                      <th>Activado</th>
+                                      <th>Estado</th>
                                       <th>Fecha Registro</th>
                                       <th>Solicitar Cita</th>
                                       <th>Desactivar</th>
@@ -210,7 +210,7 @@
                                       <td>{{vehiculo.ano}}</td>
                                       <td>{{vehiculo.placa}}</td>
                                       <td>{{vehiculo.serialMotor}}</td>
-                                      <td>{{vehiculo.activado}}</td>
+                                      <td>{{setActivado(vehiculo.activado)}}</td>
                                       <td>{{vehiculo.fechaRegistro}}</td>
                                       <td>
                                           <button (click)="solicitarCita(vehiculo.idVehiculo)" type="button" class="btn bg-indigo waves-effect">
@@ -218,31 +218,10 @@
                                           </button>
                                       </td>
                                       <td>
-                                          <button type="button" class="btn bg-indigo waves-effect" (click)="desactivarVehiculo(vehiculo.idVehiculo, vehiculo)">
+                                          <button type="button" class="btn bg-indigo waves-effect" (click)="desactivarVehiculo(vehiculo)">
                                               <i class="material-icons">close</i>
                                           </button>
-                                      </td>
-                                      
-                                  </tr>
-                                
-                                  <tr>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>----</td>
-                                      <td>
-                                          <button type="button" class="btn bg-indigo waves-effect">
-                                              <i class="material-icons">date_range</i>
-                                          </button>
-                                      </td>
-                                      <td>
-                                          <button type="button" class="btn bg-indigo waves-effect">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
+                                      </td>                                      
                                   </tr>
                               </tbody>
                           </table>
@@ -264,7 +243,7 @@
               <h2>REGISTRAR NUEVO VEHICULO</h2>
           </div>
           <div class="body">
-              <form  action="/" (submit)="vehiculoSubmit()" id="frmFileUpload"  method="post">
+              <form action="/" (submit)="vehiculoSubmit()" id="frmFileUpload"  method="post" enctype="multipart/form-data">
                   <div class="input-group">
                         <span class="input-group-addon">
                                 <i class="material-icons">confirmation_number</i>
@@ -285,7 +264,7 @@
                           <i class="material-icons">directions_car</i>
                       </span>
                       <div class="form-line">
-                          <input type="email" class="form-control"[(ngModel)]="modelo" name="modelo" placeholder="Modelo" required>
+                          <input id="myInput" type="email" class="form-control"[(ngModel)]="modelo" name="modelo" placeholder="Modelo" required>
                       </div>
                   </div>
 
@@ -294,7 +273,7 @@
                           <i class="material-icons">confirmation_number</i>
                       </span>
                       <div class="form-line">
-                          <input type="text" class="form-control" name="ano" [(ngModel)]="ano"  placeholder="Año" required>
+                          <input id="myInput2" type="text" class="form-control" name="ano" [(ngModel)]="ano"  placeholder="Año" required>
                       </div>
                   </div>
 
@@ -303,7 +282,7 @@
                           <i class="material-icons">confirmation_number</i>
                       </span>
                       <div class="form-line">
-                          <input type="text" class="form-control" name="confirm" [(ngModel)]="serialMotor" placeholder="serialMotor" required>
+                          <input id="myInput3" type="text" class="form-control" name="confirm" [(ngModel)]="serialMotor" placeholder="serialMotor" required>
                       </div>
                   </div>
 
@@ -312,40 +291,27 @@
                           <i class="material-icons">confirmation_number</i>
                       </span>
                       <div class="form-line">
-                          <input type="text" class="form-control" [(ngModel)]="placa" name="placa" placeholder="Placa" required autofocus>
+                          <input id="myInput4" type="text" class="form-control" [(ngModel)]="placa" name="placa" placeholder="Placa" required autofocus>
                       </div>
                   </div>
-                  <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR VEHÍCULO</button>
+                   <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">confirmation_number</i>
+                      </span>
+                      <div class="form-line">                      
+                        <label for="fileItem">Elegir imagen a cargar</label>
+                        <input type="file" id="fileItem" [(ngModel)]="file" name="file" accept=".png" multiple>
+                      </div>
+                  </div>                 
+                  <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit" onClick="document.getElementById('myInput').value = '', document.getElementById('myInput2').value = '', document.getElementById('myInput3').value = '',
+                  document.getElementById('myInput4').value = '',
+                  document.getElementById('fileItem').files" >REGISTRAR VEHÍCULO</button>
 
               </form>
           </div>
       </div>
     </div>
 
-    <div>
-          <div class="card">
-              <div class="header">
-                  <h2>
-                      FOTO DEL VEHICULO
-                  </h2>
-              </div>
-              <div class="body">
-                  <form action="/" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
-                      <div class="dz-message">
-                          <div class="drag-icon-cph">
-                              <i class="material-icons">touch_app</i>
-                          </div>
-                          <h3>Arrastre las fotos o de click para seleccionarlas.</h3>
-                      </div>
-                      <div class="fallback">
-                          <input [(ngModel)]="file" name="file" type="file" multiple />
-                      </div>
-                  </form>
-              </div>
-
-          </div>
-
-    </div>
   </div>
 </div>
 

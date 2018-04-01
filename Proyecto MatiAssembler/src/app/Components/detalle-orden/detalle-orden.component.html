@@ -1,4 +1,4 @@
-<div *ngIf="gerente.rol==2">
+<div *ngIf="gerente.rol==4">
 <!-- Top Bar -->
 <nav class="navbar">
     <div class="container-fluid bg-deep-orange">
@@ -30,9 +30,6 @@
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info">
-                <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
-                </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{gerente.nombre}}</div>
                     <div class="email">{{gerente.correo}}</div>

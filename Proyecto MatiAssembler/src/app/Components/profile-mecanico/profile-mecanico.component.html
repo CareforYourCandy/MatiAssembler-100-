@@ -33,7 +33,7 @@
             <div class="user-info bg-light-green">
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nombre}}</div>
-                    <div class="email">{{user.correo}} HOLA</div>
+                    <div class="email">{{user.correo}}</div>
                 </div>
                 <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
 
@@ -44,10 +44,6 @@
                 <ul class="list">
                     <li class="header active">MENU PRINCIPAL</li>
                     <li>
-                        <a (click)="home()">
-                            <i class="material-icons">home</i>
-                            <span style="cursor:pointer">Home</span>
-                        </a>
                         <a  (click)="logout()" >
                             <i class="material-icons">not_interested</i>
                             <span style="cursor:pointer">Cerrar sesión</span>

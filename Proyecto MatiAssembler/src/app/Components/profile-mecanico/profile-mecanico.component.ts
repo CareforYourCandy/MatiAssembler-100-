@@ -12,6 +12,7 @@ import { Http, Headers } from '@angular/http';
 export class ProfileMecanicoComponent implements OnInit {
 
   ordenes = []; 
+  datosOrdenes;
   user; 
   estado; //Estado de una orden (en curso, finalizada)
   ordenTemp;
@@ -31,11 +32,22 @@ export class ProfileMecanicoComponent implements OnInit {
       this.obtenerOrdenes(this.user.idUsuario); 
     }
    
-  
+    logout() {
+      this.authService.logout(); 
+      this.router.navigate(['login']); 
+    }  
+    
     obtenerOrdenes(id) {
       this.authService.getOrdenesMecanico(id).subscribe(data => {
         console.log(data); 
-        this.ordenes = data.ordenes; 
+        this.datosOrdenes = data.ordenes;
+
+        this.ordenes = this.datosOrdenes.filter(function(orden) { //Obtener solo las ordenes abiertas
+          if (orden.activada==1 || orden.activada==2) {
+            return orden;
+          }
+        }); 
+
         for (let i = 0; i < this.ordenes.length; i++) {
           let data2 = this.authService.getVehiculo(this.ordenes[i].idVehiculo).subscribe( datos => {
             console.log("IMPRIMIRE MAS DATOS"); 

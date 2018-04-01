@@ -73,42 +73,139 @@ module.exports.cerrarOrden = function(orden, callback) {
         {where: {idOrden: orden.idOrden} }
     );
 
-    RepuestosOrden.getRepuestosOrden(orden.idOrden, (err, repuestosOrden) => {
-        console.log('adentro de obtener los id repuestos orden');
-        console.log(repuestosOrden);
-        if(err) {
-            console.log('AQUI PASO ALGO');
-        }
-        if(!repuestosOrden){
-            console.log('AQUI PASO ALGO2');
-            return res.json({success: false, msg:'Vehiculo not found'});
-        }
-        const repuestosFinal = [];
+    Vehiculo.getVehiculoByID(orden.idVehiculo, (err, carro) => {
 
-        for (let i = 0; i < repuestosOrden.length; i++) {
-            Repuesto.getRepuestoByID(repuestosOrden[i].idRepuesto, (err, repuesto) => {
-                //console.log('adentro de obtener cada nombre repuestos orden');
-                //console.log(repuesto);
-                if(err) {
-                    console.log('AQUI PASO ALGO');
-                }
-                if(!repuesto){
-                    console.log('AQUI PASO ALGO2');
-                    return res.json({success: false, msg:'Repuesto not found'});
-                }                        
-                repuestosFinal.push(repuesto);
+        User.getUserByID(carro.propietario, (err, user) => {
 
-                if(i == (repuestosOrden.length-1)){
-                    console.log('array repuestos final:');
-                    console.log(repuestosFinal);
-                    return repuestosFinal; 
-                }                
-            });            
-            console.log(repuestosFinal);
-        }
-      
+            Marca.getMarcaByID(carro.marca, (err, marca) => {
+
+                RepuestosOrden.getRepuestosOrden(orden.idOrden, (err, repuestosOrden) => {
+                    console.log('adentro de obtener los id repuestos orden');
+                    console.log(repuestosOrden);
+                    if(err) {
+                        console.log('AQUI PASO ALGO');
+                    }
+                    if(!repuestosOrden){
+                        console.log('AQUI PASO ALGO2');
+                        return res.json({success: false, msg:'Vehiculo not found'});
+                    }
+                    const repuestosFinal = [];
+
+                    for (let i = 0; i < repuestosOrden.length; i++) {
+                        Repuesto.getRepuestoByID(repuestosOrden[i].idRepuesto, (err, repuesto) => {
+                            //console.log('adentro de obtener cada nombre repuestos orden');
+                            //console.log(repuesto);
+                            if(err) {
+                                console.log('AQUI PASO ALGO');
+                            }
+                            if(!repuesto){
+                                console.log('AQUI PASO ALGO2');
+                                return res.json({success: false, msg:'Repuesto not found'});
+                            }                        
+                            repuestosFinal.push(repuesto);
+
+                            if(i == (repuestosOrden.length-1)){
+                                console.log('array repuestos final:');
+                                console.log(repuestosFinal);
+                                    //------Enviar EMAIL ----------//
+                                    let transporter = nodemailer.createTransport({
+                                        service: 'gmail',
+                                        secure: false,
+                                        port: 25,
+                                        auth: {
+                                            user: 'matiassembler@gmail.com',
+                                            pass: 'comprometido100'
+                                        },
+                                        tls: {
+                                            rejectUnauthorized: false
+                                        }
+                                    }); 
+
+                                    var mostrarRepuestos = "";
+                                    repuestosFinal.forEach(function(element) {
+                                        
+                                        mostrarRepuestos= mostrarRepuestos + 
+                                                        "    <li>"+element.pieza+"</li>";
+                                    });
+                                    console.log(mostrarRepuestos);
+
+
+                                    let HelperOptions = {
+                                        from: '"Equipo MatiAssembler" <matiassembler@gmail.com>',
+                                        to: user.correo,
+                                        subject: 'Reparación de vehículo finalizada.',                                      
+                                        html: `
+                                        <!DOCTYPE html>
+                                        <html>
+                                        <head>
+                                            <meta charset="utf-8" />
+                                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                            <meta name="viewport" content="width=device-width, initial-scale=1">
+                                        </head>
+                                        <body class="bg-light">
+                                                    <div class="container-fluid">
+                                                        <div class="row clearfix">
+                                                            <div class="card mx-auto my-5 p-5 col-12 col-md-8 col-lg-6">
+                                                                <p class="lead body">
+                                                                    <span class="titulo">Hola ${user.nombre}, la reparación de su ${marca.marca} ${carro.modelo} fue culminada.</span>
+                                                                    <br>
+                                                                    <p>   Motivo: ${orden.motivo}</p>
+                                                                    <p>   Diagnostico: ${orden.diagnostico}</p>
+                                                                    <p>   Procedimiento: ${orden.procedimiento}</p>
+                                                                    <p>   Repuestos utilizados:</p>
+                                                                        <div>
+                                                                            ${mostrarRepuestos}
+                                                                        </div>
+
+                                                                    <br>Gracias por confiar en nosotros la reparación de su vehículo! Puede acudir a retirarlo cuando desee. 
+                                                                    <br>
+                                                                    Saludos,<h4> Equipo Matiassembler</h4>.
+                                                                </p>          
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <style>
+                                                        .title {
+                                                            min-height: 10rem;
+                                                        }
+                                                        .titulo {
+                                                            font-size: 20pt;
+                                                        }
+                                                        .body {
+                                                            font-size: 16pt;
+                                                        }
+                                                        .card {
+                                                            box-shadow: 0px 3px 15px rgba(0,0,0,0.2) !important;
+                                                        }
+                                                    </style>
+                                                    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                                                        crossorigin="anonymous"></script>
+                                        </body>
+                                        <script>
+                                            demoP = document.getElementById("demo");
+                                            function myFunction(item, index) {
+                                                demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>"; 
+                                            }
+                                        </script>        
+                                        </html>   
+                                    `};
+
+                                    transporter.sendMail(HelperOptions, (error, info) => {
+                                        if(error){
+                                            return console.log(error);
+                                        }
+                                        console.log("El mail fue enviado con exito!");
+                                        console.log(info);
+                                    })
+                                    //---------------FIN ENVIAR MAIL ----------------------
+                            }                
+                        });            
+                    }                  
+                });
+            });
+        });
     });
-   
+    return callback();
 }
 
 module.exports.addOrden = function(orden, callback) {

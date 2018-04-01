@@ -29,7 +29,7 @@ export class ProfileClienteComponent implements OnInit {
   activado: Boolean;
   marcaNuevo: Int16Array;
   vehiculos= []; 
-  vehiculos2: Vehiculo[];  
+  vehiculos2= [];  
   fecha: String; 
   vehiculoCita: Int16Array;
   vehiculoIteracion: Vehiculo; 
@@ -81,37 +81,37 @@ export class ProfileClienteComponent implements OnInit {
   recuperarVehiculos() {
     let data = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
       console.log(datos); 
-      this.vehiculos = datos.vehiculos; 
-      console.log(this.vehiculos);
-      /*let vehiculos3 = []; 
-      vehiculos3.push(datos.vehiculos.map(function(datosVehiculo) {
-        console.log(datosVehiculo); 
-        let vehiculo = new Vehiculo(datosVehiculo.serialMotor, datosVehiculo.modelo, datosVehiculo.ano, datosVehiculo.placa,
-          datosVehiculo.activado, datosVehiculo.marca, datosVehiculo.idVehiculo, datosVehiculo.fechaRegistro); 
-          console.log(vehiculo); 
-          return vehiculo; 
-          
-       
-      })); 
-      this.vehiculos2 = vehiculos3;*/
-       
-    }); 
-     
+      this.vehiculos2 = datos.vehiculos; 
+      this.vehiculos = this.vehiculos2.filter(function(vehiculo) {
+        if (vehiculo.activado == 1) {
+          return vehiculo;
+        }
+      });       
+    });    
   }
  
-  desactivarVehiculo(id, carro) {
-    carro.activado = false; 
-    const vehiculo = {
-      idVehiculo: id,
-      propietario: this.user.idUsuario
-    }
-    console.log("El id es" + id); 
-    
-    this.authService.desactivarVehiculo(vehiculo).subscribe(data => {
-      console.log(data.success); 
-
+  desactivarVehiculo(carro) {
+    console.log(carro);
+    this.authService.desactivarVehiculo(carro).subscribe(data => {
+      console.log(data.success);
+      if(data.success){
+        for (let i = 0; i < this.vehiculos.length; i++) {
+          if(this.vehiculos[i].idVehiculo==carro.idVehiculo){
+            //this.vehiculos[i].activado=false;
+            this.vehiculos.splice(i, 1);
+          }
+        }        
+      } 
     })
-    this.recuperarVehiculos(); 
+  }
+
+  setActivado(id){
+    if(id==1){
+      return "Activado";
+    }
+    if(id==0){
+      return "Desactivado";
+    }
   }
 
   solicitarCita(idVehiculo) {
@@ -142,6 +142,13 @@ export class ProfileClienteComponent implements OnInit {
         this.fechatemp= new Date();
         this.fechaRegistro= this.datePipe.transform(this.fechatemp);
         console.log(this.fechaRegistro); 
+        var fileInput= document.getElementById('fileItem').attributes;
+        //var fileInput2= document.querySelector("#fileItem").ATTRIBUTE_NODE;
+        //var file= fileInput.item(0);
+        var inputFile = (<HTMLInputElement>document.getElementById('fileItem')).files;
+        var file= inputFile.item(0);
+        console.log(inputFile);
+        console.log(file);
         const vehiculo = {
           placa: this.placa,       
           marca: this.marcaNuevo,
@@ -156,7 +163,7 @@ export class ProfileClienteComponent implements OnInit {
         console.log(vehiculo); //Para registrar un vehiculo
 
         //Required fields
-        if(this.validateService.validateRegisterVehiculo(vehiculo)){
+        if(!this.validateService.validateRegisterVehiculo(vehiculo)){
          console.log("Fallo validacion del vehiculo");
           return false;
         }
@@ -167,6 +174,7 @@ export class ProfileClienteComponent implements OnInit {
           if(data.success){
              console.log("sirvio");
              this.vehiculos.push(vehiculo); 
+             this.vista=1;
           } else {
             console.log("fallo");
             this.router.navigate(['profile-cliente']); 

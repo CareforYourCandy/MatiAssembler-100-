@@ -14,7 +14,7 @@ export class ValidateService {
   }
 
   validateRegisterVehiculo(carro){
-    if(carro.placa == undefined || carro.marca == undefined || carro.modelo == undefined || carro.activado == undefined || carro.serialMotor == undefined || carro.ano == undefined || carro.dueño == undefined || carro.fechaRegistro == undefined) {
+    if(carro.placa == undefined || carro.marca == undefined || carro.modelo == undefined || carro.serialMotor == undefined || carro.ano == undefined) {
       return false;
     } else {
       return true;

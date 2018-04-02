@@ -293,7 +293,7 @@ router.post('/addImagenesOrden', (req, res, next) => {
 		idOrden: req.body.idOrden,
 		imagen: req.body.imagen
 	}
-	ImagenesVehiculo.addImagenesVehiculo(imagenesOrden, (err, imagenesOrden) => {
+	ImagenesOrden.addImagenesOrden(imagenesOrden, (err, imagenesOrden) => {
 		if(err){
 			res.json({success:false, msg:'NO se añadieron las imagenes'});
 		} else {

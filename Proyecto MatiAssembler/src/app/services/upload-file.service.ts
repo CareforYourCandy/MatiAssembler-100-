@@ -46,7 +46,9 @@ export class UploadFileService {
        
       }
       if (identificador == 2) {
-        let imagenesOrden = {
+        console.log("EL IDENTIFICADOR ES 2"); 
+
+        var imagenesOrden = {
           idOrden: id, 
            imagen: data.Location
         }

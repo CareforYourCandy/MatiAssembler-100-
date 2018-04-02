@@ -217,7 +217,7 @@ module.exports.addOrden = function(ordenNueva, callback) {
         console.log(ordenGuardada.dataValues); 
 
 
-    Vehiculo.getVehiculoByID(orden.idVehiculo, (err, carro) => {
+    Vehiculo.getVehiculoByID(ordenGuardada.idVehiculo, (err, carro) => {
         //console.log('adentro de obtener el vehiculo');
         //console.log(carro);
         if(err) {

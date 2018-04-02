@@ -783,7 +783,7 @@ router.post('/registerOrden', (req, res, next) => {
 
 router.post('/addAccesorios', (req, res, next) => {
     
-    let newAccesorios = new accesoriosOrden({
+    let newAccesorios = new AccesoriosOrden({
 		idOrden: req.body.idOrden,
 		cauchoRepuesto: req.body.cauchoRepuesto,
 		llaves: req.body.llaves,

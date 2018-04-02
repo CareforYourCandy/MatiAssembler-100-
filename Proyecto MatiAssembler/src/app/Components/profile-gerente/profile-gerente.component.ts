@@ -365,7 +365,7 @@ export class ProfileGerenteComponent implements OnInit {
             for ( var i = 0; i < inputFile.length; i++) {
               file = inputFile.item(i); 
               this.uploadService.uploadfile(file, ordenRetornada.idOrden, 2, this.authService); 
-            }  
+            } 
             this.vista=3;              
           });                     
         });

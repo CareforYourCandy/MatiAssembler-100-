@@ -468,7 +468,18 @@
                             <div class="form-line">
                                 <input type="text" class="form-control" [(ngModel)]="desperfectoCarroceria" name="desperfectoCarroceria" placeholder="Desperfecto Carroceria">
                             </div>
+
                         </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">confirmation_number</i>
+                            </span>
+                            <div class="form-line">                      
+                              <label for="fileItem">Elegir imagen a cargar</label>
+                              <input type="file" id="fileItem"  name="file" accept=".png" multiple>
+                            </div>
+                        </div> 
+
                         <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "registrarOrden()" type="text">AÑADIR ORDEN</button>
           
                     </form>

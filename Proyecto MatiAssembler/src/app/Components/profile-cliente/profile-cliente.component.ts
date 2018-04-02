@@ -151,13 +151,10 @@ export class ProfileClienteComponent implements OnInit {
         var file; 
         console.log(inputFile);
         console.log(file);
-        let informacion = []; 
+       
         console.log("hola"); 
-        for ( var i = 0; i < inputFile.length; i++) {
-          file = inputFile.item(i); 
-          informacion.push(this.uploadService.uploadfile(file)); 
-        } 
-        console.log(informacion); 
+      
+        
         const vehiculo = {
           placa: this.placa,       
           marca: this.marcaNuevo,
@@ -179,13 +176,21 @@ export class ProfileClienteComponent implements OnInit {
 
         //Registrar usuario
         this.authService.registerVehiculo(vehiculo).subscribe(data => {
-       console.log("EL RESPONSE ES "); 
-          console.log(data); 
+       
+       let vehiculoNuevo = data.vehiculo; 
+         
           if(data.success){
              console.log("sirvio");
              this.vehiculos.push(vehiculo); 
              this.vista=1;
-          } else {
+             for ( var i = 0; i < inputFile.length; i++) {
+              file = inputFile.item(i); 
+             this.uploadService.uploadfile(file, vehiculoNuevo.idVehiculo, 1, this.authService); 
+
+          } 
+        }
+
+          else {
             console.log("fallo");
             this.router.navigate(['profile-cliente']); 
           }

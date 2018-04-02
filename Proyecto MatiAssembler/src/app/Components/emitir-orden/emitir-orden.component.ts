@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ValidateService } from '../../services/validate.service';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service'; 
 import { Router } from '@angular/router';
 import {IMyDpOptions} from 'mydatepicker';
 
@@ -21,6 +21,7 @@ export class EmitirOrdenComponent implements OnInit {
 	ordenGenerada;
 	activada: Boolean;
 	myDatepicker; 
+	file; 
 	public myDatePickerOptions: IMyDpOptions = {
 		// other options...
 		dateFormat: 'yyyy-mm-dd',
@@ -28,14 +29,15 @@ export class EmitirOrdenComponent implements OnInit {
 	public model: any = { date: { year: 2018, month: 10, day: 9 } };
   constructor(private validateService: ValidateService, 
 			    private authService: AuthService,
-			    private router: Router) { }
+					private router: Router,
+				e) { }
 
   ngOnInit() {
   }
   seleccionarMecanico(id) {
 	  this.mecanico = id;
   }
-
+/*
 	registrarOrden() {
 		console.log(this.idVehiculo);
 		let fechaOrdenFormateada = ""; 
@@ -49,17 +51,26 @@ export class EmitirOrdenComponent implements OnInit {
 		activada: 1
 		}
 		this.ordenGenerada = orden; 
+		var inputFile = (<HTMLInputElement>document.getElementById('fileItem')).files;
+		var file; 
 
 		this.authService.registerOrden(orden).subscribe(data => {
 			console.log(data.success); 
+			let ordenNueva = data.ordenNueva; 
 			if(data.success) {
 				this.authService.eliminarCita(this.idCita).subscribe( data => { 
 					console.log(data.success); 			
+					for ( var i = 0; i < inputFile.length; i++) {
+						file = inputFile.item(i); 
+					 this.uploadService.uploadfile(file, ordenNueva.idOrden, 2, this.authService); 
+
+				} 
 					//this.router.navigate['home-page'];
 				})
 			}			
 		}); 
 	}
+*/ 
 
   /*obtenerMecanico() {
   	let mecanicoAux = this.mecanicos.filter(function(user) {

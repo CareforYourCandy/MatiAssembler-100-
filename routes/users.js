@@ -293,7 +293,7 @@ router.post('/addImagenesOrden', (req, res, next) => {
 		idOrden: req.body.idOrden,
 		imagen: req.body.imagen
 	}
-	ImagenesVehiculo.addImagenesVehiculo(imagenesOrden, (err, imagenesOrden) => {
+	ImagenesOrden.addImagenesOrden(imagenesOrden, (err, imagenesOrden) => {
 		if(err){
 			res.json({success:false, msg:'NO se añadieron las imagenes'});
 		} else {
@@ -783,7 +783,7 @@ router.post('/registerOrden', (req, res, next) => {
 
 router.post('/addAccesorios', (req, res, next) => {
     
-    let newAccesorios = new accesoriosOrden({
+    let newAccesorios = new AccesoriosOrden({
 		idOrden: req.body.idOrden,
 		cauchoRepuesto: req.body.cauchoRepuesto,
 		llaves: req.body.llaves,

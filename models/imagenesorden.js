@@ -34,7 +34,7 @@ module.exports.getImagenesByOrden= function(ID, callback){ //Obtener las imagene
 }
 module.exports.addImagenesOrden = function(ordenImagenes, callback) { //Añadir un nuevo repuesto
     
-        ImagenesVehiculo.create(ordenImagenes); 
+        ImagenesOrden.create(ordenImagenes); 
    
 
 

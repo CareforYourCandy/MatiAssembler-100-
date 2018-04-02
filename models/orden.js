@@ -11,7 +11,7 @@ const Marca = require('../models/marca');
 const Op = Sequelize.Op; 
 const RepuestosOrden = require('../models/repuestosOrden'); 
 const Repuesto = require('../models/repuesto'); 
-
+const accesoriosOrden = require('../models/accesoriosOrden'); 
 const Orden = connection.define('orden', {
     idOrden: {
         type: Sequelize.INTEGER,
@@ -217,7 +217,7 @@ module.exports.addOrden = function(ordenNueva, callback) {
         console.log(ordenGuardada.dataValues); 
 
 
-    Vehiculo.getVehiculoByID(orden.idVehiculo, (err, carro) => {
+    Vehiculo.getVehiculoByID(ordenGuardada.idVehiculo, (err, carro) => {
         //console.log('adentro de obtener el vehiculo');
         //console.log(carro);
         if(err) {
@@ -329,6 +329,7 @@ module.exports.addOrden = function(ordenNueva, callback) {
         
     }); 
 }
+
 
 module.exports.getOrdenes =  function(req, callback){ //Obtener lista completa de ordenes
 	Orden.findAll().then(ordenes => {		

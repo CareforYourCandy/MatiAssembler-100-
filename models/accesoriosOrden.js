@@ -48,3 +48,10 @@ module.exports.getAccesorioByOrden= function(ID, callback){ //Obtener los acceso
     }); 
 
 }
+
+module.exports.addAccesorios = function(newAcces, callback) { //Añadir una nueva cita a la cola al solicitar una
+            console.log("estoy en addCita");
+            newAcces.save(callback);
+            return callback();
+
+}

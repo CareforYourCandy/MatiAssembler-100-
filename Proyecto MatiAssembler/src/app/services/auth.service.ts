@@ -61,6 +61,13 @@ export class AuthService {
 		.map(res => res.json());
 	}
 
+	addAccesorios(accesorios) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/addAccesorios', accesorios, {headers: headers})
+			.map(res => res.json());		
+	}
+
 	actualizarOrden(orden) {
 		console.log("Hola aqui en actualizar orden"); 
 		let headers = new Headers();

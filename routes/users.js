@@ -762,18 +762,16 @@ router.post('/registerOrden', (req, res, next) => {
 	console.log(req.body);
 	
 	let newOrden = {
-	
 		idVehiculo: req.body.idVehiculo,
 		idMecanico: req.body.idMecanico,
 		diagnostico: req.body.diagnostico,
 		motivo: req.body.motivo,
 		fecha: req.body.fecha,
 		activada: 1, 
-
 	}
 	console.log(newOrden); 
 
-    Orden.addOrden(newOrden, (err, ordenNueva) => {
+    Orden.addOrden(newOrden, (err, orden) => {
 		if(err){
 			res.json({success:false, msg:'No funciono el registro orden'});
 		} else {
@@ -782,6 +780,27 @@ router.post('/registerOrden', (req, res, next) => {
 	});
 
 }); 
+
+router.post('/addAccesorios', (req, res, next) => {
+    
+    let newAccesorios = new accesoriosOrden({
+		idOrden: req.body.idOrden,
+		cauchoRepuesto: req.body.cauchoRepuesto,
+		llaves: req.body.llaves,
+		gato: req.body.gato,
+		herramientas: req.body.herramientas,
+		equipodeSonido: req.body.equipodeSonido,
+		desperfectoCarroceria: req.body.desperfectoCarroceria 
+    });
+    AccesoriosOrden.addAccesorios(newAccesorios, (err, accs) => {
+		if(err){
+			res.json({success:false, msg:'No funciono el registro de cita'});
+		} else {
+			res.json({success:true, msg:'Accesorios registrados'});
+		}
+	});
+
+});
 
 
 router.post('/modificarOrden', (req, res, next) => {

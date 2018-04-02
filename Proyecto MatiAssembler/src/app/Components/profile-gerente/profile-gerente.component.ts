@@ -107,12 +107,8 @@ export class ProfileGerenteComponent implements OnInit {
   
   obtenerOrdenes() {
     this.ordenes = new Array(); 
-
-     
     this.authService.getOrdenes().subscribe( datos => {
       this.ordenes = datos.ordenes;
-      console.log("Voy a obtener las ordenes");
-      console.log(this.ordenes); 
       this.ordenesActivas = this.ordenes.filter(function(orden) {
         if (orden.activada != 0 ) {
           return orden;
@@ -121,8 +117,6 @@ export class ProfileGerenteComponent implements OnInit {
 
       for (let i = 0; i < this.ordenesActivas.length; i++) {
         let data2 = this.authService.getVehiculo(this.ordenesActivas[i].idVehiculo).subscribe( datos => {
-          //console.log("IMPRIMIRE MAS DATOS"); 
-          //console.log(datos); 
           this.ordenesActivas[i].vehiculo = datos.vehiculo; 
         })
       }
@@ -133,8 +127,6 @@ export class ProfileGerenteComponent implements OnInit {
   }
   obtenerVehiculos() {
     let data = this.authService.obtenerListaVehiculos().subscribe( datos => {
-      console.log("Aqui estan los vehiculos"); 
-      console.log(datos); 
       this.vehiculos = datos.vehiculos;       
     }); 
   }
@@ -142,8 +134,6 @@ export class ProfileGerenteComponent implements OnInit {
   obtenerClientes() {
     let data = this.authService.getUsers().subscribe( datos => {
       let usuarios = datos.users
-      console.log(usuarios); 
-
       this.clientes = usuarios.filter(function(user) {
         if (user.rol==1) {
            return user;
@@ -156,8 +146,6 @@ export class ProfileGerenteComponent implements OnInit {
   obtenerMecanicos() {
     let data = this.authService.getUsers().subscribe( datos => {
       let usuarios = datos.users
-      console.log(usuarios); 
-
       this.mecanicos = usuarios.filter(function(user) {
         if (user.rol==4) {
            return user;
@@ -170,17 +158,12 @@ export class ProfileGerenteComponent implements OnInit {
 
   obtenerColaCitas() {
     let data = this.authService.obtenerCitas().subscribe( datos => {
-     
-      console.log("AQUI ESTOY IMPRIMIENDO LOS DATOS"); 
-      console.log(datos);
       this.citas = datos.rcitas;
       console.log(this.citas); 
       let vehiculos2 = this.vehiculos; 
       console.log(vehiculos2); 
       for (let i = 0; i < this.citas.length ; i++) {
       let data2 = this.authService.getVehiculo(this.citas[i].vehiculoCita).subscribe( datos => {
-        console.log("IMPRIMIRE MAS DATOS"); 
-        console.log(datos); 
         datos.vehiculo.idCita = this.citas[i].idCita; 
         datos.vehiculo.fecha = this.citas[i].fechaSolicitud; 
         this.carrosCitas.push(datos.vehiculo); 
@@ -196,7 +179,7 @@ export class ProfileGerenteComponent implements OnInit {
  
  
   }
-  cuadrarCarros() {
+  /*cuadrarCarros() {
     console.log("LAS CITAS SON ")
     console.log(this.citas); 
     this.citas.forEach(function(cita) {
@@ -206,7 +189,7 @@ export class ProfileGerenteComponent implements OnInit {
       })
     })
 
-  }
+  }*/
 
   getMarcas() {
     this.authService.getMarcas().subscribe(data => {
@@ -349,6 +332,7 @@ export class ProfileGerenteComponent implements OnInit {
   }
 
   registrarOrden() {
+    this.validarAccesorios();
     let fechaOrdenFormateada = ""; 
     fechaOrdenFormateada += this.model.date.year + "-" + this.model.date.month + "-" + this.model.date.day; 
     const orden = {
@@ -363,15 +347,13 @@ export class ProfileGerenteComponent implements OnInit {
     var file; 
     
     this.authService.registerOrden(orden).subscribe(data => {
-      console.log(data); 
-      let ordenNueva = data.ordenNueva; 
       console.log(data.success); 
       if(data.success) {
+        let ordenRetornada=data.orden;
         this.authService.eliminarCita(this.idCitatemp).subscribe( data2 => { 
           console.log("orden retornada:");
           console.log(data.orden);
           console.log(data2.success); 
-          let ordenRetornada=data.orden;
           this.authService.getVehiculo(ordenRetornada.idVehiculo).subscribe( datos => {
             ordenRetornada.vehiculo = datos.vehiculo;
             this.ordenesActivas.push(ordenRetornada);
@@ -387,9 +369,45 @@ export class ProfileGerenteComponent implements OnInit {
             this.vista=3;              
           });                     
         });
-
+        const accesoriosOrden = {
+          idOrden: ordenRetornada.idOrden,
+          cauchoRepuesto: this.cauchoRepuesto,
+          llaves: this.llaves,
+          gato: this.gato,
+          herramientas: this.herramientas,
+          equipodeSonido: this.equipodeSonido,
+          desperfectoCarroceria: this.desperfectoCarroceria      
+        }
+        this.authService.addAccesorios(accesoriosOrden).subscribe(data => {
+          console.log(data.success);
+        });
       }      
     }); 
+  }
+
+  validarAccesorios(){
+    if(this.cauchoRepuesto==undefined){
+      this.cauchoRepuesto=false;
+    }
+    if(this.llaves==undefined){
+      this.llaves=false;
+    }
+    if(this.gato==undefined){
+      this.gato=false;
+    }
+    if(this.herramientas==undefined){
+      this.herramientas=false;
+    }
+    if(this.equipodeSonido==undefined){
+      this.equipodeSonido=false;
+    }
+    console.log("caucho:");
+    console.log(this.cauchoRepuesto);
+    console.log("llaves:");
+    console.log(this.llaves);
+    console.log("gato:");
+    console.log(this.gato);
+
   }
 
 

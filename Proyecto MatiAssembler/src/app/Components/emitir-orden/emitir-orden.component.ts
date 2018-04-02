@@ -29,8 +29,7 @@ export class EmitirOrdenComponent implements OnInit {
 	public model: any = { date: { year: 2018, month: 10, day: 9 } };
   constructor(private validateService: ValidateService, 
 			    private authService: AuthService,
-					private router: Router,
-				e) { }
+					private router: Router) { }
 
   ngOnInit() {
   }

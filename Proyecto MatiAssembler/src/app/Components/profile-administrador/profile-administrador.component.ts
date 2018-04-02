@@ -30,7 +30,8 @@ export class ProfileAdministradorComponent implements OnInit {
   direccion: String;
   telefono: String;
   pieza: String; 
-
+  marca;
+  modelo;
   constructor(private validateService: ValidateService, 
               private authService: AuthService,
               private router: Router ) { }
@@ -133,6 +134,7 @@ export class ProfileAdministradorComponent implements OnInit {
                 this.usuarios[i]=usuario;
               }
             }
+            this.setearCampos();
             this.vista=1;
           }
           this.router.navigate['profile-administrador'];      
@@ -186,13 +188,11 @@ export class ProfileAdministradorComponent implements OnInit {
     //Registrar usuario
     this.authService.registerUser(user).subscribe(data => {
       console.log(data.success); 
-      //if(data.success) {
-
-      //}
-      //this.router.navigate['profile-administrador'];       
     });        
     this.usuarios.push(user);
-    this.vista=1;       
+    this.setearCampos();
+    this.vista=1;
+    //this.router.navigate['profile-administrador'];             
   }
 
 //--------- FUNCION AGREGAR REPUESTO -----------------
@@ -203,8 +203,34 @@ export class ProfileAdministradorComponent implements OnInit {
     this.authService.registerRepuesto(repuesto).subscribe(data => {
       console.log(data.success);
       this.repuestos.push(repuesto); 
+      this.pieza="";
+      this.marca="";
+      this.modelo="";
       //this.router.navigate(['/profile-administrador']);
+      this.vista=2; 
     });
-     this.vista=2; 
+  }
+
+  /*eliminarRepuesto(repuesto){
+    let idRep=repuesto.idRepuesto;
+    this.authService.eliminarRepuesto(idRep).subscribe( data => { 
+      for (let i = 0; i < this.repuestos.length ; i++) {
+        if(this.repuestos[i].idRepuesto==idRep){
+          this.repuestos.splice(i, 1);
+        }
+      }      
+
+    })
+  }*/
+
+  setearCampos() {
+      this.name="";
+      this.lastname="";
+      this.email="";
+      this.password="";
+      this.cedula="";
+      this.direccion="";
+      this.telefono="";
+      this.rol=1;
   }
 }

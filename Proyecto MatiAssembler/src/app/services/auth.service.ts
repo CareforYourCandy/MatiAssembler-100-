@@ -176,9 +176,15 @@ export class AuthService {
 
 	eliminarCita(idCita) {
 		let headers = new Headers();
-		headers.append('Content-Type','application/json');
-		
+		headers.append('Content-Type','application/json');		
 		return this.http.post('http://localhost:3000/users/eliminarCita', {idCita}, {headers: headers})
+			.map(res => res.json());	
+	}
+
+	eliminarRepuesto(idRepuesto) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');		
+		return this.http.post('http://localhost:3000/users/eliminarRepuesto', {idRepuesto}, {headers: headers})
 			.map(res => res.json());	
 	}
 

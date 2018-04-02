@@ -59,3 +59,10 @@ module.exports.getRepuestoByID= function(ID, callback){
         callback(null, datos);
     }); 
 }
+
+module.exports.eliminarRepuesto = function(id, callback) {
+    const query = {where: {idRepuesto: id}}
+    Repuesto.destroy(query).then( repuesto => {
+        return callback(null, repuesto); 
+    })
+}

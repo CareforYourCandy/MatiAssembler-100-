@@ -98,16 +98,26 @@ router.post('/getUser', (req, res, next) => {
 });
 
 router.post('/eliminarCita', (req, res, next) => {
-
-	console.log("Estoy en eliminar cita"); 
 	console.log(req.body); 
 	let cita = Cita.eliminarCitas(req.body.idCita, (err, cita) => {
+		res.json( {
+			success: true
+		})
+	})	
+})
+
+router.post('/eliminarRepuesto', (req, res, next) => {
+
+	console.log("Estoy en eliminar repuesto"); 
+	console.log(req.body); 
+	Repuesto.eliminarRepuesto(req.body.idRepuesto, (err, repu) => {
 		res.json( {
 			success: true
 		})
 	})
 	
 })
+
 router.post('/getOrdenes', (req, res, next) => { //Obtener todas las ordenes
 	console.log("Estoy en obtener ordenes"); 
 	let ordenes = Orden.getOrdenes(req, (err, ordenes) => {

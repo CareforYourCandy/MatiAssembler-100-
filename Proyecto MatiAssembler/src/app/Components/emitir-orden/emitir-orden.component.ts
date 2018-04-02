@@ -55,7 +55,7 @@ export class EmitirOrdenComponent implements OnInit {
 			if(data.success) {
 				this.authService.eliminarCita(this.idCita).subscribe( data => { 
 					console.log(data.success); 			
-					this.router.navigate['home-page'];
+					//this.router.navigate['home-page'];
 				})
 			}			
 		}); 

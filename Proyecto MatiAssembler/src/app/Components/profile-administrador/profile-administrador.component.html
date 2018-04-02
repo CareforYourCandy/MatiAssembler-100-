@@ -165,7 +165,7 @@
                                   <td> {{repuesto.pieza}}</td>
                                   <td>
                                           <button type="button" class="btn bg-light-blue
-                                          waves-effect">
+                                          waves-effect"  (click) ="eliminarRepuesto(repuesto)">
                                               <i class="material-icons">close</i>
                                           </button>
                                       </td>
@@ -262,7 +262,7 @@
                           <div class="form-line">
                               <input type="text" class="form-control" [(ngModel)]="direccion" name="direccion" placeholder="direccion" required autofocus>
                           </div>
-                          <button class="btn btn-block btn-lg bg-pink waves-effect"  type="submit" data-dismiss="modal">MODIFICAR</button>
+                          <button class="btn btn-block btn-lg bg-pink waves-effect"  type="submit">MODIFICAR</button>
                       </div>
                   </form>
               </div>
@@ -372,7 +372,7 @@
               <h2>REGISTRAR NUEVO REPUESTO</h2>
           </div>
           <div class="body">
-              <form  action="/" (submit)="registrarRepuesto()" method="post">
+              <form  action="/" (submit)="registrarRepuesto()" id="frmFileUpload" method="post">
                   <div class="input-group">
                       <span class="input-group-addon">
                           <i class="material-icons">confirmation_number</i>
@@ -397,75 +397,15 @@
                           <input id="myInput3" type="text" class="form-control" name="modelo" placeholder="modelo" >
                       </div>
                   </div>
-                  <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit" onClick="document.getElementById('myInput').value = '',
-                  document.getElementById('myInput2').value = '',
-                  document.getElementById('myInput3').value = ''">AÑADIR REPUESTO</button>
+                  <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">AÑADIR REPUESTO</button>
     
               </form>
           </div>
     </div>
   </div>
-        <!--MODAL MODIFICAR USUARIOS-->
-                  <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="defaultModalLabel">MODIFICAR</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div *ngIf="modificar">
-                                    <app-modificar-usuario [Vista]="vistaModificar" [user]= "usuario" > </app-modificar-usuario>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                               
-                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-        <!-- MODAL REPUESTOS --> 
-        <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="smallModalLabel">Gestión Repuestos</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div *ngIf="nuevoRepuesto">
-                            <app-agregar-repuesto></app-agregar-repuesto> 
-                          </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <!-- MODAL REGISTRAR --> 
-        <div class="modal fade" id="defaultModal2" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="defaultModalLabel">Registro - Usuario</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div *ngIf="nuevoRegistro">
-                            <app-register [Vista]=vistaTemp> </app-register> 
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
   </div>               
 </section>
-
-
 
 </div>

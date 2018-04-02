@@ -10,6 +10,8 @@ import { EmitirOrdenComponent } from '../emitir-orden/emitir-orden.component';
 import {ReporteMecanicoComponent} from '../reporte-mecanico/reporte-mecanico.component'; 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material'; 
+import {IMyDpOptions} from 'mydatepicker';
+
 @Component({
   selector: 'app-profile-gerente',
   templateUrl: './profile-gerente.component.html',
@@ -22,9 +24,7 @@ export class ProfileGerenteComponent implements OnInit {
   user;
   clientes;
   mecanicos;
-  usuarios;
-  modificar = false; 
-  vistaModificar;
+  //usuarios;
   usuario;
   citas = [];
   carrosCitas = [];
@@ -34,14 +34,34 @@ export class ProfileGerenteComponent implements OnInit {
   //Marcas 
   marcas = Array;
   vehiculoTemp;
-  ordenInsertar;
-  nuevaOrden = false;
   idVehiculotemp;
   idCitatemp;
   mecanicoReporte;
   myDatepicker; 
-  
   nuevoReporte = false;
+  //Para modificar un usuario
+  id; 
+  name: String;
+  lastname: String;
+  email: String;
+  rol=1;
+  password: String;
+  cedula: String; 
+  direccion: String;
+  telefono: String;
+  //Para emitir la orden
+  fechaOrden: String;
+  diagnostico: String;
+  mecanico: String;
+  repuesto: String;
+  motivo: String;
+  ordenGenerada;
+  activada: Boolean;
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'yyyy-mm-dd',
+  };
+  public model: any = { date: { year: 2018, month: 10, day: 9 } };
 
   constructor(private http:Http,
               private validateService: ValidateService, 
@@ -61,19 +81,11 @@ export class ProfileGerenteComponent implements OnInit {
     this.obtenerVehiculos(); 
     console.log("Se van a obtener las ordenes"); 
     this.obtenerOrdenes(); 
-
-   //Para obtener todos los vehiculos registrados en el taller
   }
 
   setVista(id) {
     this.vista=id;
     console.log(this.vista); 
-  }
-
-  ngAfterViewInit() {
-    this.ordenInsertar = this.ordenHijo.ordenGenerada;
-    console.log(this.ordenInsertar); 
-    this.obtenerOrdenes(); 
   }
   
   logout() {
@@ -121,10 +133,10 @@ export class ProfileGerenteComponent implements OnInit {
 
   obtenerClientes() {
     let data = this.authService.getUsers().subscribe( datos => {
-      this.usuarios = datos.users
-      console.log(this.usuarios); 
+      let usuarios = datos.users
+      console.log(usuarios); 
 
-      this.clientes = this.usuarios.filter(function(user) {
+      this.clientes = usuarios.filter(function(user) {
         if (user.rol==1) {
            return user;
         }
@@ -135,10 +147,10 @@ export class ProfileGerenteComponent implements OnInit {
 
   obtenerMecanicos() {
     let data = this.authService.getUsers().subscribe( datos => {
-      this.usuarios = datos.users
-      console.log(this.usuarios); 
+      let usuarios = datos.users
+      console.log(usuarios); 
 
-      this.mecanicos = this.usuarios.filter(function(user) {
+      this.mecanicos = usuarios.filter(function(user) {
         if (user.rol==4) {
            return user;
         }
@@ -176,33 +188,16 @@ export class ProfileGerenteComponent implements OnInit {
  
  
   }
-cuadrarCarros() {
-  console.log("LAS CITAS SON ")
-  console.log(this.citas); 
-  this.citas.forEach(function(cita) {
-    let data2 = this.authService.getVehiculo(cita.vehiculoCita).subscribe( datos => {
-      console.log("IMPRIMIRE MAS DATOS"); 
-      this.carrosCitas.push(datos); 
+  cuadrarCarros() {
+    console.log("LAS CITAS SON ")
+    console.log(this.citas); 
+    this.citas.forEach(function(cita) {
+      let data2 = this.authService.getVehiculo(cita.vehiculoCita).subscribe( datos => {
+        console.log("IMPRIMIRE MAS DATOS"); 
+        this.carrosCitas.push(datos); 
+      })
     })
-  })
 
-}
-
-  async modificarCliente(id) {
-    this.modificar = true;
-    this.vistaModificar=2;
-
-    let user; 
-     
-    await this.authService.getUserById(id).subscribe(datos => {
-     
-      console.log(datos); 
-      user = datos.usuario; 
-      console.log(user); 
-      this.usuario = user; 
-    })     
-     console.log(this.usuario); 
- 
   }
 
   getMarcas() {
@@ -224,24 +219,6 @@ cuadrarCarros() {
       this.router.navigate(['detalle-vehiculo']);
 
     });
-  }
-
-  agregarOrden(idVehiculo, idCita) {
-    this.nuevaOrden = true;  
-    this.idVehiculotemp=idVehiculo; 
-    this.idCitatemp = idCita; 
-    console.log(this.idCitatemp); 
-    /*let user; 
-     
-    await this.authService.getUserById(id).subscribe(datos => {
-     
-      console.log(datos); 
-      user = datos.usuario; 
-      console.log(user); 
-      this.usuario = user; 
-    })    */ 
-     console.log(this.idVehiculotemp); 
- 
   }
 
   verReporte(id) {
@@ -275,4 +252,123 @@ cuadrarCarros() {
       return "Cerrada";
     }
   }
+
+   //------------ FUNCIONES PARA MODIFICAR USUARIO -------------
+
+   modificarCliente(id) {
+    let user;      
+    this.authService.getUserById(id).subscribe(datos => {     
+      console.log(datos); 
+      user = datos.usuario; 
+      console.log(user); 
+      this.usuario = user; 
+      this.obtenerDatos(this.usuario);    
+      console.log(this.usuario); 
+      this.vista=8;      
+    });
+  }
+
+  obtenerDatos(user) {
+    console.log(user); 
+    this.id = user.idUsuario;
+    this.name = user.nombre;
+    this.lastname = user.apellido;
+    this.email = user.correo;
+    this.rol = user.rol;
+    this.password = user.contraseña;
+    this.cedula = user.cedula;
+    this.direccion = user.direccion;
+    this.telefono = user.telefono; 
+  }
+
+  modificarClienteSubmit() {
+    console.log("hola"); 
+    const usuario = {
+      idUsuario: this.id,
+      nombre: this.name,
+      apellido: this.lastname,
+      correo: this.email,
+      rol: this.rol,
+      contraseña: this.password,
+      cedula: this.cedula,
+      telefono: this.telefono,
+      direccion: this.direccion
+      
+    }
+    console.log(usuario); 
+    this.authService.actualizarUsuario(usuario).subscribe(data => {
+          console.log(data.success); 
+          if(data.success) {
+            for (let i=0; i<this.clientes.length; i++){
+              if(this.clientes[i].idUsuario==usuario.idUsuario){
+                this.clientes[i]=usuario;
+              }
+            }
+            this.vista=1;
+          }     
+    });  
+  }
+
+  setRol(numero) {
+    this.rol = numero; 
+  }
+
+  obtenerRolSubmit() {
+    if(this.rol==1) {
+      return "Cliente";
+    }
+    if(this.rol==2) {
+      return "Administrador";
+    }
+    if(this.rol==3) {
+      return "Gerente";
+    }
+    if(this.rol==4) {
+      return "Mecanico";
+    }
+  }
+//----------- FUNCIONES PARA EMITIR UNA ORDEN ---------------------
+  agregarOrden(idVehiculo, idCita) { 
+    this.idVehiculotemp=idVehiculo; 
+    this.idCitatemp = idCita; 
+    console.log(this.idCitatemp); 
+    console.log(this.idVehiculotemp); 
+    this.vista=9;
+  }
+
+  seleccionarMecanico(id) {
+    this.mecanico = id;
+  }
+
+  registrarOrden() {
+    let fechaOrdenFormateada = ""; 
+    fechaOrdenFormateada += this.model.date.year + "-" + this.model.date.month + "-" + this.model.date.day; 
+    const orden = {
+    idVehiculo: this.idVehiculotemp,
+    idMecanico: this.mecanico,
+    diagnostico: this.diagnostico,
+    fecha: fechaOrdenFormateada,
+    motivo: this.motivo,
+    activada: 1
+    }
+
+    this.authService.registerOrden(orden).subscribe(data => {
+      console.log(data.success); 
+      if(data.success) {
+        this.authService.eliminarCita(this.idCitatemp).subscribe( data => { 
+          console.log(data.success); 
+          this.ordenesActivas.push(orden);
+          for (let i=0; i<this.carrosCitas.length; i++){
+            if(this.carrosCitas[i].idCita==this.idCitatemp){
+              this.carrosCitas.splice(i, 1);
+            }
+          } 
+          this.vista=3;              
+          //this.router.navigate['home-page'];
+        })
+      }      
+    }); 
+  }
+
+
 }

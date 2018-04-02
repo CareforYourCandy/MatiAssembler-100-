@@ -141,6 +141,14 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/obtenerRepuestosOrden', orden, {headers: headers})
 		.map(res => res.json());
 	}
+
+	addRepuestosOrden(repOrden) {
+		//let ids = {IDREP,IDORDEN};	
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/addRepuestosOrden', repOrden, {headers: headers})
+		.map(res => res.json());
+	}
 	
 	registerUser(user){ 
 		//console.log(user); //Para registrar un usuario

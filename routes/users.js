@@ -242,6 +242,33 @@ router.post('/obtenerRepuestosOrden', (req, res, next) => {
 	});
 });
 
+//Añadir un repuesto en una orden
+router.post('/addRepuestosOrden', (req, res, next) => {
+	console.log("AQUI AÑADIENDO REPUESTOS EN UNA ORDEN");
+	/*const idRep = req.body.IDREP;
+	const idOrden = req.body.IDORDEN;
+	console.log(idRep);
+	console.log(idOrden);*/
+	let newRepuestoOrden = new RepuestosOrden({
+        idOrden: req.body.idOrden,
+        idRepuesto: req.body.idRepuesto     
+    });
+	console.log(newRepuestoOrden);
+	RepuestosOrden.addRepuestoOrden(newRepuestoOrden, (err, repuestosOrden) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!repuestosOrden) {
+			console.log("No hay repuestos"); 
+		}
+		
+		res.json({
+			success:true
+		});
+	});
+});  
+
+
 router.post('/addImagenesVehiculo', (req, res, next) => {
 	const imagenesVehiculo = req.body.imagenesVehiculo;
 	ImagenesVehiculo.addImagenesVehiculo(imageneVehiculo, (err, imagenesVehiculo) => {
@@ -711,11 +738,12 @@ router.post('/registerOrden', (req, res, next) => {
 		if(err){
 			res.json({success:false, msg:'No funciono el registro orden'});
 		} else {
-			res.json({success:true, msg:'Orden registrada'});
+			res.json({success:true, msg:'Orden Registrada', orden});
 		}
 	});
 
 }); 
+
 
 router.post('/modificarOrden', (req, res, next) => {
 	console.log(req.body);

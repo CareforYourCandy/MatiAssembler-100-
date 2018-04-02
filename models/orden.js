@@ -208,12 +208,18 @@ module.exports.cerrarOrden = function(orden, callback) {
     return callback();
 }
 
-module.exports.addOrden = function(orden, callback) {
+module.exports.addOrden = function(ordenNueva, callback) {
     console.log("estoy en addOrden");
-    console.log(orden);
-    Orden.create(orden); 
+    console.log(ordenNueva);
+    //Orden.create(orden);
+    Orden.create(ordenNueva).then(function(ordenGuardada) {
+        console.log("EL VEHICULO GUARDADO ES"); 
+        console.log(ordenGuardada.dataValues); 
+        return callback(false,ordenGuardada.dataValues);
+        
+    }); 
 
-    Vehiculo.getVehiculoByID(orden.idVehiculo, (err, carro) => {
+    /*Vehiculo.getVehiculoByID(orden.idVehiculo, (err, carro) => {
         //console.log('adentro de obtener el vehiculo');
         //console.log(carro);
         if(err) {
@@ -321,7 +327,7 @@ module.exports.addOrden = function(orden, callback) {
         });
     });
     return callback();
-    console.log("añadi");
+    console.log("añadi");*/
 }
 
 module.exports.getOrdenes =  function(req, callback){ //Obtener lista completa de ordenes

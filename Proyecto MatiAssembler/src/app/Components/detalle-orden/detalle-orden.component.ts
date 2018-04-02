@@ -13,8 +13,8 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 export class DetalleOrdenComponent implements OnInit {
 
 	@ViewChild(ModificarRepuestoComponent) repuestoHijo;
-	nuevoRepuesto = false;
-
+	//nuevoRepuesto = false;
+	vista=1;
 	vehiculo;
 	gerente;
 	orden;
@@ -41,6 +41,7 @@ export class DetalleOrdenComponent implements OnInit {
 	qr : String;
 
 	repuestos; 
+	repuestosTemp=[];
 	ordenTemp;
 	repuestosOrden = [];
 	repuestosOrdenAux;
@@ -73,11 +74,6 @@ export class DetalleOrdenComponent implements OnInit {
 
 	goBack(): void { //Volver a vista gerente
 	this.location.back();
-	}
-
-	modificarRepuestos() {
-		this.nuevoRepuesto = true;  
-		
 	}
 
 	getMarcas() {
@@ -134,7 +130,7 @@ export class DetalleOrdenComponent implements OnInit {
 	}
 
 	obtenerEstado() {
-		console.log(this.estado);
+		//console.log(this.estado);
 		if(this.estado==1) {
 			return "En curso";
 		}
@@ -154,9 +150,6 @@ export class DetalleOrdenComponent implements OnInit {
 		  
 		this.authService.actualizarOrden(orden).subscribe(data => {
 			console.log(data.success); 
-
-			/*this.authService.añadirRepuestosOrden(this.repuestosTemp).subscribe(data => {
-				console.log(data);*/
 				this.authService.getOrden(orden.idOrden).subscribe(data => {
 					console.log(data); 
 					this.ordenTemp = data.orden; 
@@ -183,5 +176,49 @@ export class DetalleOrdenComponent implements OnInit {
 		}); 
 	}
 
+	//------ FUNCIONES PARA AÑADIR REPUESTOS
+
+	modificarRepuestos() {
+		this.obtenerRepuestos();
+		this.vista=2;  		
+	}
+
+	obtenerRepuestos() { //Se obtienen todos los repuestos disponibles
+		let data = this.authService.obtenerRepuestos().subscribe( datos => {
+			this.repuestos = datos.repuestos;
+			console.log("AQUI LOS REPUESTOS"); 
+			console.log(this.repuestos); 
+		}); 
+	}
+
+	sumarRepuesto(idRepuesto) {
+		this.repuestosTemp.push(idRepuesto);
+		console.log(this.repuestosTemp);
+	}
+
+	actualizarRepuestos() {
+		for (let i = 0; i < this.repuestosTemp.length; i++) {
+			const repOrden = {
+				idOrden:this.orden.idOrden,
+				idRepuesto:this.repuestosTemp[i]
+			};
+			this.authService.addRepuestosOrden(repOrden).subscribe(data => {
+					console.log(data.success);
+					console.log("añadiendo un repuesto en la orden");
+					if(data.success){
+						for (let i = 0; i < this.repuestos.length; i++) {
+							if(this.repuestos[i].idRepuesto==repOrden.idRepuesto){
+								this.repuestosOrden.push(this.repuestos[i]);
+							}
+						}						
+						console.log(this.repuestosOrden);
+					}
+					//this.router.navigate['detalle-orden'];     	
+			});
+		}
+		this.repuestosTemp=[];
+		this.vista=1;
+ 	
+	}
 
 }

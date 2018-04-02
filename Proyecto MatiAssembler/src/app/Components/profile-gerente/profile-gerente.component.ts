@@ -355,17 +355,22 @@ export class ProfileGerenteComponent implements OnInit {
     this.authService.registerOrden(orden).subscribe(data => {
       console.log(data.success); 
       if(data.success) {
-        this.authService.eliminarCita(this.idCitatemp).subscribe( data => { 
-          console.log(data.success); 
-          this.ordenesActivas.push(orden);
-          for (let i=0; i<this.carrosCitas.length; i++){
-            if(this.carrosCitas[i].idCita==this.idCitatemp){
-              this.carrosCitas.splice(i, 1);
-            }
-          } 
-          this.vista=3;              
-          //this.router.navigate['home-page'];
-        })
+        this.authService.eliminarCita(this.idCitatemp).subscribe( data2 => { 
+          console.log("orden retornada:");
+          console.log(data.orden);
+          console.log(data2.success); 
+          let ordenRetornada=data.orden;
+          this.authService.getVehiculo(ordenRetornada.idVehiculo).subscribe( datos => {
+            ordenRetornada.vehiculo = datos.vehiculo;
+            this.ordenesActivas.push(ordenRetornada);
+            for (let i=0; i<this.carrosCitas.length; i++){
+              if(this.carrosCitas[i].idCita==this.idCitatemp){
+                this.carrosCitas.splice(i, 1);
+              }
+            } 
+            this.vista=3;              
+          });                     
+        });
       }      
     }); 
   }

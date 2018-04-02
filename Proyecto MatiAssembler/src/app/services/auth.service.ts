@@ -235,7 +235,7 @@ export class AuthService {
 	addImagenesOrden(imagenOrden) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/addImagenesVehiculo', imagenOrden , {headers: headers})
+		return this.http.post('http://localhost:3000/users/addImagenesOrden', imagenOrden , {headers: headers})
 			.map(res => res.json());
 	}
 	getOrdenesFecha(fechas) {

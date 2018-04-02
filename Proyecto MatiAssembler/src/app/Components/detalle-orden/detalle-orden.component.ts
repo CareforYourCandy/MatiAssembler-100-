@@ -13,8 +13,8 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 export class DetalleOrdenComponent implements OnInit {
 
 	@ViewChild(ModificarRepuestoComponent) repuestoHijo;
-	nuevoRepuesto = false;
-
+	//nuevoRepuesto = false;
+	vista=1;
 	vehiculo;
 	gerente;
 	orden;
@@ -28,8 +28,8 @@ export class DetalleOrdenComponent implements OnInit {
 	placa: String;
 	serialMotor: String;
 	fechaAdmision: String;
-	diagnostico: String;
-	procedimiento: String;
+	diagnostico="";
+	procedimiento="";
 	caucho: String;
 	llaves: String;
 	gato: String;
@@ -41,6 +41,7 @@ export class DetalleOrdenComponent implements OnInit {
 	qr : String;
 
 	repuestos; 
+	repuestosTemp=[];
 	ordenTemp;
 	repuestosOrden = [];
 	repuestosOrdenAux;
@@ -75,11 +76,6 @@ export class DetalleOrdenComponent implements OnInit {
 	this.location.back();
 	}
 
-	modificarRepuestos() {
-		this.nuevoRepuesto = true;  
-		
-	}
-
 	getMarcas() {
 		this.authService.getMarcas().subscribe(data => {
 		console.log(data.marcas); 
@@ -98,6 +94,21 @@ export class DetalleOrdenComponent implements OnInit {
 		console.log(data.accesorios); 
 		this.accesorios = data.accesorios; 
 		})
+		/*if(this.accesorios.cauchoRepuesto==null){
+			this.accesorios.cauchoRepuesto=false;
+		}
+		if(this.accesorios.llaves==null){
+			this.accesorios.llaves=false;
+		}
+		if(this.accesorios.gato==null){
+			this.accesorios.gato=false;
+		}
+		if(this.accesorios.herramientas==null){
+			this.accesorios.herramientas=false;
+		}
+		if(this.accesorios.equipodeSonido==null){
+			this.accesorios.equipodeSonido=false;
+		}*/
 	}
 
 	setBoolean(variable){
@@ -116,15 +127,29 @@ export class DetalleOrdenComponent implements OnInit {
 		this.placa = this.vehiculo.placa;
 		this.serialMotor = this.vehiculo.serialMotor;
 		this.fechaAdmision = this.orden.fecha;
-		this.diagnostico = this.orden.diagnostico;
-		this.procedimiento =this.orden.procedimiento;
-		this.caucho = this.accesorios.cauchoRepuesto;
-		this.llaves = this.accesorios.llaves;
-		this.gato = this.accesorios.gato;
-		this.herramientas = this.accesorios.herramientas;
-		this.equipoSonido = this.accesorios.equipoSonido;
-		this.desperfectoCarroceria = this.accesorios.desperfectoCarroceria;
-		
+		if(this.orden.diagnostico!=null){
+			this.diagnostico = this.orden.diagnostico;
+		}
+		if(this.orden.procedimiento!=null){
+			this.procedimiento =this.orden.procedimiento;			
+		}
+		/*if(this.accesorios.cauchoRepuesto!=null){
+			this.caucho = this.accesorios.cauchoRepuesto;
+		}
+		if(this.accesorios.llaves!=null){
+			this.llaves = this.accesorios.llaves;
+		}
+		if(this.accesorios.gato!=null){
+			this.gato = this.accesorios.gato;
+		}
+		if(this.accesorios.herramientas!=null){
+			this.herramientas = this.accesorios.herramientas;
+		}
+		if(this.accesorios.equipodeSonido!=null){
+			this.equipoSonido = this.accesorios.equipoSonido;
+		}
+		this.desperfectoCarroceria = this.accesorios.desperfectoCarroceria;*/
+
 	}
 
 
@@ -134,7 +159,7 @@ export class DetalleOrdenComponent implements OnInit {
 	}
 
 	obtenerEstado() {
-		console.log(this.estado);
+		//console.log(this.estado);
 		if(this.estado==1) {
 			return "En curso";
 		}
@@ -154,9 +179,6 @@ export class DetalleOrdenComponent implements OnInit {
 		  
 		this.authService.actualizarOrden(orden).subscribe(data => {
 			console.log(data.success); 
-
-			/*this.authService.añadirRepuestosOrden(this.repuestosTemp).subscribe(data => {
-				console.log(data);*/
 				this.authService.getOrden(orden.idOrden).subscribe(data => {
 					console.log(data); 
 					this.ordenTemp = data.orden; 
@@ -183,5 +205,49 @@ export class DetalleOrdenComponent implements OnInit {
 		}); 
 	}
 
+	//------ FUNCIONES PARA AÑADIR REPUESTOS
+
+	modificarRepuestos() {
+		this.obtenerRepuestos();
+		this.vista=2;  		
+	}
+
+	obtenerRepuestos() { //Se obtienen todos los repuestos disponibles
+		let data = this.authService.obtenerRepuestos().subscribe( datos => {
+			this.repuestos = datos.repuestos;
+			console.log("AQUI LOS REPUESTOS"); 
+			console.log(this.repuestos); 
+		}); 
+	}
+
+	sumarRepuesto(idRepuesto) {
+		this.repuestosTemp.push(idRepuesto);
+		console.log(this.repuestosTemp);
+	}
+
+	actualizarRepuestos() {
+		for (let i = 0; i < this.repuestosTemp.length; i++) {
+			const repOrden = {
+				idOrden:this.orden.idOrden,
+				idRepuesto:this.repuestosTemp[i]
+			};
+			this.authService.addRepuestosOrden(repOrden).subscribe(data => {
+					console.log(data.success);
+					console.log("añadiendo un repuesto en la orden");
+					if(data.success){
+						for (let i = 0; i < this.repuestos.length; i++) {
+							if(this.repuestos[i].idRepuesto==repOrden.idRepuesto){
+								this.repuestosOrden.push(this.repuestos[i]);
+							}
+						}						
+						console.log(this.repuestosOrden);
+					}
+					//this.router.navigate['detalle-orden'];     	
+			});
+		}
+		this.repuestosTemp=[];
+		this.vista=1;
+ 	
+	}
 
 }

@@ -243,6 +243,33 @@ router.post('/obtenerRepuestosOrden', (req, res, next) => {
 	});
 });
 
+//Añadir un repuesto en una orden
+router.post('/addRepuestosOrden', (req, res, next) => {
+	console.log("AQUI AÑADIENDO REPUESTOS EN UNA ORDEN");
+	/*const idRep = req.body.IDREP;
+	const idOrden = req.body.IDORDEN;
+	console.log(idRep);
+	console.log(idOrden);*/
+	let newRepuestoOrden = new RepuestosOrden({
+        idOrden: req.body.idOrden,
+        idRepuesto: req.body.idRepuesto     
+    });
+	console.log(newRepuestoOrden);
+	RepuestosOrden.addRepuestoOrden(newRepuestoOrden, (err, repuestosOrden) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!repuestosOrden) {
+			console.log("No hay repuestos"); 
+		}
+		
+		res.json({
+			success:true
+		});
+	});
+});  
+
+
 router.post('/addImagenesVehiculo', (req, res, next) => {
 	console.log(req.body); 
 	const imagenesVehiculo = {
@@ -735,26 +762,46 @@ router.post('/registerOrden', (req, res, next) => {
 	console.log(req.body);
 	
 	let newOrden = {
-	
 		idVehiculo: req.body.idVehiculo,
 		idMecanico: req.body.idMecanico,
 		diagnostico: req.body.diagnostico,
 		motivo: req.body.motivo,
 		fecha: req.body.fecha,
 		activada: 1, 
-
 	}
 	console.log(newOrden); 
 
-    Orden.addOrden(newOrden, (err, ordenNueva) => {
+    Orden.addOrden(newOrden, (err, orden) => {
 		if(err){
 			res.json({success:false, msg:'No funciono el registro orden'});
 		} else {
-			res.json({success:true, msg:'Orden registrada', ordenNueva});
+			res.json({success:true, msg:'Orden Registrada', orden});
 		}
 	});
 
 }); 
+
+router.post('/addAccesorios', (req, res, next) => {
+    
+    let newAccesorios = new accesoriosOrden({
+		idOrden: req.body.idOrden,
+		cauchoRepuesto: req.body.cauchoRepuesto,
+		llaves: req.body.llaves,
+		gato: req.body.gato,
+		herramientas: req.body.herramientas,
+		equipodeSonido: req.body.equipodeSonido,
+		desperfectoCarroceria: req.body.desperfectoCarroceria 
+    });
+    AccesoriosOrden.addAccesorios(newAccesorios, (err, accs) => {
+		if(err){
+			res.json({success:false, msg:'No funciono el registro de cita'});
+		} else {
+			res.json({success:true, msg:'Accesorios registrados'});
+		}
+	});
+
+});
+
 
 router.post('/modificarOrden', (req, res, next) => {
 	console.log(req.body);

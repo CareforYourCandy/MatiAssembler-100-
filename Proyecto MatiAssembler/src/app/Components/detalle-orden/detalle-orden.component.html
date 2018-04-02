@@ -73,8 +73,9 @@
     </section>
 
 <section id="main" class="content">
+        
+    <div *ngIf="vista == 1">
     <div class="container-fluid">
-
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
@@ -320,6 +321,28 @@
             </div>
         </div>
     </div>
+    </div>
+
+    <div *ngIf="vista == 2">
+        <div class="card">
+            <div class="header">
+                <h2>EMITIR ORDEN DE REPARACIÓN</h2>
+            </div>
+            <div class="body">
+                <form  action="/" id="frmFileUpload"  method="post">
+                    <div class="demo-radio-button">
+                        <div *ngFor="let repuesto of repuestos">
+                            <input (click)="sumarRepuesto(repuesto.idRepuesto)" type="radio" id={{repuesto.idRepuesto}} class="with-gap radio-col-light-blue"/>
+                            <label for={{repuesto.idRepuesto}}>{{repuesto.pieza}}</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "actualizarRepuestos()" type="button" >MODIFICAR</button> <br><br>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
 </section>
 </div>
 

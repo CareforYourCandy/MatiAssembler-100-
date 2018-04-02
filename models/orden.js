@@ -208,10 +208,14 @@ module.exports.cerrarOrden = function(orden, callback) {
     return callback();
 }
 
-module.exports.addOrden = function(orden, callback) {
+module.exports.addOrden = function(ordenNueva, callback) {
     console.log("estoy en addOrden");
-    console.log(orden);
-    Orden.create(orden).then( ordenNueva =>{ 
+    console.log(ordenNueva);
+    //Orden.create(orden);
+    Orden.create(ordenNueva).then(function(ordenGuardada) {
+        console.log("EL VEHICULO GUARDADO ES"); 
+        console.log(ordenGuardada.dataValues); 
+
 
     Vehiculo.getVehiculoByID(orden.idVehiculo, (err, carro) => {
         //console.log('adentro de obtener el vehiculo');
@@ -279,8 +283,8 @@ module.exports.addOrden = function(orden, callback) {
                                             <p class="lead body">
                                                 <span class="titulo">Hola ${user.nombre},</span>
                                                 <br>
-                                                <br>La solicitud de reparación para su ${marca.marca} ${carro.modelo} fue procesada con éxito. Su vehículo será admitido el dia ${orden.fecha} al taller, lo esperamos!
-                                                <br>El servicio de ${orden.motivo} solicitado se realizará tan pronto su vehículo llegue.
+                                                <br>La solicitud de reparación para su ${marca.marca} ${carro.modelo} fue procesada con éxito. Su vehículo será admitido el dia ${ordenNueva.fecha} al taller, lo esperamos!
+                                                <br>El servicio de ${ordenNueva.motivo} solicitado se realizará tan pronto su vehículo llegue.
                                                 <br><br>
                                                 Gracias por confiar en nosotros la reparación de su vehículo.
                                                 <br>
@@ -320,10 +324,11 @@ module.exports.addOrden = function(orden, callback) {
             });
         });
     });
-    return callback(false, ordenNueva);
-    console.log("añadi");
-
-}) }
+        
+    return callback(false,ordenGuardada.dataValues);
+        
+    }); 
+}
 
 module.exports.getOrdenes =  function(req, callback){ //Obtener lista completa de ordenes
 	Orden.findAll().then(ordenes => {		

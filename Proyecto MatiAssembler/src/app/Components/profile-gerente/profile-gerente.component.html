@@ -431,35 +431,64 @@
                                 <input type="text" class="form-control" [(ngModel)]="motivo" name="motivo" placeholder="Motivo" >
                             </div>
                         </div>
+
                         <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Mecanicos<span class="caret"></span>
-                                </button>
-                                <ul   class="dropdown-menu">
-                                    <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico.idUsuario)">{{mecanico.nombre}}</a></li>
-                                    
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mecanicos<span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico.idUsuario)">{{mecanico.nombre}}</a></li>                                    
                                 </ul>
                               
                             </div>
                         </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="material-icons">check_circle</i>
-                            </span>
-                            <div class="form-line">
-                                <input type="text" class="form-control" [(ngModel)]="diagnostico" name="diagnostico" placeholder="Diagnostico" >
-                            </div>
+                        <div class="input-group"> 
+                            <div>
+                            <span class="input-group-addon" style="text-align: left">
+                                <i class="material-icons">settings</i>
+                                <label>Accesorios:</label>
+                            </span>            
+                            </div>          
+                            <div class="demo-checkbox"> 
+                            <div>
+                                    <input type="checkbox" id="acc1" [(ngModel)]="cauchoRepuesto" name="cauchoRepuesto" class="chk-col-light-blue"/>
+                                    <label for="acc1" >Caucho Repuesto</label>
+                            </div>    
+                            <div>
+                                    <input type="checkbox" id="acc2" [(ngModel)]="llaves" name="llaves" class="chk-col-light-blue"/>
+                                    <label for="acc2" >Llaves</label>                
+                            </div>                              
+                            <div>
+                                    <input type="checkbox" id="acc3" [(ngModel)]="gato" name="gato"  class="chk-col-light-blue"/>
+                                    <label for="acc3" >Gato</label>
+                            </div>                              
+                            <div>
+                                    <input type="checkbox" id="acc4" [(ngModel)]="herramientas" name="herramientas" class="chk-col-light-blue"/>
+                                    <label for="acc4" >Herramientas</label>
+                            </div> 
+                            <div>
+                                    <input type="checkbox" id="acc5"  [(ngModel)]="equipodeSonido" name="equipodeSonido" class="chk-col-light-blue"/>
+                                    <label for="acc5" >Equipo de Sonido</label>
+                            </div>   
+                            </div>  
+                             <div class="form-line">
+                                <input type="text" class="form-control" [(ngModel)]="desperfectoCarroceria" name="desperfectoCarroceria" placeholder="Desperfecto Carroceria">
+                            </div>                                 
                         </div> 
                         <div class="input-group">
-                            <span class="input-group-addon">
+                            <div>
+                            <span class="input-group-addon" style="text-align: left">
                                 <i class="material-icons">confirmation_number</i>
-                            </span>
+                                <label>Elegir imagen a cargar</label>
+                            </span>            
+                            </div>  
                             <div class="form-line">                      
-                              <label for="fileItem">Elegir imagen a cargar</label>
                               <input type="file" id="fileItem"  name="file" accept=".png" multiple>
                             </div>
                         </div> 
+
                         <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "registrarOrden()" type="text">AÑADIR ORDEN</button>
           
                     </form>

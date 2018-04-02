@@ -61,6 +61,13 @@ export class AuthService {
 		.map(res => res.json());
 	}
 
+	addAccesorios(accesorios) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/addAccesorios', accesorios, {headers: headers})
+			.map(res => res.json());		
+	}
+
 	actualizarOrden(orden) {
 		console.log("Hola aqui en actualizar orden"); 
 		let headers = new Headers();
@@ -139,6 +146,14 @@ export class AuthService {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
 		return this.http.post('http://localhost:3000/users/obtenerRepuestosOrden', orden, {headers: headers})
+		.map(res => res.json());
+	}
+
+	addRepuestosOrden(repOrden) {
+		//let ids = {IDREP,IDORDEN};	
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/addRepuestosOrden', repOrden, {headers: headers})
 		.map(res => res.json());
 	}
 	

@@ -3,7 +3,7 @@
             <h2>EMITIR ORDEN DE REPARACIÓN</h2>
         </div>
         <div class="body">
-            <form  action="/" (submit)="registrarOrden()" id="frmFileUpload"  method="post">
+            <form  action="/" id="frmFileUpload"  method="post">
 			    <div class="demo-radio-button">
 			        <div *ngFor="let repuesto of repuestos">
 			            <input (click)="sumarRepuesto(repuesto.idRepuesto)" type="radio" id={{repuesto.idRepuesto}} class="with-gap radio-col-light-blue"/>
@@ -14,4 +14,6 @@
 
             </form>
         </div>
+    </div>
+
 

@@ -15,6 +15,7 @@ export class DetalleVehiculoComponent implements OnInit {
 	gerente;
 	ordenes;
 	historial;	
+	imagenes; 
 
 	ordenTemp;
 	marcas = Array;
@@ -31,6 +32,7 @@ export class DetalleVehiculoComponent implements OnInit {
 		this.gerente = JSON.parse(localStorage.getItem("user")); 
 		this.vehiculo = JSON.parse(localStorage.getItem("vehiculo")); 
 		this.obtenerHistorial();
+		this.obtenerImagenes(); 
 	}
 
 	logout() {
@@ -45,7 +47,19 @@ export class DetalleVehiculoComponent implements OnInit {
 	goBack(): void { //Volver a vista gerente
 	this.location.back();
 	}
+	obtenerImagenes() {
+		this.authService.getImagenesVehiculo(this.vehiculo.idVehiculo).subscribe( datos => {
+			 
+			this.imagenes = datos.imagenesVehiculo; 
+			var numero = 0; 
 
+			console.log("EL ARRAY DE LAS IMAAGENES ES ", this.imagenes); 
+			this.imagenes.forEach(imagen => {
+				imagen.numero = numero; 
+				numero++; 
+			})
+		})
+	}
 	obtenerHistorial() {
 		this.authService.obtenerOrdenesVehiculo(this.vehiculo).subscribe( datos => {
 			this.ordenes = datos.ordenes;

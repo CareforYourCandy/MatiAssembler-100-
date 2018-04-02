@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class UploadFileService {
-
+  
   FOLDER = 'jsa-s3/';
   
-   constructor() { }
+   constructor() { 
+   
+   }
   
-   uploadfile(file) {
-  
+   uploadfile(file, id, identificador, authService ) {
+     
      const bucket = new S3(
        {
          accessKeyId: 'AKIAJTOIL2JOG5VHSOXQ',
@@ -28,13 +31,37 @@ export class UploadFileService {
      bucket.upload(params, function (err, data) {
        if (err) {
          console.log('There was an error uploading your file: ', err);
-         return false;
+         
        }
   
        console.log('Successfully uploaded file.', data);
-       return true;
-     });
-   }
+    
+       if (identificador == 1 ) {
+       let imagenesVehiculo = {
+         idVehiculo: id, 
+          imagen: data.Location
+       }
+       authService.addImagenesVehiculo(imagenesVehiculo).subscribe(datos => {
+        return true; 
+       });
+       
+      }
+      if (identificador == 2) {
+        let imagenesOrden = {
+          idOrden: id, 
+           imagen: data.Location
+        }
+        authService.addImagenesVehiculo(imagenesOrden).subscribe(datos => {
+         return true; 
+        });
+      }
+   }) 
   
 
+  }
 }
+
+
+
+
+

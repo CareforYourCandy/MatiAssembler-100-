@@ -2,8 +2,8 @@ const Sequelize = require('sequelize');
 const config = require('./../config/database');
 const connection = config.connection;
 
-const ImagenesVehiculo = connection.define('imagenesvehiculo', {
-    idVehiculo: {
+const ImagenesOrden = connection.define('imagenesorden', {
+    idOrden: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false
@@ -14,12 +14,12 @@ const ImagenesVehiculo = connection.define('imagenesvehiculo', {
     
 });
 
-module.exports = ImagenesVehiculo;
+module.exports = ImagenesOrden;
 
-module.exports.getImagenesByVehiculo= function(ID, callback){ //Obtener las imagenes por orden 
-    console.log('EL ID DEL VEHICULO ES:'+ID);
+module.exports.getImagenesByOrden= function(ID, callback){ //Obtener las imagenes por orden 
+    console.log('EL ID DE LA ORDEN ES:'+ID);
     const query = {where: {idVehiculo: ID}}
-    ImagenesVehiculo.findAll(query).then(imagenes => {		
+    ImagenesOrden.findAll(query).then(imagenes => {		
 		let imagenes2 = imagenes.map(function(imagen) {
 			dato = imagen.dataValues;   
 			return dato; 
@@ -32,9 +32,9 @@ module.exports.getImagenesByVehiculo= function(ID, callback){ //Obtener las imag
 	});
 
 }
-module.exports.addImagenesVehiculo = function(vehiculoImagenes, callback) { //Añadir un nuevo repuesto
+module.exports.addImagenesOrden = function(ordenImagenes, callback) { //Añadir un nuevo repuesto
     
-        ImagenesVehiculo.create(vehiculoImagenes); 
+        ImagenesVehiculo.create(ordenImagenes); 
    
 
 

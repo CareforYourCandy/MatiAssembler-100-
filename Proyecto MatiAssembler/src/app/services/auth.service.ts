@@ -214,10 +214,22 @@ export class AuthService {
 		return this.http.post('http://localhost:3000/users/obtenerImagenesVehiculo', {idVehiculo}, {headers: headers})
 			.map(res => res.json());
 	}
-	addImagenesVehiculo(imagenesVehiculo) {
+	addImagenesVehiculo(imagenVehiculo) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/obtenerImagenesVehiculo', imagenesVehiculo , {headers: headers})
+		return this.http.post('http://localhost:3000/users/addImagenesVehiculo', imagenVehiculo , {headers: headers})
+			.map(res => res.json());
+	}
+	getImagenesOrden(idOrden) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/obtenerImagenesOrden' , {idOrden}, {headers: headers})
+			.map(res => res.json());
+	}
+	addImagenesOrden(imagenOrden) {
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/addImagenesVehiculo', imagenOrden , {headers: headers})
 			.map(res => res.json());
 	}
 	getOrdenesFecha(fechas) {

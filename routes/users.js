@@ -12,6 +12,7 @@ const Marca = require('../models/marca');
 const AccesoriosOrden = require('../models/accesoriosOrden'); 
 const RepuestosOrden = require('../models/repuestosOrden'); 
 const ImagenesVehiculo = require('../models/imagenesvehiculo'); 
+const ImagenesOrden = require('.../models/imagenesorden'); 
 
 router.post('/modificarUsuario', (req, res, next) => {
 	console.log("Estoy en modificar usuario"); 
@@ -233,8 +234,29 @@ router.post('/obtenerRepuestosOrden', (req, res, next) => {
 });
 
 router.post('/addImagenesVehiculo', (req, res, next) => {
-	const imagenesVehiculo = req.body.imagenesVehiculo;
-	ImagenesVehiculo.addImagenesVehiculo(imageneVehiculo, (err, imagenesVehiculo) => {
+	console.log(req.body); 
+	const imagenesVehiculo = {
+		idVehiculo: req.body.idVehiculo,
+		imagen: req.body.imagen
+	}
+	ImagenesVehiculo.addImagenesVehiculo(imagenesVehiculo, (err, imagenesVehiculo) => {
+		if(err){
+			res.json({success:false, msg:'NO se añadieron las imagenes'});
+		} else {
+			res.json({success:true, msg:'Se añadieron las imagenes'});
+		}
+		res.json({
+			success: true
+		});
+	});
+})
+router.post('/addImagenesOrden', (req, res, next) => {
+	console.log(req.body); 
+	const imagenesOrden = {
+		idOrden: req.body.idOrden,
+		imagen: req.body.imagen
+	}
+	ImagenesVehiculo.addImagenesVehiculo(imagenesOrden, (err, imagenesOrden) => {
 		if(err){
 			res.json({success:false, msg:'NO se añadieron las imagenes'});
 		} else {
@@ -246,7 +268,23 @@ router.post('/addImagenesVehiculo', (req, res, next) => {
 	});
 })
 
-
+router.post('/obtenerImagenesOrden', (req, res, next) => {
+	console.log("Estoy en obtener repuestos de la orden"); 
+	const id = req.body.idOrden;
+	ImagenesOrden.getImagenesByOrden(id, (err, imagenesOrden) => {
+		if (err) {
+			console.log("algo fallo"); 
+		}
+		if(!imagenesOrden) {
+			console.log("No hay imagenes"); 
+		}
+		
+		res.json( {
+			success:true, 
+			imagenesOrden
+		})
+	});
+});
 router.post('/obtenerImagenesVehiculo', (req, res, next) => {
 	console.log("Estoy en obtener repuestos de la orden"); 
 	const id = req.body.idVehiculo;
@@ -254,7 +292,7 @@ router.post('/obtenerImagenesVehiculo', (req, res, next) => {
 		if (err) {
 			console.log("algo fallo"); 
 		}
-		if(!repuestosOrden) {
+		if(!imagenesVehiculo) {
 			console.log("No hay imagenes"); 
 		}
 		

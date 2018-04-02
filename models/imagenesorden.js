@@ -17,7 +17,7 @@ const ImagenesOrden = connection.define('imagenesorden', {
 module.exports = ImagenesOrden;
 
 module.exports.getImagenesByOrden= function(ID, callback){ //Obtener las imagenes por orden 
-    console.log('EL ID DE LA ORDEN ES:'+ID);
+  
     const query = {where: {idVehiculo: ID}}
     ImagenesOrden.findAll(query).then(imagenes => {		
 		let imagenes2 = imagenes.map(function(imagen) {

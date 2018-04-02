@@ -51,7 +51,7 @@ export class UploadFileService {
           idOrden: id, 
            imagen: data.Location
         }
-        authService.addImagenesVehiculo(imagenesOrden).subscribe(datos => {
+        authService.addImagenesOrden(imagenesOrden).subscribe(datos => {
          return true; 
         });
       }

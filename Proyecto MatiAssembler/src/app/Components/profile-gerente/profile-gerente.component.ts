@@ -11,7 +11,7 @@ import {ReporteMecanicoComponent} from '../reporte-mecanico/reporte-mecanico.com
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material'; 
 import {IMyDpOptions} from 'mydatepicker';
-
+import {UploadFileService} from '../../services/upload-file.service'; 
 @Component({
   selector: 'app-profile-gerente',
   templateUrl: './profile-gerente.component.html',
@@ -67,7 +67,8 @@ export class ProfileGerenteComponent implements OnInit {
               private validateService: ValidateService, 
               private authService: AuthService,
               private router: Router, 
-              private location: Location) { 
+              private location: Location,
+              private uploadService: UploadFileService) { 
     
   }
 
@@ -351,8 +352,12 @@ export class ProfileGerenteComponent implements OnInit {
     motivo: this.motivo,
     activada: 1
     }
-
+    var inputFile = (<HTMLInputElement>document.getElementById('fileItem')).files;
+    var file; 
+    
     this.authService.registerOrden(orden).subscribe(data => {
+      console.log(data); 
+      let ordenNueva = data.ordenNueva; 
       console.log(data.success); 
       if(data.success) {
         this.authService.eliminarCita(this.idCitatemp).subscribe( data => { 
@@ -363,6 +368,11 @@ export class ProfileGerenteComponent implements OnInit {
               this.carrosCitas.splice(i, 1);
             }
           } 
+          for ( var i = 0; i < inputFile.length; i++) {
+						file = inputFile.item(i); 
+					 this.uploadService.uploadfile(file, ordenNueva.idOrden, 2, this.authService); 
+
+				} 
           this.vista=3;              
           //this.router.navigate['home-page'];
         })

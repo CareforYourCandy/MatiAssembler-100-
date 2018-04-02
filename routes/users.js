@@ -12,7 +12,7 @@ const Marca = require('../models/marca');
 const AccesoriosOrden = require('../models/accesoriosOrden'); 
 const RepuestosOrden = require('../models/repuestosOrden'); 
 const ImagenesVehiculo = require('../models/imagenesvehiculo'); 
-const ImagenesOrden = require('.../models/imagenesorden'); 
+const ImagenesOrden = require('../models/imagenesorden'); 
 
 router.post('/modificarUsuario', (req, res, next) => {
 	console.log("Estoy en modificar usuario"); 
@@ -273,7 +273,8 @@ router.post('/addImagenesOrden', (req, res, next) => {
 			res.json({success:true, msg:'Se añadieron las imagenes'});
 		}
 		res.json({
-			success: true
+			success: true,
+		
 		});
 	});
 })
@@ -745,11 +746,11 @@ router.post('/registerOrden', (req, res, next) => {
 	}
 	console.log(newOrden); 
 
-    Orden.addOrden(newOrden, (err, orden) => {
+    Orden.addOrden(newOrden, (err, ordenNueva) => {
 		if(err){
 			res.json({success:false, msg:'No funciono el registro orden'});
 		} else {
-			res.json({success:true, msg:'Orden registrada'});
+			res.json({success:true, msg:'Orden registrada', ordenNueva});
 		}
 	});
 

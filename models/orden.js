@@ -211,7 +211,7 @@ module.exports.cerrarOrden = function(orden, callback) {
 module.exports.addOrden = function(orden, callback) {
     console.log("estoy en addOrden");
     console.log(orden);
-    Orden.create(orden); 
+    Orden.create(orden).then( ordenNueva =>{ 
 
     Vehiculo.getVehiculoByID(orden.idVehiculo, (err, carro) => {
         //console.log('adentro de obtener el vehiculo');
@@ -320,9 +320,10 @@ module.exports.addOrden = function(orden, callback) {
             });
         });
     });
-    return callback();
+    return callback(false, ordenNueva);
     console.log("añadi");
-}
+
+}) }
 
 module.exports.getOrdenes =  function(req, callback){ //Obtener lista completa de ordenes
 	Orden.findAll().then(ordenes => {		

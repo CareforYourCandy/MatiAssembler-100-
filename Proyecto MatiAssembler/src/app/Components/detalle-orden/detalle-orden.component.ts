@@ -28,8 +28,8 @@ export class DetalleOrdenComponent implements OnInit {
 	placa: String;
 	serialMotor: String;
 	fechaAdmision: String;
-	diagnostico: String;
-	procedimiento: String;
+	diagnostico="";
+	procedimiento="";
 	caucho: String;
 	llaves: String;
 	gato: String;
@@ -94,6 +94,21 @@ export class DetalleOrdenComponent implements OnInit {
 		console.log(data.accesorios); 
 		this.accesorios = data.accesorios; 
 		})
+		/*if(this.accesorios.cauchoRepuesto==null){
+			this.accesorios.cauchoRepuesto=false;
+		}
+		if(this.accesorios.llaves==null){
+			this.accesorios.llaves=false;
+		}
+		if(this.accesorios.gato==null){
+			this.accesorios.gato=false;
+		}
+		if(this.accesorios.herramientas==null){
+			this.accesorios.herramientas=false;
+		}
+		if(this.accesorios.equipodeSonido==null){
+			this.accesorios.equipodeSonido=false;
+		}*/
 	}
 
 	setBoolean(variable){
@@ -112,15 +127,29 @@ export class DetalleOrdenComponent implements OnInit {
 		this.placa = this.vehiculo.placa;
 		this.serialMotor = this.vehiculo.serialMotor;
 		this.fechaAdmision = this.orden.fecha;
-		this.diagnostico = this.orden.diagnostico;
-		this.procedimiento =this.orden.procedimiento;
-		this.caucho = this.accesorios.cauchoRepuesto;
-		this.llaves = this.accesorios.llaves;
-		this.gato = this.accesorios.gato;
-		this.herramientas = this.accesorios.herramientas;
-		this.equipoSonido = this.accesorios.equipoSonido;
-		this.desperfectoCarroceria = this.accesorios.desperfectoCarroceria;
-		
+		if(this.orden.diagnostico!=null){
+			this.diagnostico = this.orden.diagnostico;
+		}
+		if(this.orden.procedimiento!=null){
+			this.procedimiento =this.orden.procedimiento;			
+		}
+		/*if(this.accesorios.cauchoRepuesto!=null){
+			this.caucho = this.accesorios.cauchoRepuesto;
+		}
+		if(this.accesorios.llaves!=null){
+			this.llaves = this.accesorios.llaves;
+		}
+		if(this.accesorios.gato!=null){
+			this.gato = this.accesorios.gato;
+		}
+		if(this.accesorios.herramientas!=null){
+			this.herramientas = this.accesorios.herramientas;
+		}
+		if(this.accesorios.equipodeSonido!=null){
+			this.equipoSonido = this.accesorios.equipoSonido;
+		}
+		this.desperfectoCarroceria = this.accesorios.desperfectoCarroceria;*/
+
 	}
 
 

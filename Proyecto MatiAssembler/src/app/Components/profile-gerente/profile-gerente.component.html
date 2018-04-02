@@ -443,15 +443,32 @@
                               
                             </div>
                         </div>
+                            <div class="demo-checkbox">     
+                                        <input type="checkbox" id="acc1" [(ngModel)]="cauchoRepuesto" name="cauchoRepuesto" class="chk-col-light-blue"/>
+                                        <label for="acc1" >Caucho Repuesto</label>  
+
+                                        <input type="checkbox" id="acc2" [(ngModel)]="llaves" name="llaves" class="chk-col-light-blue"/>
+                                        <label for="acc2" >Llaves</label>
+
+                                        <input type="checkbox" id="acc3" [(ngModel)]="gato" name="gato"  class="chk-col-light-blue"/>
+                                        <label for="acc3" >Gato</label>
+
+                                        <input type="checkbox" id="acc4" [(ngModel)]="herramientas" name="herramientas" class="chk-col-light-blue"/>
+                                        <label for="acc4" >Herramientas</label>
+
+                                        <input type="checkbox" id="acc5"  [(ngModel)]="equipodeSonido" name="equipodeSonido" class="chk-col-light-blue"/>
+                                        <label for="acc5" >Equipo de Sonido</label>
+                                    </div>  
+                                   
+                            </div> 
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <i class="material-icons">check_circle</i>
+                                <i class="material-icons">question</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" class="form-control" [(ngModel)]="diagnostico" name="diagnostico" placeholder="Diagnostico" >
+                                <input type="text" class="form-control" [(ngModel)]="desperfectoCarroceria" name="desperfectoCarroceria" placeholder="Desperfecto Carroceria">
                             </div>
-                        </div> 
-
+                        </div>
                         <button class="btn btn-block btn-lg bg-pink waves-effect" (click) = "registrarOrden()" type="text">AÑADIR ORDEN</button>
           
                     </form>

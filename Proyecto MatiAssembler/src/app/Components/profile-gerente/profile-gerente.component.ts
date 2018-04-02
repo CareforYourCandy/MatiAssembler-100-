@@ -57,6 +57,13 @@ export class ProfileGerenteComponent implements OnInit {
   motivo: String;
   ordenGenerada;
   activada: Boolean;
+  //Accesorios orden
+  cauchoRepuesto: boolean;
+  llaves: boolean;
+  gato: boolean;
+  herramientas: boolean;
+  equipodeSonido: boolean;
+  desperfectoCarroceria: String;
   public myDatePickerOptions: IMyDpOptions = {
     // other options...
     dateFormat: 'yyyy-mm-dd',

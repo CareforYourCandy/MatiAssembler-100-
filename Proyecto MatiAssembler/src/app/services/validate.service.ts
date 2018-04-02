@@ -6,9 +6,11 @@ export class ValidateService {
   constructor() { }
 
   validateRegister(user){
-  	if(user.nombre == undefined || user.cedula == undefined || user.apellido == undefined || user.correo == undefined || user.contraseña == undefined || user.rol == undefined) {
+  	if(user.nombre == undefined || user.cedula == undefined || user.apellido == undefined || user.correo == undefined || user.contraseña == undefined || user.direccion == undefined || user.telefono == undefined) {
   		return false;
-  	} else {
+  	}else if(user.nombre == "" || user.cedula == "" || user.apellido == "" || user.correo == "" || user.contraseña == "" || user.direccion == "" || user.telefono == "") {
+      return false;
+    } else {
   		return true;
   	}
   }

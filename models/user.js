@@ -129,8 +129,18 @@ module.exports.addUser = function(newUser, callback) {
 	bcrypt.genSalt(10, (err, salt) => {
 		bcrypt.hash(newUser.contraseña, salt, (err, hash) => {
 			if(err) throw err;
-			newUser.contraseña = hash;
-			newUser.save(callback);
+			console.log(newUser.dataValues);
+			console.log("contraseña vieja:");
+			console.log(newUser.dataValues.contraseña);
+			console.log("hash:");
+			console.log(hash);
+			newUser.dataValues.contraseña = hash;
+			User.create(newUser.dataValues).then(function(usuarioGuardado) {
+				console.log("EL USUARIO GUARDADO ES"); 
+				console.log(usuarioGuardado.dataValues); 
+				return callback(false,usuarioGuardado.dataValues);
+				
+			});
 
 		});
 	});

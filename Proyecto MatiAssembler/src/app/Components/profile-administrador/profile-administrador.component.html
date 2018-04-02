@@ -92,7 +92,21 @@
   <section id="main" class="content">
     
       <div class="container-fluid">
-
+          <div *ngIf="mostrarAlerta">
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button (click)="cerrarAlerta()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
+            </div>
+          </div>
+          <div *ngIf="mostrarAlerta2">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button (click)="cerrarAlerta2()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
+            </div>
+          </div>
+          <div *ngIf="mostrarAlerta3">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button (click)="cerrarAlerta3()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
+            </div>
+          </div>
     <!-- LISTA USUARIOS -->
     <div  *ngIf="vista == 1">
       <div class="row clearfix">
@@ -154,21 +168,16 @@
                       <table class="table table-hover">
                           <thead>
                               <tr>
-                                  <th>TIPO</th>
                                   <th>NOMBRE</th>
-                                  <th>ELIMINAR</th>
+                                  <th>MARCA</th>
+                                  <th>MODELO</th>
                               </tr>
                           </thead>
                           <tbody>
                               <tr *ngFor = "let repuesto of repuestos" >
-                                  <td>---- </td>
-                                  <td> {{repuesto.pieza}}</td>
-                                  <td>
-                                          <button type="button" class="btn bg-light-blue
-                                          waves-effect"  (click) ="eliminarRepuesto(repuesto)">
-                                              <i class="material-icons">close</i>
-                                          </button>
-                                      </td>
+                                  <td>{{repuesto.pieza}}</td>
+                                  <td>{{setMarcaVista(repuesto.marca)}} </td>
+                                  <td>{{setModeloVista(repuesto.modelo)}} </td>
                               </tr>
                               
                           </tbody>
@@ -355,11 +364,7 @@
                       </div>
                   </div>
 
-                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit" onClick="document.getElementById('myInput4').value = '', document.getElementById('myInput5').value = '', document.getElementById('myInput6').value = '',
-                    document.getElementById('myInput7').value = '',
-                    document.getElementById('myInput8').value = '',
-                    document.getElementById('myInput9').value = '',
-                    document.getElementById('myInput10').value = ''">REGISTRAR</button>
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR</button>
                 </form>
             </div>
         </div>
@@ -370,7 +375,7 @@
       <div class="card">
           <div class="header">
               <h2>REGISTRAR NUEVO REPUESTO</h2>
-          </div>
+          </div> 
           <div class="body">
               <form  action="/" (submit)="registrarRepuesto()" id="frmFileUpload" method="post">
                   <div class="input-group">
@@ -382,19 +387,25 @@
                       </div>
                   </div>
                   <div class="input-group">
-                      <span class="input-group-addon">
-                          <i class="material-icons">directions_car</i>
-                      </span>
-                      <div class="form-line">
-                          <input id="myInput2" type="text" class="form-control"[(ngModel)]="marca" name="marca" placeholder="marca" >
-                      </div>
+                        <span class="input-group-addon">
+                                <i class="material-icons">confirmation_number</i>
+                            </span>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Marca <span class="caret"></span>
+                        </button>
+                        <ul   class="dropdown-menu">
+                            <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca.idMarca)">{{marca.marca}}</a></li>
+                            
+                        </ul>
+                    </div>
                   </div>
                   <div class="input-group">
                       <span class="input-group-addon">
                           <i class="material-icons">directions_car</i>
                       </span>
                       <div class="form-line">
-                          <input id="myInput3" type="text" class="form-control" name="modelo" placeholder="modelo" >
+                          <input id="myInput3" type="text" class="form-control"  [(ngModel)]="modelo" name="modelo" placeholder="modelo" >
                       </div>
                   </div>
                   <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">AÑADIR REPUESTO</button>

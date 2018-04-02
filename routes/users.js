@@ -55,11 +55,8 @@ router.post('/register', (req, res, next) => {
 		if(err){
 			res.json({success:false, msg:'No funciono el registro de usuario'});
 		} else {
-			res.json({success:true, msg:'Usuario registrado'});
+			res.json({success:true, msg:'Usuario registrado', user});
 		}
-		res.json({
-			success: true
-		});
 	});
 });
 
@@ -746,7 +743,9 @@ router.post('/cerrarOrden',  (req, res, next) => {
 
 router.post('/registerRepuesto', (req, res, next) => {
 	let newRepuesto = {
-		pieza:  req.body.pieza 
+		pieza:  req.body.pieza,
+		modelo: req.body.modelo,
+		marca: req.body.marca 
 	}
 
 	Repuesto.addRepuesto(newRepuesto, (err, repuesto) => {

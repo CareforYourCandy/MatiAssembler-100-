@@ -14,9 +14,13 @@ const Repuesto = connection.define('repuesto', {
     },
     pieza: {
         type: Sequelize.STRING
-    }
-  
-
+    },
+    modelo: {
+        type: Sequelize.STRING
+    },
+    marca: {
+        type: Sequelize.INTEGER
+    }  
 });
 module.exports = Repuesto;
 

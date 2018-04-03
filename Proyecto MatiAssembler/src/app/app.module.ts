@@ -42,6 +42,7 @@ import { ModificarRepuestoComponent } from './Components/modificar-repuesto/modi
 import { AgregarUsuarioComponent } from './Components/agregar-usuario/agregar-usuario.component';
 import { ReporteModeloComponent } from './Components/reporte-modelo/reporte-modelo.component';
 import { UploadFileService } from './services/upload-file.service';
+import { LeerQrComponent } from './Components/leer-qr/leer-qr.component';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -84,6 +85,7 @@ import { UploadFileService } from './services/upload-file.service';
     ModificarRepuestoComponent,
     AgregarUsuarioComponent,
     ReporteModeloComponent,
+    LeerQrComponent,
 
   ],
   imports: [

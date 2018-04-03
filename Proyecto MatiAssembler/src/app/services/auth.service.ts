@@ -181,6 +181,14 @@ export class AuthService {
 		.map (res => res.json()); 
 	}
 
+	activarVehiculo(vehiculo) {
+		console.log("entro en servicio"); 
+		let headers = new Headers();
+		headers.append('Content-Type','application/json');
+		return this.http.post('http://localhost:3000/users/activarVehiculo', vehiculo, {headers: headers})
+		.map (res => res.json()); 
+	}
+
 	solicitarCita(cita) {
 		//Para registrar una cita
 		let headers = new Headers();

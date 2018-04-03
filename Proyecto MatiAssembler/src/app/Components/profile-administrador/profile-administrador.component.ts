@@ -60,6 +60,8 @@ export class ProfileAdministradorComponent implements OnInit {
     this.vista=id;
     this.setearCampos();
     this.cerrarAlerta();
+    this.cerrarAlerta2();
+    this.cerrarAlerta3();
   }
 
   obtenerRepuestos() {
@@ -139,13 +141,15 @@ export class ProfileAdministradorComponent implements OnInit {
     //Required fields
     if(!this.validateService.validateRegister(usuario)){
       console.log("Fallo val usuario");
+      this.cerrarAlerta3();
       this.mensajeAlerta="Por favor rellene todos los campos"
-      this.mostrarAlerta2=true;     
+      this.mostrarAlerta2=true;  
       return false;
     }
     //Validar email
     if(!this.validateService.validateEmail(usuario.correo)){
       console.log("Fallo val email"); 
+      this.cerrarAlerta2();
       this.mensajeAlerta="Correo inválido, por favor ingrese correctamente."
       this.mostrarAlerta3=true;
       return false;
@@ -225,6 +229,11 @@ export class ProfileAdministradorComponent implements OnInit {
       this.cerrarAlerta2(); 
       this.mensajeAlerta="Correo inválido, por favor ingrese correctamente."
       this.mostrarAlerta3=true;
+      return false;
+    }
+    if(!this.validarUsuario(user)){
+      this.mensajeAlerta="Este correo ya esta registrado, por favor ingrese otro."
+      this.mostrarAlerta3=true;     
       return false;
     }
     this.cerrarAlerta2();
@@ -324,4 +333,14 @@ export class ProfileAdministradorComponent implements OnInit {
     this.marcaNuevo = idMarca;
     console.log(this.marcaNuevo) ;
   }
+
+  validarUsuario(newUsuario) { //Validar que no se registre un usuario con un correo ya existente
+    for (let i=0; i<this.usuarios.length; i++){
+      if(this.usuarios[i].correo==newUsuario.correo){
+        return false;
+      }
+    }
+    return true;
+  }
+
 }

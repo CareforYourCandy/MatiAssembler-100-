@@ -160,8 +160,6 @@ export class ProfileGerenteComponent implements OnInit {
     let data = this.authService.obtenerCitas().subscribe( datos => {
       this.citas = datos.rcitas;
       console.log(this.citas); 
-      let vehiculos2 = this.vehiculos; 
-      console.log(vehiculos2); 
       for (let i = 0; i < this.citas.length ; i++) {
       let data2 = this.authService.getVehiculo(this.citas[i].vehiculoCita).subscribe( datos => {
         datos.vehiculo.idCita = this.citas[i].idCita; 
@@ -179,17 +177,6 @@ export class ProfileGerenteComponent implements OnInit {
  
  
   }
-  /*cuadrarCarros() {
-    console.log("LAS CITAS SON ")
-    console.log(this.citas); 
-    this.citas.forEach(function(cita) {
-      let data2 = this.authService.getVehiculo(cita.vehiculoCita).subscribe( datos => {
-        console.log("IMPRIMIRE MAS DATOS"); 
-        this.carrosCitas.push(datos); 
-      })
-    })
-
-  }*/
 
   getMarcas() {
     this.authService.getMarcas().subscribe(data => {

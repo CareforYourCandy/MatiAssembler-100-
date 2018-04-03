@@ -16,7 +16,11 @@ export class LoginComponent implements OnInit {
     password: String; 
     vistaTemp;
     nuevoRegistro = false;
-    //@ViewChild(RegisterComponent);
+      //Alertas
+    mostrarAlerta = false; 
+    mostrarAlerta2 = false; 
+    mostrarAlerta3 = false; 
+    mensajeAlerta: String;
   
     constructor(private authService: AuthService,
                 private router: Router
@@ -34,6 +38,7 @@ export class LoginComponent implements OnInit {
       this.authService.authenticateUser(user).subscribe(data => {
         //console.log(data);	
         if(data.success){
+          this.mostrarAlerta3=false;
           this.authService.storeUserData(data.token, data.user);
           //this.flashMessage.show('¡Bienvenido, ${data.user.nombre}!', { cssClass: 'custom-success', timeout: 6000 });
           
@@ -51,8 +56,9 @@ export class LoginComponent implements OnInit {
          }
          
         } else {
-          console.log("Fallo"); 
-          //this.flashMessage.show('Usuario/Contraseña incorrectos. Intentelo de Nuevo', { cssClass: 'custom-danger', timeout: 6000 });
+          console.log("Fallo");
+          this.mostrarAlerta3=true;
+          this.mensajeAlerta="Usuario/Contraseña incorrectos. Intentelo de Nuevo";
           this.router.navigate(['login']);
         }
       }); 
@@ -61,6 +67,19 @@ export class LoginComponent implements OnInit {
     Registrar(id) {
       this.nuevoRegistro=true;      
       this.vistaTemp=id;
+    }
+
+    cerrarAlerta() {
+      this.mostrarAlerta = false;
+      this.mensajeAlerta=""; 
+    }
+    cerrarAlerta2() {
+      this.mostrarAlerta2 = false;
+      this.mensajeAlerta=""; 
+    }
+    cerrarAlerta3() {
+      this.mostrarAlerta3 = false;
+      this.mensajeAlerta=""; 
     }
   
   }

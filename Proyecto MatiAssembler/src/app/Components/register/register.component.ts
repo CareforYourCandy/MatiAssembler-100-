@@ -20,6 +20,12 @@ export class RegisterComponent implements OnInit {
   cedula: String; 
   direccion: String;
   telefono: String; 
+  usuarios;
+  //Alertas
+  mostrarAlerta = false; 
+  mostrarAlerta2 = false; 
+  mostrarAlerta3 = false; 
+  mensajeAlerta: String;
   
   constructor(private validateService: ValidateService, 
     private authService: AuthService,
@@ -27,6 +33,14 @@ export class RegisterComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.obtenerUsuarios();
+  }
+
+  obtenerUsuarios() {
+    let data = this.authService.getUsers().subscribe( datos => {
+      this.usuarios = datos.users
+      console.log(this.usuarios); 
+    })
   }
 
   onRegisterSubmitCliente() {
@@ -44,30 +58,39 @@ export class RegisterComponent implements OnInit {
     console.log(user); 
     console.log("Hola"); 
     //Required fields
+    if(!this.validateService.validateRegister(user) && !this.validateService.validateEmail(user.correo)){
+      console.log("Fallo val usuario");
+      this.mensajeAlerta="Por favor rellene todos los campos, con un correo válido"
+      this.mostrarAlerta2=true;     
+      return false;
+    }
     if(!this.validateService.validateRegister(user)){
-     console.log("Fallo val usuario");
+      console.log("Fallo val usuario");
+      this.cerrarAlerta3();
+      this.mensajeAlerta="Por favor rellene todos los campos"
+      this.mostrarAlerta2=true;     
       return false;
     }
     //Validar email
     if(!this.validateService.validateEmail(user.correo)){
-     console.log("Fallo val email"); 
+      console.log("Fallo val email");
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Correo inválido, por favor ingrese correctamente."
+      this.mostrarAlerta3=true;
       return false;
     }
+    if(!this.validarUsuario(user)){
+      this.mensajeAlerta="Este correo ya esta registrado, por favor ingrese otro."
+      this.mostrarAlerta2=true;     
+      return false;
+    }
+    this.cerrarAlerta2();
+    this.cerrarAlerta3();
     //Registrar usuario
     this.authService.registerUser(user).subscribe(data => {
       console.log(data.success); 
-     
-    /*  if(data.success){
-
-        this.router.navigate(['/login']);
-      } else {
-        console.log("fallo"); 
-        this.router.navigate(['/login']);
-      }*/
       this.router.navigate['login'];       
     });
-
-
   }
 
   onRegisterSubmit() {
@@ -118,6 +141,28 @@ export class RegisterComponent implements OnInit {
     if(this.rol==4) {
       return "Mecanico";
     }
+  }
+
+  validarUsuario(newUsuario) { //Validar que no se registre un usuario con un correo ya existente
+    for (let i=0; i<this.usuarios.length; i++){
+      if(this.usuarios[i].correo==newUsuario.correo){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  cerrarAlerta() {
+    this.mostrarAlerta = false;
+    this.mensajeAlerta=""; 
+  }
+  cerrarAlerta2() {
+    this.mostrarAlerta2 = false;
+    this.mensajeAlerta=""; 
+  }
+  cerrarAlerta3() {
+    this.mostrarAlerta3 = false;
+    this.mensajeAlerta=""; 
   }
 
 }

@@ -698,16 +698,27 @@ router.post('/registerCita', (req, res, next) => {
 });
 
 router.post('/desactivarVehiculo',  (req, res, next) => {
-console.log(req.body); 
-Vehiculo.desactivarVehiculo(req.body.idVehiculo, (err, vehiculo)  => {
-	if (err) {
-		res.json({success:false, msg:'No funciono'});
-	} else {
-		res.json({success:true, msg:'furula'});
-	}
-})
-
+	console.log(req.body); 
+	Vehiculo.desactivarVehiculo(req.body.idVehiculo, (err, vehiculo)  => {
+		if (err) {
+			res.json({success:false, msg:'No funciono'});
+		} else {
+			res.json({success:true, msg:'furula'});
+		}
+	})
 }); 
+
+router.post('/activarVehiculo',  (req, res, next) => {
+	console.log(req.body); 
+	Vehiculo.activarVehiculo(req.body, (err, vehiculo)  => {
+		if (err) {
+			res.json({success:false, msg:'No funciono'});
+		} else {
+			res.json({success:true, msg:'furula'});
+		}
+	})
+}); 
+
 router.post('/desactivarOrden',  (req, res, next) => {
 	console.log(req.body); 
 	Orden.desactivarOrden(req.body.idOrden, (err, orden)  => {

@@ -18,7 +18,8 @@ const Vehiculo = connection.define('vehiculo', {
 		allowNull: false
 	},
 	placa: {
-		type: Sequelize.STRING
+		type: Sequelize.STRING,
+		unique: true
 	},
 	marca: {
 		type: Sequelize.INTEGER
@@ -30,8 +31,8 @@ const Vehiculo = connection.define('vehiculo', {
 		type: Sequelize.BOOLEAN
 	},
 	serialMotor: {
-		type: Sequelize.STRING
-		
+		type: Sequelize.STRING,
+		unique: true
 	}, 
 	ano: {
 		type: Sequelize.INTEGER
@@ -126,6 +127,20 @@ module.exports.desactivarVehiculo = function(vehiculoID, callback) {
 		//console.log(datos);
 		return callback(null, datos);
 	});	
+}
+
+module.exports.activarVehiculo = function(vehiculo, callback) {
+	let usuario=vehiculo.propietario;
+	let PLACA=vehiculo.placa;
+	Vehiculo.update(
+		{activado: 1, propietario: usuario},
+		{where: {placa: PLACA}}
+	).then(datos => {
+		console.log("vehi activado:");
+		console.log(datos);
+		return callback(null, datos);
+	});	
+
 }
 
 module.exports.getVehiculos = function(req, callback){ //Obtener lista completa de vehiculos 

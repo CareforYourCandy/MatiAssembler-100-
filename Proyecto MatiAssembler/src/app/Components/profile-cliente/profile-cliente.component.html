@@ -95,7 +95,11 @@
 <section id="main" class="content">
 
   <div class="container-fluid">
-
+            <div *ngIf="mostrarAlerta3">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button (click)="cerrarAlerta3()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
+                </div>
+            </div>
 <div  *ngIf="vista == 1">
       <div class="block-header">
           <h2>USUARIO</h2>
@@ -181,6 +185,18 @@
       <div class="row clearfix">
           <!-- VEHICULOS -->
           <div >
+    <!--ALERTAS-->              
+    <div *ngIf="mostrarAlerta">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button (click)="cerrarAlerta()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
+        </div>
+    </div>
+    <div *ngIf="mostrarAlerta2">
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button (click)="cerrarAlerta2()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
+        </div>
+    </div>
+    <!--FIN ALERTAS-->             
               <div class="card">
                   <div class="header">
                       <h2>VEHÍCULOS REGISTRADOS</h2>
@@ -303,8 +319,7 @@
                         <input type="file" id="fileItem" [(ngModel)]="file" name="file" accept=".png" multiple>
                       </div>
                   </div>                 
-                  <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit" onClick="document.getElementById('myInput').value = '', document.getElementById('myInput2').value = '', document.getElementById('myInput3').value = '',
-                  document.getElementById('myInput4').value = ''" >REGISTRAR VEHÍCULO</button>
+                  <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">REGISTRAR VEHÍCULO</button>
 
               </form>
           </div>

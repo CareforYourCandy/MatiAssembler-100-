@@ -54,5 +54,11 @@ module.exports.addCita = function(newCita, callback) { //Añadir una nueva cita 
 			console.log("estoy en addCita");
 			newCita.save(callback);
 			return callback();
+	Cita.create(newCita.dataValues).then(function(citaGuardada) {
+		console.log("LA CITA GUARDADA ES"); 
+		console.log(citaGuardada.dataValues); 
+		return callback(false,citaGuardada.dataValues);
+		
+	});
 
 }

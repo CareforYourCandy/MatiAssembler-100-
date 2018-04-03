@@ -126,7 +126,7 @@ router.post('/getOrdenes', (req, res, next) => { //Obtener todas las ordenes
 		}
 		console.log("Hare un response ahora"); 
 		res.json( {
-			success:true, 
+			success: true, 
 			ordenes
 		})
 	});
@@ -687,11 +687,11 @@ router.post('/registerCita', (req, res, next) => {
         fechaSolicitud: req.body.fechaSolicitud 
         
     });
-    Cita.addCita(newCita, (err, user) => {
+    Cita.addCita(newCita, (err, citaNueva) => {
 		if(err){
 			res.json({success:false, msg:'No funciono el registro de cita'});
 		} else {
-			res.json({success:true, msg:'Cita en cola :)'});
+			res.json({success:true, msg:'Cita en cola :)', citaNueva});
 		}
 	});
 

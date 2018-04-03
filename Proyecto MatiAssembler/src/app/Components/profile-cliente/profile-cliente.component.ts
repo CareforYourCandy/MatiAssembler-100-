@@ -64,8 +64,10 @@ export class ProfileClienteComponent implements OnInit {
       this.getMarcas();
       this.recuperarVehiculos(); 
       this.obtenerVehiculosTaller();
-        
+      this.obtenerCitas();
+      this.obtenerOrdenes();       
   }
+
   ngAfterInit() {
     this.getMarcas();
     this.recuperarVehiculos();
@@ -85,6 +87,7 @@ export class ProfileClienteComponent implements OnInit {
     this.cerrarAlerta();
     this.cerrarAlerta2();
     this.cerrarAlerta3();
+    this.setearCampos();
   }
 
   setMarcaNuevo(idMarca) {
@@ -112,6 +115,18 @@ export class ProfileClienteComponent implements OnInit {
  
   desactivarVehiculo(carro) {
     console.log(carro);
+    this.cerrarAlerta();
+    if(!this.validarCitaPendiente(carro.idVehiculo)){ //Comprueba que no se haya solicitado una cita de este vehículo y siga pendiente
+      this.mensajeAlerta="No puede desactivarse, tiene citas por asignar";
+      this.mostrarAlerta2=true;
+      return false;     
+    }
+    if(!this.validarSolicitudCita(carro.idVehiculo)){ //Comprueba que no haya ordenes en proceso
+      this.mensajeAlerta="No puede desactivarse, tiene una orden de reparación en proceso";
+      this.mostrarAlerta2=true;
+      return false;
+    }
+    this.cerrarAlerta2();
     this.authService.desactivarVehiculo(carro).subscribe(data => {
       console.log(data.success);
       if(data.success){
@@ -135,6 +150,7 @@ export class ProfileClienteComponent implements OnInit {
   }
 
   solicitarCita(idVehiculo) {
+    this.cerrarAlerta();
     this.fechatemp= new Date();
     this.fechaRegistro= this.datePipe.transform(this.fechatemp);
     const cita = {
@@ -151,19 +167,17 @@ export class ProfileClienteComponent implements OnInit {
       this.mostrarAlerta2=true;
       return false;
     }
-    this.cerrarAlerta3();
+    this.cerrarAlerta2();
     this.authService.solicitarCita(cita).subscribe(data => {
       console.log(data.success); 
       if(data.success){
-         console.log("sirvio");
-         this.router.navigate(['profile-cliente']);
-
-      } else {
-        console.log("fallo");
-        this.router.navigate(['profile-cliente']); 
+        console.log("sirvio");
+        let citaNueva=data.citaNueva;
+        this.citas.push(citaNueva);
+        //this.router.navigate(['profile-cliente']);
+        this.mensajeAlerta="Solicitud de cita procesada exitosamente!";
+        this.mostrarAlerta=true; 
       }
-    this.recuperarVehiculos(); 
-
     });
 
   }
@@ -212,13 +226,15 @@ export class ProfileClienteComponent implements OnInit {
           this.authService.activarVehiculo(vehiculo).subscribe(data => {
             console.log(data.success);
             if(data.success){
-               console.log("sirvio");
-               this.vehiculos.push(this.vehiculoActivar); 
-               this.vista=1;
-               for ( var i = 0; i < inputFile.length; i++) {
+              console.log("sirvio");
+              this.vehiculos.push(this.vehiculoActivar); 
+              for ( var i = 0; i < inputFile.length; i++) {
                 file = inputFile.item(i); 
-               this.uploadService.uploadfile(file, this.vehiculoActivar.idVehiculo, 1, this.authService); 
-                } 
+                this.uploadService.uploadfile(file, this.vehiculoActivar.idVehiculo, 1, this.authService); 
+              } 
+              this.mensajeAlerta="Vehiculo registrado exitosamente!";
+              this.mostrarAlerta=true; 
+              this.vista=1;
             }
             else {
               console.log("fallo");
@@ -232,13 +248,17 @@ export class ProfileClienteComponent implements OnInit {
             let vehiculoNuevo = data.vehiculo; 
            
             if(data.success){
-               console.log("sirvio");
-               this.vehiculos.push(vehiculoNuevo); 
-               this.vista=1;
-               for ( var i = 0; i < inputFile.length; i++) {
+              console.log("sirvio");
+              this.vehiculos.push(vehiculoNuevo); 
+              this.vista=1;
+              for ( var i = 0; i < inputFile.length; i++) {
                 file = inputFile.item(i); 
-               this.uploadService.uploadfile(file, vehiculoNuevo.idVehiculo, 1, this.authService); 
-                } 
+                this.uploadService.uploadfile(file, vehiculoNuevo.idVehiculo, 1, this.authService); 
+              } 
+              this.mensajeAlerta="Vehiculo registrado exitosamente!";
+              this.mostrarAlerta=true;
+              this.setearCampos(); 
+              this.vista=1;
             }
             else {
               console.log("fallo");
@@ -269,6 +289,14 @@ export class ProfileClienteComponent implements OnInit {
   cerrarAlerta3() {
     this.mostrarAlerta3 = false;
     this.mensajeAlerta=""; 
+  }
+
+  setearCampos(){
+    this.placa=undefined;       
+    this.marcaNuevo=undefined; 
+    this.modelo=undefined; 
+    this.ano=undefined; 
+    this.serialMotor=undefined; 
   }
 //-------- VALIDACIONES
 
@@ -305,41 +333,48 @@ export class ProfileClienteComponent implements OnInit {
   }
 
   validarSolicitudCita(idVehiculo){
-    for (let i=0; i<this.vehiculos.length; i++){ //Obtener el vehiculo que se desea solicitar la cita
-      if(this.vehiculos[i].idVehiculo==idVehiculo){ 
-        this.vehiculoCita = this.vehiculos[i];
+    let ordenesVehiculo=[];
+    for (let i=0; i<this.ordenes.length; i++){ //Obtener las ordenes del vehiculo
+      if (this.ordenes[i].idVehiculo==idVehiculo) {
+        ordenesVehiculo.push(this.ordenes[i]);
       }
-    } 
+    }  
     //Buscar si hay ordenes activas de este vehículo
-    this.authService.obtenerOrdenesVehiculo(this.vehiculoCita).subscribe( datos => {
-      this.ordenes = datos.ordenes;
-      console.log(this.ordenes);
-      for (let i=0; i<this.ordenes.length; i++){
-        if (this.ordenes[i].activada==1 || this.ordenes[i].activada==2) { //Si hay alguna orden activa o finalizada (en vez de cerrada)
-          return false;
-        }
+    for (let i=0; i<ordenesVehiculo.length; i++){
+      if (ordenesVehiculo[i].activada==1 || ordenesVehiculo[i].activada==2) { //Si hay alguna orden activa o finalizada (en vez de cerrada)
+        return false;
       }
-      return true;
-    });         
-
+    }
+    return true;
   }
 
   validarCitaPendiente(idVehiculo){
+    let citasVehiculo=[];  
+    for (let i=0; i<this.citas.length; i++){
+      if (this.citas[i].vehiculoCita==idVehiculo) {
+        citasVehiculo.push(this.citas[i]);
+      }
+    }
+    console.log(citasVehiculo);
+    if(citasVehiculo.length>0){
+      return false;
+    }
+    return true;
+  }
+
+  obtenerCitas(){
     this.authService.obtenerCitas().subscribe( datos => {
       this.citas = datos.rcitas;
       console.log(this.citas);
-      let citasVehiculo=[];
-      for (let i=0; i<this.citas.length; i++){
-        if (this.citas[i].vehiculoCita==idVehiculo) {
-          citasVehiculo.push(this.citas[i]);
-        }
-      }
-      console.log(citasVehiculo);
-      if(citasVehiculo.length>0){
-        return false;
-      }
-      return true;
-
-    });   
+    });    
   }
+
+  obtenerOrdenes(){
+    this.authService.getOrdenes().subscribe( datos => {
+      if(datos.success){
+        this.ordenes = datos.ordenes;        
+      }      
+    });
+  }
+
 }

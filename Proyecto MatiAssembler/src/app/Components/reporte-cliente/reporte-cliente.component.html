@@ -59,7 +59,7 @@
                                 <td>{{vehiculo.ano}}</td>
                                 <td>{{vehiculo.placa}}</td>
                                 <td>{{vehiculo.serialMotor}}</td>
-                                <td> {{vehiculo.activado}}</td>
+                                <td>{{setActivado(vehiculo.activado)}}</td>
                                 <td>{{vehiculo.fechaRegistro}}</td>
                                 <td>
                                     <button (click)="verCitas(vehiculo)" data-toggle="modal" data-target="#largeModal" type="button" class="btn bg-indigo waves-effect">

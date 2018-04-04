@@ -1,3 +1,9 @@
+<div *ngIf="mostrarAlerta3">
+        <div class="alert alert-warning alert-danger" role="alert">
+                <button (click)="cerrarAlerta3()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <strong>{{mensajeAlerta}}</strong>
+            </div>
+</div> 
 <div class="card">
   <div class="header bg-orange">
       <h2>

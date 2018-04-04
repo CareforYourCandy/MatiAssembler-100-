@@ -1,24 +1,45 @@
 
   
 
-
+    <div *ngIf="mostrarAlerta3">
+            <div class="alert alert-warning alert-danger" role="alert">
+                    <button (click)="cerrarAlerta3()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   <strong>{{mensajeAlerta}}</strong>
+                </div>
+    </div> 
     <div class="card">
+
         <div class="header bg-orange">
             <h2>
                     MECANICO   {{mecanico.nombre}} {{mecanico.apellido}}
             </h2>
         </div>
-        <div class="input-group">
-        <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Mecanicos <span class="caret"></span>
-            </button>
-            <ul   class="dropdown-menu">
-                <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico)">{{mecanico.nombre}}</a></li>
-                
-            </ul>
-          
+        <div *ngIf="selecciono">
+            <div class="input-group">
+                <div class="btn-group">
+            
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{obtenerNombre()}}<span class="caret"></span>
+                </button> 
+                <ul   class="dropdown-menu">
+                    <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico)">{{mecanico.nombre}}</a></li>
+                    
+                </ul>                               
+                </div>
+            </div>
         </div>
+        <div *ngIf="selecciono==false">
+            <div class="input-group">
+                <div class="btn-group">           
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mecanicos<span class="caret"></span>
+                </button> 
+                <ul   class="dropdown-menu">
+                    <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico)">{{mecanico.nombre}}</a></li>
+                    
+                </ul>
+                </div>  
+            </div>
         </div>
         <div class="input-group">
             <my-date-picker name="fechaInicio" [options]="myDatePickerOptions"
@@ -34,7 +55,7 @@
     <div class="card">
             <div class="header bg-orange">
                 <h2>
-                        ÓRDENES EN REPARACIÓN
+                        ÓRDENES ASIGNADAS
                 </h2>
             </div>
             <div class="body table-responsive">
@@ -57,7 +78,7 @@
                             <td>{{orden.vehiculo.ano}}</td>
                             <td>{{orden.vehiculo.placa}}</td>
                             <td>{{orden.vehiculo.serialMotor}}</td>
-                            <td>{{orden.activada}}</td>
+                            <td>{{setEstado(orden.activada)}}</td>
                          
                         </tr>
                        

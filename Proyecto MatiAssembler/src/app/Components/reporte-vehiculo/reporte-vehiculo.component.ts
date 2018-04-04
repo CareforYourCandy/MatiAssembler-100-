@@ -16,7 +16,10 @@ export class ReporteVehiculoComponent implements OnInit {
   marcas; 
   ordenes; 
   mostrarAlerta = false; 
- 
+//Para el nombre del mecanico
+mecanicos;
+clientes;
+
   constructor(private http:Http,
               private validateService: ValidateService, 
               private authService: AuthService,
@@ -25,9 +28,10 @@ export class ReporteVehiculoComponent implements OnInit {
 
   ngOnInit() {
     this.getMarcas();
-    this.obtenerVehiculos(); 
-
+    this.obtenerVehiculos();
+    this.obtenerMecanicosyClientes(); 
   }
+
   getMarcas() {
     this.authService.getMarcas().subscribe(data => {
       console.log(data); 
@@ -42,7 +46,6 @@ export class ReporteVehiculoComponent implements OnInit {
       this.vehiculos = datos.vehiculos;       
     }); 
   }
-  
   
    generarReporte(vehiculo) {
     console.log(vehiculo); 
@@ -61,7 +64,7 @@ export class ReporteVehiculoComponent implements OnInit {
         this.ordenes = ordenesTemp; 
         console.log(this.ordenes); 
         let filename = ""; 
-        filename += "" + vehiculo.propietario + " " + vehiculo.modelo + " " + vehiculo.ano + ".csv"; 
+        filename += "Reporte " + this.setNombreCliente(vehiculo.propietario) + " " + vehiculo.modelo + " " + vehiculo.ano + ".csv"; 
         //DEFINICION DEL REPOTE
         let reporte ="" + vehiculo.modelo + " " + vehiculo.ano + "\r\n" + "\r\n";
         reporte += "Fecha" + "," + "idMecanico" + "," + "Diagnostico" + "," + "Procedimiento" + "\r\n";
@@ -70,7 +73,7 @@ export class ReporteVehiculoComponent implements OnInit {
         this.mostrarAlerta = false;
         this.ordenes.forEach(orden => {
            
-          reporte += orden.fecha + "," + orden.idMecanico + "," + orden.diagnostico + "," + orden.procedimiento + "\r\n";
+          reporte += orden.fecha + "," + this.setNombreMecanico(orden.idMecanico) + "," + orden.diagnostico + "," + orden.procedimiento + "\r\n";
         });
     
         var blob = new Blob([reporte]);
@@ -100,5 +103,46 @@ export class ReporteVehiculoComponent implements OnInit {
 
   cerrarAlerta() {
     this.mostrarAlerta = false; 
+  }
+
+  obtenerMecanicosyClientes() {
+    let data = this.authService.getUsers().subscribe( datos => {
+      let usuarios = datos.users
+      this.mecanicos = usuarios.filter(function(user) {
+        if (user.rol==4) {
+           return user;
+        }
+      });
+      this.clientes = usuarios.filter(function(user) {
+        if (user.rol==1) {
+           return user;
+        }
+      });
+
+      console.log(this.mecanicos); 
+    })
+  }
+  setNombreMecanico(idMecanico){
+    for(let i=0; i<this.mecanicos.length; i++){
+      if (this.mecanicos[i].idUsuario==idMecanico){
+         return this.mecanicos[i].nombre;
+      }
+    }
+  }
+  setNombreCliente(idCliente){
+    for(let i=0; i<this.clientes.length; i++){
+      if (this.clientes[i].idUsuario==idCliente){
+         return this.clientes[i].nombre;
+      }
+    }
+  }
+
+  setActivado(id){
+    if(id==1){
+      return "Activado";
+    }
+    if(id==0){
+      return "Desactivado";
+    }
   }
 }

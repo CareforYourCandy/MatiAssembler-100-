@@ -237,17 +237,22 @@ export class ProfileGerenteComponent implements OnInit {
   }
 
   cerrarOrden(orden) {
+    this.cerrarAlerta();
     let id=orden.idOrden;
     if(orden.activada==2) { //Cerrar la orden solo si esta finalizada, si esta en curso no permitirlo
-    this.authService.cerrarOrden(orden).subscribe(data => {
-      console.log(data); 
+      this.authService.cerrarOrden(orden).subscribe(data => {
+        console.log(data); 
 
-      for (let i = 0; i < this.ordenesActivas.length ; i++) {
-        if(this.ordenesActivas[i].idOrden==id){
-          this.ordenesActivas.splice(i, 1);
+        for (let i = 0; i < this.ordenesActivas.length ; i++) {
+          if(this.ordenesActivas[i].idOrden==id){
+            this.ordenesActivas.splice(i, 1);
+          }
         }
-      }
-    })      
+      });     
+    } else {
+      //this.cerrarAlerta2(); 
+      this.mensajeAlerta="No se puede cerrar esta orden, sigue en proceso."
+      this.mostrarAlerta3=true;      
     }
   }
 
@@ -404,6 +409,7 @@ export class ProfileGerenteComponent implements OnInit {
   }
 //----------- FUNCIONES PARA EMITIR UNA ORDEN ---------------------
   agregarOrden(idVehiculo, idCita) { 
+    this.cerrarAlerta();
     this.idVehiculotemp=idVehiculo; 
     this.idCitatemp = idCita; 
     console.log(this.idCitatemp); 
@@ -420,11 +426,9 @@ export class ProfileGerenteComponent implements OnInit {
     let fechaOrdenFormateada = ""; 
     fechaOrdenFormateada += this.model.date.year + "-" + this.model.date.month + "-" + this.model.date.day; 
     //Variables para comparar la fecha
-    let year=this.model.date.year;
-    let month=this.model.date.month;
-    let day=this.model.date.day;
-    let fechatemp= new Date();
-    let fechaRegistro= this.datePipe.transform(fechatemp);
+    let fechatemp= new Date(); //Fecha actual
+    console.log(fechatemp.getFullYear()+","+(fechatemp.getMonth()+1)+","+fechatemp.getDate());
+    //Fecha registrada -> this.model.date
 
     const orden = {
     idVehiculo: this.idVehiculotemp,
@@ -437,16 +441,31 @@ export class ProfileGerenteComponent implements OnInit {
     var inputFile = (<HTMLInputElement>document.getElementById('fileItem')).files;
     var file; 
     if(!this.validateService.validateOrden(orden)){
-      //this.cerrarAlerta2();
+      this.cerrarAlerta2();
       this.mensajeAlerta="Por favor rellene todos los campos."
       this.mostrarAlerta3=true;
       return false;
-    }/*
-    if(!this.validateService.validarFechaOrden(this.model.date, )){
-      this.mensajeAlerta="Fecha inválida, elige una que no haya pasado";
+    }
+    if(!this.validateService.validarFechaOrden(this.model.date, fechatemp)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="La fecha introducida es anterior a Hoy, ingresa nuevamente.";
       this.mostrarAlerta3=true;
       return false;     
-    }*/
+    }
+    if(!this.validateService.validarMotivo(orden)){
+      this.cerrarAlerta3();
+      this.mensajeAlerta="Motivo demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta2=true;
+      return false;
+    }
+    if(!this.validateService.validarDesperfecto(orden)){
+      this.cerrarAlerta3();
+      this.mensajeAlerta="Campo Desperfecto carrocería demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta2=true;
+      return false;
+    }
+    this.cerrarAlerta2();
+    this.cerrarAlerta3();
     this.authService.registerOrden(orden).subscribe(data => {
       console.log(data.success); 
       if(data.success) {
@@ -467,6 +486,9 @@ export class ProfileGerenteComponent implements OnInit {
               file = inputFile.item(i); 
               this.uploadService.uploadfile(file, ordenRetornada.idOrden, 2, this.authService); 
             } 
+            this.mensajeAlerta="La orden fue emitida exitosamente!";
+            this.mostrarAlerta=true;
+            console.log("terminando de emitir orden");
             this.vista=3;              
           });                     
         });
@@ -481,6 +503,7 @@ export class ProfileGerenteComponent implements OnInit {
         }
         this.authService.addAccesorios(accesoriosOrden).subscribe(data => {
           console.log(data.success);
+          console.log("añadiendo accesorios");
         });
       }      
     }); 

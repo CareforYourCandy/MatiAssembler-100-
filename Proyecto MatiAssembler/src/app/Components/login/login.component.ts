@@ -39,6 +39,11 @@ export class LoginComponent implements OnInit {
         correo: this.email,
         contraseña: this.password
       }
+      if(!this.validateService.validarLogin(user)){
+          this.mostrarAlerta3=true;
+          this.mensajeAlerta="Ingrese usuario y contraseña";
+          return false;
+      }
       if(!this.validarCorreo(user.correo)){
           this.mostrarAlerta3=true;
           this.mensajeAlerta="Este correo no existe, intente nuevamente.";
@@ -69,7 +74,6 @@ export class LoginComponent implements OnInit {
           console.log("Fallo");
           this.mostrarAlerta3=true;
           this.mensajeAlerta="Usuario/Contraseña incorrectos. Intentelo de Nuevo";
-          //this.router.navigate(['login']);
         }
       }); 
     }
@@ -94,7 +98,7 @@ export class LoginComponent implements OnInit {
     
     validarCorreo(correo){
       for (let i=0; i<this.usuarios.length; i++){
-        if(this.usuarios[i].correo==correo){
+        if(this.usuarios[i].correo==correo ){
           console.log("procede");
           return true;
         }

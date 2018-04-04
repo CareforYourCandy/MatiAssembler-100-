@@ -17,8 +17,14 @@ export class ReporteMecanicoComponent implements OnInit {
 
 ordenes = []; 
 mecanico; 
+selecciono=false;
 fechaIF;
-fechaFF; 
+fechaFF;
+//Alertas
+mostrarAlerta = false; 
+mostrarAlerta2 = false; 
+mostrarAlerta3 = false; 
+mensajeAlerta: String; 
 
 public myDatePickerOptions: IMyDpOptions = {
   // other options...
@@ -66,11 +72,23 @@ constructor(private http:Http,
       fechaFinal: fechaF
       
     }
+    if(this.selecciono==false){
+      this.mensajeAlerta="Debes seleccionar un mecánico."
+      this.mostrarAlerta3=true;
+      return false;     
+    }
+    if(!this.validateService.validarFechas(this.fechaInicio.date, this.fechaFinal.date)){
+      this.mensajeAlerta="La fecha final es anterior a la inicial";
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    this.cerrarAlerta3();
     this.authService.getOrdenesFecha(fechas).subscribe( datos => {
+      this.ordenes=[];
       let todasOrdenes = datos.ordenes;
       console.log("EL MECANICO ES");
       console.log(this.mecanico); 
-      console.log(todasOrdenes)
+      console.log(todasOrdenes);
       for (var i = 0; i < todasOrdenes.length; i++) {
         if ( todasOrdenes[i].idMecanico == this.mecanico.idUsuario) {
           console.log("Tiene orden");
@@ -78,6 +96,12 @@ constructor(private http:Http,
           this.ordenes.push(todasOrdenes[i]); 
         }
       }
+      if(this.ordenes.length==0){
+        this.mensajeAlerta="Este mecánico no tiene ordenes asignadas"
+        this.mostrarAlerta3=true;
+        return false;
+      }
+      this.cerrarAlerta3();
       this.ordenes.forEach(orden => {
         this.vehiculos.forEach(vehiculo => {
             if (vehiculo.idVehiculo == orden.idVehiculo) {
@@ -130,7 +154,8 @@ generarReporte() {
 
 }
 seleccionarMecanico(meca) {
-  this.mecanico = meca; 
+  this.mecanico = meca;
+  this.selecciono=true; 
 }
 
   obtenerVehiculos(id) {
@@ -145,5 +170,30 @@ seleccionarMecanico(meca) {
         })
       }
     } ) 
+  }
+
+  obtenerNombre(){
+    if(this.mecanico!=undefined){
+      return this.mecanico.nombre;
+    }
+    let vari = "Mecanicos";
+    return vari;
+  }
+
+  setEstado(id){
+    if(id==1){
+      return "En curso";
+    }
+    if(id==2){
+      return "Finalizada";
+    }
+    if(id==0){
+      return "Cerrada";
+    }
+  }
+
+  cerrarAlerta3() {
+    this.mostrarAlerta3 = false;
+    this.mensajeAlerta=""; 
   }
 }

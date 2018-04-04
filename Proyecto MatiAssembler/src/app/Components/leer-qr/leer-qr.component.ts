@@ -1,16 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
 import { QrScannerComponent } from 'angular2-qrscanner';
-
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-leer-qr',
   templateUrl: './leer-qr.component.html',
   styleUrls: ['./leer-qr.component.css']
 })
 export class LeerQrComponent implements OnInit {
+ordenTemp; 
+vehiculoTemp;
 
 @ViewChild(QrScannerComponent) qrScannerComponent: QrScannerComponent ;
 
-  constructor() { }
+  constructor(private authService: AuthService,
+            private router: Router) { }
 
   ngOnInit() {
     this.qrScannerComponent.getMediaDevices().then(devices => {
@@ -39,6 +43,22 @@ export class LeerQrComponent implements OnInit {
 
   this.qrScannerComponent.capturedQr.subscribe(result => {
       console.log(result);
+      var idOrden = parseInt(result); 
+      if (isNaN(idOrden)) {
+          console.log("No se paso un código QR válido " )
+      }
+      this.authService.getOrden(idOrden).subscribe(data => {
+        console.log(data); 
+        this.ordenTemp = data.orden; 
+        this.authService.almacenarOrdenLS(this.ordenTemp);
+        this.authService.getVehiculo(data.orden.idVehiculo).subscribe(data => {
+          console.log(data); 
+          this.vehiculoTemp = data.vehiculo; 
+          this.authService.almacenarVehiculoLS(this.vehiculoTemp);
+          this.router.navigate(['detalle-orden']);
+        });      
+        
+        });
   });
   
     /*

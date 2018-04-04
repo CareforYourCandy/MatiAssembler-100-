@@ -45,6 +45,7 @@ import { ReporteModeloComponent } from './Components/reporte-modelo/reporte-mode
 import { UploadFileService } from './services/upload-file.service';
 import { LeerQrComponent } from './Components/leer-qr/leer-qr.component';
 import { NgQrScannerModule } from 'angular2-qrscanner';
+import { DetalleOrdenGerenteComponent } from './Components/detalle-orden-gerente/detalle-orden-gerente.component';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -88,6 +89,7 @@ import { NgQrScannerModule } from 'angular2-qrscanner';
     AgregarUsuarioComponent,
     ReporteModeloComponent,
     LeerQrComponent,
+    DetalleOrdenGerenteComponent,
 
   ],
   imports: [

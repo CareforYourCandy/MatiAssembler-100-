@@ -1,21 +1,17 @@
 <div class="row clearfix">
-  <div class="card">
-    <div class="header bg-pink">
-        <h2>
-            LEER QR 
-        </h2>
-    </div>
-    <div class="row text-center" >
-      <qr-scanner
+  
+    
+    
+      <qr-scanner class="card"
       [debug]="false"
-      [canvasWidth]="400" 
-      [canvasHeight]="400" 
+   
       [stopAfterScan]="false" 
       [updateTime]="500"> 
-</qr-scanner>
-  </div>
+      
+  </qr-scanner>
+  
     
-    <button type="button" class="btn btn-danger waves-effect" (click)="picture()" text-align="left ">Tomar foto</button>
-  </div>
+    
+ 
   
 </div> 

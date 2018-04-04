@@ -31,7 +31,7 @@ router.post('/modificarUsuario', (req, res, next) => {
 
 	User.modificarUsuario(newUsuario, (err, respuesta) => {
 		if(err){
-			res.json({success:false, msg:'No funciono la actualizacion de orden'});
+			res.json({success:false, msg:'No funciono'});
 		} else {
 			res.json({success:true, msg:'Usuario actualizado'});
 		}
@@ -514,7 +514,8 @@ router.post('/getOrden', (req, res, next) => {
 				diagnostico: orden.diagnostico,
 				procedimiento: orden.procedimiento,
 				activada: orden.activada,
-				fecha: orden.fecha
+				fecha: orden.fecha,
+				motivo: orden.motivo
 			}
 		});
 	});

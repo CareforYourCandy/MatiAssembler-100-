@@ -173,28 +173,28 @@ export class ValidateService {
   }
   //Validar longitud campos al ingresar ordenes
   validarMotivo(orden){
-    if(orden.motivo>45){
+    if(orden.motivo.length>45){
       return false;
     } else {
       return true;
     }
   }
-  validarDiagnostico(orden){
-    if(orden.diagnostico>45){
+  validarDiagnostico(diagnostico){
+    if(diagnostico.length>45){
       return false;
     } else {
       return true;
     }
   }
-  validarProcedimiento(orden){
-    if(orden.motivo>255){
+  validarProcedimiento(procedimiento){
+    if(procedimiento.length>255){
       return false;
     } else {
       return true;
     }
   }
   validarDesperfecto(desperfecto){
-    if(desperfecto>45){
+    if(desperfecto.length>45){
       return false;
     } else {
       return true;
@@ -224,6 +224,21 @@ export class ValidateService {
                 return true;
             }
         }
+    }
+  }
+
+  validarPieza(pieza){
+     if(pieza.length>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarModeloRep(modelo){
+     if(modelo.length>45){
+      return false;
+    } else {
+      return true;
     }
   }
 

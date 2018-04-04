@@ -23,6 +23,7 @@ export class ProfileGerenteComponent implements OnInit {
   user;
   clientes;
   mecanicos;
+  selecciono=false;
   //usuarios;
   usuario;
   citas = [];
@@ -51,7 +52,7 @@ export class ProfileGerenteComponent implements OnInit {
   //Para emitir la orden
   fechaOrden: String;
   diagnostico: String;
-  mecanico: String;
+  mecanico;
   repuesto: String;
   motivo: String;
   ordenGenerada;
@@ -417,8 +418,9 @@ export class ProfileGerenteComponent implements OnInit {
     this.vista=9;
   }
 
-  seleccionarMecanico(id) {
-    this.mecanico = id;
+  seleccionarMecanico(meca) {
+    this.mecanico = meca;
+    this.selecciono=true;
   }
 
   registrarOrden() {
@@ -429,10 +431,15 @@ export class ProfileGerenteComponent implements OnInit {
     let fechatemp= new Date(); //Fecha actual
     console.log(fechatemp.getFullYear()+","+(fechatemp.getMonth()+1)+","+fechatemp.getDate());
     //Fecha registrada -> this.model.date
-
+    if(this.mecanico==undefined){
+      this.cerrarAlerta2();
+      this.mensajeAlerta="Debes seleccionar un mecánico";
+      this.mostrarAlerta3=true;
+      return false;
+    }
     const orden = {
     idVehiculo: this.idVehiculotemp,
-    idMecanico: this.mecanico,
+    idMecanico: this.mecanico.idUsuario,
     diagnostico: this.diagnostico,
     fecha: fechaOrdenFormateada,
     motivo: this.motivo,

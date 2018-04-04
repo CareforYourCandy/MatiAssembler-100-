@@ -47,6 +47,14 @@
                             <span style="cursor:pointer">Volver</span>
                         </a>
                     </li>
+                <div *ngIf="vista == 2">
+                    <li>
+                        <a (click)="setVista(1)" >
+                            <i class="material-icons">home</i>
+                            <span style="cursor:pointer">Detalles Orden</span>
+                        </a>
+                    </li>                    
+                </div>
                     <li>
                         <a (click)="logout()" >
                             <i class="material-icons">not_interested</i>
@@ -73,7 +81,23 @@
     </section>
 
 <section id="main" class="content">
-        
+
+          <div *ngIf="mostrarAlerta">
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button (click)="cerrarAlerta()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
+            </div>
+          </div>
+          <div *ngIf="mostrarAlerta2">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button (click)="cerrarAlerta2()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
+            </div>
+          </div>
+          <div *ngIf="mostrarAlerta3">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button (click)="cerrarAlerta3()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
+            </div>
+          </div>
+                 
     <div *ngIf="vista == 1">
     <div class="container-fluid">
         <div class="row clearfix">
@@ -139,10 +163,10 @@
                             <div class="col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                                Serial
+                                                Motivo
                                             </span>
                                     <div class="form-line disabled">
-                                        <input type="text" class="form-control" [(ngModel)]="serialMotor" name="serialMotor" placeholder="Serial Motor" disabled>
+                                        <input type="text" class="form-control" [(ngModel)]="motivo" name="motivo" placeholder="Motivo" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -282,20 +306,20 @@
                     </div>
         </div>
         
-        <div class="card">
+ <!--        <div class="card">
             <div class="header bg-deep-purple">
                 <h2>FOTOS</h2>
             </div>
             <div class="body">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
+
                     <ol class="carousel-indicators">
                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                     </ol>
 
-                    <!-- Wrapper for slides -->
+
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
                             <img src="images/image-gallery/mustang1.jpg" />
@@ -308,7 +332,7 @@
                         </div>
                     </div>
 
-                    <!-- Controls -->
+
                     <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -324,14 +348,14 @@
                     </ui-carousel-item>
                 </ui-carousel>
             </div>
-        </div>
+        </div>-->*/
     </div>
     </div>
 
     <div *ngIf="vista == 2">
         <div class="card">
             <div class="header">
-                <h2>EMITIR ORDEN DE REPARACIÓN</h2>
+                <h2>ACTUALIZAR REPUESTOS DE ORDEN DE REPARACIÓN</h2>
             </div>
             <div class="body">
                 <form  action="/" id="frmFileUpload"  method="post">
@@ -350,25 +374,6 @@
 
 </section>
 </div>
-
-<!-- MODAL REPUESTOS --> 
-    <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="smallModalLabel">Actualizar repuestos</h4>
-                </div>
-                <div class="modal-body">
-                    <div *ngIf="nuevoRepuesto">
-                        <app-modificar-repuesto> </app-modificar-repuesto> 
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 <div *ngIf="gerente.rol==3">

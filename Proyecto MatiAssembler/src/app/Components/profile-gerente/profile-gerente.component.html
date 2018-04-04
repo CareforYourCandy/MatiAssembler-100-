@@ -451,19 +451,34 @@
                                 <input type="text" class="form-control" [(ngModel)]="motivo" name="motivo" placeholder="Motivo" >
                             </div>
                         </div>
-
+                    <div *ngIf="selecciono">
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="material-icons">person</i>
                             </span>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mecanicos<span class="caret"></span></button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mecanico: {{mecanico.nombre}}<span class="caret"></span></button>
                                 <ul class="dropdown-menu">
-                                    <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico.idUsuario)">{{mecanico.nombre}}</a></li>                                    
+                                    <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico)">{{mecanico.nombre}}</a></li>                                    
                                 </ul>
                               
                             </div>
                         </div>
+                    </div>
+                    <div *ngIf="selecciono==false">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mecanico:<span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor = "let mecanico of mecanicos"><a (click)= "seleccionarMecanico(mecanico)">{{mecanico.nombre}}</a></li>                                    
+                                </ul>
+                              
+                            </div>
+                        </div>
+                    </div>
                         <div class="input-group"> 
                             <div>
                             <span class="input-group-addon" style="text-align: left">

@@ -397,7 +397,6 @@ module.exports.getOrdenesPorVehiculo = function(elquetal, callback){
 module.exports.getOrdenByID= function(ID, callback){
     const query = {where: {idOrden: ID}}
     Orden.findOne(query).then(dato => {
-        console.log(dato.get());
         return dato.get();
     })
     .then(datos => {

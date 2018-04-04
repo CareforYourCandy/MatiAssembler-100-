@@ -260,21 +260,38 @@
           </div>
           <div class="body">
               <form action="/" (submit)="vehiculoSubmit()" id="frmFileUpload"  method="post" enctype="multipart/form-data">
+                <div *ngIf="selecciono">
                   <div class="input-group">
                         <span class="input-group-addon">
                                 <i class="material-icons">confirmation_number</i>
                             </span>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Marca <span class="caret"></span>
+                            Marca: {{marcaNuevo.marca}} <span class="caret"></span>
                         </button>
                         <ul   class="dropdown-menu">
-                            <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca.idMarca)">{{marca.marca}}</a></li>
+                            <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca)">{{marca.marca}}</a></li>
                             
                         </ul>
                     </div>
                   </div>
-
+                </div>
+                <div *ngIf="selecciono==false">
+                  <div class="input-group">
+                        <span class="input-group-addon">
+                                <i class="material-icons">confirmation_number</i>
+                            </span>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Marca: <span class="caret"></span>
+                        </button>
+                        <ul   class="dropdown-menu">
+                            <li *ngFor = "let marca of marcas"><a (click)= "setMarcaNuevo(marca)">{{marca.marca}}</a></li>
+                            
+                        </ul>
+                    </div>
+                  </div>
+                </div>
                   <div class="input-group">
                       <span class="input-group-addon">
                           <i class="material-icons">directions_car</i>

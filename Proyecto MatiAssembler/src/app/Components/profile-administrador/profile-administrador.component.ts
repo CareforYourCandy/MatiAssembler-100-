@@ -31,7 +31,8 @@ export class ProfileAdministradorComponent implements OnInit {
   telefono: String;
   pieza: String; 
   marcaNuevo;
-  modelo;
+  selecciono=false;
+  modelo=undefined;
   marcas = Array;
   //Alertas
   mostrarAlerta = false; 
@@ -59,6 +60,7 @@ export class ProfileAdministradorComponent implements OnInit {
   setVista(id) {
     this.vista=id;
     this.setearCampos();
+    this.setCamposRepuestos();
     this.cerrarAlerta();
     this.cerrarAlerta2();
     this.cerrarAlerta3();
@@ -350,18 +352,29 @@ export class ProfileAdministradorComponent implements OnInit {
       this.mostrarAlerta3=true;      
     }
     else {
-      this.cerrarAlerta3();      
+      //this.cerrarAlerta3();      
+      if(!this.validateService.validarPieza(this.pieza)){
+        this.mensajeAlerta="Campo Pieza demasiado largo, ingrese uno mas corto.";
+        this.mostrarAlerta3=true;
+        return false;      
+      }
+      if(this.modelo!=undefined){
+        if(!this.validateService.validarModeloRep(this.modelo)){
+          this.mensajeAlerta="Campo Modelo demasiado largo, ingrese uno mas corto.";
+          this.mostrarAlerta3=true;
+          return false;      
+        }        
+      }
       const repuesto = {
         pieza: this.pieza, 
         modelo: this.modelo,
-        marca: this.marcaNuevo
+        marca: this.marcaNuevo.idMarca
       }
+      this.cerrarAlerta3();      
       this.authService.registerRepuesto(repuesto).subscribe(data => {
         console.log(data.success);
         this.repuestos.push(repuesto); 
-        this.pieza="";
-        this.marcaNuevo=null;
-        this.modelo=null;
+        this.setCamposRepuestos();
         //this.router.navigate(['/profile-administrador']);
         this.mensajeAlerta="Repuesto registrado correctamente"
         this.mostrarAlerta=true;  
@@ -419,9 +432,9 @@ export class ProfileAdministradorComponent implements OnInit {
   }
 
 
-  setMarcaNuevo(idMarca) {
-    this.marcaNuevo = idMarca;
-    console.log(this.marcaNuevo) ;
+  setMarcaNuevo(marca) {
+    this.marcaNuevo=marca;
+    this.selecciono=true;
   }
 
   validarUsuario(newUsuario) { //Validar que no se registre un usuario con un correo ya existente
@@ -431,6 +444,11 @@ export class ProfileAdministradorComponent implements OnInit {
       }
     }
     return true;
+  }
+  setCamposRepuestos(){
+    this.pieza="";
+    this.marcaNuevo=undefined;
+    this.modelo=undefined;
   }
 
 }

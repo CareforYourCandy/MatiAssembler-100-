@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.mensajeAlerta="Este correo no existe, intente nuevamente.";
           return false;
       }
-      this.cerrarAlerta3();
+      //this.cerrarAlerta3();
       this.authService.authenticateUser(user).subscribe(data => {
         //console.log(data);	
         if(data.success){

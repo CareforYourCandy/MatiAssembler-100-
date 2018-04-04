@@ -27,7 +27,8 @@ export class ProfileClienteComponent implements OnInit {
   fechatemp: any;
   fechaRegistro: any;
   activado: Boolean;
-  marcaNuevo: Int16Array;
+  marcaNuevo;
+  selecciono=false;
   vehiculos= []; //Contiene los vehiculos de un cliente
   vehiculosTaller; //Contiene todos los vehiculos del taller
   vehiculos2= [];  
@@ -89,9 +90,9 @@ export class ProfileClienteComponent implements OnInit {
     this.setearCampos();
   }
 
-  setMarcaNuevo(idMarca) {
-    this.marcaNuevo = idMarca;
-    console.log(this.marcaNuevo) ;
+  setMarcaNuevo(marca) {
+    this.marcaNuevo=marca;
+    this.selecciono=true;
   }
 
   obtenerVehiculosTaller() {
@@ -199,7 +200,7 @@ export class ProfileClienteComponent implements OnInit {
         
         const vehiculo = {
           placa: this.placa,       
-          marca: this.marcaNuevo,
+          marca: this.marcaNuevo.idMarca,
           modelo: this.modelo,
           ano: this.ano,
           serialMotor: this.serialMotor, 

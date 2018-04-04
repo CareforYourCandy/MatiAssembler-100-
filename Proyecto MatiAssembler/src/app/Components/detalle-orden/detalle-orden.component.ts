@@ -46,6 +46,7 @@ export class DetalleOrdenComponent implements OnInit {
 	ordenTemp;
 	repuestosOrden = [];
 	repuestosOrdenAux;
+	imagenes; 
 
 	constructor(private authService: AuthService,
 				private qrService: QrService, 
@@ -66,7 +67,7 @@ export class DetalleOrdenComponent implements OnInit {
 		let qr2 = this.qrService.generarQR(this.orden.idOrden.toString()); 
 		console.log(qr2); 
 		this.qr = qr2; 
-	
+		this.getImagenesOrden(); 
 		
 	}
 
@@ -84,6 +85,16 @@ export class DetalleOrdenComponent implements OnInit {
 		console.log(data.marcas); 
 		this.marcas = data.marcas; 
 		}) 
+	}
+	getImagenesOrden() {
+		this.authService.getImagenesOrden(this.orden.idOrden).subscribe(datos => {
+			this.imagenes = datos.imagenesOrden;
+			console.log("LAS IMAGENES DE LA ORDEN SON:", this.imagenes); 
+		})
+	}
+
+	getLinkImagen(imagen) {
+		return imagen.imagen; 
 	}
 
 	setMarcaVista(idMarca) {

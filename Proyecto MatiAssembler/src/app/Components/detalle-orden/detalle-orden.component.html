@@ -320,7 +320,7 @@
                 </div>
                 <ui-carousel [infinite]="true" [fade]="false" [speed]="200" >
                     <ui-carousel-item *ngFor="let imagen of imagenes">
-                        <img [ui-lazy-load]="">
+                        <img [ui-lazy-load]="getLinkImagen(imagen)">
                     </ui-carousel-item>
                 </ui-carousel>
             </div>
@@ -686,7 +686,7 @@
                     </div>
                     <ui-carousel [infinite]="true" [fade]="false" [speed]="200" >
                         <ui-carousel-item *ngFor="let imagen of imagenes">
-                            <img [ui-lazy-load]="">
+                            <img [ui-lazy-load]="getLinkImagen(imagen)">
                         </ui-carousel-item>
                     </ui-carousel>
                 </div>

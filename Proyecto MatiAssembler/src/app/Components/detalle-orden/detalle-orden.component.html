@@ -318,6 +318,11 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+                <ui-carousel [infinite]="true" [fade]="false" [speed]="200" >
+                    <ui-carousel-item *ngFor="let imagen of imagenes">
+                        <img [ui-lazy-load]="">
+                    </ui-carousel-item>
+                </ui-carousel>
             </div>
         </div>
     </div>
@@ -679,6 +684,11 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
+                    <ui-carousel [infinite]="true" [fade]="false" [speed]="200" >
+                        <ui-carousel-item *ngFor="let imagen of imagenes">
+                            <img [ui-lazy-load]="">
+                        </ui-carousel-item>
+                    </ui-carousel>
                 </div>
             </div>
 

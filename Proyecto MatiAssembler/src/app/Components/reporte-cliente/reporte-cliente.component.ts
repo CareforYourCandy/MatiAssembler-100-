@@ -81,6 +81,7 @@ constructor(private http:Http,
     this.vehiculos.forEach(vehiculo => {
       console.log(vehiculo); 
      reporte += "\r\n" + vehiculo.modelo + " " + vehiculo.ano + " " + "\r\n" ;
+     reporte += "Orden" + "," + "Fecha" + "idMecanico"
      vehiculo.ordenes.forEach(orden => {
       reporte += orden.idOrden + "," + orden.fecha + "," + orden.idMecanico + "," + orden.diagnostico + "," + orden.procedimiento + "\r\n";
      });

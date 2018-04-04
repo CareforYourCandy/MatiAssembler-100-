@@ -40,7 +40,7 @@ import { ReporteModeloComponent } from './Components/reporte-modelo/reporte-mode
 import { UploadFileService } from './services/upload-file.service';
 import { LeerQrComponent } from './Components/leer-qr/leer-qr.component';
 import { NgQrScannerModule } from 'angular2-qrscanner';
-
+import { UICarouselModule } from 'ui-carousel';
 
   const appRoutes: Routes = [ 
       { path: '', component:LoginComponent},
@@ -92,7 +92,8 @@ import { NgQrScannerModule } from 'angular2-qrscanner';
     FlashMessagesModule.forRoot(),
     BrowserAnimationsModule,
     MyDatePickerModule,
-    NgQrScannerModule 
+    NgQrScannerModule,
+    UICarouselModule
   ],
   
   providers: [ValidateService, AuthService, AuthGuard, DatePipe, UploadFileService, QrService ],

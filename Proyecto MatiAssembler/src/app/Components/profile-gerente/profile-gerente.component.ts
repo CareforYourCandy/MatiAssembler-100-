@@ -67,6 +67,11 @@ export class ProfileGerenteComponent implements OnInit {
   herramientas: boolean;
   equipodeSonido: boolean;
   desperfectoCarroceria: String;
+  //Alertas
+  mostrarAlerta = false; 
+  mostrarAlerta2 = false; 
+  mostrarAlerta3 = false; 
+  mensajeAlerta: String;
   public myDatePickerOptions: IMyDpOptions = {
     // other options...
     dateFormat: 'yyyy-mm-dd',
@@ -97,7 +102,10 @@ export class ProfileGerenteComponent implements OnInit {
 
   setVista(id) {
     this.vista=id;
-    console.log(this.vista); 
+    this.setearCampos();
+    this.cerrarAlerta();
+    this.cerrarAlerta2();
+    this.cerrarAlerta3();
   }
   
   logout() {
@@ -107,6 +115,29 @@ export class ProfileGerenteComponent implements OnInit {
 
   home() {
     this.router.navigate(['']);
+  }
+
+  cerrarAlerta() {
+    this.mostrarAlerta = false;
+    this.mensajeAlerta=""; 
+  }
+  cerrarAlerta2() {
+    this.mostrarAlerta2 = false;
+    this.mensajeAlerta=""; 
+  }
+  cerrarAlerta3() {
+    this.mostrarAlerta3 = false;
+    this.mensajeAlerta=""; 
+  }
+  setearCampos() {
+      this.name="";
+      this.lastname="";
+      this.email="";
+      this.password="";
+      this.cedula="";
+      this.direccion="";
+      this.telefono="";
+      this.rol=1;
   }
   
   obtenerOrdenes() {
@@ -238,7 +269,9 @@ export class ProfileGerenteComponent implements OnInit {
    //------------ FUNCIONES PARA MODIFICAR USUARIO -------------
 
    modificarCliente(id) {
-    let user;      
+    let user;  
+    this.setearCampos();
+    //this.cerrarAlerta();       
     this.authService.getUserById(id).subscribe(datos => {     
       console.log(datos); 
       user = datos.usuario; 
@@ -246,6 +279,7 @@ export class ProfileGerenteComponent implements OnInit {
       this.usuario = user; 
       this.obtenerDatos(this.usuario);    
       console.log(this.usuario); 
+      this.cerrarAlerta();       
       this.vista=8;      
     });
   }
@@ -264,7 +298,6 @@ export class ProfileGerenteComponent implements OnInit {
   }
 
   modificarClienteSubmit() {
-    console.log("hola"); 
     const usuario = {
       idUsuario: this.id,
       nombre: this.name,
@@ -274,10 +307,70 @@ export class ProfileGerenteComponent implements OnInit {
       contraseña: this.password,
       cedula: this.cedula,
       telefono: this.telefono,
-      direccion: this.direccion
-      
+      direccion: this.direccion     
     }
-    console.log(usuario); 
+
+    console.log(usuario);
+    //Validar nombre
+    if(!this.validateService.validarNombre(usuario.nombre)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Nombre demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar apellido
+    if(!this.validateService.validarApellido(usuario.apellido)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Apellido demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar correo
+    if(!this.validateService.validarCorreo(usuario.correo)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Correo demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar cedula
+    if(!this.validateService.validarCedula(usuario.cedula)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Cedula demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar direccion
+    if(!this.validateService.validarDireccion(usuario.direccion)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Direccion demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar telefono
+    if(!this.validateService.validarTelefono(usuario.telefono)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Telefono demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Required fields
+    if(!this.validateService.validateRegister(usuario)){
+      console.log("Fallo val usuario");
+      this.cerrarAlerta3();
+      this.mensajeAlerta="Por favor rellene todos los campos"
+      this.mostrarAlerta2=true;  
+      return false;
+    }
+    //Validar formato email
+    if(!this.validateService.validateEmail(usuario.correo)){
+      console.log("Fallo val email"); 
+      this.cerrarAlerta2();
+      this.mensajeAlerta="Correo inválido, por favor ingrese correctamente."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    this.cerrarAlerta2();
+    this.cerrarAlerta3(); 
     this.authService.actualizarUsuario(usuario).subscribe(data => {
           console.log(data.success); 
           if(data.success) {
@@ -285,8 +378,11 @@ export class ProfileGerenteComponent implements OnInit {
               if(this.clientes[i].idUsuario==usuario.idUsuario){
                 this.clientes[i]=usuario;
               }
-            }
+            }            
+            this.setearCampos();
             this.vista=1;
+            this.mensajeAlerta="Usuario modificado correctamente"
+            this.mostrarAlerta=true;
           }     
     });  
   }

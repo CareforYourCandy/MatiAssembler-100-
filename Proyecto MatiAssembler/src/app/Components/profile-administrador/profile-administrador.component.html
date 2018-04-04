@@ -91,7 +91,7 @@
 
   <section id="main" class="content">
     
-      <div class="container-fluid">
+
           <div *ngIf="mostrarAlerta">
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button (click)="cerrarAlerta()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
@@ -107,6 +107,7 @@
                 <button (click)="cerrarAlerta3()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>{{mensajeAlerta}}</strong>
             </div>
           </div>
+   <div class="container-fluid">
     <!-- LISTA USUARIOS -->
     <div  *ngIf="vista == 1">
       <div class="row clearfix">

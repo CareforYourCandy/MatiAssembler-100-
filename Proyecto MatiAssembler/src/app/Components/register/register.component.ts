@@ -57,6 +57,55 @@ export class RegisterComponent implements OnInit {
   	}
     console.log(user); 
     console.log("Hola"); 
+    //Validar nombre
+    if(!this.validateService.validarNombre(user.nombre)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Nombre demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar apellido
+    if(!this.validateService.validarApellido(user.apellido)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Apellido demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar correo
+    if(!this.validateService.validarCorreo(user.correo)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Correo demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar contraseña
+    if(!this.validateService.validarPassword(user.contraseña)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Contraseña demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar cedula
+    if(!this.validateService.validarCedula(user.cedula)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Cedula demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar direccion
+    if(!this.validateService.validarDireccion(user.direccion)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Direccion demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar telefono
+    if(!this.validateService.validarTelefono(user.telefono)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Telefono demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
     //Required fields
     if(!this.validateService.validateRegister(user) && !this.validateService.validateEmail(user.correo)){
       console.log("Fallo val usuario");
@@ -67,11 +116,11 @@ export class RegisterComponent implements OnInit {
     if(!this.validateService.validateRegister(user)){
       console.log("Fallo val usuario");
       this.cerrarAlerta3();
-      this.mensajeAlerta="Por favor rellene todos los campos"
+      this.mensajeAlerta="Por favor rellene todos los campos."
       this.mostrarAlerta2=true;     
       return false;
     }
-    //Validar email
+    //Validar formato email
     if(!this.validateService.validateEmail(user.correo)){
       console.log("Fallo val email");
       this.cerrarAlerta2(); 
@@ -79,7 +128,8 @@ export class RegisterComponent implements OnInit {
       this.mostrarAlerta3=true;
       return false;
     }
-    if(!this.validarUsuario(user)){
+    //Validar usuario existente por correo electronico
+    if(!this.validarUsuario(user)){ 
       this.mensajeAlerta="Este correo ya esta registrado, por favor ingrese otro."
       this.mostrarAlerta2=true;     
       return false;

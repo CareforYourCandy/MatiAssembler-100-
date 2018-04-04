@@ -1,5 +1,4 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, ViewChild,} from '@angular/core';
-import { timeout } from 'q';
 import { Http, Headers } from '@angular/http';
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
@@ -10,7 +9,7 @@ import {ReporteMecanicoComponent} from '../reporte-mecanico/reporte-mecanico.com
 import {IMyDpOptions} from 'mydatepicker';
 import {UploadFileService} from '../../services/upload-file.service'; 
 import { QrService } from '../../services/qr.service';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile-gerente',
@@ -81,7 +80,8 @@ export class ProfileGerenteComponent implements OnInit {
               private router: Router, 
               private location: Location,
               private qrService: QrService,
-              private uploadService: UploadFileService) { 
+              private uploadService: UploadFileService,
+              private datePipe: DatePipe) { 
              
   }
 
@@ -419,7 +419,13 @@ export class ProfileGerenteComponent implements OnInit {
     this.validarAccesorios();
     let fechaOrdenFormateada = ""; 
     fechaOrdenFormateada += this.model.date.year + "-" + this.model.date.month + "-" + this.model.date.day; 
-    
+    //Variables para comparar la fecha
+    let year=this.model.date.year;
+    let month=this.model.date.month;
+    let day=this.model.date.day;
+    let fechatemp= new Date();
+    let fechaRegistro= this.datePipe.transform(fechatemp);
+
     const orden = {
     idVehiculo: this.idVehiculotemp,
     idMecanico: this.mecanico,
@@ -430,7 +436,17 @@ export class ProfileGerenteComponent implements OnInit {
     }
     var inputFile = (<HTMLInputElement>document.getElementById('fileItem')).files;
     var file; 
-    
+    if(!this.validateService.validateOrden(orden)){
+      //this.cerrarAlerta2();
+      this.mensajeAlerta="Por favor rellene todos los campos."
+      this.mostrarAlerta3=true;
+      return false;
+    }/*
+    if(!this.validateService.validarFechaOrden(this.model.date, )){
+      this.mensajeAlerta="Fecha inválida, elige una que no haya pasado";
+      this.mostrarAlerta3=true;
+      return false;     
+    }*/
     this.authService.registerOrden(orden).subscribe(data => {
       console.log(data.success); 
       if(data.success) {
@@ -495,13 +511,20 @@ export class ProfileGerenteComponent implements OnInit {
 
   }
 
-  /*setearCamposOrden() {
-    this.idVehiculotemp,
-    this.mecanico,
-    this.diagnostico,
-    fechaOrdenFormateada,
-    this.motivo,
-  }*/
+  setearCamposOrden() {
+    this.mecanico=undefined;
+    //this.diagnostico=undefined;
+    this.motivo=undefined;
+  }
+
+  setCamposAccesorios(){
+    this.cauchoRepuesto=undefined;
+    this.llaves=undefined;
+    this.gato=undefined;
+    this.herramientas=undefined;
+    this.equipodeSonido=undefined;
+    this.desperfectoCarroceria=undefined;  
+  }
 
 
 }

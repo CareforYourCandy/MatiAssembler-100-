@@ -5,7 +5,6 @@ import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
- 
 
 @Component({
   selector: 'app-reporte-vehiculo',

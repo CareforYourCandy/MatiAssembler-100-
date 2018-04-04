@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, ViewChild,} from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService} from '../../services/auth.service';
+import { QrService } from '../../services/qr.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ModificarRepuestoComponent } from '../modificar-repuesto/modificar-repuesto.component'; 
@@ -47,6 +48,7 @@ export class DetalleOrdenComponent implements OnInit {
 	repuestosOrdenAux;
 
 	constructor(private authService: AuthService,
+				private qrService: QrService, 
 	          private router: Router,
 	          private location: Location) { }
 
@@ -61,8 +63,9 @@ export class DetalleOrdenComponent implements OnInit {
 		this.obtenerAccesorios();
 
 		this.obtenerDatos();
-
-		this.qr = this.orden.idOrden.toString(); 
+		let qr2 = this.qrService.generarQR(this.orden.idOrden.toString()); 
+		console.log(qr2); 
+		this.qr = qr2; 
 	
 		
 	}

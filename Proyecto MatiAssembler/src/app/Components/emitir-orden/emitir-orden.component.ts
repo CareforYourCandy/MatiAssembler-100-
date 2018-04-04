@@ -3,6 +3,7 @@ import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service'; 
 import { Router } from '@angular/router';
 import {IMyDpOptions} from 'mydatepicker';
+import { QrService } from '../../services/qr.service';
 
 @Component({
   selector: 'app-emitir-orden',
@@ -29,7 +30,8 @@ export class EmitirOrdenComponent implements OnInit {
 	public model: any = { date: { year: 2018, month: 10, day: 9 } };
   constructor(private validateService: ValidateService, 
 			    private authService: AuthService,
-					private router: Router) { }
+					private router: Router,
+					private qrService: QrService) { }
 
   ngOnInit() {
   }

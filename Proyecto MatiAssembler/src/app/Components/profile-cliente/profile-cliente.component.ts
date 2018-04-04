@@ -209,7 +209,6 @@ export class ProfileClienteComponent implements OnInit {
         }
         
         console.log(vehiculo); //Para registrar un vehiculo
-
         //Required fields
         if(!this.validateService.validateRegisterVehiculo(vehiculo)){
             this.mensajeAlerta="Por favor rellene todos los campos";
@@ -221,6 +220,31 @@ export class ProfileClienteComponent implements OnInit {
             this.mostrarAlerta3=true;
             return false;
         }
+        else if(!this.validateService.validarPlaca(vehiculo)){
+            this.mensajeAlerta="Campo Placa demasiado largo, ingrese uno más corto";
+            this.mostrarAlerta3=true;
+            return false;
+        }
+        else if(!this.validateService.validarModelo(vehiculo)){
+            this.mensajeAlerta="Campo Modelo demasiado largo, ingrese uno más corto";
+            this.mostrarAlerta3=true;
+            return false;
+        }
+        else if(!this.validateService.validarSerial(vehiculo)){
+            this.mensajeAlerta="Campo Serial demasiado largo, ingrese uno más corto";
+            this.mostrarAlerta3=true;
+            return false;
+        }
+        else if(!this.validateService.validarYear(vehiculo)){
+            this.mensajeAlerta="Campo Año inválido o demasiado largo";
+            this.mostrarAlerta3=true;
+            return false;
+        }        
+        else if(!this.validateService.validateRegisterVehiculo(vehiculo)){
+            this.mensajeAlerta="Por favor rellene todos los campos";
+            this.mostrarAlerta3=true;
+            return false;
+        }
         this.cerrarAlerta3();
       if(this.registroInactivo(vehiculo)){ //activar nuevamente el vehiculo
           this.authService.activarVehiculo(vehiculo).subscribe(data => {
@@ -228,6 +252,7 @@ export class ProfileClienteComponent implements OnInit {
             if(data.success){
               console.log("sirvio");
               this.vehiculos.push(this.vehiculoActivar); 
+              this.vehiculosTaller.push(this.vehiculoActivar);
               for ( var i = 0; i < inputFile.length; i++) {
                 file = inputFile.item(i); 
                 this.uploadService.uploadfile(file, this.vehiculoActivar.idVehiculo, 1, this.authService); 
@@ -246,10 +271,11 @@ export class ProfileClienteComponent implements OnInit {
         //Registrar vehiculo
         this.authService.registerVehiculo(vehiculo).subscribe(data => {     
             let vehiculoNuevo = data.vehiculo; 
-           
+            console.log(vehiculoNuevo);
             if(data.success){
               console.log("sirvio");
               this.vehiculos.push(vehiculoNuevo); 
+              this.vehiculosTaller.push(vehiculoNuevo);
               this.vista=1;
               for ( var i = 0; i < inputFile.length; i++) {
                 file = inputFile.item(i); 
@@ -302,16 +328,10 @@ export class ProfileClienteComponent implements OnInit {
 
   validarRegistroVehiculo(newVehiculo) { //Validar que no se registre un vehiculo con placa y serial existente
     for (let i=0; i<this.vehiculosTaller.length; i++){
-      if(this.vehiculosTaller[i].placa==newVehiculo.placa && this.vehiculosTaller[i].serialMotor==newVehiculo.serialMotor){ //Si hay un vehiculo con la misma placa
+      if(this.vehiculosTaller[i].placa==newVehiculo.placa || this.vehiculosTaller[i].serialMotor==newVehiculo.serialMotor){ //Si hay un vehiculo con la misma placa
+          console.log("ambos iguales");
           if(this.vehiculosTaller[i].activado){
-            return false;
-          } 
-      } else if(this.vehiculosTaller[i].placa==newVehiculo.placa){
-          if(this.vehiculosTaller[i].activado){
-            return false;
-          } 
-      } else if(this.vehiculosTaller[i].serialMotor==newVehiculo.serialMotor){
-          if(this.vehiculosTaller[i].activado){
+            console.log("ambos iguales y activado");
             return false;
           } 
       }

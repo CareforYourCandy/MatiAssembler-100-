@@ -82,15 +82,14 @@ export class ProfileAdministradorComponent implements OnInit {
 
    modificarUsuario(id) {
     let user;
-    this.setearCampos();      
+    this.setearCampos();
     this.authService.getUserById(id).subscribe(datos => {
-     
-      console.log(datos); 
       user = datos.usuario; 
       console.log(user); 
       this.usuario = user; 
       this.obtenerDatos(this.usuario);    
       console.log(this.usuario); 
+      this.cerrarAlerta();
       this.vista=3;      
     });
 
@@ -125,7 +124,6 @@ export class ProfileAdministradorComponent implements OnInit {
   }
 
   modificarUsuarioSubmit() {
-    console.log("hola"); 
     const usuario = {
       idUsuario: this.id,
       nombre: this.name,
@@ -138,6 +136,48 @@ export class ProfileAdministradorComponent implements OnInit {
       direccion: this.direccion     
     }
     console.log(usuario);
+    //Validar nombre
+    if(!this.validateService.validarNombre(usuario.nombre)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Nombre demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar apellido
+    if(!this.validateService.validarApellido(usuario.apellido)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Apellido demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar correo
+    if(!this.validateService.validarCorreo(usuario.correo)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Correo demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar cedula
+    if(!this.validateService.validarCedula(usuario.cedula)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Cedula demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar direccion
+    if(!this.validateService.validarDireccion(usuario.direccion)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Direccion demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar telefono
+    if(!this.validateService.validarTelefono(usuario.telefono)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Telefono demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
     //Required fields
     if(!this.validateService.validateRegister(usuario)){
       console.log("Fallo val usuario");
@@ -146,7 +186,7 @@ export class ProfileAdministradorComponent implements OnInit {
       this.mostrarAlerta2=true;  
       return false;
     }
-    //Validar email
+    //Validar formato email
     if(!this.validateService.validateEmail(usuario.correo)){
       console.log("Fallo val email"); 
       this.cerrarAlerta2();
@@ -209,6 +249,61 @@ export class ProfileAdministradorComponent implements OnInit {
     }
     console.log(user); 
     console.log("Hola"); 
+    //Validar nombre
+    if(!this.validateService.validarNombre(user.nombre)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Nombre demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar apellido
+    if(!this.validateService.validarApellido(user.apellido)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Apellido demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar correo
+    if(!this.validateService.validarCorreo(user.correo)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Correo demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar contraseña
+    if(!this.validateService.validarPassword(user.contraseña)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Contraseña demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar cedula
+    if(!this.validateService.validarCedula(user.cedula)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Cedula demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar direccion
+    if(!this.validateService.validarDireccion(user.direccion)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Direccion demasiado larga, ingrese una mas corta."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar telefono
+    if(!this.validateService.validarTelefono(user.telefono)){
+      this.cerrarAlerta2(); 
+      this.mensajeAlerta="Telefono demasiado largo, ingrese uno mas corto."
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    //Validar usuario existente por correo electronico
+    if(!this.validarUsuario(user)){
+      this.mensajeAlerta="Este correo ya esta registrado, por favor ingrese otro."
+      this.mostrarAlerta3=true;     
+      return false;
+    }
     //Required fields
     if(!this.validateService.validateRegister(user) && !this.validateService.validateEmail(user.correo)){
       console.log("Fallo val usuario");
@@ -223,17 +318,12 @@ export class ProfileAdministradorComponent implements OnInit {
       this.mostrarAlerta2=true;     
       return false;
     }
-    //Validar email
+    //Validar formato email
     if(!this.validateService.validateEmail(user.correo)){
       console.log("Fallo val email");
       this.cerrarAlerta2(); 
       this.mensajeAlerta="Correo inválido, por favor ingrese correctamente."
       this.mostrarAlerta3=true;
-      return false;
-    }
-    if(!this.validarUsuario(user)){
-      this.mensajeAlerta="Este correo ya esta registrado, por favor ingrese otro."
-      this.mostrarAlerta3=true;     
       return false;
     }
     this.cerrarAlerta2();

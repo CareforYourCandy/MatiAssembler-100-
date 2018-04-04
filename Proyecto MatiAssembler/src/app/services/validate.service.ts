@@ -15,8 +15,108 @@ export class ValidateService {
   	}
   }
 
+  /*validateLongitudCamposUsuario(user){
+    if(user.nombre.length>45 || user.apellido.length>45 || user.correo.length>45 || user.contraseña.length>10 || user.cedula.length>11 || user.direccion.length>200 || user.telefono.length>45){
+      return false;
+    } else {
+      return true;
+    }
+  }*/
+  //Validaciones longitud de campos al registrar usuarios
+  validarNombre(nombre){
+    if(nombre.length>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarApellido(apellido){
+    if(apellido.length>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarCorreo(correo){
+    if(correo.length>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarPassword(password){
+    if(password.length>10){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarCedula(cedula){
+    if(cedula.length>11){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarDireccion(direccion){
+    if(direccion.length>200){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarTelefono(telefono){
+    if(telefono.length>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  //Validar registro de vehiculo
   validateRegisterVehiculo(carro){
     if(carro.placa == undefined || carro.marca == undefined || carro.modelo == undefined || carro.serialMotor == undefined || carro.ano == undefined) {
+      return false;
+    } /*else if(carro.placa == "" || carro.modelo == "" || carro.serialMotor == ""|| carro.ano == ""){
+      return false;
+    }*/else {
+      return true;
+    }
+  }
+
+  //Validaciones longitud de campos al registrar vehiculos
+  /*validateLongitudCamposVehiculo(carro){
+     if(carro.placa.length>45 || carro.modelo.length>45 || carro.serialMotor.length>45 || carro.ano.length>11){
+      return false;
+    } else {
+      return true;
+    }
+  }*/
+  validarPlaca(carro){
+     if(carro.placa.length>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarModelo(carro){
+     if(carro.modelo.length>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarSerial(carro){
+     if(carro.serialMotor.length>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarYear(carro){
+     if(carro.ano.length>11){
+      return false;
+    } else if(carro.ano<1920 || carro.ano>2018) {
       return false;
     } else {
       return true;

@@ -39,7 +39,7 @@ import { AgregarUsuarioComponent } from './Components/agregar-usuario/agregar-us
 import { ReporteModeloComponent } from './Components/reporte-modelo/reporte-modelo.component';
 import { UploadFileService } from './services/upload-file.service';
 import { LeerQrComponent } from './Components/leer-qr/leer-qr.component';
-import { NgQrScannerModule } from 'angular2-qrscanner';
+//import { NgQrScannerModule } from 'angular2-qrscanner';
 
 
   const appRoutes: Routes = [ 
@@ -91,8 +91,8 @@ import { NgQrScannerModule } from 'angular2-qrscanner';
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot(),
     BrowserAnimationsModule,
-    MyDatePickerModule,
-    NgQrScannerModule 
+    MyDatePickerModule
+    //NgQrScannerModule 
   ],
   
   providers: [ValidateService, AuthService, AuthGuard, DatePipe, UploadFileService, QrService ],

@@ -6,7 +6,6 @@ import { AuthService } from '../../services/auth.service';
 import {UploadFileService} from '../../services/upload-file.service'; 
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { Vehiculo } from '../vehiculo/vehiculo'; 
 import { DatePipe } from '@angular/common';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 

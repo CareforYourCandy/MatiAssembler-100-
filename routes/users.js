@@ -774,7 +774,7 @@ router.post('/registerOrden', (req, res, next) => {
 	let newOrden = {
 		idVehiculo: req.body.idVehiculo,
 		idMecanico: req.body.idMecanico,
-		diagnostico: req.body.diagnostico,
+		//diagnostico: req.body.diagnostico,
 		motivo: req.body.motivo,
 		fecha: req.body.fecha,
 		activada: 1, 

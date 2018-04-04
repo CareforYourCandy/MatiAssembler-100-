@@ -6,23 +6,18 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { QrService } from './services/qr.service';
 import { tokenNotExpired } from 'angular2-jwt';
-import { NgxQRCodeModule } from 'ngx-qrcode2';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material'; 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; 
 import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppComponent } from './app.component';
 import { ProfileClienteComponent } from './Components/profile-cliente/profile-cliente.component';
 import { RouterModule, Routes } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './Components/navbar/navbar.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { LoginComponent } from './Components/login/login.component';
 import { ProfileAdministradorComponent } from './Components/profile-administrador/profile-administrador.component';
 import { AgregarRepuestoComponent } from './Components/agregar-repuesto/agregar-repuesto.component';
 import { HomepageComponent } from './Components/homepage/homepage.component';
-import { VehiculoComponent } from './Components/vehiculo/vehiculo.component';
 import { ModificarUsuarioComponent } from './Components/modificar-usuario/modificar-usuario.component';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
@@ -45,7 +40,7 @@ import { ReporteModeloComponent } from './Components/reporte-modelo/reporte-mode
 import { UploadFileService } from './services/upload-file.service';
 import { LeerQrComponent } from './Components/leer-qr/leer-qr.component';
 import { NgQrScannerModule } from 'angular2-qrscanner';
-import { DetalleOrdenGerenteComponent } from './Components/detalle-orden-gerente/detalle-orden-gerente.component';
+
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -61,7 +56,6 @@ import { DetalleOrdenGerenteComponent } from './Components/detalle-orden-gerente
       { path: 'detalle-orden', component: DetalleOrdenComponent, canActivate:[AuthGuard]},
       { path: 'modificar-usuario', component: ModificarUsuarioComponent, canActivate:[AuthGuard]},
       { path: 'emitir-orden', component: EmitirOrdenComponent, canActivate:[AuthGuard]},
-      { path: 'navbar', component:NavbarComponent},
       { path: 'modificar-repuesto', component:ModificarRepuestoComponent}
 
     ]
@@ -69,13 +63,11 @@ import { DetalleOrdenGerenteComponent } from './Components/detalle-orden-gerente
   declarations: [
     AppComponent,
     ProfileClienteComponent,
-    NavbarComponent,
     RegisterComponent,
     LoginComponent,
     ProfileAdministradorComponent,
     AgregarRepuestoComponent,
     HomepageComponent,
-    VehiculoComponent,
     ModificarUsuarioComponent,
     ProfileGerenteComponent,
     ProfileMecanicoComponent,
@@ -89,7 +81,7 @@ import { DetalleOrdenGerenteComponent } from './Components/detalle-orden-gerente
     AgregarUsuarioComponent,
     ReporteModeloComponent,
     LeerQrComponent,
-    DetalleOrdenGerenteComponent,
+ 
 
   ],
   imports: [
@@ -98,10 +90,7 @@ import { DetalleOrdenGerenteComponent } from './Components/detalle-orden-gerente
     HttpModule,
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot(),
-    NgxQRCodeModule,
     BrowserAnimationsModule,
-    MatDatepickerModule, 
-    MatNativeDateModule,
     MyDatePickerModule,
     NgQrScannerModule 
   ],

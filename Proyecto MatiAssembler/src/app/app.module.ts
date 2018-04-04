@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { QrService } from './services/qr.service';
 import { tokenNotExpired } from 'angular2-jwt';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -43,6 +44,7 @@ import { AgregarUsuarioComponent } from './Components/agregar-usuario/agregar-us
 import { ReporteModeloComponent } from './Components/reporte-modelo/reporte-modelo.component';
 import { UploadFileService } from './services/upload-file.service';
 import { LeerQrComponent } from './Components/leer-qr/leer-qr.component';
+import { NgQrScannerModule } from 'angular2-qrscanner';
 
   const appRoutes: Routes = [ 
       { path: '', component:HomepageComponent},
@@ -98,10 +100,11 @@ import { LeerQrComponent } from './Components/leer-qr/leer-qr.component';
     BrowserAnimationsModule,
     MatDatepickerModule, 
     MatNativeDateModule,
-    MyDatePickerModule 
+    MyDatePickerModule,
+    NgQrScannerModule 
   ],
   
-  providers: [ValidateService, AuthService, AuthGuard, DatePipe, UploadFileService ],
+  providers: [ValidateService, AuthService, AuthGuard, DatePipe, UploadFileService, QrService ],
   bootstrap: [AppComponent], 
   
   

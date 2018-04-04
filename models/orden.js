@@ -215,7 +215,7 @@ module.exports.addOrden = function(ordenNueva, callback) {
     Orden.create(ordenNueva).then(function(ordenGuardada) {
         console.log("EL VEHICULO GUARDADO ES"); 
         console.log(ordenGuardada.dataValues); 
-
+        let URL = "https://api.qrserver.com/v1/create-qr-code/?data=" + encodeURI(ordenGuardada.dataValues.idOrden)  + "&size=200x200";
 
     Vehiculo.getVehiculoByID(ordenGuardada.idVehiculo, (err, carro) => {
         //console.log('adentro de obtener el vehiculo');
@@ -287,8 +287,13 @@ module.exports.addOrden = function(ordenNueva, callback) {
                                                 <br>El servicio de ${ordenNueva.motivo} solicitado se realizará tan pronto su vehículo llegue.
                                                 <br><br>
                                                 Gracias por confiar en nosotros la reparación de su vehículo.
-                                                <br>
+                                                
+                                                
+                                               
+                                                
                                                 Saludos,<h4> Equipo Matiassembler</h4>.
+                                                <h5> Codigo QR <h5> 
+                                                <img src="${URL}">
                                             </p>          
                                         </div>
                                     </div>

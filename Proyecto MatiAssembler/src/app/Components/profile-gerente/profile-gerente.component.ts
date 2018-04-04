@@ -12,6 +12,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material'; 
 import {IMyDpOptions} from 'mydatepicker';
 import {UploadFileService} from '../../services/upload-file.service'; 
+import { QrService } from '../../services/qr.service';
+
+
 @Component({
   selector: 'app-profile-gerente',
   templateUrl: './profile-gerente.component.html',
@@ -75,8 +78,9 @@ export class ProfileGerenteComponent implements OnInit {
               private authService: AuthService,
               private router: Router, 
               private location: Location,
+              private qrService: QrService,
               private uploadService: UploadFileService) { 
-    
+             
   }
 
   ngOnInit() {
@@ -322,6 +326,7 @@ export class ProfileGerenteComponent implements OnInit {
     this.validarAccesorios();
     let fechaOrdenFormateada = ""; 
     fechaOrdenFormateada += this.model.date.year + "-" + this.model.date.month + "-" + this.model.date.day; 
+    
     const orden = {
     idVehiculo: this.idVehiculotemp,
     idMecanico: this.mecanico,

@@ -43,7 +43,7 @@ import { NgQrScannerModule } from 'angular2-qrscanner';
 
 
   const appRoutes: Routes = [ 
-      { path: '', component:HomepageComponent},
+      { path: '', component:LoginComponent},
       { path: 'profile-cliente', component:ProfileClienteComponent, canActivate:[AuthGuard]},
       { path: 'profile-gerente', component:ProfileGerenteComponent, canActivate:[AuthGuard]},
       { path: 'profile-mecanico', component:ProfileMecanicoComponent, canActivate:[AuthGuard]},

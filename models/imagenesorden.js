@@ -18,7 +18,7 @@ module.exports = ImagenesOrden;
 
 module.exports.getImagenesByOrden= function(ID, callback){ //Obtener las imagenes por orden 
   
-    const query = {where: {idVehiculo: ID}}
+    const query = {where: {idOrden: ID}}
     ImagenesOrden.findAll(query).then(imagenes => {		
 		let imagenes2 = imagenes.map(function(imagen) {
 			dato = imagen.dataValues;   

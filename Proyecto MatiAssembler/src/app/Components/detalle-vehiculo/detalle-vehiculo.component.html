@@ -172,34 +172,33 @@
                         <h2>FOTOS</h2>
                     </div>
                     <div class="body">
+                        
+                        <!--
                         <ui-carousel [infinite]="true" [fade]="false" [speed]="200" >
-                            <ui-carousel-item *ngFor="let imagen of imagenes">
-                                <img [ui-lazy-load]="getLinkImagen(imagen)">
-                            </ui-carousel-item>
+                                <ui-carousel-item *ngFor="let imagen of imagenes">
+                                        <div style="text-align: center; background:#551a8b" >
+                                        <img [ui-lazy-load]="getLinkImagen(imagen)" style="">
+                                        </div>
+                                </ui-carousel-item>
                         </ui-carousel>
-                        <!-- 
+                    -->
+                        
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             
-                            <ol class="carousel-indicators" >
-                                <div *ngFor="let imagen of imagenes"> 
-                                <div *ngIf="{{imagen.numero}} == 0">
-                                <li data-target="#carousel-example-generic" data-slide-to="{{imagen.numero}}" class="active"></li>
-                                 </div> 
-                                 <div *ngIf="{{imagen.numero}} != 0">
-                                        <li data-target="#carousel-example-generic" data-slide-to="{{imagen.numero}}"></li>
-                                 </div> 
-                              
-                                </div>
-                            </ol>
+                         
 
                          
-                            <div class="carousel-inner" role="listbox" *ngFor="let imagen of imagenes">
-                                <div class="item active">
-                                    <img src="{{imagen.imagen}}" />
+                            <div class="carousel-inner" role="listbox">
+                                    <div class="item active" >
+                                            <img [src]="primeraImagen.imagen" />
+                                    </div>
+                                <div class="item" *ngFor="let imagen of imagenes">
+                                    <img [src]="imagen.imagen"  style="max-height: 300px"/>
                                 </div>
+                                
                             </div>
 
-                         
+                            
                             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
@@ -210,11 +209,11 @@
                             </a>
                         
                         </div>
-                    -->
+                    
                     </div>
                 </div>
             </div>
-        
+            
 
         <br>
 

@@ -18,6 +18,8 @@ export class ReporteClienteComponent implements OnInit {
 vehiculos = []; 
 ordenes = []; 
 userSeleccionado; 
+//Para el nombre del mecanico
+mecanicos;
 
 constructor(private http:Http,
   private validateService: ValidateService, 
@@ -29,6 +31,7 @@ constructor(private http:Http,
 }
 
   ngOnInit() {
+    this.obtenerMecanicos();
   }
   recuperarVehiculos(user) {
     this.userSeleccionado = user; 
@@ -69,21 +72,25 @@ constructor(private http:Http,
   
 
   generarReporte() {
-    let fechatemp= new Date();
-     let fechaReporte= this.datePipe.transform(fechatemp);
+    let fechaActual= new Date();
+    //let fechaReporte= this.datePipe.transform(fechatemp);
+    let yearActual= fechaActual.getFullYear();
+    let monthActual= (fechaActual.getMonth()+1);
+    let dayActual= fechaActual.getDate();
     //Nombre del archivo 
     let filename = ""; 
     filename += "" + this.userSeleccionado.apellido + this.userSeleccionado.nombre + "Reporte" + ".csv"; 
 
     let reporte = "";
-    reporte += this.userSeleccionado.apellido + " " +  this.userSeleccionado.nombre + " " + fechaReporte  + "\r\n" + "\r\n";
+    reporte += "Cliente:," + this.userSeleccionado.apellido + " " +  this.userSeleccionado.nombre + "\r\n";
+    reporte += "Fecha Reporte:," + dayActual + "-" + monthActual+"-"+ yearActual + "\r\n" + "\r\n";
 
     this.vehiculos.forEach(vehiculo => {
       console.log(vehiculo); 
-     reporte += "\r\n" + vehiculo.modelo + " " + vehiculo.ano + " " + "\r\n" ;
-     reporte += "Orden" + "," + "Fecha" + "idMecanico"
+     reporte += "\r\n" + vehiculo.modelo + " " + vehiculo.ano + " " + "\r\n" ;    
+     reporte += "Numero Orden,Fecha Admision,Mecanico,Diagnostico,Procedimiento" + "\r\n";
      vehiculo.ordenes.forEach(orden => {
-      reporte += orden.idOrden + "," + orden.fecha + "," + orden.idMecanico + "," + orden.diagnostico + "," + orden.procedimiento + "\r\n";
+      reporte += orden.idOrden + "," + orden.fecha + "," + this.setNombreMecanico(orden.idMecanico) + "," + orden.diagnostico + "," + orden.procedimiento + "\r\n";
      });
     
     });
@@ -98,6 +105,36 @@ constructor(private http:Http,
         document.body.appendChild(a);
         a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
         document.body.removeChild(a);
+    }
+  }
+
+  obtenerMecanicos() {
+    let data = this.authService.getUsers().subscribe( datos => {
+      let usuarios = datos.users
+      this.mecanicos = usuarios.filter(function(user) {
+        if (user.rol==4) {
+           return user;
+        }
+      });
+
+      console.log(this.mecanicos); 
+    })
+  }
+
+  setNombreMecanico(idMecanico){
+    for(let i=0; i<this.mecanicos.length; i++){
+      if (this.mecanicos[i].idUsuario==idMecanico){
+         return this.mecanicos[i].nombre;
+      }
+    }
+  }
+
+  setActivado(id){
+    if(id==1){
+      return "Activado";
+    }
+    if(id==0){
+      return "Desactivado";
     }
   }
 

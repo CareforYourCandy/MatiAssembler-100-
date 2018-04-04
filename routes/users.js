@@ -612,7 +612,7 @@ router.post('/authenticate', (req, res, next) => {
 		}
 		if(!user){
 			console.log('AQUI PASO ALGO2');
-			return res.json({success: false, msg:'User not found'});
+			return res.json({success: false, msg:'Usuario no encontrado'});
 		}
 		User.comparePassword(contraseña, user.contraseña, (err, isMatch) => {
 			console.log('estoy en comparar');
@@ -641,7 +641,7 @@ router.post('/authenticate', (req, res, next) => {
 					}
 				});
 			} else {
-				return res.json({success:false, msg: 'Wrong password'});
+				return res.json({success:false, msg: 'Contraseña incorrecta'});
 			}
 		});
 	});

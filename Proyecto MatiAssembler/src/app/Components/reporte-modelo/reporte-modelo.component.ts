@@ -17,7 +17,9 @@ export class ReporteModeloComponent implements OnInit {
   fechaIF;
   fechaFF;
   modelos = []; 
-
+  //Alertas
+  mostrarAlerta3 = false; 
+  mensajeAlerta: String; 
   constructor(private http:Http,
     private validateService: ValidateService, 
     private authService: AuthService,
@@ -25,11 +27,26 @@ export class ReporteModeloComponent implements OnInit {
     ) { 
   
   }
+
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'yyyy.mm.dd',
+  };
+  public myDatePickerOptions2: IMyDpOptions = {
+    // other options...
+    dateFormat: 'yyyy.mm.dd',
+  };
   public fechaInicio: any = { date: { year: 2018, month: 10, day: 9 } };
   public fechaFinal: any = { date: { year: 2018, month: 10, day: 9 } };
 
   ngOnInit() {
   }
+
+  cerrarAlerta3() {
+    this.mostrarAlerta3 = false;
+    this.mensajeAlerta=""; 
+  }
+  
   obtenerVistaPrevia() {
     this.ordenes = null; 
     this.modelos = null; 
@@ -48,6 +65,12 @@ export class ReporteModeloComponent implements OnInit {
       fechaFinal: fechaF
       
     }
+    if(!this.validateService.validarFechas(this.fechaInicio.date, this.fechaFinal.date)){
+      this.mensajeAlerta="La fecha final es anterior a la inicial";
+      this.mostrarAlerta3=true;
+      return false;
+    }
+    this.cerrarAlerta3();
     this.authService.getOrdenesFecha(fechas).subscribe( datos => {
       this.ordenes = datos.ordenes;  
       this.ordenes.forEach(orden => {

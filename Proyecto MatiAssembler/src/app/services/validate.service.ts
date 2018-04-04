@@ -5,6 +5,15 @@ export class ValidateService {
 
   constructor() { }
 
+  validarLogin(user) {
+    if( user.correo == undefined || user.contraseña == undefined) {
+      return false;
+    }else if( user.correo == "" || user.contraseña == "") {
+      return false;
+    } else {
+      return true;
+    }
+  }
   validateRegister(user){
   	if(user.nombre == undefined || user.cedula == undefined || user.apellido == undefined || user.correo == undefined || user.contraseña == undefined || user.direccion == undefined || user.telefono == undefined) {
   		return false;
@@ -15,13 +24,6 @@ export class ValidateService {
   	}
   }
 
-  /*validateLongitudCamposUsuario(user){
-    if(user.nombre.length>45 || user.apellido.length>45 || user.correo.length>45 || user.contraseña.length>10 || user.cedula.length>11 || user.direccion.length>200 || user.telefono.length>45){
-      return false;
-    } else {
-      return true;
-    }
-  }*/
   //Validaciones longitud de campos al registrar usuarios
   validarNombre(nombre){
     if(nombre.length>45){
@@ -130,11 +132,101 @@ export class ValidateService {
 
   //Validar ordenes
   validateOrden(orden){
-    if(orden.idVehiculo==undefined, orden.idMecanico==undefined, orden.motivo==undefined){
+    if(orden.idVehiculo==undefined || orden.idMecanico==undefined || orden.motivo==undefined){
       return false;
     } else {
       return true;
     }
   }
-  
-}
+
+  validarFechaOrden(fechaIngresada, fechaActual){
+    let yearIng=fechaIngresada.year;
+    let monthIng=fechaIngresada.month;
+    let dayIng=fechaIngresada.day;
+
+    let yearActual= fechaActual.getFullYear();
+    let monthActual= (fechaActual.getMonth()+1);
+    let dayActual= fechaActual.getDate();
+    if (yearIng < yearActual) {
+        //alert ("La fecha introducida es anterior a Hoy");
+        return false;
+    }
+    else {
+        if (yearIng == yearActual && monthIng < monthActual) {
+           return false;     
+        }
+        else {
+            if (yearIng == yearActual && monthIng == monthActual && dayIng < dayActual){
+                return false;
+            }
+            else {
+                /*if (yearIng == yearActual && monthIng == monthActual && dayIng == dayActual){
+                     alert ("Has introducido la fecha de Hoy");
+                }
+                else{
+                    alert ("La fecha introducida es posterior a Hoy");
+                }*/
+                return true;
+            }
+        }
+    }
+  }
+  //Validar longitud campos al ingresar ordenes
+  validarMotivo(orden){
+    if(orden.motivo>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarDiagnostico(orden){
+    if(orden.diagnostico>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarProcedimiento(orden){
+    if(orden.motivo>255){
+      return false;
+    } else {
+      return true;
+    }
+  }
+  validarDesperfecto(desperfecto){
+    if(desperfecto>45){
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validarFechas(fechaInicio, fechaFinal){
+    let yearI=fechaInicio.year;
+    let monthI=fechaInicio.month;
+    let dayI=fechaInicio.day;
+
+    let yearFin=fechaFinal.year;
+    let monthFin=fechaFinal.month;
+    let dayFin=fechaFinal.day;
+    if (yearFin < yearI) {
+        return false;
+    }
+    else {
+        if (yearFin == yearI && monthFin < monthI) {
+           return false;     
+        }
+        else {
+            if (yearFin == yearI && monthFin == monthI && dayFin < dayI){
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    }
+  }
+
+  }
+
+

@@ -41,7 +41,7 @@ import { UploadFileService } from './services/upload-file.service';
 import { LeerQrComponent } from './Components/leer-qr/leer-qr.component';
 import { NgQrScannerModule } from 'angular2-qrscanner';
 import { UICarouselModule } from 'ui-carousel';
-import { NgxCarouselModule } from 'ngx-carousel';
+
 import {CarouselComponent} from './Components/carousel/carousel.component';
 
   const appRoutes: Routes = [ 
@@ -96,7 +96,7 @@ import {CarouselComponent} from './Components/carousel/carousel.component';
     MyDatePickerModule,
     NgQrScannerModule,
     UICarouselModule,
-    NgxCarouselModule
+  
   ],
   
   providers: [ValidateService, AuthService, AuthGuard, DatePipe, UploadFileService, QrService ],

@@ -285,15 +285,11 @@ module.exports.addOrden = function(ordenNueva, callback) {
                                                 <br>
                                                 <br>La solicitud de reparación para su ${marca.marca} ${carro.modelo} fue procesada con éxito. Su vehículo será admitido el dia ${ordenNueva.fecha} al taller, lo esperamos!
                                                 <br>El servicio de ${ordenNueva.motivo} solicitado se realizará tan pronto su vehículo llegue.
+                                                <br><h5> Codigo QR <h5> 
+                                                <img src="${URL}">                                                
                                                 <br><br>
-                                                Gracias por confiar en nosotros la reparación de su vehículo.
-                                                
-                                                
-                                               
-                                                
+                                                Gracias por confiar en nosotros la reparación de su vehículo.   
                                                 Saludos,<h4> Equipo Matiassembler</h4>.
-                                                <h5> Codigo QR <h5> 
-                                                <img src="${URL}">
                                             </p>          
                                         </div>
                                     </div>

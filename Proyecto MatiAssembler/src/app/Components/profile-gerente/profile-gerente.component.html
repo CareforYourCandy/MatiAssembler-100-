@@ -58,28 +58,27 @@
                             <i class="material-icons">event_available</i>
                             <span style="cursor:pointer">Citas y órdenes</span>
                         </a>
-                    </li>                    
+                    </li> 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="material-icons">assignment</i>
+                            <span>Reportes</span>
+                         <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a (click)= "setVista(4)">Cliente</a></li>
+                          <li><a (click)="setVista(5)">Vehículo</a></li>
+                          <li><a (click)="setVista(6)">Mecánico</a></li>
+                          <li><a (click)="setVista(7)">Modelo de vehículo</a></li>
+                         
+                        </ul>
+                    </li>                   
                     <li>
                         <a (click)="setVista(10)">
                             <i class="material-icons">camera</i>
                             <span style="cursor:pointer">Escanear QR</span>
                         </a>
-                    </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="material-icons">assignment</i>
-                        <span>Reportes</span>
-                     <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a (click)= "setVista(4)">Cliente</a></li>
-                      <li><a (click)="setVista(5)">Vehículo</a></li>
-                      <li><a (click)="setVista(6)">Mecánico</a></li>
-                      <li><a (click)="setVista(7)">Modelo de vehículo</a></li>
-                     
-                    </ul>
-                  </li>
-                  
+                    </li>                 
                     <li>
                         <a (click)="logout()" >
                             <i class="material-icons">not_interested</i>
@@ -495,14 +494,14 @@
                             </div>   
                             </div>  
                              <div class="form-line">
-                                <input type="text" class="form-control" [(ngModel)]="desperfectoCarroceria" name="desperfectoCarroceria" placeholder="Desperfecto Carroceria">
+                                <input type="text" class="form-control" [(ngModel)]="desperfectoCarroceria" name="desperfectoCarroceria" placeholder="Desperfecto Carroceria (opcional)">
                             </div>                                 
                         </div> 
                         <div class="input-group">
                             <div>
                             <span class="input-group-addon" style="text-align: left">
                                 <i class="material-icons">confirmation_number</i>
-                                <label>Elegir imagen a cargar</label>
+                                <label>Elegir imagen a cargar (opcional)</label>
                             </span>            
                             </div>  
                             <div class="form-line">                      

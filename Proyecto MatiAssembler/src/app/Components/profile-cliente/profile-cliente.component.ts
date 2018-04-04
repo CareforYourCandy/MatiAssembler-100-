@@ -170,6 +170,7 @@ export class ProfileClienteComponent implements OnInit {
     this.cerrarAlerta2();
     this.authService.solicitarCita(cita).subscribe(data => {
       console.log(data.success); 
+      console.log(data.citaNueva);
       if(data.success){
         console.log("sirvio");
         let citaNueva=data.citaNueva;

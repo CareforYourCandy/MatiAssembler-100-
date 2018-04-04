@@ -51,9 +51,7 @@ module.exports.getCitas = function(req, callback){ //Obtener la cola de citas (P
 
 
 module.exports.addCita = function(newCita, callback) { //Añadir una nueva cita a la cola al solicitar una
-			console.log("estoy en addCita");
-			newCita.save(callback);
-			return callback();
+	console.log("estoy en addCita");
 	Cita.create(newCita.dataValues).then(function(citaGuardada) {
 		console.log("LA CITA GUARDADA ES"); 
 		console.log(citaGuardada.dataValues); 

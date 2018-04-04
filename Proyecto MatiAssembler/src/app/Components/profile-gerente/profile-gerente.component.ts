@@ -493,5 +493,13 @@ export class ProfileGerenteComponent implements OnInit {
 
   }
 
+  /*setearCamposOrden() {
+    this.idVehiculotemp,
+    this.mecanico,
+    this.diagnostico,
+    fechaOrdenFormateada,
+    this.motivo,
+  }*/
+
 
 }

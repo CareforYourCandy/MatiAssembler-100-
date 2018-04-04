@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, Input, ViewChild,} from '@
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { RegisterComponent } from '../register/register.component'; 
+import { ValidateService } from '../../services/validate.service';
 
 //import { FlashMessagesService } from 'angular2-flash-messages';
 
@@ -21,13 +22,16 @@ export class LoginComponent implements OnInit {
     mostrarAlerta2 = false; 
     mostrarAlerta3 = false; 
     mensajeAlerta: String;
+    //Validar correo
+    usuarios;
   
     constructor(private authService: AuthService,
-                private router: Router
-                //private flashMessage: FlashMessagesService
+                private router: Router,
+                private validateService: ValidateService, 
                ) { }
   
     ngOnInit() {
+      this.obtenerUsuarios();
     }
   
     onLoginSubmit(){
@@ -35,6 +39,12 @@ export class LoginComponent implements OnInit {
         correo: this.email,
         contraseña: this.password
       }
+      if(!this.validarCorreo(user.correo)){
+          this.mostrarAlerta3=true;
+          this.mensajeAlerta="Este correo no existe, intente nuevamente.";
+          return false;
+      }
+      this.cerrarAlerta3();
       this.authService.authenticateUser(user).subscribe(data => {
         //console.log(data);	
         if(data.success){
@@ -59,7 +69,7 @@ export class LoginComponent implements OnInit {
           console.log("Fallo");
           this.mostrarAlerta3=true;
           this.mensajeAlerta="Usuario/Contraseña incorrectos. Intentelo de Nuevo";
-          this.router.navigate(['login']);
+          //this.router.navigate(['login']);
         }
       }); 
     }
@@ -81,6 +91,23 @@ export class LoginComponent implements OnInit {
       this.mostrarAlerta3 = false;
       this.mensajeAlerta=""; 
     }
-  
+    
+    validarCorreo(correo){
+      for (let i=0; i<this.usuarios.length; i++){
+        if(this.usuarios[i].correo==correo){
+          console.log("procede");
+          return true;
+        }
+      }
+      console.log("no procede");
+      return false;
+    }
+
+    obtenerUsuarios() {
+      let data = this.authService.getUsers().subscribe( datos => {
+        this.usuarios = datos.users
+        console.log(this.usuarios); 
+      })
+  }
   }
   

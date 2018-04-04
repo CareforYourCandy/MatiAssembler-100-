@@ -4,7 +4,7 @@ import { QrService } from '../../services/qr.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ModificarRepuestoComponent } from '../modificar-repuesto/modificar-repuesto.component'; 
-import { NgxQRCodeModule } from 'ngx-qrcode2';
+
 
 @Component({
   selector: 'app-detalle-orden',

@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { EmitirOrdenComponent } from '../emitir-orden/emitir-orden.component'; 
-import {ReporteMecanicoComponent} from '../reporte-mecanico/reporte-mecanico.component';  
+import {ReporteMecanicoComponent} from '../reporte-mecanico/reporte-mecanico.component'; 
 import {IMyDpOptions} from 'mydatepicker';
 import {UploadFileService} from '../../services/upload-file.service'; 
 import { QrService } from '../../services/qr.service';

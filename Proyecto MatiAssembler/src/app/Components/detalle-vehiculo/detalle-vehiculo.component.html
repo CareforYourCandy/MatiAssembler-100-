@@ -172,9 +172,11 @@
                         <h2>FOTOS</h2>
                     </div>
                     <div class="body">
-                        <div *ngFor="let imagen of imagenes">
-                            <img src="{{imagen.imagen}}">
-                        </div> 
+                        <ui-carousel [infinite]="true" [fade]="false" [speed]="200" >
+                            <ui-carousel-item *ngFor="let imagen of imagenes">
+                                <img [ui-lazy-load]="getLinkImagen(imagen)">
+                            </ui-carousel-item>
+                        </ui-carousel>
                         <!-- 
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             

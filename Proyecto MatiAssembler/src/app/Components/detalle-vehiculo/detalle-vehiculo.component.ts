@@ -35,6 +35,9 @@ export class DetalleVehiculoComponent implements OnInit {
 		this.obtenerImagenes(); 
 	}
 
+	getLinkImagen(imagen) {
+		return imagen.imagen; 
+	}
 	logout() {
 		this.authService.logout(); 
 		this.router.navigate(['login']); 

@@ -26,10 +26,7 @@ export class DetalleVehiculoComponent implements OnInit {
 	          private location: Location) { }
 
 	ngOnInit() {
-		
-		console.log('marcas y usuarios:');
 		this.getMarcas();
-		//this.getUsuarios();		
 		this.gerente = JSON.parse(localStorage.getItem("user")); 
 		this.vehiculo = JSON.parse(localStorage.getItem("vehiculo")); 
 		this.obtenerHistorial();
@@ -66,21 +63,16 @@ export class DetalleVehiculoComponent implements OnInit {
 	obtenerHistorial() {
 		this.authService.obtenerOrdenesVehiculo(this.vehiculo).subscribe( datos => {
 			this.ordenes = datos.ordenes;
-			console.log(this.ordenes); 
-
 			this.historial = this.ordenes.filter(function(orden) {
 				if (orden.activada==0) {
 					return orden;
 				}
 			});
-
-			console.log(this.historial); 
 		})
 	}
 
   	verDetalleOrden(idOrden) {
 		this.authService.getOrden(idOrden).subscribe(data => {
-		console.log(data); 
 		this.ordenTemp = data.orden; 
 		this.authService.almacenarOrdenLS(this.ordenTemp);
 		this.router.navigate(['detalle-orden']);
@@ -89,7 +81,6 @@ export class DetalleVehiculoComponent implements OnInit {
 
 	getMarcas() {
 		this.authService.getMarcas().subscribe(data => {
-		console.log(data.marcas); 
 		this.marcas = data.marcas; 
 		}) 
 	}
@@ -97,16 +88,5 @@ export class DetalleVehiculoComponent implements OnInit {
 	setMarcaVista(idMarca) {
 		return this.marcas[idMarca - 1].marca
 	}
-//------------------------
-	/*getUsuarios(idUsuario) {
-		this.authService.getUsers().subscribe(data => {
-		console.log(data.users); 
-		this.usuarios = data.usuarios; 
-		});
-	}
 
-	setNombreUsuario(idUsuario) {
-		let nombreCompleto= this.usuarios[idUsuario].nombre;
-		return nombreCompleto;
-	}*/
 }

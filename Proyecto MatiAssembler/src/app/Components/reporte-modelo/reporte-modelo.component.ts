@@ -80,7 +80,6 @@ export class ReporteModeloComponent implements OnInit {
         }
     });
   });
-  console.log(this.ordenes); 
 
   var existe = false; 
 
@@ -104,7 +103,6 @@ export class ReporteModeloComponent implements OnInit {
 
 
   })
-  console.log(this.modelos) ;
   }) 
   
 }

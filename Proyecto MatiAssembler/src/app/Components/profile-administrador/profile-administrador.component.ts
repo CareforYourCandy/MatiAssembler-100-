@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 })
 export class ProfileAdministradorComponent implements OnInit {
   admin: object;
-  @ViewChild(AgregarRepuestoComponent)  repuestoHijo;  
   repuestoInsertar; 
   usuarios; 
   usuario; 
@@ -50,35 +49,25 @@ export class ProfileAdministradorComponent implements OnInit {
     this.admin = JSON.parse(localStorage.getItem("user")); 
     this.obtenerRepuestos(); 
     this.obtenerUsuarios();
-
-    //this.nuevoRep = JSON.parse(localStorage.getItem("nuevo")); 
-      //console.log(this.nuevoRep);
-      /*this.repuestos.push(this.nuevoRep);
-      console.log(this.repuestos);*/
   }
 
   setVista(id) {
     this.vista=id;
     this.setearCampos();
-    this.setCamposRepuestos();
     this.cerrarAlerta();
     this.cerrarAlerta2();
     this.cerrarAlerta3();
   }
 
   obtenerRepuestos() {
-    let data = this.authService.obtenerRepuestos().subscribe( datos => {
-       
+    let data = this.authService.obtenerRepuestos().subscribe( datos => {     
       this.repuestos = datos.repuestos; 
-      console.log(this.repuestos); 
-       
       }); 
   }
 
   obtenerUsuarios() {
     let data = this.authService.getUsers().subscribe( datos => {
       this.usuarios = datos.users
-      console.log(this.usuarios); 
     })
   }
 
@@ -87,10 +76,8 @@ export class ProfileAdministradorComponent implements OnInit {
     this.setearCampos();
     this.authService.getUserById(id).subscribe(datos => {
       user = datos.usuario; 
-      console.log(user); 
       this.usuario = user; 
       this.obtenerDatos(this.usuario);    
-      console.log(this.usuario); 
       this.cerrarAlerta();
       this.vista=3;      
     });
@@ -113,7 +100,6 @@ export class ProfileAdministradorComponent implements OnInit {
   }
   //------------ FUNCIONES PARA MODIFICAR USUARIO -------------
   obtenerDatos(user) {
-    console.log(user); 
     this.id = user.idUsuario;
     this.name = user.nombre;
     this.lastname = user.apellido;
@@ -137,7 +123,6 @@ export class ProfileAdministradorComponent implements OnInit {
       telefono: this.telefono,
       direccion: this.direccion     
     }
-    console.log(usuario);
     //Validar nombre
     if(!this.validateService.validarNombre(usuario.nombre)){
       this.cerrarAlerta2(); 
@@ -182,7 +167,6 @@ export class ProfileAdministradorComponent implements OnInit {
     }
     //Required fields
     if(!this.validateService.validateRegister(usuario)){
-      console.log("Fallo val usuario");
       this.cerrarAlerta3();
       this.mensajeAlerta="Por favor rellene todos los campos"
       this.mostrarAlerta2=true;  
@@ -190,7 +174,6 @@ export class ProfileAdministradorComponent implements OnInit {
     }
     //Validar formato email
     if(!this.validateService.validateEmail(usuario.correo)){
-      console.log("Fallo val email"); 
       this.cerrarAlerta2();
       this.mensajeAlerta="Correo inválido, por favor ingrese correctamente."
       this.mostrarAlerta3=true;
@@ -200,7 +183,6 @@ export class ProfileAdministradorComponent implements OnInit {
     this.cerrarAlerta3();
 
     this.authService.actualizarUsuario(usuario).subscribe(data => {
-          console.log(data.success); 
           if(data.success) {
             for (let i=0; i<this.usuarios.length; i++){
               if(this.usuarios[i].idUsuario==usuario.idUsuario){
@@ -249,8 +231,6 @@ export class ProfileAdministradorComponent implements OnInit {
       direccion: this.direccion,
       telefono: this.telefono,  
     }
-    console.log(user); 
-    console.log("Hola"); 
     //Validar nombre
     if(!this.validateService.validarNombre(user.nombre)){
       this.cerrarAlerta2(); 
@@ -308,23 +288,20 @@ export class ProfileAdministradorComponent implements OnInit {
     }
     //Required fields
     if(!this.validateService.validateRegister(user) && !this.validateService.validateEmail(user.correo)){
-      console.log("Fallo val usuario");
-      this.mensajeAlerta="Por favor rellene todos los campos, con un correo válido"
+      this.mensajeAlerta="Por favor rellene todos los campos, con un correo válido";
       this.mostrarAlerta2=true;     
       return false;
     }
     if(!this.validateService.validateRegister(user)){
-      console.log("Fallo val usuario");
       this.cerrarAlerta3();
-      this.mensajeAlerta="Por favor rellene todos los campos"
+      this.mensajeAlerta="Por favor rellene todos los campos";
       this.mostrarAlerta2=true;     
       return false;
     }
     //Validar formato email
     if(!this.validateService.validateEmail(user.correo)){
-      console.log("Fallo val email");
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Correo inválido, por favor ingrese correctamente."
+      this.mensajeAlerta="Correo inválido, por favor ingrese correctamente.";
       this.mostrarAlerta3=true;
       return false;
     }
@@ -332,11 +309,10 @@ export class ProfileAdministradorComponent implements OnInit {
     this.cerrarAlerta3();
     //Registrar usuario
     this.authService.registerUser(user).subscribe(data => {
-      console.log(data.success);
       if(data.success){
         let usuarioNuevo = data.user;
         this.usuarios.push(usuarioNuevo);
-        this.mensajeAlerta="Usuario registrado correctamente"
+        this.mensajeAlerta="Usuario registrado correctamente";
         this.mostrarAlerta=true;       
       } 
     });        
@@ -365,6 +341,12 @@ export class ProfileAdministradorComponent implements OnInit {
           return false;      
         }        
       }
+      if(this.marcaNuevo==undefined || this.modelo==undefined){
+          this.mensajeAlerta="Campos marca o modelo vacios";
+          this.mostrarAlerta3=true;
+          return false;      
+               
+      }
       const repuesto = {
         pieza: this.pieza, 
         modelo: this.modelo,
@@ -372,9 +354,10 @@ export class ProfileAdministradorComponent implements OnInit {
       }
       this.cerrarAlerta3();      
       this.authService.registerRepuesto(repuesto).subscribe(data => {
-        console.log(data.success);
         this.repuestos.push(repuesto); 
-        this.setCamposRepuestos();
+        this.pieza="";
+        this.marcaNuevo=undefined;
+        this.modelo=undefined;
         //this.router.navigate(['/profile-administrador']);
         this.mensajeAlerta="Repuesto registrado correctamente"
         this.mostrarAlerta=true;  
@@ -409,7 +392,6 @@ export class ProfileAdministradorComponent implements OnInit {
 
   getMarcas() {
     this.authService.getMarcas().subscribe(data => {
-      console.log(data); 
       this.marcas = data.marcas; 
     }) 
   }
@@ -444,11 +426,6 @@ export class ProfileAdministradorComponent implements OnInit {
       }
     }
     return true;
-  }
-  setCamposRepuestos(){
-    this.pieza="";
-    this.marcaNuevo=undefined;
-    this.modelo=undefined;
   }
 
 }

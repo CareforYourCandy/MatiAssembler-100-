@@ -60,10 +60,8 @@ constructor(private http:Http,
     this.ordenes = []; 
     let fechaI = ""
     fechaI += this.fechaInicio.date.year + "." + this.fechaInicio.date.month + "." + this.fechaInicio.date.day; 
-    console.log(fechaI);
     let fechaF = "";
     fechaF += this.fechaFinal.date.year + "." + this.fechaFinal.date.month + "." + this.fechaFinal.date.day; 
-    console.log(fechaF); 
     this.fechaIF = fechaI;
     this.fechaFF = fechaF; 
 
@@ -86,13 +84,8 @@ constructor(private http:Http,
     this.authService.getOrdenesFecha(fechas).subscribe( datos => {
       this.ordenes=[];
       let todasOrdenes = datos.ordenes;
-      console.log("EL MECANICO ES");
-      console.log(this.mecanico); 
-      console.log(todasOrdenes);
       for (var i = 0; i < todasOrdenes.length; i++) {
         if ( todasOrdenes[i].idMecanico == this.mecanico.idUsuario) {
-          console.log("Tiene orden");
-
           this.ordenes.push(todasOrdenes[i]); 
         }
       }
@@ -109,7 +102,6 @@ constructor(private http:Http,
             }
         });
       });
-      console.log(this.ordenes);  
     })
   }
   obtenerMecanicos() {
@@ -160,12 +152,9 @@ seleccionarMecanico(meca) {
 
   obtenerVehiculos(id) {
     this.authService.getOrdenesMecanico(id).subscribe(data => {
-      console.log(data); 
       this.ordenes = data.ordenes; 
       for (let i = 0; i < this.ordenes.length; i++) {
         let data2 = this.authService.getVehiculo(this.ordenes[i].idVehiculo).subscribe( datos => {
-          console.log("IMPRIMIRE MAS DATOS"); 
-          console.log(datos); 
           this.ordenes[i].vehiculo = datos.vehiculo; 
         })
       }

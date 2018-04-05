@@ -39,7 +39,6 @@ export class RegisterComponent implements OnInit {
   obtenerUsuarios() {
     let data = this.authService.getUsers().subscribe( datos => {
       this.usuarios = datos.users
-      console.log(this.usuarios); 
     })
   }
 
@@ -55,82 +54,77 @@ export class RegisterComponent implements OnInit {
       direccion: this.direccion,
       telefono: this.telefono,  
   	}
-    console.log(user); 
-    console.log("Hola"); 
     //Validar nombre
     if(!this.validateService.validarNombre(user.nombre)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Nombre demasiado largo, ingrese uno mas corto."
+      this.mensajeAlerta="Nombre demasiado largo, ingrese uno mas corto.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar apellido
     if(!this.validateService.validarApellido(user.apellido)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Apellido demasiado largo, ingrese uno mas corto."
+      this.mensajeAlerta="Apellido demasiado largo, ingrese uno mas corto.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar correo
     if(!this.validateService.validarCorreo(user.correo)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Correo demasiado largo, ingrese uno mas corto."
+      this.mensajeAlerta="Correo demasiado largo, ingrese uno mas corto.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar contraseña
     if(!this.validateService.validarPassword(user.contraseña)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Contraseña demasiado larga, ingrese una mas corta."
+      this.mensajeAlerta="Contraseña demasiado larga, ingrese una mas corta.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar cedula
     if(!this.validateService.validarCedula(user.cedula)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Cedula demasiado larga, ingrese una mas corta."
+      this.mensajeAlerta="Cedula demasiado larga, ingrese una mas corta.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar direccion
     if(!this.validateService.validarDireccion(user.direccion)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Direccion demasiado larga, ingrese una mas corta."
+      this.mensajeAlerta="Direccion demasiado larga, ingrese una mas corta.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar telefono
     if(!this.validateService.validarTelefono(user.telefono)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Telefono demasiado largo, ingrese uno mas corto."
+      this.mensajeAlerta="Telefono demasiado largo, ingrese uno mas corto.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Required fields
     if(!this.validateService.validateRegister(user) && !this.validateService.validateEmail(user.correo)){
-      console.log("Fallo val usuario");
-      this.mensajeAlerta="Por favor rellene todos los campos, con un correo válido"
+      this.mensajeAlerta="Por favor rellene todos los campos, con un correo válido";
       this.mostrarAlerta2=true;     
       return false;
     }
     if(!this.validateService.validateRegister(user)){
-      console.log("Fallo val usuario");
       this.cerrarAlerta3();
-      this.mensajeAlerta="Por favor rellene todos los campos."
+      this.mensajeAlerta="Por favor rellene todos los campos.";
       this.mostrarAlerta2=true;     
       return false;
     }
     //Validar formato email
     if(!this.validateService.validateEmail(user.correo)){
-      console.log("Fallo val email");
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Correo inválido, por favor ingrese correctamente."
+      this.mensajeAlerta="Correo inválido, por favor ingrese correctamente.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar usuario existente por correo electronico
     if(!this.validarUsuario(user)){ 
-      this.mensajeAlerta="Este correo ya esta registrado, por favor ingrese otro."
+      this.mensajeAlerta="Este correo ya esta registrado, por favor ingrese otro.";
       this.mostrarAlerta2=true;     
       return false;
     }
@@ -138,7 +132,6 @@ export class RegisterComponent implements OnInit {
     this.cerrarAlerta3();
     //Registrar usuario
     this.authService.registerUser(user).subscribe(data => {
-      console.log(data.success); 
       this.router.navigate['login'];       
     });
   }
@@ -155,21 +148,16 @@ export class RegisterComponent implements OnInit {
       direccion: this.direccion,
       telefono: this.telefono,  
     }
-    console.log(user); 
-    console.log("Hola"); 
     //Required fields
     if(!this.validateService.validateRegister(user)){
-     console.log("Fallo val usuario");
       return false;
     }
     //Validar email
     if(!this.validateService.validateEmail(user.correo)){
-     console.log("Fallo val email"); 
       return false;
     }
     //Registrar usuario
     this.authService.registerUser(user).subscribe(data => {
-      console.log(data.success); 
       this.router.navigate['profile-administrador'];
     });       
   }

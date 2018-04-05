@@ -36,7 +36,6 @@ constructor(private http:Http,
   recuperarVehiculos(user) {
     this.userSeleccionado = user; 
     let data = this.authService.obtenerVehiculos(user).subscribe( datos => {
-      console.log(datos); 
       this.vehiculos = datos.vehiculos; 
     this.vehiculos.forEach(vehiculo => {
       this.verCitas(vehiculo); 
@@ -47,7 +46,6 @@ constructor(private http:Http,
   }
 
   verCitas(vehiculo) {
-    console.log(vehiculo); 
     this.ordenes = null; 
     
         this.authService.obtenerOrdenesVehiculo(vehiculo).subscribe( datos => {
@@ -86,7 +84,6 @@ constructor(private http:Http,
     reporte += "Fecha Reporte:," + dayActual + "-" + monthActual+"-"+ yearActual + "\r\n" + "\r\n";
 
     this.vehiculos.forEach(vehiculo => {
-      console.log(vehiculo); 
      reporte += "\r\n" + vehiculo.modelo + " " + vehiculo.ano + " " + "\r\n" ;    
      reporte += "Numero Orden,Fecha Admision,Mecanico,Diagnostico,Procedimiento" + "\r\n";
      vehiculo.ordenes.forEach(orden => {
@@ -116,8 +113,6 @@ constructor(private http:Http,
            return user;
         }
       });
-
-      console.log(this.mecanicos); 
     })
   }
 

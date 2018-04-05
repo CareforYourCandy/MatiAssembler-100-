@@ -3,9 +3,14 @@ const config = require('./../config/database');
 const connection = config.connection;
 
 const ImagenesOrden = connection.define('imagenesorden', {
+    idImagenesOrden:{
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false
+    },
     idOrden: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false
     },
     imagen: {
@@ -32,14 +37,8 @@ module.exports.getImagenesByOrden= function(ID, callback){ //Obtener las imagene
 	});
 
 }
-module.exports.addImagenesOrden = function(ordenImagenes, callback) { //Añadir un nuevo repuesto
-    
-        ImagenesOrden.create(ordenImagenes); 
-   
-
-
-
-    
+module.exports.addImagenesOrden = function(ordenImagenes, callback) { //Añadir una imagen a la orden
+    ImagenesOrden.create(ordenImagenes); 
     return callback();
     
 

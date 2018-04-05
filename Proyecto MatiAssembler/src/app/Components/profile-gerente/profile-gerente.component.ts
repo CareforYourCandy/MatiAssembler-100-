@@ -92,9 +92,7 @@ export class ProfileGerenteComponent implements OnInit {
     this.obtenerClientes();
     this.obtenerMecanicos();  
     this.obtenerColaCitas();
-    console.log("Ya se obtuvieron la cola de las citas")
     this.obtenerVehiculos(); 
-    console.log("Se van a obtener las ordenes"); 
     this.obtenerOrdenes(); 
   }
 
@@ -109,10 +107,6 @@ export class ProfileGerenteComponent implements OnInit {
   logout() {
     this.authService.logout(); 
     this.router.navigate(['login']); 
-  }
-
-  home() {
-    this.router.navigate(['']);
   }
 
   cerrarAlerta() {
@@ -153,7 +147,6 @@ export class ProfileGerenteComponent implements OnInit {
           this.ordenesActivas[i].vehiculo = datos.vehiculo; 
         })
       }
-      console.log(this.ordenesActivas);
     });
    
 
@@ -165,46 +158,41 @@ export class ProfileGerenteComponent implements OnInit {
   }
 
   obtenerClientes() {
-    let data = this.authService.getUsers().subscribe( datos => {
+    this.authService.getUsers().subscribe( datos => {
       let usuarios = datos.users
       this.clientes = usuarios.filter(function(user) {
         if (user.rol==1) {
            return user;
         }
       });
-      console.log(this.clientes); 
-    })
+    });
   }
 
   obtenerMecanicos() {
-    let data = this.authService.getUsers().subscribe( datos => {
+    this.authService.getUsers().subscribe( datos => {
       let usuarios = datos.users
       this.mecanicos = usuarios.filter(function(user) {
         if (user.rol==4) {
            return user;
         }
       });
-
-      console.log(this.mecanicos); 
-    })
+    });
   }
 
   obtenerColaCitas() {
     let data = this.authService.obtenerCitas().subscribe( datos => {
       this.citas = datos.rcitas;
-      console.log(this.citas); 
       for (let i = 0; i < this.citas.length ; i++) {
       let data2 = this.authService.getVehiculo(this.citas[i].vehiculoCita).subscribe( datos => {
         datos.vehiculo.idCita = this.citas[i].idCita; 
         datos.vehiculo.fecha = this.citas[i].fechaSolicitud; 
         this.carrosCitas.push(datos.vehiculo); 
         this.citas[i].vehiculo = datos.vehiculo; 
-       //ESTE CODIGO ESTA MUY FEO HAY QUE HACERLE REFACTOR 
       })
     }
-    console.log("ARRAY FINALES");
-    console.log(this.citas);
-    console.log(this.carrosCitas); 
+    //ARRAY FINALES:
+    //console.log(this.citas);
+    //console.log(this.carrosCitas); 
 
     }); 
  
@@ -213,7 +201,6 @@ export class ProfileGerenteComponent implements OnInit {
 
   getMarcas() {
     this.authService.getMarcas().subscribe(data => {
-      console.log(data); 
       this.marcas = data.marcas; 
     }) 
   }
@@ -224,7 +211,6 @@ export class ProfileGerenteComponent implements OnInit {
 
   verDetalle(idVehiculo) {
     this.authService.getVehiculo(idVehiculo).subscribe(data => {
-      console.log(data); 
       this.vehiculoTemp = data.vehiculo; 
       this.authService.almacenarVehiculoLS(this.vehiculoTemp);
       this.router.navigate(['detalle-vehiculo']);
@@ -242,8 +228,6 @@ export class ProfileGerenteComponent implements OnInit {
     let id=orden.idOrden;
     if(orden.activada==2) { //Cerrar la orden solo si esta finalizada, si esta en curso no permitirlo
       this.authService.cerrarOrden(orden).subscribe(data => {
-        console.log(data); 
-
         for (let i = 0; i < this.ordenesActivas.length ; i++) {
           if(this.ordenesActivas[i].idOrden==id){
             this.ordenesActivas.splice(i, 1);
@@ -276,19 +260,15 @@ export class ProfileGerenteComponent implements OnInit {
     this.setearCampos();
     //this.cerrarAlerta();       
     this.authService.getUserById(id).subscribe(datos => {     
-      console.log(datos); 
       user = datos.usuario; 
-      console.log(user); 
       this.usuario = user; 
       this.obtenerDatos(this.usuario);    
-      console.log(this.usuario); 
       this.cerrarAlerta();       
       this.vista=8;      
     });
   }
 
   obtenerDatos(user) {
-    console.log(user); 
     this.id = user.idUsuario;
     this.name = user.nombre;
     this.lastname = user.apellido;
@@ -312,70 +292,65 @@ export class ProfileGerenteComponent implements OnInit {
       telefono: this.telefono,
       direccion: this.direccion     
     }
-
-    console.log(usuario);
     //Validar nombre
     if(!this.validateService.validarNombre(usuario.nombre)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Nombre demasiado largo, ingrese uno mas corto."
+      this.mensajeAlerta="Nombre demasiado largo, ingrese uno mas corto.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar apellido
     if(!this.validateService.validarApellido(usuario.apellido)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Apellido demasiado largo, ingrese uno mas corto."
+      this.mensajeAlerta="Apellido demasiado largo, ingrese uno mas corto.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar correo
     if(!this.validateService.validarCorreo(usuario.correo)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Correo demasiado largo, ingrese uno mas corto."
+      this.mensajeAlerta="Correo demasiado largo, ingrese uno mas corto.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar cedula
     if(!this.validateService.validarCedula(usuario.cedula)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Cedula demasiado larga, ingrese una mas corta."
+      this.mensajeAlerta="Cedula demasiado larga, ingrese una mas corta.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar direccion
     if(!this.validateService.validarDireccion(usuario.direccion)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Direccion demasiado larga, ingrese una mas corta."
+      this.mensajeAlerta="Direccion demasiado larga, ingrese una mas corta.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Validar telefono
     if(!this.validateService.validarTelefono(usuario.telefono)){
       this.cerrarAlerta2(); 
-      this.mensajeAlerta="Telefono demasiado largo, ingrese uno mas corto."
+      this.mensajeAlerta="Telefono demasiado largo, ingrese uno mas corto.";
       this.mostrarAlerta3=true;
       return false;
     }
     //Required fields
     if(!this.validateService.validateRegister(usuario)){
-      console.log("Fallo val usuario");
       this.cerrarAlerta3();
-      this.mensajeAlerta="Por favor rellene todos los campos"
+      this.mensajeAlerta="Por favor rellene todos los campos";
       this.mostrarAlerta2=true;  
       return false;
     }
     //Validar formato email
     if(!this.validateService.validateEmail(usuario.correo)){
-      console.log("Fallo val email"); 
       this.cerrarAlerta2();
-      this.mensajeAlerta="Correo inválido, por favor ingrese correctamente."
+      this.mensajeAlerta="Correo inválido, por favor ingrese correctamente.";
       this.mostrarAlerta3=true;
       return false;
     }
     this.cerrarAlerta2();
     this.cerrarAlerta3(); 
     this.authService.actualizarUsuario(usuario).subscribe(data => {
-          console.log(data.success); 
           if(data.success) {
             for (let i=0; i<this.clientes.length; i++){
               if(this.clientes[i].idUsuario==usuario.idUsuario){
@@ -384,7 +359,7 @@ export class ProfileGerenteComponent implements OnInit {
             }            
             this.setearCampos();
             this.vista=1;
-            this.mensajeAlerta="Usuario modificado correctamente"
+            this.mensajeAlerta="Usuario modificado correctamente";
             this.mostrarAlerta=true;
           }     
     });  
@@ -413,8 +388,6 @@ export class ProfileGerenteComponent implements OnInit {
     this.cerrarAlerta();
     this.idVehiculotemp=idVehiculo; 
     this.idCitatemp = idCita; 
-    console.log(this.idCitatemp); 
-    console.log(this.idVehiculotemp); 
     this.vista=9;
   }
 
@@ -429,7 +402,6 @@ export class ProfileGerenteComponent implements OnInit {
     fechaOrdenFormateada += this.model.date.year + "-" + this.model.date.month + "-" + this.model.date.day; 
     //Variables para comparar la fecha
     let fechatemp= new Date(); //Fecha actual
-    console.log(fechatemp.getFullYear()+","+(fechatemp.getMonth()+1)+","+fechatemp.getDate());
     //Fecha registrada -> this.model.date
     if(this.mecanico==undefined){
       this.cerrarAlerta2();
@@ -474,13 +446,9 @@ export class ProfileGerenteComponent implements OnInit {
     this.cerrarAlerta2();
     this.cerrarAlerta3();
     this.authService.registerOrden(orden).subscribe(data => {
-      console.log(data.success); 
       if(data.success) {
         let ordenRetornada=data.orden;
         this.authService.eliminarCita(this.idCitatemp).subscribe( data2 => { 
-          console.log("orden retornada:");
-          console.log(data.orden);
-          console.log(data2.success); 
           this.authService.getVehiculo(ordenRetornada.idVehiculo).subscribe( datos => {
             ordenRetornada.vehiculo = datos.vehiculo;
             this.ordenesActivas.push(ordenRetornada);
@@ -495,7 +463,6 @@ export class ProfileGerenteComponent implements OnInit {
             } 
             this.mensajeAlerta="La orden fue emitida exitosamente!";
             this.mostrarAlerta=true;
-            console.log("terminando de emitir orden");
             this.vista=3;              
           });                     
         });
@@ -509,8 +476,6 @@ export class ProfileGerenteComponent implements OnInit {
           desperfectoCarroceria: this.desperfectoCarroceria      
         }
         this.authService.addAccesorios(accesoriosOrden).subscribe(data => {
-          console.log(data.success);
-          console.log("añadiendo accesorios");
         });
       }      
     }); 
@@ -532,13 +497,6 @@ export class ProfileGerenteComponent implements OnInit {
     if(this.equipodeSonido==undefined){
       this.equipodeSonido=false;
     }
-    console.log("caucho:");
-    console.log(this.cauchoRepuesto);
-    console.log("llaves:");
-    console.log(this.llaves);
-    console.log("gato:");
-    console.log(this.gato);
-
   }
 
   setearCamposOrden() {

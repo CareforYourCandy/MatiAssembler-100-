@@ -34,21 +34,17 @@ clientes;
 
   getMarcas() {
     this.authService.getMarcas().subscribe(data => {
-      console.log(data); 
       this.marcas = data.marcas; 
     } ) 
   }
   
   obtenerVehiculos() {
-    let data = this.authService.obtenerListaVehiculos().subscribe( datos => {
-      console.log("Aqui estan los vehiculos"); 
-      console.log(datos); 
+    let data = this.authService.obtenerListaVehiculos().subscribe( datos => { 
       this.vehiculos = datos.vehiculos;       
     }); 
   }
   
    generarReporte(vehiculo) {
-    console.log(vehiculo); 
     this.ordenes = null; 
     
         this.authService.obtenerOrdenesVehiculo(vehiculo).subscribe( datos => {
@@ -62,13 +58,11 @@ clientes;
           });
           
         this.ordenes = ordenesTemp; 
-        console.log(this.ordenes); 
         let filename = ""; 
         filename += "Reporte " + this.setNombreCliente(vehiculo.propietario) + " " + vehiculo.modelo + " " + vehiculo.ano + ".csv"; 
         //DEFINICION DEL REPOTE
         let reporte ="" + vehiculo.modelo + " " + vehiculo.ano + "\r\n" + "\r\n";
         reporte += "Fecha" + "," + "idMecanico" + "," + "Diagnostico" + "," + "Procedimiento" + "\r\n";
-        console.log(this.ordenes.length); 
         if ( this.ordenes !== undefined && this.ordenes.length > 0  ) {
         this.mostrarAlerta = false;
         this.ordenes.forEach(orden => {
@@ -118,8 +112,6 @@ clientes;
            return user;
         }
       });
-
-      console.log(this.mecanicos); 
     })
   }
   setNombreMecanico(idMecanico){

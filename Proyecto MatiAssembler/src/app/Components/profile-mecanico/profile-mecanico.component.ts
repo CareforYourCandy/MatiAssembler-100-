@@ -28,7 +28,6 @@ export class ProfileMecanicoComponent implements OnInit {
   
     ngOnInit() {
       this.user = JSON.parse(localStorage.getItem("user")); 
-      console.log(this.user.idUsuario); 
       this.obtenerOrdenes(this.user.idUsuario); 
     }
    
@@ -39,7 +38,6 @@ export class ProfileMecanicoComponent implements OnInit {
     
     obtenerOrdenes(id) {
       this.authService.getOrdenesMecanico(id).subscribe(data => {
-        console.log(data); 
         this.datosOrdenes = data.ordenes;
 
         this.ordenes = this.datosOrdenes.filter(function(orden) { //Obtener solo las ordenes abiertas
@@ -50,8 +48,6 @@ export class ProfileMecanicoComponent implements OnInit {
 
         for (let i = 0; i < this.ordenes.length; i++) {
           let data2 = this.authService.getVehiculo(this.ordenes[i].idVehiculo).subscribe( datos => {
-            console.log("IMPRIMIRE MAS DATOS"); 
-            console.log(datos); 
             this.ordenes[i].vehiculo = datos.vehiculo; 
           })
         }
@@ -59,15 +55,12 @@ export class ProfileMecanicoComponent implements OnInit {
     }
 
     finalizarOrden(idOrden) { //Marcar orden como finalizada
-      console.log(idOrden);
       if(this.estado==2) { //Finalizar orden
         this.authService.desactivarOrden(idOrden).subscribe(data => {
-          console.log(data); 
         })        
       }
       if(this.estado==1) { //Poner en curso otra vez
         this.authService.activarOrden(idOrden).subscribe(data => {
-          console.log(data); 
         })        
       }
       this.obtenerOrdenes(this.user.idUsuario); 
@@ -75,11 +68,9 @@ export class ProfileMecanicoComponent implements OnInit {
 
     verDetalleOrden(orden) {
       this.authService.getOrden(orden.idOrden).subscribe(data => {
-      console.log(data); 
       this.ordenTemp = data.orden; 
       this.authService.almacenarOrdenLS(this.ordenTemp);
       this.authService.getVehiculo(orden.idVehiculo).subscribe(data => {
-        console.log(data); 
         this.vehiculoTemp = data.vehiculo; 
         this.authService.almacenarVehiculoLS(this.vehiculoTemp);
         this.router.navigate(['detalle-orden']);

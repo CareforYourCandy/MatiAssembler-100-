@@ -3,9 +3,14 @@ const config = require('./../config/database');
 const connection = config.connection;
 
 const ImagenesVehiculo = connection.define('imagenesvehiculo', {
+     idImagenesVehiculo:{
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false
+    },   
     idVehiculo: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNull: false
     },
     imagen: {

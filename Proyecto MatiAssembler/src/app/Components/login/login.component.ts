@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       }
       if(!this.validarCorreo(user.correo)){
           this.mostrarAlerta3=true;
-          this.mensajeAlerta="Este correo no existe, intente nuevamente.";
+          this.mensajeAlerta="Este correo no esta registrado, intente nuevamente.";
           return false;
       }
       //this.cerrarAlerta3();
@@ -71,7 +71,6 @@ export class LoginComponent implements OnInit {
          }
          
         } else {
-          console.log("Fallo");
           this.mostrarAlerta3=true;
           this.mensajeAlerta="Usuario/Contraseña incorrectos. Intentelo de Nuevo";
         }
@@ -99,18 +98,15 @@ export class LoginComponent implements OnInit {
     validarCorreo(correo){
       for (let i=0; i<this.usuarios.length; i++){
         if(this.usuarios[i].correo==correo ){
-          console.log("procede");
           return true;
         }
       }
-      console.log("no procede");
       return false;
     }
 
     obtenerUsuarios() {
       let data = this.authService.getUsers().subscribe( datos => {
         this.usuarios = datos.users
-        console.log(this.usuarios); 
       })
   }
   }

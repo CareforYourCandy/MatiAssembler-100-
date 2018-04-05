@@ -59,8 +59,7 @@ export class ProfileClienteComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.user = JSON.parse(localStorage.getItem("user")); 
-      console.log(this.user); 
+      this.user = JSON.parse(localStorage.getItem("user"));  
       this.getMarcas();
       this.recuperarVehiculos(); 
       this.obtenerVehiculosTaller();
@@ -102,8 +101,7 @@ export class ProfileClienteComponent implements OnInit {
   }
 
   recuperarVehiculos() {
-    let data = this.authService.obtenerVehiculos(this.user).subscribe( datos => {
-      console.log(datos); 
+    let data = this.authService.obtenerVehiculos(this.user).subscribe( datos => { 
       this.vehiculos2 = datos.vehiculos; 
       this.vehiculos = this.vehiculos2.filter(function(vehiculo) {
         if (vehiculo.activado == 1) {
@@ -114,7 +112,6 @@ export class ProfileClienteComponent implements OnInit {
   }
  
   desactivarVehiculo(carro) {
-    console.log(carro);
     this.cerrarAlerta();
     if(!this.validarCitaPendiente(carro.idVehiculo)){ //Comprueba que no se haya solicitado una cita de este vehículo y siga pendiente
       this.mensajeAlerta="No puede desactivarse, tiene citas por asignar";
@@ -128,11 +125,9 @@ export class ProfileClienteComponent implements OnInit {
     }
     this.cerrarAlerta2();
     this.authService.desactivarVehiculo(carro).subscribe(data => {
-      console.log(data.success);
       if(data.success){
         for (let i = 0; i < this.vehiculos.length; i++) {
           if(this.vehiculos[i].idVehiculo==carro.idVehiculo){
-            //this.vehiculos[i].activado=false;
             this.vehiculos.splice(i, 1);
           }
         }        
@@ -169,13 +164,9 @@ export class ProfileClienteComponent implements OnInit {
     }
     this.cerrarAlerta2();
     this.authService.solicitarCita(cita).subscribe(data => {
-      console.log(data.success); 
-      console.log(data.citaNueva);
       if(data.success){
-        console.log("sirvio");
         let citaNueva=data.citaNueva;
         this.citas.push(citaNueva);
-        //this.router.navigate(['profile-cliente']);
         this.mensajeAlerta="Solicitud de cita procesada exitosamente!";
         this.mostrarAlerta=true; 
       }
@@ -186,21 +177,18 @@ export class ProfileClienteComponent implements OnInit {
   vehiculoSubmit() { 
         this.fechatemp= new Date();
         this.fechaRegistro= this.datePipe.transform(this.fechatemp);
-        console.log(this.fechaRegistro); 
         var fileInput= document.getElementById('fileItem').attributes;
-        //var fileInput2= document.querySelector("#fileItem").ATTRIBUTE_NODE;
-        //var file= fileInput.item(0);
         var inputFile = (<HTMLInputElement>document.getElementById('fileItem')).files;
         var file; 
         console.log(inputFile);
-        console.log(file);
-       
-        console.log("hola"); 
-      
-        
+        console.log(file);; 
+        //this.fechaRegistro=this.fechatemp.getFullYear()+"-"+(this.fechatemp.getMonth()+1)+"-"+this.fechatemp.getDate();
+        if (this.selecciono){
+          this.marcaNuevo=this.marcaNuevo.idMarca;
+        }
         const vehiculo = {
           placa: this.placa,       
-          marca: this.marcaNuevo.idMarca,
+          marca: this.marcaNuevo,
           modelo: this.modelo,
           ano: this.ano,
           serialMotor: this.serialMotor, 
@@ -208,8 +196,6 @@ export class ProfileClienteComponent implements OnInit {
           propietario: this.user.idUsuario, 
           fechaRegistro: this.fechaRegistro
         }
-        
-        console.log(vehiculo); //Para registrar un vehiculo
         //Required fields
         if(!this.validateService.validateRegisterVehiculo(vehiculo)){
             this.mensajeAlerta="Por favor rellene todos los campos";
@@ -249,9 +235,7 @@ export class ProfileClienteComponent implements OnInit {
         this.cerrarAlerta3();
       if(this.registroInactivo(vehiculo)){ //activar nuevamente el vehiculo
           this.authService.activarVehiculo(vehiculo).subscribe(data => {
-            console.log(data.success);
             if(data.success){
-              console.log("sirvio");
               this.vehiculos.push(this.vehiculoActivar); 
               this.vehiculosTaller.push(this.vehiculoActivar);
               for ( var i = 0; i < inputFile.length; i++) {
@@ -263,7 +247,6 @@ export class ProfileClienteComponent implements OnInit {
               this.vista=1;
             }
             else {
-              console.log("fallo");
               this.router.navigate(['profile-cliente']); 
             } 
           })        
@@ -272,9 +255,7 @@ export class ProfileClienteComponent implements OnInit {
         //Registrar vehiculo
         this.authService.registerVehiculo(vehiculo).subscribe(data => {     
             let vehiculoNuevo = data.vehiculo; 
-            console.log(vehiculoNuevo);
             if(data.success){
-              console.log("sirvio");
               this.vehiculos.push(vehiculoNuevo); 
               this.vehiculosTaller.push(vehiculoNuevo);
               this.vista=1;
@@ -288,7 +269,6 @@ export class ProfileClienteComponent implements OnInit {
               this.vista=1;
             }
             else {
-              console.log("fallo");
               this.router.navigate(['profile-cliente']); 
             }
         });
@@ -330,9 +310,7 @@ export class ProfileClienteComponent implements OnInit {
   validarRegistroVehiculo(newVehiculo) { //Validar que no se registre un vehiculo con placa y serial existente
     for (let i=0; i<this.vehiculosTaller.length; i++){
       if(this.vehiculosTaller[i].placa==newVehiculo.placa || this.vehiculosTaller[i].serialMotor==newVehiculo.serialMotor){ //Si hay un vehiculo con la misma placa
-          console.log("ambos iguales");
           if(this.vehiculosTaller[i].activado){
-            console.log("ambos iguales y activado");
             return false;
           } 
       }
@@ -376,7 +354,6 @@ export class ProfileClienteComponent implements OnInit {
         citasVehiculo.push(this.citas[i]);
       }
     }
-    console.log(citasVehiculo);
     if(citasVehiculo.length>0){
       return false;
     }
@@ -386,7 +363,6 @@ export class ProfileClienteComponent implements OnInit {
   obtenerCitas(){
     this.authService.obtenerCitas().subscribe( datos => {
       this.citas = datos.rcitas;
-      console.log(this.citas);
     });    
   }
 

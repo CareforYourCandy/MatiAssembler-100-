@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-
+import {CarouselComponent} from '../carousel/carousel.component'; 
 
 @Component({
   selector: 'app-detalle-vehiculo',
@@ -16,16 +16,17 @@ export class DetalleVehiculoComponent implements OnInit {
 	ordenes;
 	historial;	
 	imagenes; 
-
+	primeraImagen; 
 	ordenTemp;
 	marcas = Array;
 	usuario;
-
+	carouselBanner; 
 	constructor(private authService: AuthService,
 	          private router: Router,
 	          private location: Location) { }
 
 	ngOnInit() {
+		
 		console.log('marcas y usuarios:');
 		this.getMarcas();
 		//this.getUsuarios();		
@@ -36,6 +37,7 @@ export class DetalleVehiculoComponent implements OnInit {
 	}
 
 	getLinkImagen(imagen) {
+		console.log("LINK IMAGEN", imagen.imagen)
 		return imagen.imagen; 
 	}
 	logout() {
@@ -54,13 +56,11 @@ export class DetalleVehiculoComponent implements OnInit {
 		this.authService.getImagenesVehiculo(this.vehiculo.idVehiculo).subscribe( datos => {
 			 
 			this.imagenes = datos.imagenesVehiculo; 
-			var numero = 0; 
+			this.primeraImagen = this.imagenes[0];
+			this.imagenes.shift(); 
 
 			console.log("EL ARRAY DE LAS IMAAGENES ES ", this.imagenes); 
-			this.imagenes.forEach(imagen => {
-				imagen.numero = numero; 
-				numero++; 
-			})
+			
 		})
 	}
 	obtenerHistorial() {

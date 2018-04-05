@@ -5,6 +5,7 @@ import { QrService } from '../../services/qr.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ModificarRepuestoComponent } from '../modificar-repuesto/modificar-repuesto.component'; 
+import {UICarouselModule} from 'ui-carousel'; 
 
 
 @Component({
@@ -41,7 +42,7 @@ export class DetalleOrdenComponent implements OnInit {
 	mecanicos=[];
 	elementType : 'url' | 'canvas' | 'img' = 'url';
 	qr : String;
-
+	primeraImagen; 
 	repuestos; 
 	repuestosTemp=[];
 	ordenTemp;
@@ -121,6 +122,8 @@ export class DetalleOrdenComponent implements OnInit {
 	getImagenesOrden() {
 		this.authService.getImagenesOrden(this.orden.idOrden).subscribe(datos => {
 			this.imagenes = datos.imagenesOrden;
+			this.primeraImagen = this.imagenes[0];
+			this.imagenes.shift(); 
 			console.log("LAS IMAGENES DE LA ORDEN SON:", this.imagenes); 
 		})
 	}

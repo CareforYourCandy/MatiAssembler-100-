@@ -50,6 +50,11 @@ export class ProfileAdministradorComponent implements OnInit {
     this.obtenerRepuestos(); 
     this.obtenerUsuarios();
   }
+  
+  logout() {
+    this.authService.logout(); 
+    this.router.navigate(['login']); 
+  }
 
   setVista(id) {
     this.vista=id;

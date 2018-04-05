@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegisterSubmitCliente() {
-  	
+  	this.cerrarAlerta();
   	const user = {
   		nombre: this.name,
   		apellido: this.lastname,
@@ -54,6 +54,12 @@ export class RegisterComponent implements OnInit {
       direccion: this.direccion,
       telefono: this.telefono,  
   	}
+    if(!this.validateService.validateRegister(user)){
+      this.cerrarAlerta3();
+      this.mensajeAlerta="Por favor rellene todos los campos.";
+      this.mostrarAlerta2=true;     
+      return false;
+    }
     //Validar nombre
     if(!this.validateService.validarNombre(user.nombre)){
       this.cerrarAlerta2(); 
@@ -132,7 +138,12 @@ export class RegisterComponent implements OnInit {
     this.cerrarAlerta3();
     //Registrar usuario
     this.authService.registerUser(user).subscribe(data => {
-      this.router.navigate['login'];       
+      if(data.success){
+        this.mensajeAlerta="Usuario registrado correctamente";
+        this.mostrarAlerta=true;      
+        this.setearCampos();       
+      } 
+      //this.router.navigate['login'];       
     });
   }
 
@@ -201,6 +212,17 @@ export class RegisterComponent implements OnInit {
   cerrarAlerta3() {
     this.mostrarAlerta3 = false;
     this.mensajeAlerta=""; 
+  }
+
+  setearCampos() {
+      this.name="";
+      this.lastname="";
+      this.email="";
+      this.password="";
+      this.cedula="";
+      this.direccion="";
+      this.telefono="";
+      this.rol=1;
   }
 
 }

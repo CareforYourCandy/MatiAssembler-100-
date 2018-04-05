@@ -55,7 +55,7 @@ export class DetalleVehiculoComponent implements OnInit {
 			this.imagenes = datos.imagenesVehiculo; 
 			this.primeraImagen = this.imagenes[0];
 			this.imagenes.shift(); 
-
+			console.log("LA PRIMERA IMAGEN ES", this.primeraImagen); 
 			console.log("EL ARRAY DE LAS IMAAGENES ES ", this.imagenes); 
 			
 		})

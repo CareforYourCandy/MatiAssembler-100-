@@ -125,9 +125,9 @@ generarReporte() {
   let reporte ="" + this.mecanico.nombre + " " + this.mecanico.apellido + ", "  + this.fechaIF + "-" + this.fechaFF + " " + "\r\n";  
    reporte +=  "Ordenes totales: " + this.ordenes.length + "\r\n" + "\r\n";
   
-  reporte += "Orden" + "," + "Modelo" + "," + "Año" + "\r\n";
+  reporte += "Orden" + "," + "Modelo" + "," + "Año" + "," + "Diagnóstico" + "," + "Procedimiento" + "\r\n";
   this.ordenes.forEach(orden => {
-    reporte += orden.idOrden + "," + orden.vehiculo.modelo + "," + orden.vehiculo.ano + "\r\n"
+    reporte += orden.idOrden + "," + orden.vehiculo.modelo + "," + orden.vehiculo.ano + "," + orden.diagnostico + "," + orden.procedimiento +"\r\n"
   });
  
   var blob = new Blob([reporte]);

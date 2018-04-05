@@ -72,7 +72,7 @@
 </section>
 
 
-
+<div *ngIf="user.rol == 4"> 
 <section id="main" class="content">
 
 
@@ -122,3 +122,12 @@
 
         <!-- #END# Hover Rows -->
 </section>
+</div>
+<div *ngIf="user.rol != 4"> 
+    <body class="five-zero-zero">
+        <div class="five-zero-zero-container">
+            <div class="error-code">Error</div>
+            <div class="error-message">No tiene acceso a esta página</div>
+        </div>
+    </body> 
+</div>

@@ -4,7 +4,6 @@ import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { EmitirOrdenComponent } from '../emitir-orden/emitir-orden.component'; 
 import {ReporteMecanicoComponent} from '../reporte-mecanico/reporte-mecanico.component'; 
 import {IMyDpOptions} from 'mydatepicker';
 import {UploadFileService} from '../../services/upload-file.service'; 
@@ -19,7 +18,6 @@ import { DatePipe } from '@angular/common';
 export class ProfileGerenteComponent implements OnInit {
 
   vista=1;
-  @ViewChild(EmitirOrdenComponent)  ordenHijo;
   user;
   clientes;
   mecanicos;

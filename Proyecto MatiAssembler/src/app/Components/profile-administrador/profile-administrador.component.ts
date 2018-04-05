@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ValidateService } from '../../services/validate.service';
-import { ModificarUsuarioComponent } from '../modificar-usuario/modificar-usuario.component';
-import { AgregarRepuestoComponent } from '../agregar-repuesto/agregar-repuesto.component'; 
+
+
 import { Router } from '@angular/router';
 
 

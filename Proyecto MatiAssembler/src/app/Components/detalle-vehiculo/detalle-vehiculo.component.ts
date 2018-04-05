@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import {CarouselComponent} from '../carousel/carousel.component'; 
+
 
 @Component({
   selector: 'app-detalle-vehiculo',

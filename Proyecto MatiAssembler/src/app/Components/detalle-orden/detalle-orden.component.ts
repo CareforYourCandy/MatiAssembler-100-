@@ -3,9 +3,8 @@ import { AuthService} from '../../services/auth.service';
 import { ValidateService } from '../../services/validate.service';
 import { QrService } from '../../services/qr.service';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { ModificarRepuestoComponent } from '../modificar-repuesto/modificar-repuesto.component'; 
-import {UICarouselModule} from 'ui-carousel'; 
+import { Location } from '@angular/common'; 
+
 
 
 @Component({

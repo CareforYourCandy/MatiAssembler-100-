@@ -434,9 +434,6 @@ export class ProfileAdministradorComponent implements OnInit {
     return true;
   }
 
-  logout() {
-    this.authService.logout(); 
-    this.router.navigate(['login']); 
-  }
+ 
 
 }

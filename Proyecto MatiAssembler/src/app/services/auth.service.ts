@@ -17,14 +17,14 @@ export class AuthService {
 	getMecanicos() {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getMecanicos', Object(), {headers: headers})
+		return this.http.post('users/getMecanicos', Object(), {headers: headers})
 		.map(res => res.json());
 	}
 
 	getMarcas() {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getMarcas', Object(), {headers: headers})
+		return this.http.post('users/getMarcas', Object(), {headers: headers})
 		.map(res => res.json());
 
 	}
@@ -33,7 +33,7 @@ export class AuthService {
 		let idOrden = {ID}
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getAccesorios', idOrden, {headers: headers})
+		return this.http.post('users/getAccesorios', idOrden, {headers: headers})
 		.map(res => res.json());
 
 	}
@@ -42,14 +42,14 @@ export class AuthService {
 		console.log("Hola aqui en actualizar usuario"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/modificarUsuario', usuario, {headers: headers})
+		return this.http.post('users/modificarUsuario', usuario, {headers: headers})
 		.map(res => res.json());
 	}
 	registerRepuesto(repuesto) {
 		console.log("Hola"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/registerRepuesto', repuesto, {headers: headers})
+		return this.http.post('users/registerRepuesto', repuesto, {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -57,14 +57,14 @@ export class AuthService {
 		console.log("Hola aqui en registrar orden"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/registerOrden', orden, {headers: headers})
+		return this.http.post('users/registerOrden', orden, {headers: headers})
 		.map(res => res.json());
 	}
 
 	addAccesorios(accesorios) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/addAccesorios', accesorios, {headers: headers})
+		return this.http.post('users/addAccesorios', accesorios, {headers: headers})
 			.map(res => res.json());		
 	}
 
@@ -72,7 +72,7 @@ export class AuthService {
 		console.log("Hola aqui en actualizar orden"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/modificarOrden', orden, {headers: headers})
+		return this.http.post('users/modificarOrden', orden, {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -80,7 +80,7 @@ export class AuthService {
 		let idUsuario = {ID};
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getUser', idUsuario, {headers: headers})
+		return this.http.post('users/getUser', idUsuario, {headers: headers})
 		.map(res => res.json());
 	}
 	
@@ -88,7 +88,7 @@ export class AuthService {
 		console.log("Hola2"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getUsers', Object(), {headers: headers})
+		return this.http.post('users/getUsers', Object(), {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -96,7 +96,7 @@ export class AuthService {
 	obtenerCitas() {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getCitas', {headers: headers})
+		return this.http.post('users/getCitas', {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -104,7 +104,7 @@ export class AuthService {
 	getOrdenes() {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getOrdenes', Object(), {headers: headers})
+		return this.http.post('users/getOrdenes', Object(), {headers: headers})
 		.map(res => res.json());
 
 	}
@@ -112,7 +112,7 @@ export class AuthService {
 		let idVehiculo = {ID}
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getVehiculo', idVehiculo, {headers: headers})
+		return this.http.post('users/getVehiculo', idVehiculo, {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -120,7 +120,7 @@ export class AuthService {
 		let idOrden = {ID}
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getOrden', idOrden, {headers: headers})
+		return this.http.post('users/getOrden', idOrden, {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -128,7 +128,7 @@ export class AuthService {
 		console.log("Hola2"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/obtenerRepuestos', Object(), {headers: headers})
+		return this.http.post('users/obtenerRepuestos', Object(), {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -136,7 +136,7 @@ export class AuthService {
 		let idRepuesto = {ID} 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/obtenerRepuesto', idRepuesto, {headers: headers})
+		return this.http.post('users/obtenerRepuesto', idRepuesto, {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -145,7 +145,7 @@ export class AuthService {
 		//let idOrden = {ID} 		
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/obtenerRepuestosOrden', orden, {headers: headers})
+		return this.http.post('users/obtenerRepuestosOrden', orden, {headers: headers})
 		.map(res => res.json());
 	}
 
@@ -153,7 +153,7 @@ export class AuthService {
 		//let ids = {IDREP,IDORDEN};	
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/addRepuestosOrden', repOrden, {headers: headers})
+		return this.http.post('users/addRepuestosOrden', repOrden, {headers: headers})
 		.map(res => res.json());
 	}
 	
@@ -161,7 +161,7 @@ export class AuthService {
 		//console.log(user); //Para registrar un usuario
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/register', user, {headers: headers})
+		return this.http.post('users/register', user, {headers: headers})
 			.map(res => res.json());
 	}
 
@@ -169,7 +169,7 @@ export class AuthService {
 		//Para registrar un vehiculo
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/registerVehiculo', carro, {headers: headers})
+		return this.http.post('users/registerVehiculo', carro, {headers: headers})
 			.map(res => res.json());
 	}
 
@@ -177,7 +177,7 @@ export class AuthService {
 		console.log("entro en servicio"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/desactivarVehiculo', vehiculo, {headers: headers})
+		return this.http.post('users/desactivarVehiculo', vehiculo, {headers: headers})
 		.map (res => res.json()); 
 	}
 
@@ -185,7 +185,7 @@ export class AuthService {
 		console.log("entro en servicio"); 
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/activarVehiculo', vehiculo, {headers: headers})
+		return this.http.post('users/activarVehiculo', vehiculo, {headers: headers})
 		.map (res => res.json()); 
 	}
 
@@ -193,103 +193,103 @@ export class AuthService {
 		//Para registrar una cita
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/registerCita', cita, {headers: headers})
+		return this.http.post('users/registerCita', cita, {headers: headers})
 			.map(res => res.json());		
 	}
 
 	eliminarCita(idCita) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');		
-		return this.http.post('http://localhost:3000/users/eliminarCita', {idCita}, {headers: headers})
+		return this.http.post('users/eliminarCita', {idCita}, {headers: headers})
 			.map(res => res.json());	
 	}
 
 	eliminarRepuesto(idRepuesto) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');		
-		return this.http.post('http://localhost:3000/users/eliminarRepuesto', {idRepuesto}, {headers: headers})
+		return this.http.post('users/eliminarRepuesto', {idRepuesto}, {headers: headers})
 			.map(res => res.json());	
 	}
 
 	authenticateUser(user){ //Iniciar sesión
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/authenticate', user, {headers: headers})
+		return this.http.post('users/authenticate', user, {headers: headers})
 			.map(res => res.json());
 	}
 
 	obtenerVehiculos(user){ //Obtener Vehiculos por cliente
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getVehiculos', user, {headers: headers})
+		return this.http.post('users/getVehiculos', user, {headers: headers})
 			.map(res => res.json());
 	}
 
 	obtenerOrdenesVehiculo(vehiculo){ //Obtener Ordenes por vehiculo
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getOrdenesVehiculo', vehiculo, {headers: headers})
+		return this.http.post('users/getOrdenesVehiculo', vehiculo, {headers: headers})
 			.map(res => res.json());
 	}
 	getOrdenesMecanico(idMecanico) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getOrdenesMecanico', {idMecanico}, {headers: headers})
+		return this.http.post('users/getOrdenesMecanico', {idMecanico}, {headers: headers})
 			.map(res => res.json());
 	}
 	getImagenesVehiculo(idVehiculo) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/obtenerImagenesVehiculo', {idVehiculo}, {headers: headers})
+		return this.http.post('users/obtenerImagenesVehiculo', {idVehiculo}, {headers: headers})
 			.map(res => res.json());
 	}
 	addImagenesVehiculo(imagenVehiculo) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/addImagenesVehiculo', imagenVehiculo , {headers: headers})
+		return this.http.post('users/addImagenesVehiculo', imagenVehiculo , {headers: headers})
 			.map(res => res.json());
 	}
 	getImagenesOrden(idOrden) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/obtenerImagenesOrden' , {idOrden}, {headers: headers})
+		return this.http.post('users/obtenerImagenesOrden' , {idOrden}, {headers: headers})
 			.map(res => res.json());
 	}
 	addImagenesOrden(imagenOrden) {
 		console.log("imagenOrden es", imagenOrden)
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/addImagenesOrden', imagenOrden , {headers: headers})
+		return this.http.post('users/addImagenesOrden', imagenOrden , {headers: headers})
 			.map(res => res.json());
 	}
 	getOrdenesFecha(fechas) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getOrdenesFecha', {fechas}, {headers: headers})
+		return this.http.post('users/getOrdenesFecha', {fechas}, {headers: headers})
 			.map(res => res.json());
 	}
 	desactivarOrden(idOrden) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/desactivarOrden', {idOrden}, {headers: headers})
+		return this.http.post('users/desactivarOrden', {idOrden}, {headers: headers})
 			.map(res => res.json());
 	}
 	activarOrden(idOrden) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/activarOrden', {idOrden}, {headers: headers})
+		return this.http.post('users/activarOrden', {idOrden}, {headers: headers})
 			.map(res => res.json());
 	}
 	cerrarOrden(orden) {
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/cerrarOrden', orden, {headers: headers})
+		return this.http.post('users/cerrarOrden', orden, {headers: headers})
 			.map(res => res.json());
 	}
 	obtenerListaVehiculos(){ //Obtener todos los Vehiculos
 		let headers = new Headers();
 		headers.append('Content-Type','application/json');
-		return this.http.post('http://localhost:3000/users/getVehiculos2', {headers: headers})
+		return this.http.post('users/getVehiculos2', {headers: headers})
 			.map(res => res.json());
 	}
 
@@ -298,7 +298,7 @@ export class AuthService {
 		this.loadToken();
 		headers.append('Authorization', this.authToken);
 		headers.append('Content-Type','application/json');
-		return this.http.get('http://localhost:3000/users/profile', {headers: headers})
+		return this.http.get('users/profile', {headers: headers})
 			.map(res => res.json());
 	}
 

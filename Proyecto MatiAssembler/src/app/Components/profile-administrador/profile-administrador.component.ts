@@ -47,6 +47,7 @@ export class ProfileAdministradorComponent implements OnInit {
   ngOnInit() {
     this.getMarcas();
     this.admin = JSON.parse(localStorage.getItem("user")); 
+    console.log(this.admin, JSON.parse(localStorage.getItem("user"))); 
     this.obtenerRepuestos(); 
     this.obtenerUsuarios();
   }
@@ -426,6 +427,11 @@ export class ProfileAdministradorComponent implements OnInit {
       }
     }
     return true;
+  }
+
+  logout() {
+    this.authService.logout(); 
+    this.router.navigate(['login']); 
   }
 
 }

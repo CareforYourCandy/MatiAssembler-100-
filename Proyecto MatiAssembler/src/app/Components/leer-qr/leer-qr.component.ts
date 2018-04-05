@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { QrScannerComponent } from 'angular2-qrscanner';
 import { AuthService } from '../../services/auth.service';
@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./leer-qr.component.css']
 })
 export class LeerQrComponent implements OnInit {
+@Input() vista;  
 ordenTemp; 
 vehiculoTemp;
 
@@ -45,7 +46,8 @@ vehiculoTemp;
       console.log(result);
       var idOrden = parseInt(result); 
       if (isNaN(idOrden)) {
-          console.log("No se paso un código QR válido " )
+          console.log("No se paso un código QR válido " );
+          this.vista = 500; 
       }
       this.authService.getOrden(idOrden).subscribe(data => {
         console.log(data); 

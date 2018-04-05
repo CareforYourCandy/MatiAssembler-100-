@@ -1,4 +1,4 @@
-<div> 
+<div *ngIf="user.rol == 3"> 
 <!-- Top Bar -->
 <nav class="navbar">
     <div class="container-fluid bg-deep-orange">
@@ -532,20 +532,30 @@
        </div>
     <!-- #END# Hover Rows -->
     <div *ngIf="vista == 10"> 
-        <app-leer-qr> </app-leer-qr>
+        <app-leer-qr [vista]="vista"> </app-leer-qr>
     </div>
 </div>
-
+<div *ngIf="vista == 500">
+    <body class="five-zero-zero">
+        <div class="five-zero-zero-container">
+            <div class="error-code">Error</div>
+            <div class="error-message">Qr inválido</div>
+            <div class="button-place">
+                <a (click)=setVista(1) class="btn btn-default btn-lg waves-effect">VOLVER </a>
+            </div>
+        </div>
+    </body> 
+</div> 
 </section>
-<div class="body">
-    <div class="row clearfix">
-       
-
-
-        <!--MODAL MODIFICAR USUARIOS-->
-              
-
 
 </div>
-</div>
+<div *ngIf="user.rol != 3"> 
+    <body class="five-zero-zero">
+        <div class="five-zero-zero-container">
+            <div class="error-code">Error</div>
+            <div class="error-message">No tiene acceso a esta página</div>
+        </div>
+    </body> 
+
+
 </div>

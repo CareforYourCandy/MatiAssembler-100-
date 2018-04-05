@@ -1,5 +1,5 @@
 
-<div > 
+<div *ngIf="user.rol == 1"> 
 
 <!-- Search Bar -->
 <div class="search-bar">
@@ -351,4 +351,12 @@
 </div>
 </section>
 
+</div>
+<div *ngIf="user.rol != 1"> 
+    <body class="five-zero-zero">
+        <div class="five-zero-zero-container">
+            <div class="error-code">Error</div>
+            <div class="error-message">No tiene acceso a esta página</div>
+        </div>
+    </body> 
 </div>
